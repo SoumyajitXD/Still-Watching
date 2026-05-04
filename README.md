@@ -8,6 +8,7 @@
 [![Mod Loader](https://img.shields.io/badge/Loader-Forge-f16436?style=for-the-badge)](#recommended-setup)
 [![Genre](https://img.shields.io/badge/Genre-Horror%20Survival-b00020?style=for-the-badge)](#what-is-still-watching)
 [![Multiplayer](https://img.shields.io/badge/Multiplayer-Supported-8a2be2?style=for-the-badge)](#multiplayer)
+[![Version](https://img.shields.io/badge/Version-V1.0.8-b00020?style=for-the-badge)](#quick-facts)
 [![License](https://img.shields.io/badge/Repo%20License-Apache--2.0-2f81f7?style=for-the-badge)](#license)
 
 **The world is not empty. The silence is not safety. It is still watching.**
@@ -37,8 +38,7 @@ Still Watching is made for players who want Minecraft to feel dangerous, cinemat
 | **Type** | Minecraft modpack |
 | **Minecraft** | `1.20.1` |
 | **Loader** | `Forge` |
-| **Latest CurseForge file checked** | `Still Watching V1.0.7` |
-| **Latest CurseForge release date checked** | `Apr 27, 2026` |
+| **Current modpack version** | `V1.0.8` |
 | **CurseForge Project ID** | `1420406` |
 | **CurseForge categories** | Horror, Adventure/RPG, Exploration, Multiplayer, Quests |
 | **Recommended RAM** | `5 GB+` |
