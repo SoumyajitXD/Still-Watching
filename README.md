@@ -151,17 +151,32 @@ These are not decorations. These are the things turning your world into a proble
 
 <div align="center">
 
-<img src="https://media.forgecdn.net/attachments/description/1420406/description_d95ef59a-e4f0-4ea9-b89d-d0ef1dfe71a5.png" alt="The Anomaly" width="48%">
-<img src="https://media.forgecdn.net/attachments/description/1420406/description_07ad44e1-0bf1-434a-ae33-23af22db8f8b.png" alt="The Man From The Fog" width="48%">
-
-<br><br>
-
-<img src="https://media.forgecdn.net/attachments/description/1420406/description_877ca552-6bb8-4da2-9d59-2c20ab466459.png" alt="Apollyon" width="48%">
-<img src="https://media.forgecdn.net/attachments/description/1420406/description_887f243d-969c-4055-b665-9f03fd94ede1.png" alt="Cave Dweller Reimagined" width="48%">
+[![View the full Still Watching gallery on CurseForge](https://img.shields.io/badge/View%20Full%20Gallery-CurseForge-f16436?style=for-the-badge&logo=curseforge&logoColor=white)](https://www.curseforge.com/minecraft/modpacks/still-watching/gallery)
 
 </div>
 
-> More gallery images are available on the [CurseForge project page](https://www.curseforge.com/minecraft/modpacks/still-watching/gallery).
+The official CurseForge gallery currently lists **16 screenshots** showing the pack's fog-heavy landscapes, storm-lit forests, misty lakes, lonely rooftops, and cinematic gloomy lighting.
+
+| # | Gallery scene |
+| ---: | --- |
+| 1 | This foggy Minecraft scene feels dark and calm, with water, grass, and tall trees. |
+| 2 | Tall shadowy plants fill the land as the gray sky glows softly through the mist. |
+| 3 | A dark voxel landscape glows softly under a cloudy sky, creating a haunting and cinematic atmosphere. |
+| 4 | A shadowy voxel woodland scene with fog, dramatic clouds, and soft light breaking over the horizon. |
+| 5 | Foggy Minecraft hillside with silhouetted trees and pale sunlight glowing beneath heavy clouds. |
+| 6 | Blocky grassland fades into fog beneath heavy clouds, with dim light washing over the terrain. |
+| 7 | A moody Minecraft rooftop overlooks a foggy landscape as warm lantern light spills from the doorway. |
+| 8 | A cozy Minecraft balcony glows under a hanging lantern as misty trees fade into the gray morning. |
+| 9 | A fog-covered Minecraft lake sits beneath heavy clouds, creating a cold and cinematic scene. |
+| 10 | A misty Minecraft hillside glows softly beneath heavy clouds and dim morning light. |
+| 11 | A misty Minecraft river winds through towering cliffs under soft, fading light. |
+| 12 | A foggy Minecraft forest stretches into the distance beneath towering trees and pale storm light. |
+| 13 | A misty Minecraft lake reflects dark clouds and pale light across a quiet shoreline. |
+| 14 | A lone Minecraft tree rises above a misty landscape under heavy, glowing clouds. |
+| 15 | A misty Minecraft lake glows softly under dark clouds and pale evening light. |
+| 16 | A moody Minecraft scene glows faintly where light breaks through thick clouds. |
+
+> The raw gallery image CDN URLs are managed by CurseForge. Use the button above for the full interactive screenshot gallery instead of stale copied preview links.
 
 ---
 
