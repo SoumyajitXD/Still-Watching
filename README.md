@@ -8,7 +8,7 @@
 [![Loader](https://img.shields.io/badge/Loader-Forge-orange?style=for-the-badge)](#recommended-setup)
 [![Genre](https://img.shields.io/badge/Genre-Horror%20Survival-red?style=for-the-badge)](#what-is-still-watching)
 [![Multiplayer](https://img.shields.io/badge/Multiplayer-Supported-purple?style=for-the-badge)](#multiplayer--support-notes)
-[![License](https://img.shields.io/badge/License-CC--BY--4.0-blue?style=for-the-badge)](#license)
+[![License](https://img.shields.io/badge/License-Apache--2.0-blue?style=for-the-badge)](#license)
 
 **The world is not empty. The silence is not safety. It is still watching.**
 
@@ -42,7 +42,7 @@ The pack is designed for players who want Minecraft to feel dangerous, cinematic
 | Official categories | Horror, Adventure/RPG, Exploration, Multiplayer, Quests |
 | Official download source | [CurseForge](https://www.curseforge.com/minecraft/modpacks/still-watching) |
 | Source repository | [GitHub](https://github.com/SoumyajitXD/Still-Watching) |
-| License for original repository files | `CC-BY-4.0` |
+| License for original repository files | `Apache-2.0` |
 
 ---
 
@@ -187,13 +187,13 @@ All third-party content remains the property of its respective creators and is g
 
 ## License
 
-Original **Still Watching** project files in this repository are licensed under the **Creative Commons Attribution 4.0 International Public License**.
+Original **Still Watching** project files in this repository are licensed under the **Apache License 2.0**.
 
-SPDX: `CC-BY-4.0`
+SPDX: `Apache-2.0`
 
 This license applies only to original files in this repository. It does **not** apply to third-party mods, assets, shaders, resource packs, libraries, tools, sounds, textures, or external content included through the modpack ecosystem.
 
-Full license text: [Creative Commons Attribution 4.0 International](https://creativecommons.org/licenses/by/4.0/)
+Full license text: [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0)
 
 ---
 
