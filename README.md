@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🌫️ Still Watching
+# 🩸 Still Watching
 
 ### Forge 1.20.1 horror survival where the fog moves, the caves listen, and the night has teeth.
 
