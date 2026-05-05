@@ -16,6 +16,10 @@
 [![Download on CurseForge](https://img.shields.io/badge/Download-CurseForge-f16436?style=for-the-badge&logo=curseforge&logoColor=white)](https://www.curseforge.com/minecraft/modpacks/still-watching)
 [![Report Issues](https://img.shields.io/badge/Report-Issues-b00020?style=for-the-badge&logo=github)](../../issues)
 
+<a href="https://url-shortener.curseforge.com/AZDOs" target="_blank" rel="nofollow noopener">
+  <img src="https://media.forgecdn.net/attachments/description/1420406/description_669e11c3-e62d-4ac0-a961-574733e6b87a.png" alt="Make a Server and Get 25% Off" width="850">
+</a>
+
 </div>
 
 ---
