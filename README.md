@@ -2,299 +2,221 @@
 
 # 🩸 Still Watching
 
-### Forge 1.20.1 horror survival where the fog moves, the caves listen, and the night has teeth.
+### Forge 1.20.1 horror survival where the fog moves, the dark listens, and something is already in the trees.
 
-[![Minecraft](https://img.shields.io/badge/Minecraft-1.20.1-44cc44?style=for-the-badge&logo=minecraft&logoColor=white)](#recommended-setup)
-[![Mod Loader](https://img.shields.io/badge/Loader-Forge-f16436?style=for-the-badge)](#recommended-setup)
-[![Genre](https://img.shields.io/badge/Genre-Horror%20Survival-b00020?style=for-the-badge)](#what-is-still-watching)
-[![Multiplayer](https://img.shields.io/badge/Multiplayer-Supported-8a2be2?style=for-the-badge)](#multiplayer)
-[![Version](https://img.shields.io/badge/Version-V1.0.8-b00020?style=for-the-badge)](#quick-facts)
-[![License](https://img.shields.io/badge/Repo%20License-Apache--2.0-2f81f7?style=for-the-badge)](#license)
+[![Minecraft](https://img.shields.io/badge/Minecraft-1.20.1-2ea043?style=for-the-badge&logo=minecraft&logoColor=white)](#version--loader)
+[![Loader](https://img.shields.io/badge/Loader-Forge-f16436?style=for-the-badge)](#version--loader)
+[![CurseForge](https://img.shields.io/badge/Install-CurseForge-f16436?style=for-the-badge&logo=curseforge&logoColor=white)](https://www.curseforge.com/minecraft/modpacks/still-watching)
+[![License](https://img.shields.io/badge/License-Apache--2.0-2f81f7?style=for-the-badge)](./LICENSE)
 
-**The world is not empty. The silence is not safety. It is still watching.**
+**The fog is not empty. The silence is not safety. It is still watching.**
 
-[![Download on CurseForge](https://img.shields.io/badge/Download-CurseForge-f16436?style=for-the-badge&logo=curseforge&logoColor=white)](https://www.curseforge.com/minecraft/modpacks/still-watching)
-[![Report Issues](https://img.shields.io/badge/Report-Issues-b00020?style=for-the-badge&logo=github)](../../issues)
-
-<a href="https://url-shortener.curseforge.com/AZDOs" target="_blank" rel="nofollow noopener">
-  <img src="https://media.forgecdn.net/attachments/description/1420406/description_669e11c3-e62d-4ac0-a961-574733e6b87a.png" alt="Make a Server and Get 25% Off" width="850">
-</a>
+[Install on CurseForge](https://www.curseforge.com/minecraft/modpacks/still-watching) · [View Gallery](https://www.curseforge.com/minecraft/modpacks/still-watching/gallery) · [Report an Issue](../../issues)
 
 </div>
 
 ---
 
-## 🩸 What is Still Watching?
+## Overview
 
-**Still Watching** is a cinematic **Minecraft horror-survival modpack** for **Forge 1.20.1**. It rebuilds survival around fog, sound, stalking entities, cursed exploration, brutal nights, and that lovely feeling that the world already knows where you are.
+**Still Watching** is a **Forge 1.20.1 Minecraft horror survival modpack** built around fog, sound, stalking entities, cursed exploration, brutal nights, and cinematic paranoia.
 
-This is not cozy vanilla+ with a paper mask and three spooky mobs taped to it. **Forests feel wrong. Structures feel like bait. Caves stop being resource tunnels and become bad decisions with stone walls.** The dark hides movement, the fog hides intent, and every sound may be your last useful warning.
+This is not comfort survival wearing a cheap monster mask. The world is hostile by design: forests disappear into mist, structures feel like bait, caves stop being resource tunnels, and every distant sound has the manners of a threat. The pack is tuned for players who want survival to feel dangerous, atmospheric, and wrong in the bones.
 
-Still Watching is made for players who want Minecraft to feel dangerous, cinematic, unpredictable, and deeply hostile.
+The signature presence is **The Anomaly**. It is not just another enemy on the checklist. It is the thing that makes safety feel temporary.
 
 ---
 
-## ⚡ Quick Facts
+## Quick Facts
 
 | Item | Details |
 | --- | --- |
 | **Project** | Still Watching |
 | **Type** | Minecraft modpack |
-| **Minecraft** | `1.20.1` |
-| **Loader** | `Forge` |
-| **Current modpack version** | `V1.0.8` |
-| **CurseForge Project ID** | `1420406` |
+| **Minecraft version** | `1.20.1` |
+| **Mod loader** | `Forge` |
+| **Latest CurseForge file checked** | `Still Watching V1.0.8` |
+| **CurseForge project ID** | `1420406` |
 | **CurseForge categories** | Horror, Adventure/RPG, Exploration, Multiplayer, Quests |
-| **Recommended RAM** | `5 GB+` |
-| **Best played with** | Headphones, darkness, and questionable survival instincts |
-| **Official install source** | [CurseForge](https://www.curseforge.com/minecraft/modpacks/still-watching) |
-| **Repository license** | `Apache-2.0` for original files in this repo |
+| **License shown on CurseForge** | Apache License 2.0 |
+| **Repository license** | Apache License 2.0 for original repository files |
+| **Best experience** | Headphones, low light, and no fake bravery |
 
 ---
 
-## 🧭 Table of Contents
+## Feature Highlights
 
-- [What is Still Watching?](#-what-is-still-watching)
-- [Quick Facts](#-quick-facts)
-- [Core Experience](#-core-experience)
-- [Known Threats](#-known-threats)
-- [Screenshots](#-screenshots)
-- [Recommended Setup](#-recommended-setup)
-- [Installation](#-installation)
-- [Multiplayer](#-multiplayer)
-- [Repository Purpose](#-repository-purpose)
-- [Reporting Bugs](#-reporting-bugs)
-- [Credits](#-credits)
-- [License](#-license)
+### 🌫️ Fog, darkness, and pressure
+Fog is not decoration here. It hides movement, distance, and intent. Darkness is not a cosmetic filter either; it creates bad decisions.
 
----
+### 🔊 Sound-led horror
+Footsteps, knocks, whispers, growls, echoes, and distant movement matter. Headphones are strongly recommended because the pack uses audio as a warning system, a trap, and occasionally a personal attack.
 
-## 🕯️ Core Experience
+### 👁️ Stalking entities
+Still Watching focuses on threats that stalk, observe, ambush, mimic, punish careless movement, and wait for players to relax. The horror is not only in the attack. It is in the delay before it.
 
-<table>
-<tr>
-<td width="50%">
+### 🏚️ Cursed exploration
+Expect darker wilderness, abandoned places, hostile structures, and exploration that asks for payment up front. Loot is not free. Curiosity has teeth.
 
-### 🌑 Cinematic horror atmosphere
-Ambient sounds, realistic audio physics, dynamic lighting, screen distortion, blood effects, and horror-focused visuals make the world feel unsafe even when nothing is attacking you.
+### 🌘 Brutal nights
+Night is not a scheduled inconvenience. It is where mistakes compound. Some nights are quiet. That does not mean they are safe.
 
-</td>
-<td width="50%">
-
-### 🌫️ Fog, darkness, paranoia
-The fog is not decoration. It hides movement. Darkness is not a lighting setting. It creates mistakes. The pack keeps pressure alive with distant sounds, strange events, and false calm.
-
-</td>
-</tr>
-<tr>
-<td width="50%">
-
-### 👁️ Stalking horror entities
-Threats observe, ambush, mimic, hunt, and punish careless players. Some attack immediately. Others wait until you relax, which is rude but effective.
-
-</td>
-<td width="50%">
-
-### 🔊 Sound matters
-Footsteps, knocks, growls, whispers, echoes, cave noise, and distant movement can mean danger. Playing without headphones is basically volunteering for the obituary.
-
-</td>
-</tr>
-<tr>
-<td width="50%">
-
-### 🌲 Cursed exploration
-Overhauled terrain, darker biomes, abandoned places, eerie structures, and unforgiving dungeons make exploration feel like trespassing somewhere you were never meant to find.
-
-</td>
-<td width="50%">
-
-### 🧨 Survival, not power fantasy
-Weapons and guns exist, but they do not make you immortal. Ammo runs low. Panic ruins aim. Gear helps; awareness saves.
-
-</td>
-</tr>
-<tr>
-<td width="50%">
-
-### 🏚️ Loot with consequences
-Structures can become traps. Dungeons fight back. Curiosity can reward you, or drag you straight into regret like a genius with no exit plan.
-
-</td>
-<td width="50%">
-
-### 🌘 Unpredictable nights
-No routine is fully safe. Some nights are quiet. Some are not. The worst mistake is treating silence as permission to relax.
-
-</td>
-</tr>
-</table>
+### 🧨 Survival over power fantasy
+Weapons and gear can help, but they do not delete fear. Panic still ruins aim. Ammo still runs out. Awareness stays king.
 
 ---
 
-## 👹 Known Threats
+## Known Threats
 
-These are not decorations. These are the things turning your world into a problem.
+The CurseForge description and project materials highlight these major horrors:
 
-| Threat | What it brings |
+| Threat | Role in the pack |
 | --- | --- |
-| **The Anomaly** | The signature nightmare of Still Watching. Reality feels unstable around it; safety becomes temporary; survival becomes endurance. |
-| **The Man From The Fog** | A relentless mist-stalker that turns foggy terrain into a hunting ground. |
-| **Apollyon** | Destruction given form. When it appears, survival stops being a plan and becomes a reaction. |
-| **The Knocker** | Turns sound into fear. Hollow knocks in the dark mean something is close, or already too close. |
-| **Herobrine** | The classic Minecraft myth returns through strange structures, distant sightings, and glowing eyes. |
-| **The Mimicer** | Familiarity becomes bait. If something known starts behaving wrong, you waited too long. |
-| **The Goatman** | A savage forest stalker that makes lonely paths, bridges, and dark woods feel unsafe. |
-| **The Midnight Lurker** | A darkness-driven threat that punishes late reactions and careless night travel. |
-| **Siren Head** | A towering sound-based terror that weaponizes distance, forests, and panic. |
-| **Cave Dweller Reimagined** | Mining is no longer peaceful. Every tunnel, echo, and shadow can turn hostile. |
+| **The Anomaly** | The signature nightmare of Still Watching; reality feels unstable around it, and survival becomes endurance. |
+| **The Man From The Fog** | A mist-stalking presence that turns foggy terrain into a hunting ground. |
+| **Apollyon** | A destructive force where planning gives way to desperate reaction. |
+| **The Knocker** | A sound-driven threat built around hollow knocks, distance, and dread. |
+| **Herobrine** | The classic Minecraft myth reframed as sightings, strange structures, and hostile nostalgia. |
+| **The Mimicer** | A threat that makes familiar things feel unreliable. |
+| **The Goatman** | A dark-woods stalker for forests, bridges, and lonely routes. |
+| **The Midnight Lurker** | A darkness-focused threat that punishes slow reactions. |
+| **Siren Head** | A towering sound-based terror that weaponizes distance and panic. |
+| **Cave Dweller Reimagined** | Underground horror that turns mining into a liability. |
 
 ---
 
-## 🖼️ Screenshots
+## Screenshots / Gallery
+
+The full gallery is hosted on CurseForge and currently shows fog-heavy forests, lakes, cliffs, rooftops, shadowed terrain, and cinematic storm light.
 
 <div align="center">
 
-[![View the full Still Watching gallery on CurseForge](https://img.shields.io/badge/View%20Full%20Gallery-CurseForge-f16436?style=for-the-badge&logo=curseforge&logoColor=white)](https://www.curseforge.com/minecraft/modpacks/still-watching/gallery)
+[![View the full gallery on CurseForge](https://img.shields.io/badge/View%20Full%20Gallery-CurseForge-f16436?style=for-the-badge&logo=curseforge&logoColor=white)](https://www.curseforge.com/minecraft/modpacks/still-watching/gallery)
 
-<img src="https://media.forgecdn.net/attachments/1599/543/0-jpg.jpg" alt="Still Watching screenshot 1" width="850">
+<br>
 
-<img src="https://media.forgecdn.net/attachments/1599/545/1-jpg.jpg" alt="Still Watching screenshot 2" width="850">
+<img src="https://media.forgecdn.net/attachments/1599/543/0-jpg.jpg" alt="Foggy Still Watching landscape with water, grass, and tall trees" width="850">
 
-<img src="https://media.forgecdn.net/attachments/1599/546/2-jpg.jpg" alt="Still Watching screenshot 3" width="850">
+<br><br>
 
-<img src="https://media.forgecdn.net/attachments/1599/555/3-jpg.jpg" alt="Still Watching screenshot 4" width="850">
+<img src="https://media.forgecdn.net/attachments/1599/545/1-jpg.jpg" alt="Shadowy plants and mist under a gray sky in Still Watching" width="850">
+
+<br><br>
+
+<img src="https://media.forgecdn.net/attachments/1599/546/2-jpg.jpg" alt="Dark voxel landscape with cinematic clouds in Still Watching" width="850">
+
+<br><br>
+
+<img src="https://media.forgecdn.net/attachments/1599/555/3-jpg.jpg" alt="Foggy woodland with dramatic clouds and soft light in Still Watching" width="850">
 
 </div>
 
 ---
 
-## 🧰 Recommended Setup
-
-| Requirement | Recommendation |
-| --- | --- |
-| **Minecraft** | `1.20.1` |
-| **Mod loader** | `Forge` |
-| **Java** | `Java 17` |
-| **Launcher** | CurseForge App or another launcher that supports CurseForge modpacks |
-| **RAM allocation** | `5 GB` or higher recommended |
-| **Audio** | Headphones strongly recommended |
-| **Video settings** | Keep the atmosphere intact; do not flatten the pack into daylight soup |
-| **Multiplayer** | Supported |
-
-For the intended experience, let the pack breathe. Keep the sound on. Respect the darkness. Do not murder the mood with settings that turn horror into a spreadsheet.
-
----
-
-## 📦 Installation
+## Installation
 
 ### CurseForge App
 
 1. Install the **CurseForge App**.
-2. Open the official page: [Still Watching on CurseForge](https://www.curseforge.com/minecraft/modpacks/still-watching).
+2. Open the official project page: [Still Watching on CurseForge](https://www.curseforge.com/minecraft/modpacks/still-watching).
 3. Click **Install**.
-4. Allocate at least **5 GB RAM** if your system allows it.
-5. Launch the pack.
-6. Use headphones.
-7. Enter the fog and immediately regret your confidence.
+4. Launch the modpack from the CurseForge App.
+5. Use headphones. Do not negotiate with the darkness.
 
 ### Other compatible launchers
 
-Use a launcher that supports CurseForge modpacks, import/install the latest **Minecraft 1.20.1 Forge** release from the official CurseForge page, then keep the same RAM and audio recommendations above.
+Use a launcher that supports CurseForge modpacks, then import or install the latest **Minecraft 1.20.1 Forge** release from the official CurseForge page.
 
-**CurseForge is the official player download source.** This repository is for project-side files, documentation, issue tracking, licensing clarity, and transparency.
-
----
-
-## 🧑‍🤝‍🧑 Multiplayer
-
-Still Watching supports multiplayer. Horror gets worse when other players are nearby: panic spreads faster, communication matters more, and trust becomes another resource to lose.
-
-When reporting multiplayer issues, include whether the problem happens in:
-
-- Singleplayer only
-- Multiplayer only
-- Both singleplayer and multiplayer
-- Dedicated server, LAN, or hosted server
-
-Server logs and crash reports are not optional decorations. They are the difference between fixing the issue and staring into the void like it owes you answers.
+The official player download source is CurseForge. This repository is for source/project-side material, documentation, issue tracking, and licensing clarity. Do not treat it as a third-party mod jar dump. That is how asset goblins are born.
 
 ---
 
-## 🗂️ Repository Purpose
+## Version & Loader
 
-This repository may contain project-side material such as:
+| Field | Value |
+| --- | --- |
+| **Minecraft** | `1.20.1` |
+| **Loader** | `Forge` |
+| **CurseForge main file checked** | `Still Watching V1.0.8` |
+| **Release channel shown** | Release |
+| **Multiplayer category** | Listed on CurseForge |
 
-- Documentation
-- Configuration notes
-- Changelogs
-- Release notes
-- Modpack metadata
-- Issue tracking material
-- Original project files
-- CurseForge description assets or source files
-
-This repository does **not** claim ownership of third-party mods, libraries, shaders, resource packs, tools, sounds, textures, or assets used by the modpack.
-
-Do not treat this repo as a warehouse for other creators' `.jar` files. Third-party work belongs to its respective authors. Modding without credit is not community; it is asset goblin behavior.
+Because CurseForge releases can change, use the CurseForge project page as the source of truth for the newest downloadable file.
 
 ---
 
-## 🐛 Reporting Bugs
+## Project Files / Source
 
-Found a crash, broken config, typo, missing credit, performance issue, or cursed behavior that is not supposed to be cursed?
+This repository currently contains the project-facing files visible at the root:
 
-### [Open an issue](../../issues)
+| File | Purpose |
+| --- | --- |
+| [`README.md`](./README.md) | Public project documentation for GitHub. |
+| [`description.html`](./description.html) | HTML source used for the CurseForge-style project description. |
+| [`LICENSE`](./LICENSE) | Apache License 2.0 text for original repository files. |
 
-Please include:
+No root-level `manifest.json`, `modlist.html`, or changelog file is currently present in the visible repository root. If those files are added later, document them here instead of leaving future readers to wander through the fog with a spoon.
+
+This repository does **not** claim ownership of third-party mods, libraries, shaders, resource packs, tools, sounds, textures, or assets used by the modpack. Those belong to their respective creators and follow their own licenses and distribution rules.
+
+---
+
+## Contributing
+
+Contributions are welcome when they improve the project without muddying the pack’s identity.
+
+Good contributions include:
+
+- Documentation fixes
+- Broken link fixes
+- Reproducible bug reports
+- Missing credit or attribution corrections
+- Clear compatibility notes
+- Useful screenshots or issue evidence
+
+Before opening an issue, include the basics:
 
 - Modpack version
 - Launcher used
 - Minecraft version
 - Forge version, if visible
 - Java version, if relevant
+- Singleplayer or multiplayer
 - Crash report or `latest.log`, if applicable
-- Steps to reproduce the issue
-- Screenshots or clips, if helpful
-- Whether it happens in singleplayer, multiplayer, or both
-- Any extra mods/resource packs/shaders you added yourself
+- Steps to reproduce the problem
 
-A useful report gives enough detail to reproduce the problem. **“It broke” is not a bug report. It is a haunted postcard.**
+“it broke” is not a bug report. It is a haunted postcard.
 
 ---
 
-## 🙏 Credits
+## Credits / Attribution
 
-Still Watching exists because of the Minecraft modding community and the creators behind the mods, tools, libraries, shaders, resource packs, sounds, textures, and assets used by the pack.
+Still Watching is created and published by **Soumyajit** on CurseForge.
 
-All third-party content remains the property of its respective creators and is governed by its own license, permissions, and distribution rules.
+The pack exists because of the broader Minecraft modding community: mod authors, library maintainers, shader/resource creators, tool developers, artists, sound designers, and everyone whose work makes modded Minecraft possible.
 
-Support the original authors. Credit is not decoration; it is the spine of modding.
+All third-party content remains the property of its respective creators and is governed by its own license, permissions, and distribution terms. Support the original authors. Credit is not decoration; it is the spine of modding.
 
 ---
 
-## 📜 License
+## License
 
-Original **Still Watching** project files in this repository are licensed under the **Apache License 2.0**.
+Original files in this repository are licensed under the **Apache License 2.0**.
 
-SPDX: `Apache-2.0`
+See [`LICENSE`](./LICENSE) for the full license text.
 
-This license applies only to original files in this repository. It does **not** apply to third-party mods, assets, shaders, resource packs, libraries, tools, sounds, textures, or external content included through the modpack ecosystem.
-
-The CurseForge project page may display its own project/license metadata. Always respect the license and permissions of each original creator whose work is used by the modpack.
-
-Full license text: [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0)
+This repository license applies to original repository files only. It does **not** override or relicense third-party mods, assets, shaders, resource packs, libraries, tools, sounds, textures, or other external content used by the modpack ecosystem.
 
 ---
 
 <div align="center">
 
-## ⚠️ Final Warning
+## Final Warning
 
 Build carefully. Explore slowly. Listen before you move.
 
 ### **Do not trust the quiet.**
 
-[![Download on CurseForge](https://img.shields.io/badge/Play%20Still%20Watching-CurseForge-f16436?style=for-the-badge&logo=curseforge&logoColor=white)](https://www.curseforge.com/minecraft/modpacks/still-watching)
+[![Install Still Watching](https://img.shields.io/badge/Install%20Still%20Watching-CurseForge-f16436?style=for-the-badge&logo=curseforge&logoColor=white)](https://www.curseforge.com/minecraft/modpacks/still-watching)
 
 </div>
