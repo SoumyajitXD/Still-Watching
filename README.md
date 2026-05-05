@@ -13,6 +13,12 @@
 
 [Install on CurseForge](https://www.curseforge.com/minecraft/modpacks/still-watching) · [View Gallery](https://www.curseforge.com/minecraft/modpacks/still-watching/gallery) · [Report an Issue](../../issues)
 
+<br>
+
+<a href="https://url-shortener.curseforge.com/AZDOs" target="_blank" rel="nofollow noopener">
+  <img src="https://media.forgecdn.net/attachments/description/1420406/description_669e11c3-e62d-4ac0-a961-574733e6b87a.png" alt="Make a Server and Get 25% Off" width="850">
+</a>
+
 </div>
 
 ---
