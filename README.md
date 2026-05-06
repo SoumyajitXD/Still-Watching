@@ -45,7 +45,7 @@ The signature presence is **The Anomaly**. It is not just another enemy on the c
 | **CurseForge project ID** | `1420406` |
 | **CurseForge categories** | Horror, Adventure/RPG, Exploration, Multiplayer, Quests |
 | **License shown on CurseForge** | Apache License 2.0 |
-| **Repository license** | Apache License 2.0 for original repository files |
+| **Repository license** | Apache License 2.0 |
 | **Best experience** | Headphones, low light, and no fake bravery |
 
 ---
