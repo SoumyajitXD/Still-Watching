@@ -13,7 +13,7 @@
 
 **The fog is not empty. The silence is not safety. It is still watching.**
 
-[Install on CurseForge](https://www.curseforge.com/minecraft/modpacks/still-watching) · [Installation Guide](./installation-guide.md) · [Mod List](./latest-modlist.html) · [Gallery](https://www.curseforge.com/minecraft/modpacks/still-watching/gallery) · [Report an Issue](../../issues)
+[Install](https://www.curseforge.com/minecraft/modpacks/still-watching) · [Installation Guide](./installation-guide.md) · [Mod List](./latest-modlist.html) · [Gallery](https://www.curseforge.com/minecraft/modpacks/still-watching/gallery) · [Report Issue](../../issues)
 
 <br>
 
@@ -22,6 +22,25 @@
 </a>
 
 </div>
+
+---
+
+## Table Of Contents
+
+- [What Is Still Watching?](#what-is-still-watching)
+- [Quick Facts](#quick-facts)
+- [Why Play This Pack?](#why-play-this-pack)
+- [Main Threats](#main-threats)
+- [Screenshots And Gallery](#screenshots-and-gallery)
+- [Install](#install)
+- [Update Safely](#update-safely)
+- [Recommended Setup](#recommended-setup)
+- [Multiplayer And Server Notes](#multiplayer-and-server-notes)
+- [Repository Contents](#repository-contents)
+- [Reporting Issues](#reporting-issues)
+- [Contributing](#contributing)
+- [Credits And Attribution](#credits-and-attribution)
+- [License](#license)
 
 ---
 
@@ -40,10 +59,11 @@ The signature presence is **The Anomaly**. It is not just another enemy on the c
 | Item | Details |
 | --- | --- |
 | **Project** | Still Watching |
+| **Author** | Soumyajit |
 | **Type** | Minecraft modpack |
 | **Minecraft version** | `1.20.1` |
 | **Mod loader** | `Forge` |
-| **Latest CurseForge file checked** | `Still Watching V1.0.8` |
+| **Main CurseForge file checked** | `Still Watching V1.0.8` |
 | **CurseForge project ID** | `1420406` |
 | **Categories** | Horror, Adventure/RPG, Exploration, Multiplayer, Quests |
 | **Recommended RAM** | `5GB+` |
@@ -55,16 +75,16 @@ The signature presence is **The Anomaly**. It is not just another enemy on the c
 
 ---
 
-## Features
+## Why Play This Pack?
 
-| Feature | What It Means |
+| Promise | What You Get |
 | --- | --- |
-| **Cinematic horror atmosphere** | Fog, darkness, lighting, sound, weather, and environmental pressure are tuned to make the world feel wrong. |
-| **Sound-led survival** | Footsteps, knocks, whispers, growls, echoes, and distant movement matter. Headphones are strongly recommended. |
-| **Stalking entities** | Threats observe, ambush, mimic, chase, punish careless movement, and wait for players to relax. Rude, but effective. |
-| **Cursed exploration** | Structures, wilderness, caves, and lonely paths are dangerous by design. Curiosity has teeth. |
-| **Brutal nights** | Night is not a scheduled inconvenience. It is where mistakes compound. |
-| **Multiplayer horror** | Supported for players who think screaming with friends counts as strategy. |
+| **Atmosphere first** | Fog, darkness, lighting, sound, weather, and environmental pressure tuned to make the world feel wrong. |
+| **Audio matters** | Footsteps, knocks, whispers, growls, echoes, and distant movement are not background noise. They are warnings. |
+| **Threats that stalk** | Entities observe, ambush, mimic, chase, punish careless movement, and wait for players to relax. Rude, but effective. |
+| **Exploration with consequences** | Structures, wilderness, caves, and lonely paths are dangerous by design. Curiosity has teeth. |
+| **Nights with actual teeth** | Night is not a scheduled inconvenience. It is where mistakes compound. |
+| **Multiplayer panic** | Supported for players who think screaming with friends counts as strategy. |
 | **Survival over power fantasy** | Gear helps, but it does not delete fear. Panic still ruins aim. Awareness stays king. |
 
 ---
@@ -99,13 +119,13 @@ The full visual showcase lives on CurseForge and in the repository screenshots f
 
 ---
 
-## Installation
+## Install
 
 ### Recommended: CurseForge App
 
 1. Install the **CurseForge App**.
 2. Open the official project page: [Still Watching on CurseForge](https://www.curseforge.com/minecraft/modpacks/still-watching).
-3. Click **Install**.
+3. Click **Install** or **Install via App**.
 4. Allocate at least **5GB RAM** if your launcher does not already do it.
 5. Launch the pack.
 6. Use headphones. Do not negotiate with the darkness.
@@ -116,7 +136,26 @@ Use a launcher that supports CurseForge modpacks, then import or install the lat
 
 The official player download source is **CurseForge**. This repository is for project files, documentation, issue tracking, source references, and licensing clarity. Do not treat the repo ZIP as the player install method. That is how asset goblins are born.
 
-For more detail, see [`installation-guide.md`](./installation-guide.md).
+Need the full setup walkthrough? Use the big guide instead of trying to improvise your way into a broken profile:
+
+[Read the installation guide](./installation-guide.md)
+
+---
+
+## Update Safely
+
+Use the launcher update flow when possible. Back up your worlds before updating. Do not test a modpack update on your only copy of a world unless your hobbies include avoidable pain.
+
+Recommended update checklist:
+
+- Back up `saves/`.
+- Back up custom configs if you changed them.
+- Update through CurseForge or a compatible launcher.
+- Keep client and server versions matched.
+- Test the updated pack before committing your main world to it.
+- Read file notes or changelogs when available.
+
+CurseForge supports changing modpack versions through the app, including updating to the latest version or selecting a specific available version. Use that instead of manually smashing files together like a raccoon with admin rights.
 
 ---
 
@@ -124,7 +163,8 @@ For more detail, see [`installation-guide.md`](./installation-guide.md).
 
 | Setting | Recommendation |
 | --- | --- |
-| **RAM** | `5GB+` |
+| **RAM** | `5GB+`; `6–8GB` preferred if your PC can spare it |
+| **Java** | Java `17` if your launcher asks |
 | **Audio** | Headphones strongly recommended |
 | **Brightness** | Keep it low/default for the intended horror experience |
 | **Shaders** | Optional; reduce settings if performance suffers |
@@ -148,6 +188,8 @@ Recommended checklist:
 - Keep backups. Horror is fun. Data loss is not.
 - Ask players to test voice/audio settings before the first real session.
 
+For the long version, including server setup notes, RAM allocation, backups, logs, and troubleshooting, use [`installation-guide.md`](./installation-guide.md).
+
 ---
 
 ## Repository Contents
@@ -155,7 +197,7 @@ Recommended checklist:
 | Path | Purpose |
 | --- | --- |
 | [`README.md`](./README.md) | Main GitHub landing page and project overview. |
-| [`installation-guide.md`](./installation-guide.md) | Detailed install instructions. |
+| [`installation-guide.md`](./installation-guide.md) | Full install, update, server, backup, and troubleshooting guide. |
 | [`latest-modlist.html`](./latest-modlist.html) | Exported latest mod list. |
 | [`curseforge-description.html`](./curseforge-description.html) | HTML source for the CurseForge-style description. |
 | [`Screenshots/`](./Screenshots) | Repository screenshot assets. |
@@ -169,17 +211,22 @@ Recommended checklist:
 
 ## Reporting Issues
 
-Before opening an issue, include the basics:
+Before opening an issue, reproduce the problem on a clean install if possible.
+
+Include:
 
 - Modpack version
 - Launcher used
 - Minecraft version
 - Forge version, if visible
 - Java version, if relevant
+- Operating system
 - Singleplayer or multiplayer
-- Crash report or `latest.log`, if applicable
+- Dedicated server, LAN, or hosted server, if relevant
+- Crash report or `latest.log`
 - Steps to reproduce the problem
 - Screenshots or video if the issue is visual
+- Any extra mods, shaders, resource packs, or config edits you added yourself
 
 Reports like “it broke” are not bug reports. They are haunted postcards. Bring evidence.
 
