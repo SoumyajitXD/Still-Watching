@@ -1,0 +1,151 @@
+name: Server issue
+description: Report a Still Watching multiplayer or dedicated server problem
+title: "[Server]: "
+labels:
+  - server
+  - multiplayer
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this for hosted servers, dedicated servers, LAN, connection issues, and multiplayer-only crashes. Client and server versions must match unless the changelog says otherwise. Mismatched versions are bug factories with a loading screen.
+
+  - type: checkboxes
+    id: version-checks
+    attributes:
+      label: Version checks
+      options:
+        - label: Client and server are using the same Still Watching version.
+          required: true
+        - label: Client and server are using Minecraft 1.20.1.
+          required: true
+        - label: Client and server are using the required Forge version for this pack release.
+          required: true
+        - label: I searched existing issues and did not find a duplicate.
+          required: true
+
+  - type: dropdown
+    id: server-type
+    attributes:
+      label: Server type
+      options:
+        - Hosted server with CurseForge/modpack installer
+        - Official server pack from CurseForge
+        - Manual Forge server setup
+        - LAN
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: pack-version
+    attributes:
+      label: Still Watching version
+      placeholder: "V1.0.x"
+    validations:
+      required: true
+
+  - type: input
+    id: forge-version
+    attributes:
+      label: Forge version
+      placeholder: "Forge 47.x.x"
+    validations:
+      required: true
+
+  - type: input
+    id: server-host
+    attributes:
+      label: Server host/provider
+      description: Write "Self-hosted" if you run it yourself.
+      placeholder: "Example: Self-hosted / Apex / Bisect / Other"
+    validations:
+      required: true
+
+  - type: input
+    id: server-memory
+    attributes:
+      label: Server RAM
+      placeholder: "Example: 6 GB"
+    validations:
+      required: true
+
+  - type: input
+    id: client-memory
+    attributes:
+      label: Client allocated RAM
+      placeholder: "Example: 6 GB / 6144 MB"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: issue-type
+    attributes:
+      label: Issue type
+      options:
+        - Server will not start
+        - Client cannot connect
+        - Missing mod or config mismatch
+        - Server crash
+        - Client crash when joining
+        - Severe lag/TPS issue
+        - Multiplayer-only gameplay issue
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: What happened?
+      placeholder: "Describe the server problem clearly."
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Start server
+        2. Join with matching client
+        3. Do...
+        4. Issue happens
+    validations:
+      required: true
+
+  - type: textarea
+    id: server-log
+    attributes:
+      label: Server log or crash report
+      description: Attach or link server latest.log/debug.log/crash report. Review logs for private IPs or tokens before posting.
+      placeholder: "Drag and drop server logs here, or paste a link."
+    validations:
+      required: true
+
+  - type: textarea
+    id: client-log
+    attributes:
+      label: Client log or crash report
+      description: Attach or link the client latest.log/crash report when relevant.
+      placeholder: "Drag and drop client logs here, or paste a link."
+    validations:
+      required: false
+
+  - type: textarea
+    id: modifications
+    attributes:
+      label: Server/client changes
+      description: List extra mods, removed mods, edited configs, plugins, datapacks, or host panel changes. Write "None" for clean client/server.
+      placeholder: "None"
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: client-only-check
+    attributes:
+      label: Client-only mod check
+      options:
+        - label: I checked that the dedicated server does not contain client-only mods such as shader loaders, minimap renderers, HUD-only mods, or client rendering/performance mods.
+          required: true
