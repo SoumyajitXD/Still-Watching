@@ -10,6 +10,8 @@ body:
       value: |
         Thanks for reporting a bug. Reproduce the issue on a clean Still Watching profile before submitting. Modified profiles are chaos soup until proven otherwise.
 
+        Before posting, update to the latest Still Watching release and check whether the issue already exists. Reports without useful logs or reproduction steps may be closed because guessing is not debugging.
+
   - type: checkboxes
     id: existing-issues
     attributes:
@@ -19,12 +21,70 @@ body:
           required: true
 
   - type: checkboxes
+    id: latest-version
+    attributes:
+      label: Latest version check
+      options:
+        - label: I tested this on the latest available Still Watching version.
+          required: true
+
+  - type: checkboxes
     id: clean-install
     attributes:
       label: Clean install confirmation
       options:
         - label: I reproduced this on a clean Still Watching profile without extra mods, shaders, resource packs, or config edits.
           required: true
+
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Severity
+      description: Pick the impact, not the drama level.
+      options:
+        - Game/server will not start
+        - Crash during gameplay
+        - Progression blocker
+        - Major gameplay issue
+        - Minor gameplay issue
+        - Visual/audio/UI issue
+        - Performance issue
+    validations:
+      required: true
+
+  - type: dropdown
+    id: affected-area
+    attributes:
+      label: Affected area
+      description: Choose the closest category.
+      options:
+        - Startup/loading
+        - Crash
+        - Gameplay/mechanics
+        - Quests/progression
+        - World generation/structures
+        - Mobs/entities
+        - Items/blocks/recipes
+        - UI/menus/tooltips
+        - Performance/FPS/TPS
+        - Audio/visuals
+        - Multiplayer/server
+        - Other
+    validations:
+      required: true
+
+  - type: dropdown
+    id: reproducibility
+    attributes:
+      label: How often does this happen?
+      options:
+        - Always
+        - Often
+        - Sometimes
+        - Happened once
+        - Unknown
+    validations:
+      required: true
 
   - type: input
     id: pack-version
@@ -80,6 +140,13 @@ body:
       required: true
 
   - type: input
+    id: allocated-memory
+    attributes:
+      label: Allocated memory
+      description: Include this if relevant, especially for crashes, freezes, or performance issues.
+      placeholder: "Example: 6 GB"
+
+  - type: input
     id: os
     attributes:
       label: Operating system
@@ -103,7 +170,7 @@ body:
     id: description
     attributes:
       label: What happened?
-      description: Describe the bug clearly.
+      description: Describe the bug clearly. Include when it started and what you were doing right before it happened.
       placeholder: "The game crashes when..."
     validations:
       required: true
@@ -131,10 +198,33 @@ body:
       required: true
 
   - type: textarea
+    id: world-context
+    attributes:
+      label: World or location details
+      description: Include seed, dimension, coordinates, structure/biome name, or whether this happens in a new world. Write "Not relevant" if it does not apply.
+      placeholder: |
+        Seed:
+        Dimension:
+        Coordinates:
+        Biome/structure:
+        New world or existing world:
+
+  - type: textarea
+    id: server-details
+    attributes:
+      label: Server details
+      description: Fill this out for LAN, multiplayer client, or dedicated server bugs. Write "Not relevant" for singleplayer-only issues.
+      placeholder: |
+        Server host/provider:
+        Server specs:
+        Number of players online:
+        Does it happen to every player or only one player?
+
+  - type: textarea
     id: logs
     attributes:
       label: Logs or crash report
-      description: Attach latest.log. If the game crashed, also attach the crash report from the crash-reports folder. Do not paste only the last few lines. Remove private info first.
+      description: Attach latest.log. If the game crashed, also attach the crash report from the crash-reports folder. For server issues, include both client and server logs when possible. Do not paste only the last few lines. Remove private info first.
       placeholder: "Drag and drop files here, or paste a link to a log upload."
     validations:
       required: true
@@ -145,6 +235,13 @@ body:
       label: Screenshots or video
       description: Drag and drop screenshots or videos here if they help explain the bug.
       placeholder: "Attach screenshots/video here if relevant."
+
+  - type: textarea
+    id: workaround
+    attributes:
+      label: Workaround
+      description: Mention anything that temporarily fixes or avoids the issue. Write "None found" if you tried and found nothing.
+      placeholder: "Restarting the game fixes it until..."
 
   - type: textarea
     id: modifications
