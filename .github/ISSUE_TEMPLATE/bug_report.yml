@@ -3,11 +3,29 @@ description: Report a reproducible gameplay or modpack bug on a clean Still Watc
 title: "[Bug]: "
 labels:
   - bug
+
 body:
   - type: markdown
     attributes:
       value: |
         Thanks for reporting a bug. Reproduce the issue on a clean Still Watching profile before submitting. Modified profiles are chaos soup until proven otherwise.
+
+  - type: checkboxes
+    id: existing-issues
+    attributes:
+      label: Existing issue check
+      options:
+        - label: I searched existing issues and did not find a duplicate.
+          required: true
+
+  - type: checkboxes
+    id: clean-install
+    attributes:
+      label: Clean install confirmation
+      options:
+        - label: I reproduced this on a clean Still Watching profile without extra mods, shaders, resource packs, or config edits.
+          required: true
+
   - type: input
     id: pack-version
     attributes:
@@ -16,6 +34,7 @@ body:
       placeholder: V1.0.x
     validations:
       required: true
+
   - type: dropdown
     id: launcher
     attributes:
@@ -28,6 +47,14 @@ body:
         - Other
     validations:
       required: true
+
+  - type: input
+    id: launcher-other
+    attributes:
+      label: Other launcher name
+      description: Fill this only if you selected Other above.
+      placeholder: "Example: GDLauncher"
+
   - type: input
     id: minecraft-version
     attributes:
@@ -35,18 +62,23 @@ body:
       placeholder: "1.20.1"
     validations:
       required: true
+
   - type: input
     id: forge-version
     attributes:
       label: Forge version
       description: Include this if your launcher shows it.
       placeholder: "Forge 47.x.x"
+
   - type: input
     id: java-version
     attributes:
       label: Java version
-      description: Include this if visible in launcher logs or crash reports.
+      description: Check your launcher, latest.log, or crash report.
       placeholder: "Java 17"
+    validations:
+      required: true
+
   - type: input
     id: os
     attributes:
@@ -54,6 +86,7 @@ body:
       placeholder: "Windows 11 / macOS / Linux distro"
     validations:
       required: true
+
   - type: dropdown
     id: mode
     attributes:
@@ -65,14 +98,25 @@ body:
         - Dedicated server
     validations:
       required: true
+
   - type: textarea
     id: description
     attributes:
       label: What happened?
-      description: Describe the bug clearly. Include what you expected and what happened instead.
+      description: Describe the bug clearly.
       placeholder: "The game crashes when..."
     validations:
       required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect to happen?
+      description: Describe the correct behavior.
+      placeholder: "I expected..."
+    validations:
+      required: true
+
   - type: textarea
     id: steps
     attributes:
@@ -85,14 +129,23 @@ body:
         4. Bug happens
     validations:
       required: true
+
   - type: textarea
     id: logs
     attributes:
       label: Logs or crash report
-      description: Attach latest.log or the crash report. Remove private info first.
+      description: Attach latest.log. If the game crashed, also attach the crash report from the crash-reports folder. Do not paste only the last few lines. Remove private info first.
       placeholder: "Drag and drop files here, or paste a link to a log upload."
     validations:
       required: true
+
+  - type: textarea
+    id: media
+    attributes:
+      label: Screenshots or video
+      description: Drag and drop screenshots or videos here if they help explain the bug.
+      placeholder: "Attach screenshots/video here if relevant."
+
   - type: textarea
     id: modifications
     attributes:
