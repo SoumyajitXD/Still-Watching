@@ -12,7 +12,7 @@ body:
     id: pack-version
     attributes:
       label: Still Watching version
-      description: Example: V1.0.2
+      description: "Example: V1.0.2"
       placeholder: V1.0.x
     validations:
       required: true
