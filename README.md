@@ -8,20 +8,20 @@
 
 [![Minecraft](https://img.shields.io/badge/Minecraft-1.20.1-2ea043?style=for-the-badge&logo=minecraft&logoColor=white)](#quick-facts)
 [![Loader](https://img.shields.io/badge/Loader-Forge-f16436?style=for-the-badge)](#quick-facts)
+[![Latest Release](https://img.shields.io/badge/Latest-V1.0.9-fa1d04?style=for-the-badge&logo=curseforge&logoColor=white)](https://www.curseforge.com/minecraft/modpacks/still-watching/files)
 [![CurseForge](https://img.shields.io/badge/Install-CurseForge-f16436?style=for-the-badge&logo=curseforge&logoColor=white)](https://www.curseforge.com/minecraft/modpacks/still-watching)
-[![Latest Release](https://img.shields.io/badge/Latest-Check%20CurseForge-f16436?style=for-the-badge&logo=curseforge&logoColor=white)](https://www.curseforge.com/minecraft/modpacks/still-watching/files)
 [![License](https://img.shields.io/badge/License-Apache--2.0-2f81f7?style=for-the-badge)](./LICENSE)
 
 **The fog is not empty. The silence is not safety. It is still watching.**
 
-[Install](https://www.curseforge.com/minecraft/modpacks/still-watching) · [Installation Guide](./installation-guide.md) · [Mod List](./latest-modlist.html) · [Gallery](https://www.curseforge.com/minecraft/modpacks/still-watching/gallery) · [Issues](../../issues)
+[Install](https://www.curseforge.com/minecraft/modpacks/still-watching) · [Files / Releases](https://www.curseforge.com/minecraft/modpacks/still-watching/files) · [Installation Guide](./installation-guide.md) · [Mod List](./latest-modlist.html) · [Gallery](https://www.curseforge.com/minecraft/modpacks/still-watching/gallery) · [Issues](../../issues)
 
 </div>
 
 ---
 
 > [!IMPORTANT]
-> Do **not** download this repository as the playable modpack. Use **CurseForge** for installation. This GitHub repository is for documentation, issue tracking, source-side project files, and licensing clarity.
+> **Still Watching V1.0.9 is out.** Download and update through **CurseForge**, not the repository ZIP. This GitHub repository is for documentation, issue tracking, source-side project files, and licensing clarity.
 
 ---
 
@@ -29,7 +29,7 @@
 
 | I want to... | Go here |
 | --- | --- |
-| **Play the pack** | [Install on CurseForge](https://www.curseforge.com/minecraft/modpacks/still-watching) |
+| **Play the latest version** | [Install Still Watching V1.0.9 on CurseForge](https://www.curseforge.com/minecraft/modpacks/still-watching/files) |
 | **Read install/server help** | [`installation-guide.md`](./installation-guide.md) |
 | **Check the mod list** | [`latest-modlist.html`](./latest-modlist.html) |
 | **See screenshots** | [CurseForge gallery](https://www.curseforge.com/minecraft/modpacks/still-watching/gallery) or [`Screenshots/`](./Screenshots) |
@@ -40,8 +40,9 @@
 ## Table of Contents
 
 - [What Is Still Watching?](#what-is-still-watching)
-- [Who Should Play This?](#who-should-play-this)
 - [Quick Facts](#quick-facts)
+- [V1.0.9 Update Notice](#v109-update-notice)
+- [Who Should Play This?](#who-should-play-this)
 - [Why Play This Pack?](#why-play-this-pack)
 - [Experience Loop](#experience-loop)
 - [Main Threats](#main-threats)
@@ -72,18 +73,6 @@ The signature presence is **The Anomaly**: a stalking force designed to make she
 
 ---
 
-## Who Should Play This?
-
-| Play this if you want... | Skip this if you want... |
-| --- | --- |
-| Slow-burn horror survival | Peaceful building as the main focus |
-| Fog, darkness, audio tension, and paranoia | Bright, safe, predictable survival |
-| Exploration that punishes greed | Casual mining with mild danger |
-| Stalking, ambushing, mimicking, chasing threats | A power-fantasy kitchen sink pack |
-| Multiplayer panic with bad decisions included | Random famous horror mods with no identity |
-
----
-
 ## Quick Facts
 
 | Item | Details |
@@ -93,15 +82,45 @@ The signature presence is **The Anomaly**: a stalking force designed to make she
 | **Type** | Minecraft horror survival modpack |
 | **Minecraft version** | `1.20.1` |
 | **Mod loader** | `Forge` |
+| **Latest version** | `V1.0.9` |
 | **CurseForge project ID** | `1420406` |
-| **Latest version** | See the [CurseForge files page](https://www.curseforge.com/minecraft/modpacks/still-watching/files) |
 | **Recommended RAM** | `5GB` minimum; `6–8GB` preferred |
 | **Best experience** | Headphones, low light, and no fake bravery |
 | **Primary download** | [CurseForge](https://www.curseforge.com/minecraft/modpacks/still-watching) |
+| **Files / releases** | [CurseForge files page](https://www.curseforge.com/minecraft/modpacks/still-watching/files) |
 | **Repository ZIP** | Not a playable install method |
 | **Repository license** | [Apache License 2.0](./LICENSE) for original repository files |
 
-> CurseForge is the source of truth for downloadable releases. If this README and CurseForge ever disagree, trust CurseForge first and open an issue so the documentation can be fixed.
+> CurseForge is the source of truth for playable releases. If this README and CurseForge ever disagree, trust CurseForge first and open an issue so the documentation can be fixed.
+
+---
+
+## V1.0.9 Update Notice
+
+**Still Watching V1.0.9 is the current documented release.** Update through CurseForge or a compatible launcher that properly supports CurseForge modpacks.
+
+Before updating, back up your worlds and keep client/server versions matched. A mismatched horror server is not “extra mysterious.” It is just broken administration with spooky lighting.
+
+Recommended V1.0.9 update flow:
+
+1. Back up your `saves/` folder.
+2. Back up custom configs if you edited them.
+3. Update through CurseForge.
+4. Confirm every multiplayer client uses **Still Watching V1.0.9**.
+5. Confirm the server uses the matching V1.0.9 server files/configs.
+6. Test a copied world before risking your main one.
+
+---
+
+## Who Should Play This?
+
+| Play this if you want... | Skip this if you want... |
+| --- | --- |
+| Slow-burn horror survival | Peaceful building as the main focus |
+| Fog, darkness, audio tension, and paranoia | Bright, safe, predictable survival |
+| Exploration that punishes greed | Casual mining with mild danger |
+| Stalking, ambushing, mimicking, chasing threats | A power-fantasy kitchen sink pack |
+| Multiplayer panic with bad decisions included | Random famous horror mods with no identity |
 
 ---
 
@@ -170,9 +189,10 @@ Recommended path:
 1. Install the **CurseForge App**.
 2. Open [Still Watching on CurseForge](https://www.curseforge.com/minecraft/modpacks/still-watching).
 3. Click **Install** or **Install via App**.
-4. Allocate at least **5GB RAM** if your launcher does not already do it.
-5. Launch the pack.
-6. Use headphones. Do not negotiate with the darkness.
+4. Install/update to **Still Watching V1.0.9**.
+5. Allocate at least **5GB RAM** if your launcher does not already do it.
+6. Launch the pack.
+7. Use headphones. Do not negotiate with the darkness.
 
 For manual imports, compatible launchers, server setup, backups, logs, and troubleshooting, use the full guide:
 
@@ -302,7 +322,7 @@ Before opening an issue, reproduce the problem on a clean install if possible.
 
 Include:
 
-- Modpack version
+- Modpack version, for example `Still Watching V1.0.9`
 - Launcher used
 - Minecraft version
 - Forge version, if visible
@@ -324,7 +344,7 @@ it broke fix pls
 Good report:
 
 ```text
-Pack version: Still Watching V1.0.x
+Pack version: Still Watching V1.0.9
 Launcher: CurseForge App
 Mode: Singleplayer
 Issue: Crash when entering a cave near a structure
@@ -387,6 +407,6 @@ Build carefully. Explore slowly. Listen before you move.
 
 ### **Do not trust the quiet.**
 
-[![Install Still Watching](https://img.shields.io/badge/Install%20Still%20Watching-CurseForge-f16436?style=for-the-badge&logo=curseforge&logoColor=white)](https://www.curseforge.com/minecraft/modpacks/still-watching)
+[![Install Still Watching](https://img.shields.io/badge/Install%20Still%20Watching%20V1.0.9-CurseForge-f16436?style=for-the-badge&logo=curseforge&logoColor=white)](https://www.curseforge.com/minecraft/modpacks/still-watching/files)
 
 </div>
