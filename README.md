@@ -9,25 +9,26 @@
 [![Minecraft](https://img.shields.io/badge/Minecraft-1.20.1-2ea043?style=for-the-badge&logo=minecraft&logoColor=white)](#quick-facts)
 [![Loader](https://img.shields.io/badge/Loader-Forge-f16436?style=for-the-badge)](#quick-facts)
 [![CurseForge](https://img.shields.io/badge/Install-CurseForge-f16436?style=for-the-badge&logo=curseforge&logoColor=white)](https://www.curseforge.com/minecraft/modpacks/still-watching)
+[![Latest Release](https://img.shields.io/badge/Latest-Check%20CurseForge-f16436?style=for-the-badge&logo=curseforge&logoColor=white)](https://www.curseforge.com/minecraft/modpacks/still-watching/files)
 [![License](https://img.shields.io/badge/License-Apache--2.0-2f81f7?style=for-the-badge)](./LICENSE)
 
 **The fog is not empty. The silence is not safety. It is still watching.**
 
 [Install](https://www.curseforge.com/minecraft/modpacks/still-watching) · [Installation Guide](./installation-guide.md) · [Mod List](./latest-modlist.html) · [Gallery](https://www.curseforge.com/minecraft/modpacks/still-watching/gallery) · [Issues](../../issues)
 
-<br>
-
-<a href="https://url-shortener.curseforge.com/AZDOs" target="_blank" rel="nofollow noopener">
-  <img src="./bisecthosting-banner.png" alt="Make a server and get 25% off" width="850">
-</a>
-
 </div>
+
+---
+
+> [!IMPORTANT]
+> Do **not** download this repository as the playable modpack. Use **CurseForge** for installation. This GitHub repository is for documentation, issue tracking, source-side project files, and licensing clarity.
 
 ---
 
 ## Table of Contents
 
 - [What Is Still Watching?](#what-is-still-watching)
+- [Who Should Play This?](#who-should-play-this)
 - [Quick Facts](#quick-facts)
 - [Why Play This Pack?](#why-play-this-pack)
 - [Experience Loop](#experience-loop)
@@ -36,6 +37,8 @@
 - [Install](#install)
 - [Update Safely](#update-safely)
 - [Recommended Setup](#recommended-setup)
+- [Compatibility Notes](#compatibility-notes)
+- [Quick Troubleshooting](#quick-troubleshooting)
 - [Multiplayer And Server Notes](#multiplayer-and-server-notes)
 - [Repository Contents](#repository-contents)
 - [Reporting Issues](#reporting-issues)
@@ -52,7 +55,26 @@
 
 This is not cozy survival with a monster sticker slapped on it. The world is hostile by design: forests disappear into mist, structures feel like bait, caves stop being resource tunnels, and every distant sound has the manners of a threat. Build carefully. Explore slowly. Listen before you move.
 
-The signature presence is **The Anomaly**. It is not just another enemy on the checklist. It is the thing that makes safety feel temporary.
+The signature presence is **The Anomaly**: a stalking force designed to make shelter feel temporary, travel feel unsafe, and silence feel suspicious.
+
+---
+
+## Who Should Play This?
+
+Play **Still Watching** if you want:
+
+- Slow-burn horror survival instead of cozy sightseeing.
+- Fog, darkness, audio tension, and paranoia.
+- Dangerous exploration where structures, caves, and forests can punish greed.
+- Threats that stalk, ambush, mimic, chase, and punish careless movement.
+- Multiplayer panic with friends who absolutely will make worse decisions than they admit.
+
+Skip it if you want:
+
+- A peaceful building-focused pack.
+- Casual mining with predictable danger.
+- A bright, safe, power-fantasy kitchen sink modpack.
+- Random famous horror mods thrown together with no identity.
 
 ---
 
@@ -66,10 +88,11 @@ The signature presence is **The Anomaly**. It is not just another enemy on the c
 | **Minecraft version** | `1.20.1` |
 | **Mod loader** | `Forge` |
 | **CurseForge project ID** | `1420406` |
-| **Latest file** | Check the [CurseForge files page](https://www.curseforge.com/minecraft/modpacks/still-watching/files) |
+| **Latest version** | See the [CurseForge files page](https://www.curseforge.com/minecraft/modpacks/still-watching/files) |
 | **Recommended RAM** | `5GB` minimum; `6–8GB` preferred |
 | **Best experience** | Headphones, low light, and no fake bravery |
 | **Primary download** | [CurseForge](https://www.curseforge.com/minecraft/modpacks/still-watching) |
+| **Repository ZIP** | Not a playable install method |
 | **Repository license** | [Apache License 2.0](./LICENSE) for original repository files |
 
 > CurseForge is the source of truth for downloadable releases. If this README and CurseForge ever disagree, trust CurseForge first and open an issue so the documentation can be fixed.
@@ -106,7 +129,7 @@ Still Watching plays best when you treat every trip like a bad idea you prepared
 
 | Threat | Role In The Pack |
 | --- | --- |
-| **The Anomaly** | The signature nightmare of Still Watching; reality feels unstable around it, and survival becomes endurance. |
+| **The Anomaly** | The signature nightmare of Still Watching; shelter feels temporary and survival becomes endurance. |
 | **The Man From The Fog** | A mist-stalking presence that turns foggy terrain into a hunting ground. |
 | **Apollyon** | A destructive force where planning gives way to desperate reaction. |
 | **The Knocker** | A sound-driven threat built around hollow knocks, distance, and dread. |
@@ -130,11 +153,13 @@ The full visual showcase lives on CurseForge. Local screenshots are also kept in
 
 </div>
 
+> Want inline screenshots here? Add stable image filenames inside `Screenshots/`, then embed the best 2–3 shots directly in this section. Broken image links are uglier than any monster in the pack.
+
 ---
 
 ## Install
 
-Use **CurseForge** for the player install. Do **not** use the repository ZIP as the player install method; this repo is for documentation, issue tracking, source-side project files, and licensing clarity.
+Use **CurseForge** for the player install. Do **not** use the repository ZIP as the player install method.
 
 Recommended path:
 
@@ -148,6 +173,14 @@ Recommended path:
 For manual imports, compatible launchers, server setup, backups, logs, and troubleshooting, use the full guide:
 
 [Read the installation guide](./installation-guide.md)
+
+<div align="center">
+
+<a href="https://url-shortener.curseforge.com/AZDOs" target="_blank" rel="nofollow noopener">
+  <img src="./bisecthosting-banner.png" alt="Make a server and get 25% off" width="850">
+</a>
+
+</div>
 
 ---
 
@@ -182,6 +215,31 @@ If performance is poor, reduce shader settings, render distance, particles, and 
 
 ---
 
+## Compatibility Notes
+
+- Use the exact same modpack version on client and server.
+- Do not add random horror mods unless you are ready to debug the mess yourself.
+- Shaders may reduce performance on lower-end systems.
+- Extra resource packs may change the intended atmosphere.
+- Client-only visual, shader, UI, map, and rendering/performance mods may break dedicated servers if installed server-side.
+- Backup worlds before major updates, config edits, or server migrations.
+
+---
+
+## Quick Troubleshooting
+
+| Problem | Try This |
+| --- | --- |
+| **Game crashes on launch** | Check Java `17`, RAM allocation, and launcher logs. |
+| **Low FPS** | Lower render distance, shaders, particles, and dynamic lighting. |
+| **Server/client mismatch** | Confirm every player and the server use the same pack version. |
+| **Missing mods error** | Reinstall through CurseForge instead of using the repository ZIP. |
+| **Broken world after update** | Restore a backup and test the update on a copied world first. |
+
+For deeper troubleshooting, use [`installation-guide.md`](./installation-guide.md).
+
+---
+
 ## Multiplayer And Server Notes
 
 Still Watching supports multiplayer, but server setups need discipline. A mismatched server pack is not “mysterious horror”; it is just bad admin work wearing a cheap mask.
@@ -213,6 +271,22 @@ For deeper server setup, RAM allocation, backups, logs, and troubleshooting, use
 | [`bisecthosting-banner.png`](./bisecthosting-banner.png) | Local sponsor/banner image used in this README. |
 | [`still-watching-logo.jpg`](./still-watching-logo.jpg) | Project logo used in this README. |
 | [`LICENSE`](./LICENSE) | Apache License 2.0 text for original repository files. |
+
+---
+
+## Mod List
+
+The full exported mod list is available here:
+
+- [Latest mod list](./latest-modlist.html)
+
+Major categories include:
+
+- Horror entities and stalking threats.
+- Atmosphere, fog, darkness, and ambience.
+- Structures, exploration, and world danger.
+- Performance, visuals, and quality-of-life support.
+- Multiplayer and server-relevant utilities.
 
 ---
 
