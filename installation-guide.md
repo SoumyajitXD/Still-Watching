@@ -20,8 +20,25 @@ This repository is for documentation, issue tracking, source-side material, and 
 
 ---
 
+## Start Here
+
+| Situation | Go to |
+| --- | --- |
+| You just want to install the pack | [Quick Install](#quick-install) |
+| You installed it and want to test safely | [First Launch Checklist](#first-launch-checklist) |
+| You need to allocate RAM | [RAM Allocation](#ram-allocation) |
+| You are setting up multiplayer/server | [Multiplayer / Server Notes](#multiplayer--server-notes) |
+| The game crashes or will not launch | [Troubleshooting](#troubleshooting) |
+| You need logs or crash reports | [Finding Logs and Crash Reports](#finding-logs-and-crash-reports) |
+| You want to report a bug | [Bug Reports](#bug-reports) |
+
+If you are already angry because the launcher coughed up red text, start with **Troubleshooting**. Do not delete random files. That is not debugging; that is arson with a mouse.
+
+---
+
 ## Table of Contents
 
+- [Start Here](#start-here)
 - [Official Links](#official-links)
 - [Quick Install](#quick-install)
 - [First Launch Checklist](#first-launch-checklist)
@@ -87,9 +104,23 @@ Before changing anything:
 3. Confirm the game loads correctly.
 4. Confirm audio works.
 5. Confirm FPS is playable.
-6. Only then add shaders, resource packs, or optional changes.
+6. Close the game normally.
+7. Only then add shaders, resource packs, or optional changes.
 
 If the clean pack works but breaks after your changes, the problem is probably your changes. That is not a curse. That is cause and effect wearing blocky shoes.
+
+### Baseline test
+
+For the first test world, keep the setup boring:
+
+- No extra mods.
+- No shaders.
+- No extra resource packs.
+- Render distance around `8–10 chunks`.
+- Simulation distance around `5–6 chunks`.
+- RAM set to at least `5 GB`.
+
+A boring baseline is useful. A chaotic baseline is just a crime scene with particles enabled.
 
 ---
 
@@ -153,6 +184,18 @@ This is the cleanest install path because the CurseForge App handles the profile
 12. Click **Play**.
 
 The CurseForge App can install modpacks from Browse/Discover and then exposes installed packs through **My Modpacks**. That is the path you want. Dragging random jars into the folder is how clean installs go to die.
+
+### Confirming the correct project
+
+Before installing, check the project page or launcher listing:
+
+- Project name: **Still Watching**.
+- Author: **Soumyajit**.
+- Minecraft version: `1.20.1`.
+- Loader: `Forge`.
+- Source: CurseForge, not a reupload site.
+
+If any of those do not match, stop. Mystery downloads are how malware gets invited inside and starts rearranging the furniture.
 
 ---
 
@@ -240,6 +283,17 @@ Do **not** allocate all system RAM to Minecraft. Your operating system still nee
 
 If the game still runs badly after correct RAM allocation, do not blindly add more memory. Lower render distance, remove shaders, and check logs. Throwing RAM at every problem is not troubleshooting; it is Java worship.
 
+### RAM symptoms
+
+| Symptom | Likely direction |
+| --- | --- |
+| Crash during loading with memory errors | Increase allocation within safe limits |
+| Stutter after long play sessions | Restart game, then check RAM and background apps |
+| Whole computer freezes or swaps heavily | Allocation may be too high for your system |
+| Low FPS but no memory pressure | Lower graphics/settings before adding RAM |
+
+RAM is medicine, not seasoning. Use enough. Do not dump the whole bottle into the soup.
+
 ---
 
 ## Java Notes
@@ -249,6 +303,17 @@ Minecraft `1.20.1` normally uses Java `17`.
 Most modern launchers handle Java automatically. If your launcher asks for a Java version, use Java `17` unless the pack release notes say otherwise.
 
 Do not randomly swap Java versions because a forum goblin said it fixed something in 2017. Wrong Java versions can create crashes that look like modpack problems.
+
+### Where to check Java
+
+Usually, Java version appears in one of these places:
+
+- Launcher profile settings.
+- CurseForge/Minecraft launcher settings.
+- `logs/latest.log` near the top of the file.
+- Crash report system details.
+
+When reporting a bug, include the Java version if visible. “Java exists somewhere” is not diagnostic information; it is a shrug with a keyboard.
 
 ---
 
@@ -264,6 +329,7 @@ These settings are not mandatory, but they are good starting points for this pac
 | Music | Personal choice |
 | Hostile Creatures | `70–100%` |
 | Ambient/Environment | `70–100%` |
+| Subtitles | Optional, useful for accessibility or noisy rooms |
 | Shaders | Off for first launch; enable later only if performance is stable |
 | Resource Packs | Avoid stacking extras until the clean pack works |
 | Fullscreen | Recommended |
@@ -276,6 +342,14 @@ Still Watching uses sound and limited visibility as design tools. If you crank b
 ## Accessibility Notes
 
 Still Watching is designed around darkness, fog, and sound cues. If needed, adjust brightness, subtitles, volume balance, field of view, or visual settings for comfort and accessibility. Atmosphere matters, but playability matters more.
+
+Recommended accessibility-friendly changes:
+
+- Enable subtitles if directional audio is hard to use.
+- Raise brightness if darkness causes eye strain.
+- Lower fog/shader intensity if visuals become uncomfortable.
+- Reduce volume spikes through Minecraft or system audio settings.
+- Take breaks during long sessions. Horror is entertainment, not a medical endurance test.
 
 ---
 
@@ -294,6 +368,20 @@ Still Watching is listed as a multiplayer modpack, but server setup depends on t
 | CurseForge provides a server pack for your version | Option B |
 | No host installer and no server pack | Option C, advanced only |
 | You do not know what client-only mods are | Do not use manual setup |
+
+### Server preflight checklist
+
+Before inviting players:
+
+1. Confirm the server and client use the same Still Watching version.
+2. Confirm Minecraft is `1.20.1` on both sides.
+3. Confirm the required Forge build matches.
+4. Start the server once and read the console.
+5. Join with a clean client profile.
+6. Test a new world before migrating an important one.
+7. Back up the server world before updating or changing configs.
+
+Red console text is not decoration. Read it before it reads you.
 
 ### Option A: Hosted server with CurseForge support
 
@@ -418,6 +506,10 @@ Still-Watching-worldname-before-vX.X.X-update.zip
 
 A backup named `new new final real backup 2.zip` is not a system. It is a cry for help.
 
+### Restore check
+
+A backup is only useful if it can be restored. For important worlds, occasionally test that the archive opens and contains the expected folders. A broken backup is just griefing yourself in advance.
+
 ---
 
 ## Troubleshooting
@@ -444,6 +536,8 @@ Try these before opening an issue:
 | Crashes on server | Check client-only mods and version mismatch |
 | Bad FPS | Lower render/simulation distance and disable shaders |
 | No atmosphere/audio | Check headphones, output device, and sound sliders |
+| Missing mods/config mismatch | Compare client and server pack versions |
+| World loads but behaves strangely | Test a new world on a clean install |
 
 ### The pack does not launch
 
@@ -546,7 +640,7 @@ Use this when the basic checks do not expose the problem:
 - Test a new world.
 - Compare client and server modpack versions.
 - Read the first real error in the crash report, not only the final line.
-- Search the log for `Caused by`, `Mod File`, `Missing`, `Failed`, and `Exception`.
+- Search the log for `Caused by`, `Mod File`, `Missing`, `Failed`, `Exception`, and `OutOfMemoryError`.
 - Attach the full log when reporting the issue.
 
 ---
@@ -571,6 +665,17 @@ logs/debug.log
 crash-reports/
 ```
 
+### Finding the profile folder
+
+In the CurseForge App:
+
+1. Open **My Modpacks**.
+2. Right-click **Still Watching**, or click the three dots.
+3. Choose **Open Folder**.
+4. Look for `logs/`, `crash-reports/`, `saves/`, and `config/`.
+
+That folder is the crime scene. Do not clean it before collecting evidence.
+
 > **Privacy warning:** Logs can contain usernames, local file paths, server IPs, system details, and sometimes tokens. Review logs before posting them publicly.
 
 When sharing logs:
@@ -579,6 +684,7 @@ When sharing logs:
 - Do not paste only the final three lines unless asked.
 - Remove private tokens, IPs, or personal info if present.
 - Mention what you were doing when it crashed.
+- For server issues, include both client and server logs when possible.
 
 A crash report without steps is a corpse with no murder weapon. Interesting, but not enough.
 
@@ -602,6 +708,14 @@ Do **not** report as a pack bug unless you tested on a clean install:
 - Crashes from a manually assembled mod list.
 - Server crashes caused by client-only mods.
 - Problems from unofficial downloads.
+
+Choose the right issue type:
+
+| Problem | Use |
+| --- | --- |
+| General gameplay bug | Bug report |
+| Game/client crash | Crash report |
+| Dedicated server, LAN, or multiplayer problem | Server issue |
 
 Include:
 
@@ -673,6 +787,14 @@ Install the latest release shown on the official CurseForge project page unless 
 
 Only after testing the same issue on a clean install. If the problem exists only after your extra mods, shaders, edited configs, or manual file changes, the bug is probably yours. Congratulations, you invented a problem.
 
+### Where do I find the exact Forge version?
+
+Check the selected file on the CurseForge **Files** page, your launcher profile details, or the top section of `logs/latest.log`.
+
+### Should I send screenshots?
+
+Yes, if the issue is visual, UI-related, world/location-specific, or hard to explain. For crashes, logs matter more than screenshots.
+
 ---
 
 ## Documentation Roadmap
@@ -683,6 +805,7 @@ Planned improvements:
 - Add release-specific notes when major pack updates change installation or server behavior.
 - Add tested third-party launcher notes after actual verification.
 - Add a known client-only mod list if server setup problems become common.
+- Add a short video install walkthrough if screenshot support is not enough.
 
 Screenshots are not decorative glitter. They reduce support chaos.
 
