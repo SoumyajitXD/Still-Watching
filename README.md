@@ -4,7 +4,7 @@
 
 # 🩸 Still Watching
 
-### Forge 1.20.1 horror survival built on fog, sound, stalking entities, cursed exploration, brutal nights, and paranoia that does not blink.
+### Forge 1.20.1 horror survival where fog, sound, darkness, and stalking entities turn every safe place into a temporary lie.
 
 [![Minecraft](https://img.shields.io/badge/Minecraft-1.20.1-2ea043?style=for-the-badge&logo=minecraft&logoColor=white)](#quick-facts)
 [![Loader](https://img.shields.io/badge/Loader-Forge-f16436?style=for-the-badge)](#quick-facts)
@@ -25,6 +25,18 @@
 
 ---
 
+## Start Here
+
+| I want to... | Go here |
+| --- | --- |
+| **Play the pack** | [Install on CurseForge](https://www.curseforge.com/minecraft/modpacks/still-watching) |
+| **Read install/server help** | [`installation-guide.md`](./installation-guide.md) |
+| **Check the mod list** | [`latest-modlist.html`](./latest-modlist.html) |
+| **See screenshots** | [CurseForge gallery](https://www.curseforge.com/minecraft/modpacks/still-watching/gallery) or [`Screenshots/`](./Screenshots) |
+| **Report a bug** | [Open an issue](../../issues) with logs and reproduction steps |
+
+---
+
 ## Table of Contents
 
 - [What Is Still Watching?](#what-is-still-watching)
@@ -41,6 +53,7 @@
 - [Quick Troubleshooting](#quick-troubleshooting)
 - [Multiplayer And Server Notes](#multiplayer-and-server-notes)
 - [Repository Contents](#repository-contents)
+- [Mod List](#mod-list)
 - [Reporting Issues](#reporting-issues)
 - [Contributing](#contributing)
 - [Credits And Attribution](#credits-and-attribution)
@@ -53,7 +66,7 @@
 
 **Still Watching** is a **Forge 1.20.1 Minecraft horror survival modpack** built around fog, sound, stalking entities, cursed exploration, brutal nights, and cinematic paranoia.
 
-This is not cozy survival with a monster sticker slapped on it. The world is hostile by design: forests disappear into mist, structures feel like bait, caves stop being resource tunnels, and every distant sound has the manners of a threat. Build carefully. Explore slowly. Listen before you move.
+This is not cozy survival with a monster sticker slapped on it. Forests disappear into mist. Structures feel like bait. Caves stop being resource tunnels. Every distant sound has the manners of a threat.
 
 The signature presence is **The Anomaly**: a stalking force designed to make shelter feel temporary, travel feel unsafe, and silence feel suspicious.
 
@@ -61,20 +74,13 @@ The signature presence is **The Anomaly**: a stalking force designed to make she
 
 ## Who Should Play This?
 
-Play **Still Watching** if you want:
-
-- Slow-burn horror survival instead of cozy sightseeing.
-- Fog, darkness, audio tension, and paranoia.
-- Dangerous exploration where structures, caves, and forests can punish greed.
-- Threats that stalk, ambush, mimic, chase, and punish careless movement.
-- Multiplayer panic with friends who absolutely will make worse decisions than they admit.
-
-Skip it if you want:
-
-- A peaceful building-focused pack.
-- Casual mining with predictable danger.
-- A bright, safe, power-fantasy kitchen sink modpack.
-- Random famous horror mods thrown together with no identity.
+| Play this if you want... | Skip this if you want... |
+| --- | --- |
+| Slow-burn horror survival | Peaceful building as the main focus |
+| Fog, darkness, audio tension, and paranoia | Bright, safe, predictable survival |
+| Exploration that punishes greed | Casual mining with mild danger |
+| Stalking, ambushing, mimicking, chasing threats | A power-fantasy kitchen sink pack |
+| Multiplayer panic with bad decisions included | Random famous horror mods with no identity |
 
 ---
 
@@ -152,8 +158,6 @@ The full visual showcase lives on CurseForge. Local screenshots are also kept in
 [![View repository screenshots](https://img.shields.io/badge/View%20Screenshots-GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](./Screenshots)
 
 </div>
-
-> Want inline screenshots here? Add stable image filenames inside `Screenshots/`, then embed the best 2–3 shots directly in this section. Broken image links are uglier than any monster in the pack.
 
 ---
 
@@ -235,6 +239,8 @@ If performance is poor, reduce shader settings, render distance, particles, and 
 | **Server/client mismatch** | Confirm every player and the server use the same pack version. |
 | **Missing mods error** | Reinstall through CurseForge instead of using the repository ZIP. |
 | **Broken world after update** | Restore a backup and test the update on a copied world first. |
+
+Still broken? Open an issue with the crash report or `latest.log`. “It crashed” without logs is not debugging; it is a campfire ghost story with no fire.
 
 For deeper troubleshooting, use [`installation-guide.md`](./installation-guide.md).
 
