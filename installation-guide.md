@@ -1,29 +1,31 @@
 # Still Watching Installation Guide
 
-A clean, practical install guide for **Still Watching** — a Forge `1.20.1` Minecraft horror-survival modpack built around fog, sound, darkness, exploration, and the ugly feeling that something already clocked your location.
+A practical install and survival-safe setup guide for **Still Watching**, a Forge `1.20.1` Minecraft horror-survival modpack built around fog, sound, darkness, exploration, and the feeling that the world noticed you before you noticed it.
 
 > [!IMPORTANT]
-> **Install Still Watching from CurseForge, not from the GitHub ZIP.**
+> **Install Still Watching from CurseForge. Do not install from the GitHub ZIP.**
 >
-> This repository is for documentation, issue tracking, source-side files, and licensing clarity. The playable modpack release lives on CurseForge. If GitHub and CurseForge ever disagree, trust CurseForge first and report the documentation mismatch.
+> This repository is for documentation, issue tracking, source files, screenshots, and licensing clarity. The playable modpack release lives on CurseForge. If GitHub and CurseForge ever disagree, trust CurseForge first and report the mismatch.
 
-## Project Details
+---
 
-| Item | Value |
+## Project at a Glance
+
+| Item | Details |
 | --- | --- |
 | Modpack | **Still Watching** |
 | Creator | **Soumyajit** |
 | Official download | [CurseForge](https://www.curseforge.com/minecraft/modpacks/still-watching) |
-| Files / versions | [CurseForge Files](https://www.curseforge.com/minecraft/modpacks/still-watching/files) |
+| Version files | [CurseForge Files](https://www.curseforge.com/minecraft/modpacks/still-watching/files) |
 | CurseForge Project ID | `1420406` |
 | Minecraft | `1.20.1` |
 | Loader | `Forge` |
 | Java | `17` if your launcher asks |
-| RAM | `5 GB` minimum, `6–8 GB` preferred |
+| RAM | `5 GB` minimum, `6–8 GB` recommended |
 | Disk space | `5–10 GB` recommended |
-| Best experience | Headphones, low light, subtitles if needed, and survival instincts that are not decorative |
+| Best experience | Headphones, dim room, stable FPS, and enough awareness to not treat darkness like wallpaper |
 
-Do **not** download this pack from random mirror sites. Use CurseForge or a launcher that pulls directly from CurseForge. Malware loves impatient players. Do not roll out the carpet.
+Never download the pack from random mirrors. CurseForge is the source of truth. Mirror sites are where malware goes to cosplay as convenience.
 
 ---
 
@@ -37,32 +39,33 @@ Do **not** download this pack from random mirror sites. Use CurseForge or a laun
 - [RAM Allocation](#ram-allocation)
 - [First Launch Checklist](#first-launch-checklist)
 - [Recommended Game Settings](#recommended-game-settings)
-- [Updating the Pack](#updating-the-pack)
+- [Updating Safely](#updating-safely)
 - [Backups](#backups)
-- [Multiplayer and Server Setup](#multiplayer-and-server-setup)
+- [Multiplayer & Server Notes](#multiplayer--server-notes)
 - [Troubleshooting](#troubleshooting)
 - [Logs and Crash Reports](#logs-and-crash-reports)
 - [Bug Reports](#bug-reports)
 - [FAQ](#faq)
+- [Final Checklist](#final-checklist)
 
 ---
 
 ## Fast Install
 
-Use this path if you just want the pack installed without turning your `.minecraft` folder into a crime scene.
+Use this if you want the pack installed without turning your `.minecraft` folder into a crime scene.
 
 1. Install the [CurseForge App](https://www.curseforge.com/download/app).
 2. Open **Minecraft** inside CurseForge.
 3. Search for **Still Watching**.
 4. Confirm the project is by **Soumyajit**.
 5. Click **Install**.
-6. Allocate at least `5 GB` RAM.
+6. Open the profile options and allocate at least `5 GB` RAM.
 7. Launch once with **no extra mods, shaders, or resource packs**.
-8. Create a test world.
-9. Confirm the game loads, audio works, and FPS is playable.
-10. Only then add optional shaders or personal changes.
+8. Create a new test world.
+9. Confirm loading, audio, and FPS are stable.
+10. Only then add optional shaders, extra resource packs, or personal changes.
 
-The first launch can take longer than later launches because Forge and the launcher are preparing files. Do not panic-click the close button unless the game actually crashed or froze.
+The first launch can be slow because Forge and the launcher are preparing files. Slow is normal. Crash loops are not.
 
 ---
 
@@ -71,13 +74,23 @@ The first launch can take longer than later launches because Forge and the launc
 You need:
 
 - A valid **Minecraft: Java Edition** account.
-- The **CurseForge App**, or another launcher with proper CurseForge modpack support.
+- The **CurseForge App**, or another launcher that can properly install CurseForge modpack manifests.
 - Enough memory to allocate at least `5 GB` to Minecraft.
-- `5–10 GB` free disk space for the pack, logs, worlds, screenshots, and backups.
+- `5–10 GB` of free disk space for the pack, worlds, logs, screenshots, and backups.
 - A stable internet connection.
 - Headphones or decent stereo audio.
 
-Still Watching uses audio cues, fog, limited visibility, stalking threats, and environmental pressure. Playing muted is allowed, in the same way licking a cactus is allowed. Technically possible. Spiritually bankrupt.
+Still Watching uses sound, fog, darkness, and hostile timing as core pressure. Playing muted is technically allowed, just like walking into traffic blindfolded is technically movement.
+
+### Do not do this
+
+- Do **not** install from the GitHub source ZIP.
+- Do **not** drag random `.jar` files into the pack before first launch.
+- Do **not** install from unofficial mirrors.
+- Do **not** allocate all system RAM to Minecraft.
+- Do **not** report bugs from a modified profile until you reproduce them on a clean one.
+
+A clean baseline saves everyone time. Chaos is not debugging. It is arson with a loading bar.
 
 ---
 
@@ -90,7 +103,7 @@ This is the recommended method. It handles the profile, dependencies, launcher s
 3. Select **Minecraft**.
 4. Open **Browse** or **Discover**.
 5. Search for **Still Watching**.
-6. Confirm:
+6. Confirm the listing:
    - Name: **Still Watching**
    - Author: **Soumyajit**
    - Minecraft: `1.20.1`
@@ -99,8 +112,9 @@ This is the recommended method. It handles the profile, dependencies, launcher s
 8. Wait for the download and setup to finish.
 9. Go to **My Modpacks**.
 10. Select **Still Watching**.
-11. Open **Profile Options** and allocate RAM.
-12. Click **Play**.
+11. Open **Profile Options**.
+12. Allocate RAM.
+13. Click **Play**.
 
 ### Confirm the correct project
 
@@ -110,9 +124,9 @@ Before installing, check the listing like your save file depends on it:
 - It must be by **Soumyajit**.
 - It must target Minecraft `1.20.1`.
 - It must use **Forge**.
-- It must come from CurseForge, not a reupload site wearing a fake moustache.
+- It must come from CurseForge, not a reupload wearing a fake moustache.
 
-If any detail does not match, stop.
+If any of those details are wrong, stop. Do not negotiate with suspicious downloads.
 
 ---
 
@@ -120,32 +134,32 @@ If any detail does not match, stop.
 
 Use this if you found the pack in your browser first.
 
-1. Open the official page: [Still Watching on CurseForge](https://www.curseforge.com/minecraft/modpacks/still-watching).
-2. Click **Install** or **Install via App**.
-3. Allow your browser to open CurseForge.
-4. Let CurseForge install the profile.
+1. Open the official CurseForge page: [Still Watching](https://www.curseforge.com/minecraft/modpacks/still-watching).
+2. Click **Install**, **Install via App**, or the current CurseForge equivalent.
+3. Allow the browser to open the CurseForge App.
+4. Let CurseForge create the profile.
 5. Launch from **My Modpacks**.
 6. Allocate RAM before serious play.
 
-For specific versions, use the [Files page](https://www.curseforge.com/minecraft/modpacks/still-watching/files). Do not hardcode loyalty to an old version unless your world or server requires it.
+For specific versions, use the [CurseForge Files page](https://www.curseforge.com/minecraft/modpacks/still-watching/files). Install the latest release unless your world or server requires an older version.
 
 ---
 
 ## Other Launchers
 
-Some launchers can import CurseForge modpacks. Use them only if they properly support CurseForge manifests and dependency downloads.
+Some launchers can import CurseForge modpacks. Use them only if they support CurseForge manifests and dependency downloads properly.
 
 General flow:
 
 1. Open your launcher.
 2. Choose **Import Modpack**, **Install from CurseForge**, or the launcher’s equivalent.
-3. Search for **Still Watching**, or import the `.zip` from the official CurseForge file page.
+3. Search for **Still Watching**, or import the official `.zip` from the CurseForge Files page.
 4. Confirm Minecraft `1.20.1` and Forge.
 5. Allocate RAM.
 6. Launch once with no extra modifications.
-7. Test a new world.
+7. Test a new world before moving your main world or server into it.
 
-If the launcher asks you to manually assemble every mod yourself, back away. That is not an install process; that is punishment with a progress bar.
+If a launcher asks you to manually assemble every mod yourself, that is not an install process. That is punishment with a file picker.
 
 ### Manual import rules
 
@@ -153,28 +167,29 @@ Only manually import a `.zip` if:
 
 - It came from the official CurseForge project page.
 - Your launcher supports CurseForge modpack archives.
-- You are importing the archive directly, not unzipping and flinging files around like a raccoon with admin rights.
+- You are importing the archive directly.
+- You are not unzipping it and flinging folders around like a raccoon with admin rights.
 
-A valid CurseForge pack archive normally includes manifest metadata and overrides. A zipped `mods` folder from a stranger is not a modpack. It is a liability wearing compression.
+A valid CurseForge modpack archive normally includes manifest metadata and overrides. A zipped `mods` folder from a stranger is not a modpack. It is a liability in a trench coat.
 
 ---
 
 ## RAM Allocation
 
-Recommended:
+Recommended allocation:
 
 - Minimum: `5 GB` / `5120 MB`
-- Preferred: `6 GB` / `6144 MB`
+- Recommended: `6 GB` / `6144 MB`
 - High-end comfort: `8 GB` / `8192 MB`
 
 | System RAM | Suggested Minecraft RAM | Notes |
 | --- | --- | --- |
 | `8 GB` | `5 GB` | Close browsers, overlays, recorders, and background junk. |
-| `12 GB` | `5–6 GB` | Keep breathing room for the OS. |
+| `12 GB` | `5–6 GB` | Leave breathing room for the OS. |
 | `16 GB` | `6–8 GB` | Best normal target. |
 | `32 GB+` | `8 GB` | More is not automatically better. Java is not a dragon. Stop feeding it. |
 
-Do **not** allocate all system RAM to Minecraft. Your operating system still needs memory. Starving Windows/Linux/macOS so Minecraft can hoard RAM is not optimization; it is a hostage situation.
+Do **not** allocate all system RAM to Minecraft. Starving the operating system so Java can hoard memory is not optimization. It is a hostage situation.
 
 ### CurseForge RAM steps
 
@@ -195,9 +210,9 @@ Do **not** allocate all system RAM to Minecraft. Your operating system still nee
 | Symptom | Likely fix |
 | --- | --- |
 | Crash during loading with memory errors | Increase allocation within safe limits. |
-| Stutter after long sessions | Restart the game and check background apps. |
+| Stutter after long sessions | Restart the game and close background apps. |
 | Whole PC freezes or swaps heavily | Allocation may be too high. Lower it. |
-| Low FPS but no memory pressure | Lower render distance, simulation distance, or shaders. |
+| Low FPS without memory errors | Lower render distance, simulation distance, or shaders. |
 
 RAM is medicine, not seasoning. Use enough. Do not dump the bottle into the soup.
 
@@ -207,12 +222,12 @@ RAM is medicine, not seasoning. Use enough. Do not dump the bottle into the soup
 
 Before adding anything extra:
 
-1. Launch the pack once clean.
+1. Launch the pack clean.
 2. Do not add extra mods.
 3. Do not enable shaders.
 4. Do not stack resource packs.
 5. Create a new test world.
-6. Confirm loading completes.
+6. Confirm the world loads.
 7. Confirm audio works.
 8. Confirm FPS is playable.
 9. Close the game normally.
@@ -224,11 +239,11 @@ A boring baseline is useful. A chaotic baseline is just a crime scene with parti
 
 | Setting | Starting point |
 | --- | --- |
+| RAM | `5–8 GB` |
 | Render Distance | `8–10 chunks` |
 | Simulation Distance | `5–6 chunks` |
 | Shaders | Off |
 | Extra resource packs | Off |
-| RAM | `5–8 GB` |
 | Audio | Headphones recommended |
 
 If the clean pack works but breaks after your changes, the pack did not betray you. Your changes did.
@@ -260,21 +275,21 @@ Adjust the pack so it is playable for you:
 
 - Enable subtitles if audio cues are hard to track.
 - Raise brightness if darkness causes eye strain.
-- Lower visual intensity if fog, shaders, or darkness become uncomfortable.
+- Lower visual intensity if fog, darkness, or shaders become uncomfortable.
 - Reduce volume spikes through Minecraft or system audio settings.
 - Take breaks. Horror is entertainment, not a medical endurance test.
 
 ---
 
-## Updating the Pack
+## Updating Safely
 
 Use the launcher update flow. Do not manually replace random jars unless you enjoy debugging self-inflicted nonsense.
 
-1. Open CurseForge.
-2. Go to **My Modpacks**.
-3. Select **Still Watching**.
-4. Check for updates.
-5. Back up important worlds first.
+1. Back up important worlds.
+2. Open CurseForge.
+3. Go to **My Modpacks**.
+4. Select **Still Watching**.
+5. Check for updates.
 6. Update through CurseForge.
 7. Launch the pack.
 8. Test a new or disposable world.
@@ -295,7 +310,7 @@ Do not update the client and leave the server behind. Do not update the server a
 
 ## Backups
 
-Back up before updates, major config changes, server migrations, or suspicious experiments.
+Back up before updates, major config edits, server migrations, and suspicious experiments.
 
 Back up:
 
@@ -322,9 +337,9 @@ For important worlds, occasionally verify the archive opens and contains the exp
 
 ---
 
-## Multiplayer and Server Setup
+## Multiplayer & Server Notes
 
-Still Watching can be played in multiplayer when every player and the server use matching versions.
+Still Watching can be played in multiplayer when every client and the server use matching versions.
 
 > [!WARNING]
 > Client, server, Minecraft version, Forge version, pack version, and required configs must match unless a release note says otherwise.
@@ -394,7 +409,7 @@ Manual setup is advanced. Use it only when no server pack exists and you underst
 8. Remove or replace anything the crash log identifies as client-only or incompatible.
 9. Test with a clean client before adding extra changes.
 
-Manual setup is where confidence goes to get audited by stack traces. Move slowly.
+Manual setup is where confidence gets audited by stack traces. Move slowly.
 
 ### Client-only mod warning
 
@@ -485,7 +500,7 @@ Try:
 3. Close background apps.
 4. Disable heavy shaders.
 5. Remove extra resource packs.
-6. Keep included performance mods/configs intact.
+6. Keep included performance mods and configs intact.
 7. Restart after major video setting changes.
 
 Do not max out every graphics option and then act shocked when the frames die. You built the crime scene.
@@ -558,7 +573,7 @@ When sharing logs:
 
 - Upload the full file when possible.
 - Do not paste only the final three lines unless asked.
-- Remove private tokens, IPs, or personal info.
+- Remove private tokens, IPs, or personal information.
 - Say what you were doing when it crashed.
 - For server issues, include both client and server logs when possible.
 
