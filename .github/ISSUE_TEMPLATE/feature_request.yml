@@ -1,0 +1,86 @@
+name: Feature or content request
+description: Suggest a new feature, config change, mod, quest, structure, mechanic, or content improvement.
+title: "[Request]: "
+labels:
+  - enhancement
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this for thoughtful additions to Still Watching.
+
+        Good requests explain the problem, the proposed change, and why it belongs in this modpack's horror/progression loop.
+
+  - type: checkboxes
+    id: preflight
+    attributes:
+      label: Preflight checks
+      options:
+        - label: I searched existing issues and did not find this suggestion already posted.
+          required: true
+        - label: I checked that this request fits Still Watching's horror-focused survival identity.
+          required: true
+        - label: I am not asking for support, a crash fix, or help installing the pack.
+          required: true
+
+  - type: dropdown
+    id: request-type
+    attributes:
+      label: Request type
+      options:
+        - New mod suggestion
+        - Remove or replace a mod
+        - Config/balance change
+        - Quest/progression change
+        - Structure/world generation change
+        - Mob/entity behavior change
+        - Item/block/recipe change
+        - Visual/audio/ambience improvement
+        - Accessibility or quality-of-life change
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem does this solve?
+      description: Explain the gap, annoyance, imbalance, or missing experience.
+      placeholder: "Currently, the pack..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed change
+      description: Be specific. Name the mod, config, quest, or mechanic and describe what should change.
+      placeholder: "I suggest adding/changing/removing..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: fit
+    attributes:
+      label: Why does this fit Still Watching?
+      description: Explain how it improves horror, survival, progression, atmosphere, or multiplayer.
+      placeholder: "This fits because..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: tradeoffs
+    attributes:
+      label: Tradeoffs, risks, or compatibility concerns
+      description: Mention performance cost, balance problems, dependencies, conflicts, licensing, server impact, or known bugs.
+      placeholder: "Possible downside: ..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: references
+    attributes:
+      label: Links, examples, or screenshots
+      description: Add mod pages, docs, videos, screenshots, or examples if relevant.
+      placeholder: "Links/examples here."
