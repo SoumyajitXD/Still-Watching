@@ -1,18 +1,16 @@
 name: Crash report
-description: Report a Still Watching client or server crash with logs and reproduction steps.
+description: Report a Still Watching crash with logs, versions, and reproduction context.
 title: "[Crash]: "
 labels:
   - crash
   - needs-triage
-
 body:
   - type: markdown
     attributes:
       value: |
-        Use this when the game or server crashes. Attach the full crash report and latest.log.
+        Use this when the game, launcher profile, or dedicated server closes unexpectedly.
 
-        A useful crash report includes logs, versions, reproduction context, and any clean-install testing you performed.
-
+        Attach the full crash report and latest.log. Short excerpts are usually not enough.
   - type: checkboxes
     id: preflight
     attributes:
@@ -20,11 +18,12 @@ body:
       options:
         - label: I searched existing issues and did not find a duplicate.
           required: true
-        - label: I tested this on the latest available Still Watching version.
+        - label: I tested this on the latest available Still Watching release from CurseForge.
           required: true
-        - label: I tested this on a clean Still Watching profile without extra mods, shaders, resource packs, or config edits unless listed below.
+        - label: I tested this on a clean profile unless changes are listed below.
           required: true
-
+        - label: I attached or linked the full crash report and latest.log.
+          required: true
   - type: dropdown
     id: crash-type
     attributes:
@@ -32,22 +31,33 @@ body:
       options:
         - Game will not launch
         - Crash during loading
-        - Crash when creating/loading a world
+        - Crash when creating or loading a world
         - Crash during gameplay
         - Crash when joining server
         - Dedicated server crash
+        - Launcher error or exit-code failure
         - Other
     validations:
       required: true
-
+  - type: dropdown
+    id: reproducibility
+    attributes:
+      label: How often does it happen?
+      options:
+        - Every time
+        - Often
+        - Sometimes
+        - Happened once
+        - Unknown
+    validations:
+      required: true
   - type: input
     id: pack-version
     attributes:
       label: Still Watching version
-      placeholder: "V1.0.x"
+      placeholder: "Example: V1.0.x"
     validations:
       required: true
-
   - type: dropdown
     id: launcher
     attributes:
@@ -60,7 +70,6 @@ body:
         - Other
     validations:
       required: true
-
   - type: input
     id: minecraft-version
     attributes:
@@ -68,13 +77,11 @@ body:
       placeholder: "1.20.1"
     validations:
       required: true
-
   - type: input
     id: forge-version
     attributes:
       label: Forge version
       placeholder: "Forge 47.x.x"
-
   - type: input
     id: java-version
     attributes:
@@ -82,7 +89,6 @@ body:
       placeholder: "Java 17"
     validations:
       required: true
-
   - type: input
     id: allocated-memory
     attributes:
@@ -90,7 +96,6 @@ body:
       placeholder: "Example: 6 GB / 6144 MB"
     validations:
       required: true
-
   - type: input
     id: os
     attributes:
@@ -98,7 +103,6 @@ body:
       placeholder: "Windows 11 / macOS / Linux distro"
     validations:
       required: true
-
   - type: dropdown
     id: mode
     attributes:
@@ -110,51 +114,44 @@ body:
         - Dedicated server
     validations:
       required: true
-
   - type: textarea
-    id: what-happened
+    id: context
     attributes:
-      label: What happened before the crash?
-      placeholder: |
-        Example: I clicked Play, Forge loaded to 70%, then it crashed.
-        Example: I entered a cave structure and the game crashed.
+      label: What happened before it closed?
+      placeholder: "Describe the action, loading stage, world context, or server join step."
     validations:
       required: true
-
   - type: textarea
     id: steps
     attributes:
       label: Steps to reproduce
       placeholder: |
         1. Launch the pack
-        2. Open/create world
+        2. Open or create world
         3. Do...
-        4. Crash happens
+        4. Problem happens
     validations:
       required: true
-
   - type: textarea
     id: crash-report
     attributes:
       label: Crash report
-      description: Attach or link the full file from crash-reports/. Review it for private information first.
+      description: Attach or link the full file from crash-reports/.
       placeholder: "Drag and drop the crash report here, or paste a link."
     validations:
       required: true
-
   - type: textarea
     id: latest-log
     attributes:
       label: latest.log
-      description: Attach or link logs/latest.log. Include the full relevant file, not only the last few lines.
+      description: Attach or link logs/latest.log.
       placeholder: "Drag and drop latest.log here, or paste a link."
     validations:
       required: true
-
   - type: textarea
     id: modifications
     attributes:
-      label: Extra mods, shaders, resource packs, or config changes
+      label: Extra mods, shaders, resource packs, datapacks, or config changes
       description: Write "None" if the install is clean.
       placeholder: "None"
     validations:
