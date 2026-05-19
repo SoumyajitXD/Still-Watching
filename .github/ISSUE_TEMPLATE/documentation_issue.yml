@@ -1,0 +1,83 @@
+name: Documentation issue
+description: Report unclear, outdated, missing, or incorrect repository documentation.
+title: "[Docs]: "
+labels:
+  - documentation
+  - needs-triage
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this for README, installation guide, changelog, credits, links, metadata, and other documentation problems.
+
+        If the game itself is broken, use the bug, crash, install, server, or performance template instead.
+  - type: checkboxes
+    id: preflight
+    attributes:
+      label: Preflight checks
+      options:
+        - label: I searched existing issues and did not find a duplicate.
+          required: true
+        - label: This is about documentation, links, metadata, or wording rather than gameplay behavior.
+          required: true
+  - type: dropdown
+    id: docs-area
+    attributes:
+      label: Documentation area
+      options:
+        - README
+        - Installation guide
+        - Mod list or version metadata
+        - CurseForge/release information
+        - Server setup docs
+        - Troubleshooting docs
+        - Credits/license docs
+        - Links or badges
+        - Other
+    validations:
+      required: true
+  - type: dropdown
+    id: problem-type
+    attributes:
+      label: Problem type
+      options:
+        - Incorrect information
+        - Outdated information
+        - Missing information
+        - Confusing wording
+        - Broken link or badge
+        - Formatting/rendering issue
+        - Typo or grammar issue
+        - Other
+    validations:
+      required: true
+  - type: input
+    id: location
+    attributes:
+      label: Location
+      description: Link the file/section or describe where the problem appears.
+      placeholder: "Example: installation-guide.md > RAM Allocation"
+    validations:
+      required: true
+  - type: textarea
+    id: current-text
+    attributes:
+      label: Current text or behavior
+      description: Paste the relevant excerpt, link, badge, or section name.
+      placeholder: "Current text/link..."
+    validations:
+      required: true
+  - type: textarea
+    id: expected-text
+    attributes:
+      label: Suggested correction
+      description: Explain what should change. Include replacement wording if you have it.
+      placeholder: "Suggested replacement..."
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence or source
+      description: Add links, screenshots, release notes, or context proving the correction.
+      placeholder: "Evidence/source..."
