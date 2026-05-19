@@ -4,27 +4,26 @@ title: "[Performance]: "
 labels:
   - performance
   - needs-triage
-
 body:
   - type: markdown
     attributes:
       value: |
-        Use this for measurable performance problems. Include numbers, context, and logs.
+        Use this for measurable performance problems.
 
-        "Laggy" is not data. FPS, TPS, memory use, render distance, player count, location, and reproduction steps are data.
-
+        Include numbers: FPS, TPS, MSPT, memory use, render distance, player count, location, and reproduction steps.
   - type: checkboxes
     id: preflight
     attributes:
       label: Preflight checks
       options:
-        - label: I tested this on the latest available Still Watching version.
+        - label: I tested this on the latest available Still Watching release from CurseForge.
           required: true
         - label: I searched existing issues and did not find a duplicate.
           required: true
-        - label: I reproduced this without extra mods, shaders, resource packs, or config edits unless listed below.
+        - label: I reproduced this without extra mods, shaders, resource packs, datapacks, or config edits unless listed below.
           required: true
-
+        - label: I included actual measurements, not only a general description.
+          required: true
   - type: dropdown
     id: performance-type
     attributes:
@@ -32,37 +31,14 @@ body:
       options:
         - Low FPS
         - Stuttering or frame spikes
-        - Freezing/hanging
-        - Long startup/load time
+        - Freezing or hanging
+        - Long startup or world load time
         - High memory usage or garbage collection spikes
-        - Server TPS/MSPT lag
-        - Network/desync lag
+        - Server TPS or MSPT lag
+        - Network or desync lag
         - Other
     validations:
       required: true
-
-  - type: input
-    id: pack-version
-    attributes:
-      label: Still Watching version
-      placeholder: "V1.0.x"
-    validations:
-      required: true
-
-  - type: input
-    id: minecraft-version
-    attributes:
-      label: Minecraft version
-      placeholder: "1.20.1"
-    validations:
-      required: true
-
-  - type: input
-    id: forge-version
-    attributes:
-      label: Forge version
-      placeholder: "Forge 47.x.x"
-
   - type: dropdown
     id: mode
     attributes:
@@ -74,16 +50,33 @@ body:
         - Dedicated server
     validations:
       required: true
-
+  - type: input
+    id: pack-version
+    attributes:
+      label: Still Watching version
+      placeholder: "Example: V1.0.x"
+    validations:
+      required: true
+  - type: input
+    id: minecraft-version
+    attributes:
+      label: Minecraft version
+      placeholder: "1.20.1"
+    validations:
+      required: true
+  - type: input
+    id: forge-version
+    attributes:
+      label: Forge version
+      placeholder: "Forge 47.x.x"
   - type: input
     id: hardware
     attributes:
       label: Hardware
-      description: CPU, GPU, RAM, storage type if known.
+      description: CPU, GPU, RAM, and storage type if known.
       placeholder: "CPU / GPU / RAM / SSD or HDD"
     validations:
       required: true
-
   - type: input
     id: allocated-memory
     attributes:
@@ -91,7 +84,6 @@ body:
       placeholder: "Example: 6 GB / 6144 MB"
     validations:
       required: true
-
   - type: input
     id: os
     attributes:
@@ -99,7 +91,6 @@ body:
       placeholder: "Windows 11 / macOS / Linux distro"
     validations:
       required: true
-
   - type: textarea
     id: settings
     attributes:
@@ -114,7 +105,6 @@ body:
         Server view distance:
     validations:
       required: true
-
   - type: textarea
     id: measurements
     attributes:
@@ -128,7 +118,6 @@ body:
         Number of players:
     validations:
       required: true
-
   - type: textarea
     id: trigger
     attributes:
@@ -137,7 +126,6 @@ body:
       placeholder: "It happens when..."
     validations:
       required: true
-
   - type: textarea
     id: steps
     attributes:
@@ -149,20 +137,18 @@ body:
         4. FPS/TPS drops to...
     validations:
       required: true
-
   - type: textarea
     id: logs
     attributes:
       label: Logs, spark report, or profiler output
-      description: Attach latest.log and profiler/spark reports if available. Server TPS issues are almost useless without profiling data.
+      description: Attach latest.log and profiler/spark reports if available. Server TPS issues need profiling data where possible.
       placeholder: "Drag and drop logs/reports here, or paste links."
     validations:
       required: true
-
   - type: textarea
     id: modifications
     attributes:
-      label: Extra mods, shaders, resource packs, or config changes
+      label: Extra mods, shaders, resource packs, datapacks, or config changes
       description: Write "None" if the install is clean.
       placeholder: "None"
     validations:
