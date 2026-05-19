@@ -4,27 +4,26 @@ title: "[Install]: "
 labels:
   - installation
   - needs-triage
-
 body:
   - type: markdown
     attributes:
       value: |
         Use this when Still Watching fails to install, update, import, or launch before normal gameplay starts.
 
-        Only report issues from official pack files. Third-party repacks and edited ZIPs are outside the blast radius.
-
+        Only report issues from official CurseForge files. GitHub ZIP installs, third-party repacks, and edited archives are not supported.
   - type: checkboxes
     id: preflight
     attributes:
       label: Preflight checks
       options:
-        - label: I downloaded the pack from an official Still Watching source.
+        - label: I downloaded or imported the pack from an official CurseForge source.
           required: true
         - label: I followed the installation guide before opening this issue.
           required: true
         - label: I searched existing issues and did not find a duplicate.
           required: true
-
+        - label: I am not using the GitHub source ZIP as the playable modpack.
+          required: true
   - type: dropdown
     id: issue-type
     attributes:
@@ -36,11 +35,11 @@ body:
         - Missing files after install
         - Launcher profile will not create
         - Launcher profile created but will not launch
-        - Dependency/mod resolution issue
+        - Dependency or mod resolution issue
+        - Java or memory setup issue
         - Other
     validations:
       required: true
-
   - type: dropdown
     id: launcher
     attributes:
@@ -53,21 +52,19 @@ body:
         - Other
     validations:
       required: true
-
   - type: input
     id: launcher-version
     attributes:
       label: Launcher version
       placeholder: "Example: CurseForge 1.x / Prism 9.x"
-
   - type: input
     id: pack-version
     attributes:
       label: Still Watching version
-      placeholder: "V1.0.x"
+      description: Use the exact CurseForge file/version name.
+      placeholder: "Example: V1.0.x"
     validations:
       required: true
-
   - type: input
     id: minecraft-version
     attributes:
@@ -75,13 +72,11 @@ body:
       placeholder: "1.20.1"
     validations:
       required: true
-
   - type: input
     id: forge-version
     attributes:
       label: Forge version shown by launcher
       placeholder: "Forge 47.x.x"
-
   - type: input
     id: java-version
     attributes:
@@ -89,7 +84,11 @@ body:
       placeholder: "Java 17"
     validations:
       required: true
-
+  - type: input
+    id: allocated-memory
+    attributes:
+      label: Allocated memory
+      placeholder: "Example: 6 GB / 6144 MB"
   - type: input
     id: os
     attributes:
@@ -97,16 +96,21 @@ body:
       placeholder: "Windows 11 / macOS / Linux distro"
     validations:
       required: true
-
+  - type: textarea
+    id: error-message
+    attributes:
+      label: Exact error message
+      description: Paste the full launcher/game error text if one appears.
+      placeholder: "Paste the full error here."
+    validations:
+      required: true
   - type: textarea
     id: what-happened
     attributes:
       label: What happened?
-      description: Include the exact error message if there is one.
-      placeholder: "The launcher shows..."
+      placeholder: "Describe what failed and where it failed."
     validations:
       required: true
-
   - type: textarea
     id: steps
     attributes:
@@ -118,7 +122,6 @@ body:
         4. Error appears
     validations:
       required: true
-
   - type: textarea
     id: logs
     attributes:
@@ -127,10 +130,11 @@ body:
       placeholder: "Drag and drop logs here, or paste a link."
     validations:
       required: true
-
   - type: textarea
     id: attempted-fixes
     attributes:
       label: What have you tried?
-      description: Mention reinstalling, clearing cache, changing Java, changing memory, or redownloading.
+      description: Mention reinstalling, clearing cache, changing Java, changing memory, redownloading, or using a clean profile.
       placeholder: "I tried..."
+    validations:
+      required: true
