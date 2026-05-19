@@ -1,18 +1,16 @@
 name: Bug report
-description: Report a reproducible gameplay, content, or modpack bug on a clean Still Watching install.
+description: Report a reproducible gameplay, content, quest, worldgen, UI, audio, or balance bug.
 title: "[Bug]: "
 labels:
   - bug
   - needs-triage
-
 body:
   - type: markdown
     attributes:
       value: |
-        Use this for reproducible bugs that are not crashes, installation failures, server-only problems, or pure performance issues. Those have their own templates.
+        Use this for reproducible bugs in a clean Still Watching install.
 
-        Reports need clear steps, exact versions, and logs when relevant. Guesswork is not a debugging strategy.
-
+        Crashes, install/update failures, server-only problems, and pure performance issues have their own templates. Use the right template so the report lands with the right context.
   - type: checkboxes
     id: preflight
     attributes:
@@ -20,28 +18,27 @@ body:
       options:
         - label: I searched existing issues and did not find a duplicate.
           required: true
-        - label: I tested this on the latest available Still Watching version.
+        - label: I tested this on the latest available Still Watching release from CurseForge.
           required: true
-        - label: I reproduced this on a clean Still Watching profile without extra mods, shaders, resource packs, or config edits unless listed below.
+        - label: I reproduced this on a clean profile with no extra mods, shaders, resource packs, datapacks, or config edits unless listed below.
           required: true
-        - label: This is not a crash, installation/update issue, server-only issue, or performance-only issue.
+        - label: This is not a crash, install/update failure, server-only problem, or performance-only problem.
           required: true
-
   - type: dropdown
     id: severity
     attributes:
       label: Severity
-      description: Pick the impact, not the mood.
+      description: Pick the impact.
       options:
         - Progression blocker
         - Major gameplay issue
         - Minor gameplay issue
         - Visual/audio/UI issue
         - Balance issue
+        - Typo/text issue
         - Other
     validations:
       required: true
-
   - type: dropdown
     id: affected-area
     attributes:
@@ -55,14 +52,14 @@ body:
         - UI/menus/tooltips
         - Audio/visuals
         - Config/balance
+        - Documentation/text
         - Other
     validations:
       required: true
-
   - type: dropdown
     id: reproducibility
     attributes:
-      label: How often does this happen?
+      label: How often does it happen?
       options:
         - Always
         - Often
@@ -71,15 +68,14 @@ body:
         - Unknown
     validations:
       required: true
-
   - type: input
     id: pack-version
     attributes:
       label: Still Watching version
-      placeholder: "V1.0.x"
+      description: Use the exact CurseForge file/version name.
+      placeholder: "Example: V1.0.x"
     validations:
       required: true
-
   - type: dropdown
     id: launcher
     attributes:
@@ -92,7 +88,6 @@ body:
         - Other
     validations:
       required: true
-
   - type: input
     id: minecraft-version
     attributes:
@@ -100,13 +95,11 @@ body:
       placeholder: "1.20.1"
     validations:
       required: true
-
   - type: input
     id: forge-version
     attributes:
       label: Forge version
       placeholder: "Forge 47.x.x"
-
   - type: input
     id: java-version
     attributes:
@@ -114,7 +107,6 @@ body:
       placeholder: "Java 17"
     validations:
       required: true
-
   - type: input
     id: os
     attributes:
@@ -122,7 +114,6 @@ body:
       placeholder: "Windows 11 / macOS / Linux distro"
     validations:
       required: true
-
   - type: dropdown
     id: mode
     attributes:
@@ -134,29 +125,26 @@ body:
         - Dedicated server
     validations:
       required: true
-
   - type: textarea
-    id: description
+    id: summary
     attributes:
-      label: What happened?
-      description: Describe the bug clearly, including what you were doing right before it happened.
-      placeholder: "The bug happens when..."
+      label: Summary
+      description: One or two clear sentences.
+      placeholder: "When I..., the pack..."
     validations:
       required: true
-
   - type: textarea
     id: expected
     attributes:
-      label: What did you expect to happen?
+      label: Expected behavior
       placeholder: "I expected..."
     validations:
       required: true
-
   - type: textarea
     id: steps
     attributes:
       label: Steps to reproduce
-      description: Give exact steps.
+      description: Make this precise enough that someone else can reproduce it.
       placeholder: |
         1. Create/load world
         2. Go to...
@@ -164,44 +152,39 @@ body:
         4. Bug happens
     validations:
       required: true
-
   - type: textarea
     id: world-context
     attributes:
-      label: World or location details
-      description: Include seed, dimension, coordinates, structure/biome, and whether this is a new or existing world. Write "Not relevant" if it does not apply.
+      label: World/location context
+      description: Write "Not relevant" if this does not apply.
       placeholder: |
         Seed:
         Dimension:
         Coordinates:
         Biome/structure:
         New world or existing world:
-
   - type: textarea
     id: logs
     attributes:
       label: Logs
-      description: Attach latest.log when relevant. Remove private information before posting.
+      description: Attach latest.log when relevant. Remove private tokens, IPs, and personal info before posting.
       placeholder: "Drag and drop logs here, or paste a link."
-
   - type: textarea
     id: media
     attributes:
-      label: Screenshots or video
-      description: Attach screenshots or videos if they help explain the issue.
+      label: Screenshots/video
+      description: Attach screenshots or video if they help explain the issue.
       placeholder: "Attach screenshots/video here if relevant."
-
   - type: textarea
     id: workaround
     attributes:
       label: Workaround
-      description: Mention anything that temporarily fixes or avoids the issue. Write "None found" if nothing worked.
+      description: Mention anything that avoids or temporarily fixes the issue.
       placeholder: "None found"
-
   - type: textarea
     id: modifications
     attributes:
-      label: Extra mods, shaders, resource packs, or config changes
+      label: Extra mods, shaders, resource packs, datapacks, or config changes
       description: Write "None" if the install is clean.
       placeholder: "None"
     validations:
