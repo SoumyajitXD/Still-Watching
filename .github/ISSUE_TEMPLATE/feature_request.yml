@@ -1,86 +1,96 @@
 name: Feature or content request
-description: Suggest a new feature, config change, mod, quest, structure, mechanic, or content improvement.
-title: "[Request]: "
+description: Suggest a modpack feature, content change, balance pass, compatibility improvement, or quality-of-life idea.
+title: "[Feature]: "
 labels:
   - enhancement
-
+  - needs-triage
 body:
   - type: markdown
     attributes:
       value: |
-        Use this for thoughtful additions to Still Watching.
+        Use this for actionable improvements to Still Watching.
 
-        Good requests explain the problem, the proposed change, and why it belongs in this modpack's horror/progression loop.
-
+        Keep suggestions focused. A clear proposal with tradeoffs is useful. A vague wish list is not.
   - type: checkboxes
     id: preflight
     attributes:
       label: Preflight checks
       options:
-        - label: I searched existing issues and did not find this suggestion already posted.
+        - label: I searched existing issues and discussions for this idea.
           required: true
-        - label: I checked that this request fits Still Watching's horror-focused survival identity.
+        - label: This request fits Still Watching as a Forge 1.20.1 horror-survival modpack.
           required: true
-        - label: I am not asking for support, a crash fix, or help installing the pack.
+        - label: This is not a bug report, crash report, install issue, server issue, or support question.
           required: true
-
   - type: dropdown
     id: request-type
     attributes:
       label: Request type
       options:
-        - New mod suggestion
-        - Remove or replace a mod
-        - Config/balance change
+        - New mod or content addition
+        - Remove or replace existing content
+        - Balance/tuning change
+        - Compatibility improvement
+        - Quality-of-life improvement
         - Quest/progression change
-        - Structure/world generation change
-        - Mob/entity behavior change
-        - Item/block/recipe change
-        - Visual/audio/ambience improvement
-        - Accessibility or quality-of-life change
+        - Audio/visual/atmosphere change
+        - Documentation or metadata improvement
         - Other
     validations:
       required: true
-
+  - type: dropdown
+    id: impact
+    attributes:
+      label: Expected impact
+      options:
+        - Small polish
+        - Noticeable improvement
+        - Major gameplay change
+        - Breaking or risky change
+        - Unsure
+    validations:
+      required: true
   - type: textarea
     id: problem
     attributes:
-      label: What problem does this solve?
-      description: Explain the gap, annoyance, imbalance, or missing experience.
-      placeholder: "Currently, the pack..."
+      label: Problem or opportunity
+      description: What is weak, missing, confusing, too easy, too punishing, or worth improving?
+      placeholder: "Currently..."
     validations:
       required: true
-
   - type: textarea
     id: proposal
     attributes:
-      label: Proposed change
-      description: Be specific. Name the mod, config, quest, or mechanic and describe what should change.
-      placeholder: "I suggest adding/changing/removing..."
+      label: Proposed solution
+      description: Describe the actual change you want.
+      placeholder: "I suggest..."
     validations:
       required: true
-
   - type: textarea
     id: fit
     attributes:
       label: Why does this fit Still Watching?
-      description: Explain how it improves horror, survival, progression, atmosphere, or multiplayer.
+      description: Explain how it improves horror, survival, progression, atmosphere, stability, accessibility, or multiplayer.
       placeholder: "This fits because..."
     validations:
       required: true
-
   - type: textarea
-    id: tradeoffs
+    id: alternatives
     attributes:
-      label: Tradeoffs, risks, or compatibility concerns
-      description: Mention performance cost, balance problems, dependencies, conflicts, licensing, server impact, or known bugs.
-      placeholder: "Possible downside: ..."
+      label: Alternatives considered
+      description: Mention other approaches, mods, configs, or smaller changes that could solve the same problem.
+      placeholder: "Alternatives include..."
+  - type: textarea
+    id: risks
+    attributes:
+      label: Risks or tradeoffs
+      description: Consider performance, balance, horror pacing, server compatibility, licensing, mod conflicts, and world safety.
+      placeholder: "Possible downsides..."
     validations:
       required: true
-
   - type: textarea
     id: references
     attributes:
-      label: Links, examples, or screenshots
-      description: Add mod pages, docs, videos, screenshots, or examples if relevant.
-      placeholder: "Links/examples here."
+      label: References
+      description: Link mod pages, screenshots, videos, configs, changelogs, or examples if relevant.
+      placeholder: "Links or examples..."
