@@ -1,15 +1,15 @@
 <div align="center">
 
-<img src="./still-watching-logo.jpg" alt="Still Watching logo" width="190" />
+<img src="./still-watching-logo.jpg" alt="Still Watching logo" width="210" />
 
 # Still Watching
 
-### A Forge 1.20.1 horror-survival modpack built around fog, sound, darkness, exploration, and constant tension.
+### A cinematic Forge `1.20.1` horror-survival modpack built on fog, sound, darkness, exploration, and the awful feeling that something already knows where you are.
 
-[![Minecraft](https://img.shields.io/badge/Minecraft-1.20.1-2ea043?style=for-the-badge&logo=minecraft&logoColor=white)](#quick-facts)
-[![Loader](https://img.shields.io/badge/Loader-Forge-f16436?style=for-the-badge)](#quick-facts)
-[![Latest](https://img.shields.io/badge/Latest-V1.0.9-fa1d04?style=for-the-badge&logo=curseforge&logoColor=white)](https://www.curseforge.com/minecraft/modpacks/still-watching/files)
-[![CurseForge](https://img.shields.io/badge/Install-CurseForge-f16436?style=for-the-badge&logo=curseforge&logoColor=white)](https://www.curseforge.com/minecraft/modpacks/still-watching)
+[![Minecraft](https://img.shields.io/badge/Minecraft-1.20.1-2ea043?style=for-the-badge&logo=minecraft&logoColor=white)](#project-at-a-glance)
+[![Loader](https://img.shields.io/badge/Loader-Forge-f16436?style=for-the-badge)](#project-at-a-glance)
+[![Latest CurseForge File](https://img.shields.io/curseforge/v/1420406?style=for-the-badge&logo=curseforge&logoColor=white&label=Latest)](https://www.curseforge.com/minecraft/modpacks/still-watching/files)
+[![Downloads](https://img.shields.io/curseforge/dt/1420406?style=for-the-badge&logo=curseforge&logoColor=white&label=Downloads)](https://www.curseforge.com/minecraft/modpacks/still-watching)
 [![License](https://img.shields.io/badge/License-Apache--2.0-2f81f7?style=for-the-badge)](./LICENSE)
 
 **The fog is not empty. The silence is not safety. It is still watching.**
@@ -26,9 +26,61 @@
 ---
 
 > [!IMPORTANT]
-> **Download and update through CurseForge.**
+> **Install Still Watching from CurseForge, not from the GitHub ZIP.**
 >
-> This GitHub repository is for documentation, issue tracking, source-side files, and licensing clarity. The repository ZIP is **not** the correct player install method. Treat CurseForge as the source of truth for playable releases.
+> This repository is for documentation, issue tracking, source-side files, and licensing clarity. The playable modpack release lives on CurseForge. If GitHub and CurseForge ever disagree, trust CurseForge first and report the documentation mismatch.
+
+---
+
+## Contents
+
+- [What Is Still Watching?](#what-is-still-watching)
+- [Project at a Glance](#project-at-a-glance)
+- [Start Here](#start-here)
+- [Why It Hits Different](#why-it-hits-different)
+- [Core Horror Loop](#core-horror-loop)
+- [Featured Threats](#featured-threats)
+- [Screenshots](#screenshots)
+- [Install](#install)
+- [Recommended Setup](#recommended-setup)
+- [Multiplayer & Servers](#multiplayer--servers)
+- [Troubleshooting](#troubleshooting)
+- [Repository Map](#repository-map)
+- [Issue Reports](#issue-reports)
+- [Contributing](#contributing)
+- [Credits & License](#credits--license)
+
+---
+
+## What Is Still Watching?
+
+**Still Watching** is a focused **Minecraft horror-survival modpack** for **Forge `1.20.1`**. It turns normal survival into a hostile atmosphere machine: fog hides movement, caves punish confidence, forests feel occupied, and sound becomes information instead of decoration.
+
+This is not a kitchen-sink pack wearing a Halloween mask. The design is tighter than that: keep the player vulnerable, make exploration tempting, make safety temporary, and make every bad decision echo.
+
+The pack is built around a simple promise:
+
+> **Minecraft should feel familiar enough to trust — then wrong enough to regret trusting it.**
+
+---
+
+## Project at a Glance
+
+| Item | Details |
+| --- | --- |
+| **Name** | Still Watching |
+| **Creator** | Soumyajit |
+| **Type** | Horror-survival Minecraft modpack |
+| **Minecraft** | `1.20.1` |
+| **Loader** | `Forge` |
+| **CurseForge Project ID** | `1420406` |
+| **Official install source** | [CurseForge](https://www.curseforge.com/minecraft/modpacks/still-watching) |
+| **Latest release** | [Check CurseForge Files](https://www.curseforge.com/minecraft/modpacks/still-watching/files) |
+| **Recommended RAM** | `5 GB` minimum; `6–8 GB` preferred |
+| **Recommended Java** | Java `17` if your launcher asks |
+| **Multiplayer** | Supported when every client and server uses the same pack version |
+| **Best experience** | Headphones, low light, low brightness, and survival instincts that actually work |
+| **Repository license** | [Apache License 2.0](./LICENSE) for original repository files only |
 
 ---
 
@@ -36,144 +88,92 @@
 
 | I want to... | Go here |
 | --- | --- |
-| **Play the latest version** | [Install Still Watching on CurseForge](https://www.curseforge.com/minecraft/modpacks/still-watching/files) |
-| **Install safely** | [`installation-guide.md`](./installation-guide.md) |
-| **Set up multiplayer/server** | [`installation-guide.md`](./installation-guide.md#multiplayer--server-notes) |
-| **Check the mod list** | [`latest-modlist.html`](./latest-modlist.html) |
-| **See screenshots** | [CurseForge gallery](https://www.curseforge.com/minecraft/modpacks/still-watching/gallery) or [`Screenshots/`](./Screenshots) |
+| **Install the modpack** | [Still Watching on CurseForge](https://www.curseforge.com/minecraft/modpacks/still-watching) |
+| **Download a specific version** | [CurseForge Files](https://www.curseforge.com/minecraft/modpacks/still-watching/files) |
+| **Install without breaking things** | [`installation-guide.md`](./installation-guide.md) |
+| **Set up multiplayer or a server** | [`installation-guide.md`](./installation-guide.md#multiplayer--server-notes) |
+| **Check the full mod list** | [`latest-modlist.html`](./latest-modlist.html) |
+| **View screenshots** | [CurseForge Gallery](https://www.curseforge.com/minecraft/modpacks/still-watching/gallery) or [`Screenshots/`](./Screenshots) |
 | **Report a bug** | [Open an issue](../../issues) with logs, versions, and reproduction steps |
 
 ---
 
-## What Is Still Watching?
+## Why It Hits Different
 
-**Still Watching** is a focused **Minecraft horror-survival modpack** for **Forge 1.20.1**. It is designed around heavy atmosphere, poor visibility, unsettling audio, dangerous exploration, and encounters that make ordinary travel feel suspicious.
-
-This is not a random pile of scary mods wearing a trench coat. The pack has one job: make Minecraft feel tense, cinematic, and unpredictable while still remaining playable for survival worlds and multiplayer sessions.
-
-The signature presence is **The Anomaly**, supported by fog-focused encounters, dark caves, haunted structures, eerie forests, and audio cues that reward careful players.
-
----
-
-## Quick Facts
-
-| Item | Details |
+| Design Pillar | What it means in-game |
 | --- | --- |
-| **Project** | Still Watching |
-| **Creator** | Soumyajit |
-| **Type** | Minecraft horror-survival modpack |
-| **Minecraft** | `1.20.1` |
-| **Loader** | `Forge` |
-| **Latest documented version** | `V1.0.9` |
-| **CurseForge project ID** | `1420406` |
-| **Install source** | [CurseForge](https://www.curseforge.com/minecraft/modpacks/still-watching) |
-| **Recommended RAM** | `5GB` minimum; `6–8GB` preferred |
-| **Recommended Java** | Java `17` if your launcher asks |
-| **Multiplayer** | Supported when client and server versions match |
-| **Best experience** | Headphones, low brightness, and careful exploration |
-| **Repository license** | [Apache License 2.0](./LICENSE) for original repository files only |
-
-> If this README and CurseForge ever disagree, trust CurseForge first and open an issue so the documentation can be corrected.
+| **Fog-first horror** | Visibility becomes a resource. Distance is suspicious. Shapes in the mist are a problem, not scenery. |
+| **Sound-led survival** | Footsteps, echoes, growls, knocks, whispers, and silence all matter. Playing muted is basically speedrunning confusion. |
+| **Pressure over cheap jumpscares** | The pack leans into stalking, ambushes, pursuit, uncertainty, and bad timing. Panic is earned. |
+| **Exploration with consequences** | Caves, ruins, roads, forests, towns, and structures are worth entering — and not always worth leaving badly prepared. |
+| **Survival, not superhero cosplay** | Gear helps. Awareness helps more. If your entire plan is “I have armor,” congratulations, you have a louder coffin. |
+| **Multiplayer paranoia** | Friends do not delete fear. They add noise, bad calls, split-second mistakes, and screaming in voice chat. Beautiful disaster. |
 
 ---
 
-## The 10-Second Pitch
-
-Still Watching turns Minecraft survival into a slow-burn horror loop:
+## Core Horror Loop
 
 1. **Prepare before nightfall.** Food, light, tools, armor, exits, and backup plans matter.
-2. **Enter dangerous places.** Forests, caves, ruins, roads, towns, and structures all demand attention.
-3. **Listen before moving.** Footsteps, knocks, echoes, growls, and silence can all mean something.
-4. **React under pressure.** Fight when needed, retreat when smart, and keep your route open.
-5. **Return changed.** Better loot, higher tension, and one more reason to respect the dark.
+2. **Push into unsafe places.** Caves, forests, ruins, roads, and structures pull you forward.
+3. **Listen before moving.** Audio cues often beat visual confirmation.
+4. **Choose fast.** Fight, hide, flee, block a route, or abandon the plan.
+5. **Return with scars.** Better loot, worse nerves, and one more reason to respect the dark.
 
 ---
 
-## Who This Pack Is For
+## Featured Threats
 
-| Play this if you want... | Skip this if you want... |
+Still Watching combines creature pressure, folklore horror, visual uncertainty, and environmental dread. Expect encounters that stalk, chase, mimic, ambush, interrupt, and punish autopilot gameplay.
+
+| Threat / Theme | Role in the pack |
 | --- | --- |
-| Slow-burn horror survival | Peaceful building as the main focus |
-| Fog, darkness, audio tension, and paranoia | Bright, safe, predictable survival |
-| Stalking, ambushing, mimicking, and chase-style encounters | A clean power fantasy where gear solves everything |
-| Exploration that rewards caution | Casual mining with mild danger |
-| Multiplayer tension and chaotic teamwork | A kitchen-sink pack with no identity |
+| **The Anomaly** | The signature presence. Shelter feels temporary. Travel feels observed. |
+| **The Man From The Fog** | Makes misty terrain hostile instead of decorative. |
+| **Apollyon** | High-pressure danger where planning can collapse into reaction instantly. |
+| **Herobrine-inspired horror** | Classic Minecraft myth energy: sightings, unease, and corrupted familiarity. |
+| **The Mimicer** | Makes trust expensive. Familiar things stop feeling reliable. |
+| **Goatman-style forest dread** | Woods, bridges, and lonely routes become bad ideas with leaves. |
+| **The Midnight Lurker** | Darkness-focused pressure that rewards fast decisions and punishes hesitation. |
+| **Siren Head** | A towering sound-based threat built around distance, exposure, and awareness. |
+| **Cave Dweller pressure** | Underground exploration becomes dangerous again. Strip-mining autopilot gets humbled. |
+| **Ambient darkness and audio mods** | The world itself helps the horror breathe: footsteps, echoes, visibility loss, and tension between encounters. |
 
 ---
 
-## Design Pillars
+## Screenshots
 
-| Pillar | What it does |
-| --- | --- |
-| **Fog-first horror** | Visibility becomes part of the challenge. Distance, terrain, and weather make travel feel uncertain. |
-| **Sound-led survival** | Audio is not background noise. Footsteps, knocks, whispers, growls, echoes, and distant movement become warnings. |
-| **Persistent pressure** | Encounters can observe, ambush, mimic, chase, interrupt, or punish careless routes. |
-| **Cursed exploration** | Structures, caves, forests, roads, and isolated places are dangerous by design. Curiosity has a cost. |
-| **Survival over power fantasy** | Gear helps, but awareness, preparation, and escape routes still matter. |
-| **Multiplayer atmosphere** | Friends do not remove tension. They amplify it. Poor decisions just get louder. |
+<div align="center">
 
----
+[![View CurseForge Gallery](https://img.shields.io/badge/View%20Gallery-CurseForge-f16436?style=for-the-badge&logo=curseforge&logoColor=white)](https://www.curseforge.com/minecraft/modpacks/still-watching/gallery)
+[![View GitHub Screenshots](https://img.shields.io/badge/View%20Screenshots-GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](./Screenshots)
 
-## Main Encounters
-
-| Encounter | Role in the pack |
-| --- | --- |
-| **The Anomaly** | The signature presence of Still Watching; makes shelter feel temporary and travel feel unsafe. |
-| **The Man From The Fog** | Turns misty terrain into a hunting ground. |
-| **Apollyon** | Adds high-pressure danger where planning quickly becomes reaction. |
-| **The Knocker** | Uses hollow sounds, distance, darkness, and suspense. |
-| **Herobrine** | Classic Minecraft myth reframed through sightings, strange structures, and uneasy nostalgia. |
-| **The Mimicer** | Makes familiar things less reliable. Trust becomes a gameplay risk. |
-| **The Goatman** | A dark-woods encounter for forests, bridges, and lonely routes. |
-| **The Midnight Lurker** | Darkness-focused pressure that rewards quick decisions. |
-| **Siren Head** | A towering sound-based encounter built around distance and awareness. |
-| **Cave Dweller Reimagined** | Makes underground exploration feel hostile again. |
-
----
-
-## Screenshots & Gallery
-
-The visual showcase lives on CurseForge, with local screenshots also kept in this repository.
-
-[![View Gallery](https://img.shields.io/badge/View%20Gallery-CurseForge-f16436?style=for-the-badge&logo=curseforge&logoColor=white)](https://www.curseforge.com/minecraft/modpacks/still-watching/gallery)
-[![View Screenshots](https://img.shields.io/badge/View%20Screenshots-GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](./Screenshots)
+</div>
 
 ---
 
 ## Install
 
-Use CurseForge for the player install. Do **not** use the repository ZIP as the player install method.
+Use CurseForge for the playable install. The GitHub source ZIP is **not** a modpack installer. Treating it like one is how you manufacture problems and then give them names.
 
-### Recommended install path
+### Recommended path
 
 1. Install the [CurseForge App](https://www.curseforge.com/download/app).
 2. Open [Still Watching on CurseForge](https://www.curseforge.com/minecraft/modpacks/still-watching).
 3. Click **Install** or **Install via App**.
-4. Install or update to the latest available release.
-5. Allocate at least **5GB RAM** if your launcher does not already do it.
-6. Launch the pack once without extra mods.
-7. Put on headphones.
-8. Enter the fog carefully.
+4. Install the latest release from the **Files** page.
+5. Allocate at least **`5 GB` RAM** if your launcher does not already do it.
+6. Launch once with no extra mods.
+7. Confirm the game loads, audio works, and FPS is playable.
+8. Put on headphones.
+9. Enter the fog carefully.
 
-For manual imports, compatible launchers, server setup, backups, logs, and deeper troubleshooting, use the full guide:
+For manual imports, server setup, backups, logs, launcher notes, and deeper troubleshooting, read the full guide:
 
-[![Read the Installation Guide](https://img.shields.io/badge/Read-Installation%20Guide-2f81f7?style=for-the-badge)](./installation-guide.md)
+<div align="center">
 
----
+[![Read Installation Guide](https://img.shields.io/badge/Read-Installation%20Guide-2f81f7?style=for-the-badge)](./installation-guide.md)
 
-## First Launch Checklist
-
-Before changing anything:
-
-- Launch the pack once without extra mods.
-- Create or open a test world.
-- Confirm the game loads correctly.
-- Confirm audio works.
-- Confirm FPS is playable.
-- Close the game normally.
-- Only then add shaders, resource packs, or optional changes.
-
-If the clean pack works but breaks after custom changes, test those changes one by one. Random edits make clean debugging impossible.
+</div>
 
 ---
 
@@ -181,134 +181,121 @@ If the clean pack works but breaks after custom changes, test those changes one 
 
 | Setting | Recommendation |
 | --- | --- |
-| **RAM** | `5GB` minimum; `6–8GB` preferred if your PC can spare it |
+| **RAM** | `5 GB` minimum; `6–8 GB` preferred if your PC can spare it |
 | **Java** | Java `17` if your launcher asks |
 | **Audio** | Headphones strongly recommended |
-| **Brightness** | Keep it low/default for the intended horror atmosphere |
+| **Brightness** | Keep low/default for the intended horror atmosphere |
 | **Shaders** | Optional; reduce settings if performance suffers |
-| **Render distance** | Lower it if performance drops in foggy areas |
+| **Render distance** | Lower this first when FPS drops in foggy or structure-heavy areas |
 | **Simulation distance** | Keep moderate for smoother survival and fewer frame drops |
-| **Multiplayer** | Supported; every player should use the same modpack version |
+| **Extra mods** | Test one at a time; random mod piles are compatibility soup |
+| **Backups** | Mandatory before updates, server moves, or config experiments |
 
-If performance is poor, reduce shader settings, render distance, particles, dynamic lighting, and other visual extras before assuming the pack itself is broken.
+### First-launch baseline
 
----
+Before adding anything extra:
 
-## Update Safely
+- No additional mods.
+- No extra shaders.
+- No stacked resource packs.
+- Render distance around `8–10 chunks`.
+- Simulation distance around `5–6 chunks`.
+- RAM set to at least `5 GB`.
 
-Modpack updates can affect configs, world generation, server behavior, and client compatibility. Do not test updates on your only copy of a world.
-
-Recommended update flow:
-
-1. Back up your `saves/` folder.
-2. Back up custom configs if you edited them.
-3. Update through CurseForge or a compatible launcher.
-4. Confirm every multiplayer client uses the same Still Watching version.
-5. Confirm the server uses the matching server files/configs.
-6. Test a copied world before using your main one.
-
-Hope is not a backup strategy. Keep copies.
+A clean baseline is useful. A chaotic baseline is just a crime scene with particles enabled.
 
 ---
 
-## Compatibility Notes
+## Multiplayer & Servers
 
-- Use the exact same modpack version on client and server.
-- Match Minecraft `1.20.1` and the required Forge build.
-- Do not add extra horror mods unless you are ready to debug conflicts.
-- Shaders may reduce performance on lower-end systems.
-- Extra resource packs may change the intended atmosphere.
-- Client-only visual, shader, UI, map, and rendering/performance mods may break dedicated servers if installed server-side.
-- Back up worlds before major updates, config edits, or server migrations.
+Still Watching supports multiplayer, but horror modpacks are allergic to sloppy server setup. Keep versions aligned or enjoy debugging a mess you personally summoned.
 
----
+Checklist:
 
-## Multiplayer & Server Notes
-
-Still Watching supports multiplayer, but server setups need discipline. A mismatched server pack is not mysterious; it is just a setup problem.
-
-Recommended checklist:
-
-- Use the same modpack version on server and clients.
-- Match Minecraft `1.20.1` and Forge versions exactly.
-- Keep backups before updates or migrations.
-- Keep client-only visual, shader, UI, map, and rendering/performance mods out of dedicated servers when required.
+- Use the **same Still Watching version** on server and every client.
+- Match **Minecraft `1.20.1`** and the required **Forge** version.
+- Use server files/configs that match the selected CurseForge release when available.
+- Keep client-only shader, visual, UI, map, and rendering/performance mods off dedicated servers when required.
+- Back up worlds before updates or migrations.
 - Test world generation before inviting players.
 - Ask players to test voice/audio settings before the first real session.
-- Keep logs. Reports without logs are hard to fix.
+- Save logs. Reports without logs are vibes, not diagnostics.
 
-For deeper server setup, RAM allocation, backups, logs, and troubleshooting, use [`installation-guide.md`](./installation-guide.md).
+Full details live in [`installation-guide.md`](./installation-guide.md#multiplayer--server-notes).
 
 ---
 
-## Quick Troubleshooting
+## Troubleshooting
 
-| Problem | Try this |
+| Problem | Try this first |
 | --- | --- |
-| **Game crashes on launch** | Check Java `17`, RAM allocation, and launcher logs. |
+| **Crash on launch** | Check Java `17`, RAM allocation, launcher logs, and whether you installed through CurseForge. |
 | **Low FPS** | Lower shaders, render distance, particles, dynamic lighting, and heavy visual settings. |
-| **Server/client mismatch** | Confirm every player and the server use the same pack version. |
+| **Server/client mismatch** | Confirm every client and the server use the exact same pack version. |
 | **Missing mods error** | Reinstall through CurseForge instead of using the repository ZIP. |
-| **Broken world after update** | Restore a backup and test the update on a copied world first. |
-| **Audio feels flat** | Use headphones and check in-game/system volume settings. |
+| **World broke after update** | Restore a backup and test updates on a copied world first. |
+| **Audio feels flat** | Use headphones and check Minecraft/system audio settings. |
 | **Extra mods broke the pack** | Reproduce on a clean install before reporting. |
 
-Still broken? Open an issue with your crash report or `latest.log`. No logs means no useful diagnosis.
+Need deeper help? Use the troubleshooting section in [`installation-guide.md`](./installation-guide.md#troubleshooting).
 
 ---
 
-## Repository Contents
+## Repository Map
 
 | Path | Purpose |
 | --- | --- |
 | [`README.md`](./README.md) | Main GitHub landing page and project overview. |
-| [`installation-guide.md`](./installation-guide.md) | Full install, update, server, backup, and troubleshooting guide. |
+| [`installation-guide.md`](./installation-guide.md) | Full install, update, multiplayer, server, backup, and troubleshooting guide. |
 | [`latest-modlist.html`](./latest-modlist.html) | Exported mod list from the current repository state. |
-| [`curseforge-description.html`](./curseforge-description.html) | HTML source for the CurseForge-style description. |
-| [`Screenshots/`](./Screenshots) | Repository screenshot assets. |
+| [`curseforge-description.html`](./curseforge-description.html) | HTML source for the CurseForge-style project description. |
+| [`Screenshots/`](./Screenshots) | Screenshot assets for repository browsing. |
 | [`Releases/`](./Releases) | Release-related project files. |
-| [`.github/ISSUE_TEMPLATE/`](./.github/ISSUE_TEMPLATE) | Issue templates for cleaner reports. |
-| [`bisecthosting-banner.png`](./bisecthosting-banner.png) | Local sponsor/banner image used by the project. |
+| [`.github/ISSUE_TEMPLATE/`](./.github/ISSUE_TEMPLATE) | Issue templates for cleaner bug reports. |
 | [`still-watching-logo.jpg`](./still-watching-logo.jpg) | Project logo. |
-| [`LICENSE`](./LICENSE) | Apache License 2.0 text for original repository files. |
+| [`LICENSE`](./LICENSE) | Apache License 2.0 for original repository files. |
 
 ---
 
 ## Mod List
 
-The full exported mod list is available here:
+The exported mod list is available here:
 
-[![Latest Mod List](https://img.shields.io/badge/View-Latest%20Mod%20List-181717?style=for-the-badge&logo=github&logoColor=white)](./latest-modlist.html)
+<div align="center">
+
+[![View Latest Mod List](https://img.shields.io/badge/View-Latest%20Mod%20List-181717?style=for-the-badge&logo=github&logoColor=white)](./latest-modlist.html)
+
+</div>
 
 Major categories include:
 
 - Horror entities and encounter mods.
-- Atmosphere, fog, darkness, ambience, and sound pressure.
-- Structures, exploration, dungeons, and world danger.
+- Fog, darkness, ambience, sound physics, footsteps, and visual pressure.
+- Structures, dungeons, exploration, roads, towns, and world danger.
 - Visuals, shaders, resource packs, and cinematic presentation.
 - Performance, compatibility, and quality-of-life support.
 - Multiplayer and server-relevant utilities.
 
 ---
 
-## Reporting Issues
+## Issue Reports
 
 Before opening an issue, reproduce the problem on a clean install if possible.
 
 Include:
 
-- Modpack version, for example `Still Watching V1.0.9`
-- Launcher used
-- Minecraft version
-- Forge version, if visible
-- Java version, if relevant
-- Operating system
-- Singleplayer or multiplayer
-- Dedicated server, LAN, or hosted server, if relevant
-- Crash report or `latest.log`
-- Steps to reproduce the problem
-- Screenshots or video if the issue is visual
-- Any extra mods, shaders, resource packs, or config edits you added yourself
+- Still Watching version.
+- Launcher used.
+- Minecraft version.
+- Forge version, if visible.
+- Java version, if relevant.
+- Operating system.
+- Singleplayer or multiplayer.
+- Dedicated server, LAN, or hosted server, if relevant.
+- Crash report or `latest.log`.
+- Steps to reproduce the problem.
+- Screenshots or video if the issue is visual.
+- Any extra mods, shaders, resource packs, or config edits you added yourself.
 
 Bad report:
 
@@ -319,7 +306,7 @@ it broke fix pls
 Good report:
 
 ```text
-Pack version: Still Watching V1.0.9
+Pack version: Still Watching V1.0.8
 Launcher: CurseForge App
 Mode: Singleplayer
 Issue: Crash when entering a cave near a structure
@@ -333,28 +320,37 @@ Attached: latest.log and crash report
 
 Reports like “it broke” are not bug reports. Bring evidence.
 
+<div align="center">
+
 [![Open an Issue](https://img.shields.io/badge/Open-Issue-fa1d04?style=for-the-badge&logo=github&logoColor=white)](../../issues)
+
+</div>
 
 ---
 
 ## Contributing
 
-Contributions are welcome when they improve the project without muddying the pack’s identity.
+Contributions are welcome when they improve the project without turning the pack into a confused mod soup.
 
-Good contributions include:
+Good contributions:
 
 - Documentation fixes.
 - Broken link fixes.
 - Reproducible bug reports.
 - Missing credit or attribution corrections.
-- Clear compatibility notes.
-- Useful screenshots, logs, or issue evidence.
+- Compatibility notes backed by testing.
+- Screenshots, logs, or evidence that actually help.
 
-Bad contributions include random difficulty bloat, vibe-breaking content, vague crash complaints, and requests to add every famous horror mod without design purpose.
+Bad contributions:
+
+- “Add this famous horror mod” with no design reason.
+- Vague crash complaints with no logs.
+- Difficulty bloat for the sake of pain.
+- Changes that wreck the pack’s horror-survival identity.
 
 ---
 
-## Credits & Attribution
+## Credits & License
 
 Still Watching is created and published by **Soumyajit**.
 
@@ -362,27 +358,21 @@ This pack exists because of the Minecraft modding community: mod authors, librar
 
 All third-party mods, shaders, resource packs, sounds, textures, libraries, tools, and external assets remain the property of their respective creators and are governed by their own licenses, permissions, and distribution terms.
 
+Original files in this repository are licensed under the **Apache License 2.0**. See [`LICENSE`](./LICENSE) for the full license text.
+
+The repository license applies to original repository files only. It does **not** override or relicense third-party mods, assets, shaders, resource packs, libraries, tools, sounds, textures, or other external content used by the modpack ecosystem.
+
 Support the original authors. Credit is not decoration; it is the spine of modding.
 
 ---
 
-## License
-
-Original files in this repository are licensed under the **Apache License 2.0**.
-
-See [`LICENSE`](./LICENSE) for the full license text.
-
-This repository license applies to original repository files only. It does **not** override or relicense third-party mods, assets, shaders, resource packs, libraries, tools, sounds, textures, or other external content used by the modpack ecosystem.
-
----
+<div align="center">
 
 ## Final Warning
 
 Build carefully. Explore slowly. Listen before you move.
 
 ### Do not trust the quiet.
-
-<div align="center">
 
 [![Install Still Watching](https://img.shields.io/badge/Install%20Still%20Watching-CurseForge-f16436?style=for-the-badge&logo=curseforge&logoColor=white)](https://www.curseforge.com/minecraft/modpacks/still-watching/files)
 
