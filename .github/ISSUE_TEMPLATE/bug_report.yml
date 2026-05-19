@@ -1,54 +1,44 @@
 name: Bug report
-description: Report a reproducible gameplay or modpack bug on a clean Still Watching install.
+description: Report a reproducible gameplay, content, or modpack bug on a clean Still Watching install.
 title: "[Bug]: "
 labels:
   - bug
+  - needs-triage
 
 body:
   - type: markdown
     attributes:
       value: |
-        Thanks for reporting a bug. Reproduce the issue on a clean Still Watching profile before submitting. Modified profiles are chaos soup until proven otherwise.
+        Use this for reproducible bugs that are not crashes, installation failures, server-only problems, or pure performance issues. Those have their own templates.
 
-        Before posting, update to the latest Still Watching release and check whether the issue already exists. Reports without useful logs or reproduction steps may be closed because guessing is not debugging.
+        Reports need clear steps, exact versions, and logs when relevant. Guesswork is not a debugging strategy.
 
   - type: checkboxes
-    id: existing-issues
+    id: preflight
     attributes:
-      label: Existing issue check
+      label: Preflight checks
       options:
         - label: I searched existing issues and did not find a duplicate.
           required: true
-
-  - type: checkboxes
-    id: latest-version
-    attributes:
-      label: Latest version check
-      options:
         - label: I tested this on the latest available Still Watching version.
           required: true
-
-  - type: checkboxes
-    id: clean-install
-    attributes:
-      label: Clean install confirmation
-      options:
-        - label: I reproduced this on a clean Still Watching profile without extra mods, shaders, resource packs, or config edits.
+        - label: I reproduced this on a clean Still Watching profile without extra mods, shaders, resource packs, or config edits unless listed below.
+          required: true
+        - label: This is not a crash, installation/update issue, server-only issue, or performance-only issue.
           required: true
 
   - type: dropdown
     id: severity
     attributes:
       label: Severity
-      description: Pick the impact, not the drama level.
+      description: Pick the impact, not the mood.
       options:
-        - Game/server will not start
-        - Crash during gameplay
         - Progression blocker
         - Major gameplay issue
         - Minor gameplay issue
         - Visual/audio/UI issue
-        - Performance issue
+        - Balance issue
+        - Other
     validations:
       required: true
 
@@ -56,19 +46,15 @@ body:
     id: affected-area
     attributes:
       label: Affected area
-      description: Choose the closest category.
       options:
-        - Startup/loading
-        - Crash
         - Gameplay/mechanics
         - Quests/progression
         - World generation/structures
         - Mobs/entities
         - Items/blocks/recipes
         - UI/menus/tooltips
-        - Performance/FPS/TPS
         - Audio/visuals
-        - Multiplayer/server
+        - Config/balance
         - Other
     validations:
       required: true
@@ -90,8 +76,7 @@ body:
     id: pack-version
     attributes:
       label: Still Watching version
-      description: "Example: V1.0.2"
-      placeholder: V1.0.x
+      placeholder: "V1.0.x"
     validations:
       required: true
 
@@ -109,13 +94,6 @@ body:
       required: true
 
   - type: input
-    id: launcher-other
-    attributes:
-      label: Other launcher name
-      description: Fill this only if you selected Other above.
-      placeholder: "Example: GDLauncher"
-
-  - type: input
     id: minecraft-version
     attributes:
       label: Minecraft version
@@ -127,24 +105,15 @@ body:
     id: forge-version
     attributes:
       label: Forge version
-      description: Include this if your launcher shows it.
       placeholder: "Forge 47.x.x"
 
   - type: input
     id: java-version
     attributes:
       label: Java version
-      description: Check your launcher, latest.log, or crash report.
       placeholder: "Java 17"
     validations:
       required: true
-
-  - type: input
-    id: allocated-memory
-    attributes:
-      label: Allocated memory
-      description: Include this if relevant, especially for crashes, freezes, or performance issues.
-      placeholder: "Example: 6 GB"
 
   - type: input
     id: os
@@ -170,8 +139,8 @@ body:
     id: description
     attributes:
       label: What happened?
-      description: Describe the bug clearly. Include when it started and what you were doing right before it happened.
-      placeholder: "The game crashes when..."
+      description: Describe the bug clearly, including what you were doing right before it happened.
+      placeholder: "The bug happens when..."
     validations:
       required: true
 
@@ -179,7 +148,6 @@ body:
     id: expected
     attributes:
       label: What did you expect to happen?
-      description: Describe the correct behavior.
       placeholder: "I expected..."
     validations:
       required: true
@@ -188,7 +156,7 @@ body:
     id: steps
     attributes:
       label: Steps to reproduce
-      description: Give exact steps. No telepathy. No haunted postcards.
+      description: Give exact steps.
       placeholder: |
         1. Create/load world
         2. Go to...
@@ -201,7 +169,7 @@ body:
     id: world-context
     attributes:
       label: World or location details
-      description: Include seed, dimension, coordinates, structure/biome name, or whether this happens in a new world. Write "Not relevant" if it does not apply.
+      description: Include seed, dimension, coordinates, structure/biome, and whether this is a new or existing world. Write "Not relevant" if it does not apply.
       placeholder: |
         Seed:
         Dimension:
@@ -210,44 +178,31 @@ body:
         New world or existing world:
 
   - type: textarea
-    id: server-details
-    attributes:
-      label: Server details
-      description: Fill this out for LAN, multiplayer client, or dedicated server bugs. Write "Not relevant" for singleplayer-only issues.
-      placeholder: |
-        Server host/provider:
-        Server specs:
-        Number of players online:
-        Does it happen to every player or only one player?
-
-  - type: textarea
     id: logs
     attributes:
-      label: Logs or crash report
-      description: Attach latest.log. If the game crashed, also attach the crash report from the crash-reports folder. For server issues, include both client and server logs when possible. Do not paste only the last few lines. Remove private info first.
-      placeholder: "Drag and drop files here, or paste a link to a log upload."
-    validations:
-      required: true
+      label: Logs
+      description: Attach latest.log when relevant. Remove private information before posting.
+      placeholder: "Drag and drop logs here, or paste a link."
 
   - type: textarea
     id: media
     attributes:
       label: Screenshots or video
-      description: Drag and drop screenshots or videos here if they help explain the bug.
+      description: Attach screenshots or videos if they help explain the issue.
       placeholder: "Attach screenshots/video here if relevant."
 
   - type: textarea
     id: workaround
     attributes:
       label: Workaround
-      description: Mention anything that temporarily fixes or avoids the issue. Write "None found" if you tried and found nothing.
-      placeholder: "Restarting the game fixes it until..."
+      description: Mention anything that temporarily fixes or avoids the issue. Write "None found" if nothing worked.
+      placeholder: "None found"
 
   - type: textarea
     id: modifications
     attributes:
       label: Extra mods, shaders, resource packs, or config changes
-      description: List anything you changed. Write "None" for a clean install.
+      description: Write "None" if the install is clean.
       placeholder: "None"
     validations:
       required: true
