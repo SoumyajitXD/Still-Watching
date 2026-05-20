@@ -10,53 +10,75 @@ permissions:
   contents: read
 
 concurrency:
-  group: docs-check-${{ github.ref }}
+  group: docs-check-${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
   validate:
-    name: Validate repository files
+    name: Validate repository docs
     runs-on: ubuntu-latest
+    timeout-minutes: 5
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-      - name: Show repository structure
+      - name: Check required repository layout
+        shell: bash
         run: |
-          find . -maxdepth 3 -type f | sort
+          set -euo pipefail
 
-      - name: Install validation dependencies
+          required_files=(
+            README.md
+            installation-guide.md
+            latest-modlist.html
+            curseforge-description.html
+            LICENSE
+          )
+
+          required_dirs=(
+            .github/ISSUE_TEMPLATE
+            .github/workflows
+            Releases
+            Screenshots
+          )
+
+          for file in "${required_files[@]}"; do
+            [[ -f "$file" ]] || { echo "Missing required file: $file"; exit 1; }
+          done
+
+          for dir in "${required_dirs[@]}"; do
+            [[ -d "$dir" ]] || { echo "Missing required directory: $dir"; exit 1; }
+          done
+
+      - name: Validate YAML syntax
+        shell: bash
         run: |
-          python -m pip install --upgrade pip
-          python -m pip install pyyaml
+          set -euo pipefail
+          ruby <<'RUBY'
+          require 'yaml'
 
-      - name: Validate YAML issue templates and workflows
+          paths = Dir['.github/workflows/*.{yml,yaml}', '.github/ISSUE_TEMPLATE/*.{yml,yaml}'].sort
+          abort('No workflow or issue-template YAML files found') if paths.empty?
+
+          failed = false
+          paths.each do |path|
+            begin
+              YAML.safe_load_file(path, permitted_classes: [Date, Time], aliases: true)
+              puts "OK: #{path}"
+            rescue Psych::Exception => e
+              warn "YAML ERROR: #{path}: #{e.message}"
+              failed = true
+            end
+          end
+
+          exit(failed ? 1 : 0)
+          RUBY
+
+      - name: Validate HTML files are parseable
+        shell: bash
         run: |
-          python - <<'PY'
-          import pathlib
-          import sys
-          import yaml
-
-          failed = False
-          roots = [pathlib.Path('.github/ISSUE_TEMPLATE'), pathlib.Path('.github/workflows')]
-
-          for root in roots:
-              if not root.exists():
-                  continue
-
-              for path in sorted(list(root.rglob('*.yml')) + list(root.rglob('*.yaml'))):
-                  try:
-                      yaml.safe_load(path.read_text(encoding='utf-8'))
-                      print(f'OK: {path}')
-                  except Exception as exc:
-                      print(f'YAML ERROR: {path}: {exc}')
-                      failed = True
-
-          sys.exit(1 if failed else 0)
-          PY
-
-      - name: Validate HTML files can be parsed
-        run: |
+          set -euo pipefail
           python - <<'PY'
           from html.parser import HTMLParser
           from pathlib import Path
@@ -68,7 +90,9 @@ jobs:
           failed = False
           for path in sorted(Path('.').glob('*.html')):
               try:
-                  Parser().feed(path.read_text(encoding='utf-8-sig'))
+                  parser = Parser()
+                  parser.feed(path.read_text(encoding='utf-8-sig'))
+                  parser.close()
                   print(f'OK: {path}')
               except Exception as exc:
                   print(f'HTML ERROR: {path}: {exc}')
@@ -76,14 +100,3 @@ jobs:
 
           sys.exit(1 if failed else 0)
           PY
-
-      - name: Check required repository files exist
-        run: |
-          test -f README.md
-          test -f installation-guide.md
-          test -f latest-modlist.html
-          test -f curseforge-description.html
-          test -f LICENSE
-          test -d .github/ISSUE_TEMPLATE
-          test -d Screenshots
-          test -d Releases
