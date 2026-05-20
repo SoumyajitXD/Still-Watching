@@ -56,6 +56,7 @@ jobs:
         run: |
           set -euo pipefail
           ruby <<'RUBY'
+          require 'date'
           require 'yaml'
 
           paths = Dir['.github/workflows/*.{yml,yaml}', '.github/ISSUE_TEMPLATE/*.{yml,yaml}'].sort
