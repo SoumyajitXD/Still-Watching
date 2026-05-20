@@ -14,68 +14,138 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: issue-template-check-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   check:
-    name: Validate issue templates
+    name: Validate issue forms
     runs-on: ubuntu-latest
+    timeout-minutes: 5
 
     steps:
-      - uses: actions/checkout@v4
-
-      - name: Install validation dependencies
-        run: |
-          python -m pip install --upgrade pip
-          python -m pip install pyyaml
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
       - name: Validate issue template config and forms
+        shell: bash
         run: |
-          python - <<'PY'
-          from pathlib import Path
-          import sys
-          import yaml
+          set -euo pipefail
+          ruby <<'RUBY'
+          require 'date'
+          require 'yaml'
 
-          template_dir = Path('.github/ISSUE_TEMPLATE')
-          failed = False
+          template_dir = '.github/ISSUE_TEMPLATE'
+          abort('Missing .github/ISSUE_TEMPLATE directory') unless Dir.exist?(template_dir)
 
-          if not template_dir.exists():
-              print('Missing .github/ISSUE_TEMPLATE directory')
-              sys.exit(1)
+          config_path = File.join(template_dir, 'config.yml')
+          failed = false
 
-          config = template_dir / 'config.yml'
-          if not config.exists():
-              print('Missing .github/ISSUE_TEMPLATE/config.yml')
-              failed = True
+          unless File.file?(config_path)
+            warn 'Missing .github/ISSUE_TEMPLATE/config.yml'
+            failed = true
+          else
+            begin
+              config = YAML.safe_load_file(config_path, permitted_classes: [Date, Time], aliases: true)
+              unless config.is_a?(Hash)
+                warn "#{config_path} must contain a YAML mapping"
+                failed = true
+              end
+              if config.is_a?(Hash) && config['blank_issues_enabled'] != false
+                warn "#{config_path} should keep blank_issues_enabled: false"
+                failed = true
+              end
+            rescue Psych::Exception => e
+              warn "YAML ERROR: #{config_path}: #{e.message}"
+              failed = true
+            end
+          end
 
-          for path in sorted(template_dir.glob('*.yml')):
-              print(f'Checking {path}')
-              try:
-                  data = yaml.safe_load(path.read_text(encoding='utf-8'))
-              except Exception as exc:
-                  print(f'YAML ERROR: {path}: {exc}')
-                  failed = True
-                  continue
+          form_paths = Dir[File.join(template_dir, '*.{yml,yaml}')].reject { |path| File.basename(path) == 'config.yml' }.sort
+          if form_paths.empty?
+            warn 'No issue form YAML files found'
+            failed = true
+          end
 
-              if path.name == 'config.yml':
-                  continue
+          required_top_level = %w[name description title labels body]
+          required_field_types = %w[input textarea dropdown checkboxes]
 
-              if not isinstance(data, dict):
-                  print(f'{path} must contain a YAML mapping')
-                  failed = True
-                  continue
+          form_paths.each do |path|
+            puts "Checking #{path}"
+            begin
+              data = YAML.safe_load_file(path, permitted_classes: [Date, Time], aliases: true)
+            rescue Psych::Exception => e
+              warn "YAML ERROR: #{path}: #{e.message}"
+              failed = true
+              next
+            end
 
-              for key in ['name', 'description', 'title', 'body']:
-                  if key not in data:
-                      print(f'{path} missing required key: {key}')
-                      failed = True
+            unless data.is_a?(Hash)
+              warn "#{path} must contain a YAML mapping"
+              failed = true
+              next
+            end
 
-              if 'labels' not in data:
-                  print(f'{path} should define labels')
-                  failed = True
+            required_top_level.each do |key|
+              value = data[key]
+              if value.nil? || (value.respond_to?(:empty?) && value.empty?)
+                warn "#{path} missing non-empty top-level key: #{key}"
+                failed = true
+              end
+            end
 
-              body = data.get('body', [])
-              if not isinstance(body, list) or not body:
-                  print(f'{path} must have a non-empty body list')
-                  failed = True
+            labels = data['labels']
+            unless labels.is_a?(Array) || labels.is_a?(String)
+              warn "#{path} labels must be a string or list"
+              failed = true
+            end
 
-          sys.exit(1 if failed else 0)
-          PY
+            body = data['body']
+            unless body.is_a?(Array) && !body.empty?
+              warn "#{path} must have a non-empty body list"
+              failed = true
+              next
+            end
+
+            has_required_user_field = false
+            body.each_with_index do |item, index|
+              unless item.is_a?(Hash)
+                warn "#{path} body item #{index + 1} must be a mapping"
+                failed = true
+                next
+              end
+
+              type = item['type']
+              if type.nil? || type.to_s.strip.empty?
+                warn "#{path} body item #{index + 1} missing type"
+                failed = true
+              end
+
+              attrs = item['attributes']
+              if type != 'markdown' && !item.key?('id')
+                warn "#{path} #{type || 'unknown'} field #{index + 1} missing id"
+                failed = true
+              end
+
+              if type != 'markdown'
+                unless attrs.is_a?(Hash) && attrs['label'].to_s.strip != ''
+                  warn "#{path} #{type || 'unknown'} field #{index + 1} missing attributes.label"
+                  failed = true
+                end
+              end
+
+              validations = item['validations']
+              if required_field_types.include?(type.to_s) && validations.is_a?(Hash) && validations['required'] == true
+                has_required_user_field = true
+              end
+            end
+
+            unless has_required_user_field
+              warn "#{path} should contain at least one required user-fillable field"
+              failed = true
+            end
+          end
+
+          exit(failed ? 1 : 0)
+          RUBY

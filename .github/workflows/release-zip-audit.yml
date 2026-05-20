@@ -14,65 +14,78 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: release-zip-audit-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   audit:
-    name: Audit release archives
+    name: Audit release ZIPs
     runs-on: ubuntu-latest
+    timeout-minutes: 10
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-      - name: List release files
+      - name: Audit ZIP archives
+        shell: bash
         run: |
-          find Releases -maxdepth 1 -type f -print | sort
-
-      - name: Validate ZIP files
-        run: |
+          set -euo pipefail
           python - <<'PY'
           from pathlib import Path
           import sys
           import zipfile
 
           release_dir = Path('Releases')
-          if not release_dir.exists():
+          if not release_dir.is_dir():
               print('Releases directory is missing')
               sys.exit(1)
 
           zips = sorted(release_dir.glob('*.zip'))
           if not zips:
-              print('No release ZIPs found.')
+              print('No release ZIPs found in Releases/.')
               sys.exit(0)
 
           failed = False
 
           for archive in zips:
-              print(f'Checking {archive}')
+              print(f'\nArchive: {archive}')
               try:
                   with zipfile.ZipFile(archive) as zf:
+                      infos = zf.infolist()
                       bad = zf.testzip()
-                      names = zf.namelist()
 
                       if bad:
-                          print(f'Corrupt file inside {archive}: {bad}')
+                          print(f'ERROR: corrupt entry: {bad}')
                           failed = True
 
-                      if not names:
-                          print(f'Empty ZIP: {archive}')
-                          failed = True
-                          continue
-
+                      names = [info.filename for info in infos]
                       lower_names = [name.lower() for name in names]
-                      has_manifest = any(name.endswith('manifest.json') or name == 'manifest.json' for name in lower_names)
-                      has_overrides = any(name.startswith('overrides/') or '/overrides/' in name for name in lower_names)
+                      has_manifest = 'manifest.json' in lower_names
+                      has_overrides = any(name == 'overrides/' or name.startswith('overrides/') for name in lower_names)
+                      looks_like_curseforge_import = has_manifest or has_overrides
 
-                      if not has_manifest:
-                          print(f'WARNING: {archive} has no manifest.json')
+                      print(f'entries: {len(infos)}')
+                      print(f'manifest.json: {"yes" if has_manifest else "no"}')
+                      print(f'overrides/: {"yes" if has_overrides else "no"}')
 
-                      if not has_overrides:
-                          print(f'WARNING: {archive} has no overrides/ folder')
+                      if not infos:
+                          print('ERROR: archive is empty')
+                          failed = True
+
+                      if looks_like_curseforge_import and not has_manifest:
+                          print('ERROR: archive has overrides/ but no manifest.json')
+                          failed = True
+
+                      if looks_like_curseforge_import and not has_overrides:
+                          print('NOTE: archive has manifest.json but no overrides/ directory')
+
+                      if not looks_like_curseforge_import:
+                          print('NOTE: no CurseForge import markers found; treating as a generic release ZIP')
 
               except zipfile.BadZipFile:
-                  print(f'Bad ZIP file: {archive}')
+                  print('ERROR: unreadable or corrupt ZIP')
                   failed = True
 
           sys.exit(1 if failed else 0)

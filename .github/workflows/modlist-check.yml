@@ -14,62 +14,109 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: modlist-check-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   check:
     name: Validate latest modlist
     runs-on: ubuntu-latest
+    timeout-minutes: 5
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
       - name: Parse modlist links
+        shell: bash
         run: |
+          set -euo pipefail
           python - <<'PY'
-          from pathlib import Path
+          from collections import Counter
           from html.parser import HTMLParser
+          from pathlib import Path
+          from urllib.parse import urlparse
           import sys
 
           class LinkParser(HTMLParser):
               def __init__(self):
                   super().__init__()
                   self.links = []
+                  self._current = None
 
               def handle_starttag(self, tag, attrs):
-                  if tag != 'a':
+                  if tag.lower() != 'a':
                       return
-                  href = dict(attrs).get('href')
-                  if href:
-                      self.links.append(href)
+                  attrs = dict(attrs)
+                  href = attrs.get('href', '').strip()
+                  self._current = {'href': href, 'text': []}
+
+              def handle_data(self, data):
+                  if self._current is not None:
+                      self._current['text'].append(data)
+
+              def handle_entityref(self, name):
+                  if self._current is not None:
+                      self._current['text'].append(f'&{name};')
+
+              def handle_charref(self, name):
+                  if self._current is not None:
+                      self._current['text'].append(f'&#{name};')
+
+              def handle_endtag(self, tag):
+                  if tag.lower() == 'a' and self._current is not None:
+                      text = ' '.join(''.join(self._current['text']).split())
+                      self.links.append((self._current['href'], text))
+                      self._current = None
 
           path = Path('latest-modlist.html')
-          if not path.exists():
+          if not path.is_file():
               print('latest-modlist.html is missing')
               sys.exit(1)
 
-          html = path.read_text(encoding='utf-8-sig')
           parser = LinkParser()
-          parser.feed(html)
+          parser.feed(path.read_text(encoding='utf-8-sig'))
+          parser.close()
 
           links = parser.links
-          print(f'Found {len(links)} links')
+          hrefs = [href for href, _ in links]
+          print(f'Found {len(links)} modlist links')
 
-          if len(links) < 20:
-              print('Modlist looks suspiciously small.')
-              sys.exit(1)
+          failed = False
+          if len(links) < 40:
+              print('Modlist looks suspiciously small for this pack; expected at least 40 links.')
+              failed = True
 
-          bad = [link for link in links if not link.startswith('https://www.curseforge.com/')]
-          if bad:
-              print('Non-CurseForge links found:')
-              for link in bad:
-                  print(link)
-              sys.exit(1)
+          empty_text = [(href, index) for index, (href, text) in enumerate(links, start=1) if not text]
+          if empty_text:
+              print('Links with empty anchor text:')
+              for href, index in empty_text:
+                  print(f'  #{index}: {href}')
+              failed = True
 
-          duplicates = sorted({link for link in links if links.count(link) > 1})
+          bad_links = []
+          for href, text in links:
+              parsed = urlparse(href)
+              if parsed.scheme != 'https' or parsed.netloc != 'www.curseforge.com':
+                  bad_links.append(href)
+                  continue
+              parts = [part for part in parsed.path.split('/') if part]
+              if len(parts) < 3 or parts[0] != 'minecraft' or parts[1] not in {'mc-mods', 'texture-packs', 'shaders', 'modpacks'}:
+                  bad_links.append(href)
+
+          if bad_links:
+              print('Invalid-looking CurseForge links found:')
+              for href in bad_links:
+                  print(f'  {href}')
+              failed = True
+
+          duplicates = sorted(href for href, count in Counter(hrefs).items() if count > 1)
           if duplicates:
               print('Duplicate modlist links found:')
-              for link in duplicates:
-                  print(link)
-              sys.exit(1)
+              for href in duplicates:
+                  print(f'  {href}')
+              failed = True
 
-          print('Modlist OK')
+          sys.exit(1 if failed else 0)
           PY
