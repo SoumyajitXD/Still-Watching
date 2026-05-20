@@ -1,0 +1,68 @@
+name: Repository Consistency Check
+
+on:
+  push:
+    paths:
+      - README.md
+      - installation-guide.md
+      - curseforge-description.html
+      - .github/workflows/readme-consistency.yml
+  pull_request:
+    paths:
+      - README.md
+      - installation-guide.md
+      - curseforge-description.html
+      - .github/workflows/readme-consistency.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  consistency:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check required project facts
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import sys
+
+          files = [
+              Path('README.md'),
+              Path('installation-guide.md'),
+              Path('curseforge-description.html'),
+          ]
+
+          terms = [
+              'Still Watching',
+              '1.20.1',
+              'Forge',
+              'Java',
+              '17',
+              '1420406',
+              'CurseForge',
+          ]
+
+          failed = False
+
+          for file_path in files:
+              if not file_path.exists():
+                  print('Missing file:', file_path)
+                  failed = True
+                  continue
+
+              text = file_path.read_text(encoding='utf-8', errors='ignore')
+              print('Checking', file_path)
+
+              for term in terms:
+                  if term not in text:
+                      print(file_path, 'is missing:', term)
+                      failed = True
+
+          if failed:
+              sys.exit(1)
+          PY
