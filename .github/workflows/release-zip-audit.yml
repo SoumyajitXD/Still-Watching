@@ -64,6 +64,7 @@ jobs:
                       lower_names = [name.lower() for name in names]
                       has_manifest = 'manifest.json' in lower_names
                       has_overrides = any(name == 'overrides/' or name.startswith('overrides/') for name in lower_names)
+                      looks_like_curseforge_import = has_manifest or has_overrides
 
                       print(f'entries: {len(infos)}')
                       print(f'manifest.json: {"yes" if has_manifest else "no"}')
@@ -73,11 +74,15 @@ jobs:
                           print('ERROR: archive is empty')
                           failed = True
 
-                      if not has_manifest:
-                          print('WARNING: no manifest.json; archive may not be directly CurseForge-importable')
+                      if looks_like_curseforge_import and not has_manifest:
+                          print('ERROR: archive has overrides/ but no manifest.json')
+                          failed = True
 
-                      if not has_overrides:
-                          print('WARNING: no overrides/ directory; this is fine only if the archive is not meant to include overrides')
+                      if looks_like_curseforge_import and not has_overrides:
+                          print('NOTE: archive has manifest.json but no overrides/ directory')
+
+                      if not looks_like_curseforge_import:
+                          print('NOTE: no CurseForge import markers found; treating as a generic release ZIP')
 
               except zipfile.BadZipFile:
                   print('ERROR: unreadable or corrupt ZIP')
