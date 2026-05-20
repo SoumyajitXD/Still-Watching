@@ -1,0 +1,75 @@
+name: Modlist Check
+
+on:
+  push:
+    paths:
+      - "latest-modlist.html"
+      - ".github/workflows/modlist-check.yml"
+  pull_request:
+    paths:
+      - "latest-modlist.html"
+      - ".github/workflows/modlist-check.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    name: Validate latest modlist
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Parse modlist links
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from html.parser import HTMLParser
+          import sys
+
+          class LinkParser(HTMLParser):
+              def __init__(self):
+                  super().__init__()
+                  self.links = []
+
+              def handle_starttag(self, tag, attrs):
+                  if tag != 'a':
+                      return
+                  href = dict(attrs).get('href')
+                  if href:
+                      self.links.append(href)
+
+          path = Path('latest-modlist.html')
+          if not path.exists():
+              print('latest-modlist.html is missing')
+              sys.exit(1)
+
+          html = path.read_text(encoding='utf-8-sig')
+          parser = LinkParser()
+          parser.feed(html)
+
+          links = parser.links
+          print(f'Found {len(links)} links')
+
+          if len(links) < 20:
+              print('Modlist looks suspiciously small.')
+              sys.exit(1)
+
+          bad = [link for link in links if not link.startswith('https://www.curseforge.com/')]
+          if bad:
+              print('Non-CurseForge links found:')
+              for link in bad:
+                  print(link)
+              sys.exit(1)
+
+          duplicates = sorted({link for link in links if links.count(link) > 1})
+          if duplicates:
+              print('Duplicate modlist links found:')
+              for link in duplicates:
+                  print(link)
+              sys.exit(1)
+
+          print('Modlist OK')
+          PY
