@@ -33,6 +33,7 @@ jobs:
         run: |
           set -euo pipefail
           ruby <<'RUBY'
+          require 'date'
           require 'yaml'
 
           template_dir = '.github/ISSUE_TEMPLATE'
