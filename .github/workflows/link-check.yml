@@ -38,6 +38,7 @@ jobs:
             --exclude '^https://www\.curseforge\.com/'
             --exclude '^https://media\.forgecdn\.net/'
             --exclude '^\.\./\.\./issues$'
+            --exclude '^file:///home/runner/work/issues$'
             README.md
             installation-guide.md
             curseforge-description.html
