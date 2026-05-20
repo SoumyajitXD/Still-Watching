@@ -1,0 +1,81 @@
+name: Issue Template Check
+
+on:
+  push:
+    paths:
+      - ".github/ISSUE_TEMPLATE/**"
+      - ".github/workflows/issue-template-check.yml"
+  pull_request:
+    paths:
+      - ".github/ISSUE_TEMPLATE/**"
+      - ".github/workflows/issue-template-check.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    name: Validate issue templates
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install validation dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install pyyaml
+
+      - name: Validate issue template config and forms
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import sys
+          import yaml
+
+          template_dir = Path('.github/ISSUE_TEMPLATE')
+          failed = False
+
+          if not template_dir.exists():
+              print('Missing .github/ISSUE_TEMPLATE directory')
+              sys.exit(1)
+
+          config = template_dir / 'config.yml'
+          if not config.exists():
+              print('Missing .github/ISSUE_TEMPLATE/config.yml')
+              failed = True
+
+          for path in sorted(template_dir.glob('*.yml')):
+              print(f'Checking {path}')
+              try:
+                  data = yaml.safe_load(path.read_text(encoding='utf-8'))
+              except Exception as exc:
+                  print(f'YAML ERROR: {path}: {exc}')
+                  failed = True
+                  continue
+
+              if path.name == 'config.yml':
+                  continue
+
+              if not isinstance(data, dict):
+                  print(f'{path} must contain a YAML mapping')
+                  failed = True
+                  continue
+
+              for key in ['name', 'description', 'title', 'body']:
+                  if key not in data:
+                      print(f'{path} missing required key: {key}')
+                      failed = True
+
+              if 'labels' not in data:
+                  print(f'{path} should define labels')
+                  failed = True
+
+              body = data.get('body', [])
+              if not isinstance(body, list) or not body:
+                  print(f'{path} must have a non-empty body list')
+                  failed = True
+
+          sys.exit(1 if failed else 0)
+          PY
