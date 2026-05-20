@@ -1,0 +1,79 @@
+name: Release ZIP Audit
+
+on:
+  push:
+    paths:
+      - "Releases/**"
+      - ".github/workflows/release-zip-audit.yml"
+  pull_request:
+    paths:
+      - "Releases/**"
+      - ".github/workflows/release-zip-audit.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    name: Audit release archives
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: List release files
+        run: |
+          find Releases -maxdepth 1 -type f -print | sort
+
+      - name: Validate ZIP files
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import sys
+          import zipfile
+
+          release_dir = Path('Releases')
+          if not release_dir.exists():
+              print('Releases directory is missing')
+              sys.exit(1)
+
+          zips = sorted(release_dir.glob('*.zip'))
+          if not zips:
+              print('No release ZIPs found.')
+              sys.exit(0)
+
+          failed = False
+
+          for archive in zips:
+              print(f'Checking {archive}')
+              try:
+                  with zipfile.ZipFile(archive) as zf:
+                      bad = zf.testzip()
+                      names = zf.namelist()
+
+                      if bad:
+                          print(f'Corrupt file inside {archive}: {bad}')
+                          failed = True
+
+                      if not names:
+                          print(f'Empty ZIP: {archive}')
+                          failed = True
+                          continue
+
+                      lower_names = [name.lower() for name in names]
+                      has_manifest = any(name.endswith('manifest.json') or name == 'manifest.json' for name in lower_names)
+                      has_overrides = any(name.startswith('overrides/') or '/overrides/' in name for name in lower_names)
+
+                      if not has_manifest:
+                          print(f'WARNING: {archive} has no manifest.json')
+
+                      if not has_overrides:
+                          print(f'WARNING: {archive} has no overrides/ folder')
+
+              except zipfile.BadZipFile:
+                  print(f'Bad ZIP file: {archive}')
+                  failed = True
+
+          sys.exit(1 if failed else 0)
+          PY
