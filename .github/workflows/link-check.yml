@@ -35,6 +35,8 @@ jobs:
             --retry-wait-time 5
             --timeout 20
             --accept 200,204,206,301,302,303,307,308,403,406,418,429,999
+            --exclude '^https://www\.curseforge\.com/'
+            --exclude '^https://media\.forgecdn\.net/'
             README.md
             installation-guide.md
             curseforge-description.html
