@@ -1,5 +1,5 @@
 name: Crash report
-description: Report a Still Watching client or server crash with logs and reproduction steps.
+description: Client or server terminates/crashes. Full crash report and latest.log required.
 title: "[Crash]: "
 labels:
   - crash
@@ -9,9 +9,9 @@ body:
   - type: markdown
     attributes:
       value: |
-        Use this when the game or server crashes. Attach the full crash report and latest.log.
+        Use this when the game client or dedicated server terminates, closes, or throws a crash report.
 
-        A useful crash report includes logs, versions, reproduction context, and any clean-install testing you performed.
+        Do not post cropped screenshots of logs. Attach the full crash report and latest.log as files or links. Screenshots hide the useful part and make debugging miserable.
 
   - type: checkboxes
     id: preflight
@@ -22,7 +22,7 @@ body:
           required: true
         - label: I tested this on the latest available Still Watching version.
           required: true
-        - label: I tested this on a clean Still Watching profile without extra mods, shaders, resource packs, or config edits unless listed below.
+        - label: I tested this on a clean Still Watching profile/server without extra mods, shaders, resource packs, datapacks, or config edits unless listed below.
           required: true
 
   - type: dropdown
@@ -31,12 +31,35 @@ body:
       label: Crash type
       options:
         - Game will not launch
-        - Crash during loading
-        - Crash when creating/loading a world
+        - Crash during mod loading
+        - Crash creating/loading world
         - Crash during gameplay
-        - Crash when joining server
+        - Crash joining server
         - Dedicated server crash
         - Other
+    validations:
+      required: true
+
+  - type: dropdown
+    id: affected-side
+    attributes:
+      label: Affected side
+      options:
+        - Client
+        - Server
+        - Both
+        - Unknown
+    validations:
+      required: true
+
+  - type: dropdown
+    id: clean-install-tested
+    attributes:
+      label: Clean install tested?
+      options:
+        - "Yes"
+        - "No"
+        - Partially
     validations:
       required: true
 
@@ -44,7 +67,20 @@ body:
     id: pack-version
     attributes:
       label: Still Watching version
-      placeholder: "V1.0.x"
+      description: Use the CurseForge file/version shown by your launcher or server pack.
+      placeholder: "Example: V1.0.x / CurseForge file name"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: official-source
+    attributes:
+      label: Official source
+      options:
+        - CurseForge App
+        - CurseForge ZIP/manual import
+        - Server pack from CurseForge
+        - Other
     validations:
       required: true
 
@@ -57,6 +93,7 @@ body:
         - Prism Launcher
         - ATLauncher
         - Modrinth App
+        - Dedicated server
         - Other
     validations:
       required: true
@@ -74,6 +111,8 @@ body:
     attributes:
       label: Forge version
       placeholder: "Forge 47.x.x"
+    validations:
+      required: true
 
   - type: input
     id: java-version
@@ -112,7 +151,7 @@ body:
       required: true
 
   - type: textarea
-    id: what-happened
+    id: what-happened-before-crash
     attributes:
       label: What happened before the crash?
       placeholder: |
@@ -122,12 +161,12 @@ body:
       required: true
 
   - type: textarea
-    id: steps
+    id: steps-to-reproduce
     attributes:
       label: Steps to reproduce
       placeholder: |
-        1. Launch the pack
-        2. Open/create world
+        1. Launch the pack/server
+        2. Open/create world or join server
         3. Do...
         4. Crash happens
     validations:
@@ -137,8 +176,8 @@ body:
     id: crash-report
     attributes:
       label: Crash report
-      description: Attach or link the full file from crash-reports/. Review it for private information first.
-      placeholder: "Drag and drop the crash report here, or paste a link."
+      description: Required. Attach or link the full file from crash-reports/. Review it for private information first. Do not upload cropped screenshots.
+      placeholder: "Drag and drop the full crash report here, or paste a link."
     validations:
       required: true
 
@@ -146,16 +185,16 @@ body:
     id: latest-log
     attributes:
       label: latest.log
-      description: Attach or link logs/latest.log. Include the full relevant file, not only the last few lines.
+      description: Required. Attach or link logs/latest.log. Include the full relevant file, not only the final lines.
       placeholder: "Drag and drop latest.log here, or paste a link."
     validations:
       required: true
 
   - type: textarea
-    id: modifications
+    id: extra-content
     attributes:
-      label: Extra mods, shaders, resource packs, or config changes
-      description: Write "None" if the install is clean.
+      label: Extra mods, shaders, resource packs, datapacks, or config edits
+      description: Write "None" if the install/server is clean. List both added and removed content.
       placeholder: "None"
     validations:
       required: true
