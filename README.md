@@ -26,39 +26,17 @@
 > [!IMPORTANT]
 > **Install Still Watching from CurseForge.**
 >
-> The GitHub ZIP is **not** the playable modpack installer. This repository exists for documentation, issue tracking, source-side files, and licensing clarity. If GitHub and CurseForge disagree, trust the CurseForge release and report the mismatch.
-
----
-
-## Contents
-
-- [What Is Still Watching?](#what-is-still-watching)
-- [Quick Links](#quick-links)
-- [Project Facts](#project-facts)
-- [Install](#install)
-- [Recommended Setup](#recommended-setup)
-- [Gameplay Focus](#gameplay-focus)
-- [Multiplayer & Servers](#multiplayer--servers)
-- [Troubleshooting](#troubleshooting)
-- [Repository Contents](#repository-contents)
-- [Mod List](#mod-list)
-- [Issue Reports](#issue-reports)
-- [Contributing](#contributing)
-- [Credits & License](#credits--license)
+> The GitHub ZIP is **not** the playable modpack installer. This repository is for documentation, issue tracking, source-side files, and licensing clarity. If GitHub and CurseForge disagree, trust the CurseForge release and report the mismatch.
 
 ---
 
 ## What Is Still Watching?
 
-**Still Watching** is a Minecraft **Forge `1.20.1` horror-survival modpack** built around fog, sound, hostile exploration, and creatures that make normal Minecraft routines feel unsafe.
+**Still Watching** is my Minecraft **Forge `1.20.1` horror-survival modpack**.
 
-The goal is simple: keep Minecraft recognizable, then make the usual habits less comfortable. Mining, building, travelling, looting structures, walking through forests, and staying out too late should all feel riskier than they do in vanilla.
+It keeps Minecraft familiar, but makes caves, forests, structures, fog, sound, and night travel feel less safe than usual. You can still build, mine, explore, loot, and get stronger. The difference is that the world is less willing to let you do it casually.
 
-This is not meant to be a giant kitchen-sink pack with a few scary mobs thrown in. The pack is focused on atmosphere, creature pressure, exploration danger, audio cues, and survival decisions that can go bad quickly.
-
-You can still build a base. You can still explore. You can still get stronger.
-
-Just don't expect the world to politely leave you alone.
+This is not a giant kitchen-sink pack with a few scary mobs taped on. The focus is atmosphere, creature pressure, risky exploration, audio cues, and survival decisions that can go wrong fast.
 
 ---
 
@@ -101,8 +79,6 @@ Just don't expect the world to politely leave you alone.
 
 Use CurseForge for normal gameplay. That is the supported install path.
 
-### Recommended install
-
 1. Install the [CurseForge App](https://www.curseforge.com/download/app).
 2. Open [Still Watching on CurseForge](https://www.curseforge.com/minecraft/modpacks/still-watching).
 3. Click **Install** / **Install via App**.
@@ -112,13 +88,7 @@ Use CurseForge for normal gameplay. That is the supported install path.
 7. Check that the game loads, audio works, and FPS is playable.
 8. Then start playing.
 
-### Do not use the GitHub ZIP as the modpack installer
-
-Downloading this repository as a ZIP will **not** give you a clean playable modpack install.
-
-The GitHub ZIP contains repository files. It is useful for documentation, issue tracking, source-side files, and licensing clarity. It is not a launcher-ready CurseForge modpack package.
-
-For actual gameplay, use:
+Downloading this repository as a ZIP will **not** give you a clean playable modpack install. The GitHub ZIP contains repository files, not a launcher-ready CurseForge modpack package.
 
 <div align="center">
 
@@ -126,7 +96,7 @@ For actual gameplay, use:
 
 </div>
 
-For manual imports, server setup, backups, logs, and extra troubleshooting, read:
+For manual imports, server setup, backups, logs, and deeper troubleshooting, read:
 
 <div align="center">
 
@@ -150,8 +120,6 @@ For manual imports, server setup, backups, logs, and extra troubleshooting, read
 | **Extra mods** | Test one at a time on a clean profile |
 | **Backups** | Make them before updates, server moves, or config edits |
 
-### First-launch baseline
-
 Before reporting a bug or adding more mods, test the pack clean:
 
 - No additional mods.
@@ -161,30 +129,27 @@ Before reporting a bug or adding more mods, test the pack clean:
 - Render distance around `8–10 chunks`.
 - Simulation distance around `5–6 chunks`.
 
-A clean baseline saves everyone time. If the pack breaks only after adding five extra mods, three shaders, and a mystery config edit from a YouTube comment, that is not a useful starting point.
+A clean baseline saves time. If the issue only appears after extra mods, shaders, or config edits, mention that in the report.
 
 ---
 
 ## Gameplay Focus
 
-Still Watching is built around a few main ideas:
+Still Watching leans on Minecraft horror without trying to replace Minecraft completely. The world should still feel playable, just less comfortable.
 
-- **Fog and limited visibility**  
-  Long sightlines are less reliable. Sometimes you will know something is nearby before you know exactly where it is.
+- **Fog and visibility**  
+  Long sightlines are not always reliable. Sometimes you know something is nearby before you know where it is.
 
-- **Audio matters**  
-  Footsteps, ambient sound, cave noise, voice chat panic, and sudden silence all change how you play. Headphones help a lot.
+- **Sound and headphones**  
+  Footsteps, ambience, cave noise, sudden silence, and voice chat panic all matter more when you can actually hear them.
 
-- **Exploration should feel risky**  
-  Caves, roads, ruins, towns, forests, and structures are worth checking, but they should not feel like free loot boxes.
+- **Exploration danger**  
+  Caves, roads, ruins, towns, forests, and structures are worth checking, but they are not free loot rooms.
 
-- **Threats are not just decoration**  
-  The pack includes stalking creatures, folklore-style entities, cave pressure, Herobrine-inspired unease, and hostile encounters that can ruin a lazy plan.
+- **Creatures and events**  
+  Some threats punish lazy routines: wandering too far, ignoring sounds, staying out too late, or assuming a place is empty.
 
-- **Survival still matters**  
-  Gear helps, but preparation, exits, light, food, awareness, and not getting greedy matter more.
-
-Some of the horror comes from big obvious threats. Some of it comes from Minecraft feeling slightly wrong for long enough that you stop trusting easy routines.
+Some horror is obvious. Some of it is just Minecraft feeling wrong for long enough that you stop trusting the easy route home.
 
 ---
 
@@ -203,19 +168,17 @@ Some of the horror comes from big obvious threats. Some of it comes from Minecra
 
 Multiplayer is supported when the server and every client use matching pack versions.
 
-Horror packs are especially annoying to debug when everyone has a different install, so keep the setup boring and consistent.
-
-Checklist:
+Keep the setup consistent:
 
 - Use the **same Still Watching version** on the server and every client.
 - Match **Minecraft `1.20.1`**.
-- Match the required **Forge** version for the pack release.
-- Use server files/configs that match the selected CurseForge release when available.
+- Match the required **Forge** version for the selected pack release.
+- Use server files/configs that match the CurseForge release when available.
 - Keep client-only visual, shader, UI, map, and rendering/performance mods off dedicated servers when required.
-- Back up the world before updates, migrations, or config experiments.
+- Back up the world before updates, migrations, or config changes.
 - Test world generation before inviting players.
 - Test voice/audio settings before the first real session.
-- Keep logs. Logs are not optional when something breaks.
+- Keep logs. They are required when something breaks.
 
 <div align="center">
 
@@ -275,16 +238,9 @@ View the exported mod list:
 
 </div>
 
-The pack includes mods for:
-
-- Horror entities and encounter pressure.
-- Fog, darkness, ambience, footsteps, sound physics, and visual tension.
-- Structures, dungeons, towns, roads, ruins, and exploration danger.
-- Visual presentation, shaders, and resource-pack support.
-- Performance, compatibility, libraries, and quality-of-life tools.
-- Multiplayer and server-relevant utilities.
-
 For the exact current list, use [`latest-modlist.html`](./latest-modlist.html) or the installed CurseForge profile.
+
+In general, the pack includes mods for horror encounters, atmosphere, sound, structures, exploration, visuals, performance, compatibility, multiplayer, and quality-of-life tools.
 
 ---
 
@@ -330,7 +286,7 @@ Attached: latest.log and crash report
 Extra mods/shaders/resource packs/config edits: none
 ```
 
-Reports without logs are hard to fix. A screenshot helps with visual bugs. A short video helps with weird behavior. Guesswork helps nobody.
+Logs matter. Screenshots help with visual bugs. Short videos help with weird behavior. Reports without details usually cannot be fixed.
 
 <div align="center">
 
@@ -357,11 +313,11 @@ Bad contributions:
 
 - Random mod requests with no reason.
 - Crash complaints with no logs.
-- Difficulty bloat for pain’s sake.
+- Difficulty bloat for its own sake.
 - Changes that turn the pack into generic mod soup.
 - Removing or weakening required sponsor content.
 
-Keep the pack focused. More stuff is not automatically better. Sometimes it is just more ways to crash.
+Keep the pack focused. More mods do not automatically make the pack better.
 
 ---
 
