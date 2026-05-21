@@ -4,10 +4,12 @@ on:
   push:
     paths:
       - "Releases/**"
+      - ".github/scripts/validate.py"
       - ".github/workflows/release-zip-audit.yml"
   pull_request:
     paths:
       - "Releases/**"
+      - ".github/scripts/validate.py"
       - ".github/workflows/release-zip-audit.yml"
   workflow_dispatch:
 
@@ -15,7 +17,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: release-zip-audit-${{ github.workflow }}-${{ github.ref }}
+  group: release-zip-audit-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
@@ -28,65 +30,8 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Install validation dependencies
+        run: python -m pip install --disable-pip-version-check --quiet PyYAML
+
       - name: Audit ZIP archives
-        shell: bash
-        run: |
-          set -euo pipefail
-          python - <<'PY'
-          from pathlib import Path
-          import sys
-          import zipfile
-
-          release_dir = Path('Releases')
-          if not release_dir.is_dir():
-              print('Releases directory is missing')
-              sys.exit(1)
-
-          zips = sorted(release_dir.glob('*.zip'))
-          if not zips:
-              print('No release ZIPs found in Releases/.')
-              sys.exit(0)
-
-          failed = False
-
-          for archive in zips:
-              print(f'\nArchive: {archive}')
-              try:
-                  with zipfile.ZipFile(archive) as zf:
-                      infos = zf.infolist()
-                      bad = zf.testzip()
-
-                      if bad:
-                          print(f'ERROR: corrupt entry: {bad}')
-                          failed = True
-
-                      names = [info.filename for info in infos]
-                      lower_names = [name.lower() for name in names]
-                      has_manifest = 'manifest.json' in lower_names
-                      has_overrides = any(name == 'overrides/' or name.startswith('overrides/') for name in lower_names)
-                      looks_like_curseforge_import = has_manifest or has_overrides
-
-                      print(f'entries: {len(infos)}')
-                      print(f'manifest.json: {"yes" if has_manifest else "no"}')
-                      print(f'overrides/: {"yes" if has_overrides else "no"}')
-
-                      if not infos:
-                          print('ERROR: archive is empty')
-                          failed = True
-
-                      if looks_like_curseforge_import and not has_manifest:
-                          print('ERROR: archive has overrides/ but no manifest.json')
-                          failed = True
-
-                      if looks_like_curseforge_import and not has_overrides:
-                          print('NOTE: archive has manifest.json but no overrides/ directory')
-
-                      if not looks_like_curseforge_import:
-                          print('NOTE: no CurseForge import markers found; treating as a generic release ZIP')
-
-              except zipfile.BadZipFile:
-                  print('ERROR: unreadable or corrupt ZIP')
-                  failed = True
-
-          sys.exit(1 if failed else 0)
-          PY
+        run: python .github/scripts/validate.py release-zips

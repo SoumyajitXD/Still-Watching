@@ -3,14 +3,32 @@ name: Docs Check
 on:
   push:
     branches: [main]
+    paths:
+      - "README.md"
+      - "installation-guide.md"
+      - "curseforge-description.html"
+      - "latest-modlist.html"
+      - "LICENSE"
+      - ".github/ISSUE_TEMPLATE/**"
+      - ".github/scripts/validate.py"
+      - ".github/workflows/docs-check.yml"
   pull_request:
+    paths:
+      - "README.md"
+      - "installation-guide.md"
+      - "curseforge-description.html"
+      - "latest-modlist.html"
+      - "LICENSE"
+      - ".github/ISSUE_TEMPLATE/**"
+      - ".github/scripts/validate.py"
+      - ".github/workflows/docs-check.yml"
   workflow_dispatch:
 
 permissions:
   contents: read
 
 concurrency:
-  group: docs-check-${{ github.workflow }}-${{ github.ref }}
+  group: docs-check-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
@@ -23,81 +41,14 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Install validation dependencies
+        run: python -m pip install --disable-pip-version-check --quiet PyYAML
+
       - name: Check required repository layout
-        shell: bash
-        run: |
-          set -euo pipefail
-
-          required_files=(
-            README.md
-            installation-guide.md
-            latest-modlist.html
-            curseforge-description.html
-            LICENSE
-          )
-
-          required_dirs=(
-            .github/ISSUE_TEMPLATE
-            .github/workflows
-            Releases
-            Screenshots
-          )
-
-          for file in "${required_files[@]}"; do
-            [[ -f "$file" ]] || { echo "Missing required file: $file"; exit 1; }
-          done
-
-          for dir in "${required_dirs[@]}"; do
-            [[ -d "$dir" ]] || { echo "Missing required directory: $dir"; exit 1; }
-          done
+        run: python .github/scripts/validate.py layout
 
       - name: Validate YAML syntax
-        shell: bash
-        run: |
-          set -euo pipefail
-          ruby <<'RUBY'
-          require 'date'
-          require 'yaml'
+        run: python .github/scripts/validate.py yaml
 
-          paths = Dir['.github/workflows/*.{yml,yaml}', '.github/ISSUE_TEMPLATE/*.{yml,yaml}'].sort
-          abort('No workflow or issue-template YAML files found') if paths.empty?
-
-          failed = false
-          paths.each do |path|
-            begin
-              YAML.safe_load_file(path, permitted_classes: [Date, Time], aliases: true)
-              puts "OK: #{path}"
-            rescue Psych::Exception => e
-              warn "YAML ERROR: #{path}: #{e.message}"
-              failed = true
-            end
-          end
-
-          exit(failed ? 1 : 0)
-          RUBY
-
-      - name: Validate HTML files are parseable
-        shell: bash
-        run: |
-          set -euo pipefail
-          python - <<'PY'
-          from html.parser import HTMLParser
-          from pathlib import Path
-          import sys
-
-          class Parser(HTMLParser):
-              pass
-
-          failed = False
-          for path in sorted(Path('.').glob('*.html')):
-              try:
-                  parser = Parser()
-                  parser.feed(path.read_text(encoding='utf-8-sig'))
-                  parser.close()
-                  print(f'OK: {path}')
-              except Exception as exc:
-                  print(f'HTML ERROR: {path}: {exc}')
-                  failed = True
-
-          sys.exit(1 if failed else 0)
-          PY
+      - name: Validate HTML files
+        run: python .github/scripts/validate.py html
