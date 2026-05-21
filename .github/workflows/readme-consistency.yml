@@ -3,23 +3,25 @@ name: Repository Consistency Check
 on:
   push:
     paths:
-      - README.md
-      - installation-guide.md
-      - curseforge-description.html
-      - .github/workflows/readme-consistency.yml
+      - "README.md"
+      - "installation-guide.md"
+      - "curseforge-description.html"
+      - ".github/scripts/validate.py"
+      - ".github/workflows/readme-consistency.yml"
   pull_request:
     paths:
-      - README.md
-      - installation-guide.md
-      - curseforge-description.html
-      - .github/workflows/readme-consistency.yml
+      - "README.md"
+      - "installation-guide.md"
+      - "curseforge-description.html"
+      - ".github/scripts/validate.py"
+      - ".github/workflows/readme-consistency.yml"
   workflow_dispatch:
 
 permissions:
   contents: read
 
 concurrency:
-  group: repository-consistency-${{ github.workflow }}-${{ github.ref }}
+  group: repository-consistency-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
@@ -32,45 +34,8 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Install validation dependencies
+        run: python -m pip install --disable-pip-version-check --quiet PyYAML
+
       - name: Check required project facts
-        shell: bash
-        run: |
-          set -euo pipefail
-          python - <<'PY'
-          from pathlib import Path
-          import re
-          import sys
-
-          files = [
-              Path('README.md'),
-              Path('installation-guide.md'),
-              Path('curseforge-description.html'),
-          ]
-
-          checks = [
-              ('project name', re.compile(r'\bStill\s+Watching\b', re.I)),
-              ('minecraft 1.20.1', re.compile(r'\b1\.20\.1\b')),
-              ('forge loader', re.compile(r'\bForge\b', re.I)),
-              ('java 17', re.compile(r'\bJava\b[\s\S]{0,80}\b17\b|\b17\b[\s\S]{0,80}\bJava\b', re.I)),
-              ('CurseForge', re.compile(r'\bCurseForge\b', re.I)),
-              ('CurseForge project ID 1420406', re.compile(r'\b1420406\b')),
-          ]
-
-          failed = False
-
-          for path in files:
-              if not path.is_file():
-                  print(f'Missing file: {path}')
-                  failed = True
-                  continue
-
-              text = path.read_text(encoding='utf-8', errors='ignore')
-              print(f'Checking {path}')
-
-              for name, pattern in checks:
-                  if not pattern.search(text):
-                      print(f'{path} is missing required fact: {name}')
-                      failed = True
-
-          sys.exit(1 if failed else 0)
-          PY
+        run: python .github/scripts/validate.py project-facts
