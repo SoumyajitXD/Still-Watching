@@ -1,0 +1,144 @@
+name: Mod compatibility report
+description: Conflict caused by adding, removing, or updating a mod, shader, resource pack, datapack, or config.
+title: "[Compat]: "
+labels:
+  - compatibility
+  - needs-triage
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this when Still Watching works cleanly, but breaks after extra content or a version/config change. If the clean pack is broken too, use Bug report or Crash report instead.
+
+  - type: checkboxes
+    id: compat-preflight
+    attributes:
+      label: Preflight checks
+      options:
+        - label: I reproduced this on Still Watching with only the listed added/changed content.
+          required: true
+        - label: I confirmed the same issue does not happen on a clean Still Watching profile, or I explain below why I cannot.
+          required: true
+        - label: I searched existing issues and did not find a duplicate.
+          required: true
+
+  - type: dropdown
+    id: compat-result
+    attributes:
+      label: Result of the conflict
+      options:
+        - Crash
+        - Startup/load failure
+        - Broken gameplay/content
+        - Visual/rendering issue
+        - Audio issue
+        - Server/client mismatch
+        - Performance regression
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: compat-pack-version
+    attributes:
+      label: Still Watching version
+      placeholder: "Example: V1.0.x / CurseForge file name"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: compat-launcher
+    attributes:
+      label: Launcher
+      options:
+        - CurseForge App
+        - Prism Launcher
+        - ATLauncher
+        - Modrinth App
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: compat-minecraft-version
+    attributes:
+      label: Minecraft version
+      placeholder: "1.20.1"
+    validations:
+      required: true
+
+  - type: input
+    id: compat-forge-version
+    attributes:
+      label: Forge version
+      placeholder: "Forge 47.x.x"
+    validations:
+      required: true
+
+  - type: input
+    id: compat-java-version
+    attributes:
+      label: Java version
+      placeholder: "Java 17"
+    validations:
+      required: true
+
+  - type: input
+    id: compat-os
+    attributes:
+      label: Operating system
+      placeholder: "Windows 11 / macOS / Linux distro"
+    validations:
+      required: true
+
+  - type: textarea
+    id: compat-changed-content
+    attributes:
+      label: Added, removed, or updated content
+      description: Include exact names, versions, and download source for every added/changed mod, shader, resource pack, datapack, or config.
+      placeholder: |
+        Added:
+        Removed:
+        Updated:
+        Config edits:
+    validations:
+      required: true
+
+  - type: textarea
+    id: compat-clean-test
+    attributes:
+      label: Clean profile test result
+      description: What happens on an unmodified Still Watching profile?
+      placeholder: "Clean profile works / clean profile also fails / could not test because..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: compat-steps
+    attributes:
+      label: Steps to reproduce
+      description: Include how to apply the extra content and trigger the issue.
+      placeholder: |
+        1. Install clean pack...
+        2. Add/change...
+        3. Launch/load...
+        4. Issue happens...
+    validations:
+      required: true
+
+  - type: textarea
+    id: compat-logs
+    attributes:
+      label: Logs or crash report
+      description: Required for crashes, startup failures, missing registry errors, mod-loading errors, or server/client mismatch.
+      placeholder: "Drag and drop logs/crash reports here, or paste links."
+    validations:
+      required: true
+
+  - type: textarea
+    id: compat-notes
+    attributes:
+      label: Other compatibility notes
+      description: Mention workarounds, tested versions, or suspected mod pair.
+      placeholder: "Optional notes..."
