@@ -1,11 +1,11 @@
 blank_issues_enabled: false
 contact_links:
-  - name: Still Watching on CurseForge
+  - name: Official CurseForge download
     url: https://www.curseforge.com/minecraft/modpacks/still-watching
-    about: Download the official modpack files. Do not report bugs from repacks or mystery ZIPs.
+    about: Official install/download source only. Do not use random repacks or GitHub ZIPs as playable packs.
   - name: Installation Guide
     url: https://github.com/SoumyajitXD/Still-Watching/blob/main/installation-guide.md
-    about: Read this before opening install, update, crash, or server issues.
+    about: Read this before install, update, first-launch, server, or troubleshooting issues.
   - name: Discussions / questions
     url: https://github.com/SoumyajitXD/Still-Watching/discussions
-    about: Use discussions for help, ideas, and vague questions. Issues are for actionable work.
+    about: Use Discussions for help, vague questions, and ideas not ready for an actionable issue.
