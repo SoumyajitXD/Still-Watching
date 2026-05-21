@@ -2,6 +2,8 @@
 
 This guide covers installing, updating, backing up, troubleshooting, reporting bugs, and setting up multiplayer for **Still Watching**, a Minecraft Java Edition horror-survival modpack by **Soumyajit** for **Minecraft 1.20.1** on **Forge**.
 
+Current documented release: **Still Watching V1.0.9**.
+
 > [!IMPORTANT]
 > **CurseForge is the supported install source.** The playable release is distributed through CurseForge.
 >
@@ -25,7 +27,7 @@ This guide covers installing, updating, backing up, troubleshooting, reporting b
 | --- | --- |
 | CurseForge project page | [Still Watching on CurseForge](https://www.curseforge.com/minecraft/modpacks/still-watching) |
 | CurseForge files page | [Still Watching Files](https://www.curseforge.com/minecraft/modpacks/still-watching/files) |
-| GitHub issues | [Report an issue](../../issues) |
+| GitHub issues | [Report an issue](https://github.com/SoumyajitXD/Still-Watching/issues) |
 | README | [README.md](./README.md) |
 | Latest mod list | [latest-modlist.md](./latest-modlist.md) |
 
@@ -443,7 +445,7 @@ Read the first meaningful error, not just the final line. The last line often on
 
 ## Bug Reports
 
-Open reports here: [GitHub Issues](../../issues)
+Open reports here: [GitHub Issues](https://github.com/SoumyajitXD/Still-Watching/issues)
 
 Before reporting, reproduce on a clean CurseForge install when possible. Use the matching issue template: bug, crash, server, performance, installation/update, or another template if present.
 

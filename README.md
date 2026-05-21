@@ -16,7 +16,7 @@
 
 [![Install Still Watching on CurseForge](https://img.shields.io/badge/INSTALL%20ON-CURSEFORGE-f16436?style=for-the-badge&logo=curseforge&logoColor=white)](https://www.curseforge.com/minecraft/modpacks/still-watching/files)
 [![Read Installation Guide](https://img.shields.io/badge/READ-INSTALLATION%20GUIDE-2f81f7?style=for-the-badge)](./installation-guide.md)
-[![Report a Bug](https://img.shields.io/badge/REPORT-A%20BUG-fa1d04?style=for-the-badge&logo=github&logoColor=white)](../../issues)
+[![Report a Bug](https://img.shields.io/badge/REPORT-A%20BUG-fa1d04?style=for-the-badge&logo=github&logoColor=white)](https://github.com/SoumyajitXD/Still-Watching/issues)
 
 **[Mod List](./latest-modlist.md)** ·
 **[Screenshots](./Screenshots)** ·
@@ -48,7 +48,7 @@
 | --- | --- | --- |
 | **Players** | [Install on CurseForge](https://www.curseforge.com/minecraft/modpacks/still-watching) | Allocate `5 GB` minimum RAM; `6–8 GB` preferred. |
 | **Server admins** | [`installation-guide.md`](./installation-guide.md#multiplayer--server-setup) | Match pack version, Forge version, configs, and files. No client-only junk on dedicated servers. |
-| **Bug reporters** | [GitHub Issues](../../issues) | Test a clean CurseForge install and attach logs. Vibes are not diagnostics. |
+| **Bug reporters** | [GitHub Issues](https://github.com/SoumyajitXD/Still-Watching/issues) | Test a clean CurseForge install and attach logs. Vibes are not diagnostics. |
 | **Maintainers** | [`python .github/scripts/validate.py all`](#maintainer-checks) | Validate before release-side edits. Guesswork belongs in horror, not maintenance. |
 
 ---
@@ -73,6 +73,7 @@ You are still playing Minecraft. You are just no longer allowed to pretend the d
 | **Minecraft version** | `1.20.1` |
 | **Loader** | Forge |
 | **Official playable release** | [CurseForge](https://www.curseforge.com/minecraft/modpacks/still-watching) |
+| **Current documented release** | Still Watching V1.0.9 |
 | **CurseForge Project ID** | `1420406` |
 | **RAM** | `5 GB` minimum; `6–8 GB` preferred |
 | **Java** | Java `17` if the launcher asks |
@@ -211,7 +212,7 @@ Logs matter. Vibes are not diagnostics.
 
 <div align="center">
 
-[![Open an Issue](https://img.shields.io/badge/Open-Issue-fa1d04?style=for-the-badge&logo=github&logoColor=white)](../../issues)
+[![Open an Issue](https://img.shields.io/badge/Open-Issue-fa1d04?style=for-the-badge&logo=github&logoColor=white)](https://github.com/SoumyajitXD/Still-Watching/issues)
 
 </div>
 
