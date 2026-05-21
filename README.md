@@ -21,6 +21,14 @@
 [Gallery](https://www.curseforge.com/minecraft/modpacks/still-watching/gallery) ·
 [Report Issue](../../issues)
 
+<br />
+
+<!-- sponsor:bisecthosting:start -->
+<a href="https://url-shortener.curseforge.com/AZDOs" rel="nofollow">
+  <img src="https://media.forgecdn.net/attachments/description/1420406/description_0434b1be-41ee-4fa8-a2f5-177b2fe87c95.png" alt="Make a server and get 25 percent off with BisectHosting" width="850" />
+</a>
+<!-- sponsor:bisecthosting:end -->
+
 </div>
 
 ---
@@ -95,6 +103,7 @@ The pack is built around a simple promise:
 | **Check the full mod list** | [`latest-modlist.html`](./latest-modlist.html) |
 | **View screenshots** | [CurseForge Gallery](https://www.curseforge.com/minecraft/modpacks/still-watching/gallery) or [`Screenshots/`](./Screenshots) |
 | **Report a bug** | [Open an issue](../../issues) with logs, versions, and reproduction steps |
+| **Create a server** | [Get 25% off your first month with BisectHosting](https://url-shortener.curseforge.com/AZDOs) |
 
 ---
 
@@ -221,6 +230,16 @@ Checklist:
 - Ask players to test voice/audio settings before the first real session.
 - Save logs. Reports without logs are vibes, not diagnostics.
 
+<div align="center">
+
+<!-- sponsor:bisecthosting:start -->
+<a href="https://url-shortener.curseforge.com/AZDOs" rel="nofollow">
+  <img src="https://media.forgecdn.net/attachments/description/1420406/description_0434b1be-41ee-4fa8-a2f5-177b2fe87c95.png" alt="Make a server and get 25 percent off with BisectHosting" width="850" />
+</a>
+<!-- sponsor:bisecthosting:end -->
+
+</div>
+
 Full details live in [`installation-guide.md`](./installation-guide.md#multiplayer--server-notes).
 
 ---
@@ -252,6 +271,7 @@ Need deeper help? Use the troubleshooting section in [`installation-guide.md`](.
 | [`Screenshots/`](./Screenshots) | Screenshot assets for repository browsing. |
 | [`Releases/`](./Releases) | Release-related project files. |
 | [`.github/ISSUE_TEMPLATE/`](./.github/ISSUE_TEMPLATE) | Issue templates for cleaner bug reports. |
+| [`.github/workflows/sponsor-guard.yml`](./.github/workflows/sponsor-guard.yml) | CI guard that blocks README sponsor banner/link removal. |
 | [`still-watching-logo.jpg`](./still-watching-logo.jpg) | Project logo. |
 | [`LICENSE`](./LICENSE) | Apache License 2.0 for original repository files. |
 
@@ -306,7 +326,7 @@ it broke fix pls
 Good report:
 
 ```text
-Pack version: Still Watching V1.0.8
+Pack version: Still Watching V1.0.9
 Launcher: CurseForge App
 Mode: Singleplayer
 Issue: Crash when entering a cave near a structure
@@ -347,6 +367,7 @@ Bad contributions:
 - Vague crash complaints with no logs.
 - Difficulty bloat for the sake of pain.
 - Changes that wreck the pack’s horror-survival identity.
+- Removing sponsor banners or sponsor links from README without replacing them with approved sponsor assets.
 
 ---
 
