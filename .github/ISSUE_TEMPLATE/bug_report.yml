@@ -1,5 +1,5 @@
 name: Bug report
-description: Report a reproducible gameplay, content, or modpack bug on a clean Still Watching install.
+description: Reproducible gameplay/content bug that is not a crash, install, server, or performance-only problem.
 title: "[Bug]: "
 labels:
   - bug
@@ -9,9 +9,9 @@ body:
   - type: markdown
     attributes:
       value: |
-        Use this for reproducible bugs that are not crashes, installation failures, server-only problems, or pure performance issues. Those have their own templates.
+        Use this for reproducible gameplay, content, quest, worldgen, mob, item, audio, visual, or config bugs.
 
-        Reports need clear steps, exact versions, and logs when relevant. Guesswork is not a debugging strategy.
+        Do not use this for crashes, install/update/first-launch failures, multiplayer-only problems, or pure performance issues. Those have their own templates. Bad reports waste time; useful reports have versions, steps, context, and logs when relevant.
 
   - type: checkboxes
     id: preflight
@@ -22,9 +22,9 @@ body:
           required: true
         - label: I tested this on the latest available Still Watching version.
           required: true
-        - label: I reproduced this on a clean Still Watching profile without extra mods, shaders, resource packs, or config edits unless listed below.
+        - label: I tested this on a clean Still Watching profile without extra mods, shaders, resource packs, datapacks, or config edits unless listed below.
           required: true
-        - label: This is not a crash, installation/update issue, server-only issue, or performance-only issue.
+        - label: This is not a crash, install/update issue, server/multiplayer-only issue, or performance-only issue.
           required: true
 
   - type: dropdown
@@ -33,12 +33,12 @@ body:
       label: Severity
       description: Pick the impact, not the mood.
       options:
+        - Data loss
         - Progression blocker
         - Major gameplay issue
         - Minor gameplay issue
-        - Visual/audio/UI issue
-        - Balance issue
-        - Other
+        - Cosmetic/visual/audio issue
+        - Question/unclear impact
     validations:
       required: true
 
@@ -55,19 +55,32 @@ body:
         - UI/menus/tooltips
         - Audio/visuals
         - Config/balance
+        - Documentation text inside the pack
         - Other
+    validations:
+      required: true
+
+  - type: dropdown
+    id: affected-side
+    attributes:
+      label: Affected side
+      options:
+        - Client
+        - Server
+        - Both
+        - Unknown
     validations:
       required: true
 
   - type: dropdown
     id: reproducibility
     attributes:
-      label: How often does this happen?
+      label: Reproducibility
       options:
         - Always
         - Often
         - Sometimes
-        - Happened once
+        - Once
         - Unknown
     validations:
       required: true
@@ -76,7 +89,20 @@ body:
     id: pack-version
     attributes:
       label: Still Watching version
-      placeholder: "V1.0.x"
+      description: Use the CurseForge file/version shown by your launcher.
+      placeholder: "Example: V1.0.x / CurseForge file name"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: pack-version-source
+    attributes:
+      label: Pack version source
+      options:
+        - CurseForge App
+        - CurseForge ZIP/manual import
+        - Server pack from CurseForge
+        - Other
     validations:
       required: true
 
@@ -106,6 +132,8 @@ body:
     attributes:
       label: Forge version
       placeholder: "Forge 47.x.x"
+    validations:
+      required: true
 
   - type: input
     id: java-version
@@ -136,7 +164,7 @@ body:
       required: true
 
   - type: textarea
-    id: description
+    id: what-happened
     attributes:
       label: What happened?
       description: Describe the bug clearly, including what you were doing right before it happened.
@@ -145,18 +173,18 @@ body:
       required: true
 
   - type: textarea
-    id: expected
+    id: expected-result
     attributes:
-      label: What did you expect to happen?
+      label: Expected result
       placeholder: "I expected..."
     validations:
       required: true
 
   - type: textarea
-    id: steps
+    id: steps-to-reproduce
     attributes:
       label: Steps to reproduce
-      description: Give exact steps.
+      description: Give exact steps. If the steps are vague, the issue is dead on arrival.
       placeholder: |
         1. Create/load world
         2. Go to...
@@ -166,29 +194,31 @@ body:
       required: true
 
   - type: textarea
-    id: world-context
+    id: world-location-details
     attributes:
       label: World or location details
-      description: Include seed, dimension, coordinates, structure/biome, and whether this is a new or existing world. Write "Not relevant" if it does not apply.
+      description: Include seed, dimension, coordinates, biome/structure, and whether this is a new or existing world. Write "Not relevant" if it does not apply.
       placeholder: |
         Seed:
         Dimension:
         Coordinates:
         Biome/structure:
         New world or existing world:
+    validations:
+      required: true
 
   - type: textarea
     id: logs
     attributes:
-      label: Logs
-      description: Attach latest.log when relevant. Remove private information before posting.
+      label: Logs, if relevant
+      description: Required when applicable. Attach latest.log if the bug prints errors, breaks loading, affects saving, involves worldgen, or happens near a warning/error. Do not paste cropped log screenshots.
       placeholder: "Drag and drop logs here, or paste a link."
 
   - type: textarea
-    id: media
+    id: screenshots-video
     attributes:
       label: Screenshots or video
-      description: Attach screenshots or videos if they help explain the issue.
+      description: Attach screenshots or video if they make the bug obvious.
       placeholder: "Attach screenshots/video here if relevant."
 
   - type: textarea
@@ -197,12 +227,14 @@ body:
       label: Workaround
       description: Mention anything that temporarily fixes or avoids the issue. Write "None found" if nothing worked.
       placeholder: "None found"
+    validations:
+      required: true
 
   - type: textarea
-    id: modifications
+    id: extra-content
     attributes:
-      label: Extra mods, shaders, resource packs, or config changes
-      description: Write "None" if the install is clean.
+      label: Extra mods, shaders, resource packs, datapacks, or config edits
+      description: Write "None" if the install is clean. List both added and removed content.
       placeholder: "None"
     validations:
       required: true

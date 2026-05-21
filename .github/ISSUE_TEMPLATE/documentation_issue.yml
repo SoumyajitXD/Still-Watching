@@ -1,0 +1,85 @@
+name: Documentation issue
+description: Broken links, outdated docs, unclear setup steps, README/CurseForge mismatch, typos, or formatting.
+title: "[Docs]: "
+labels:
+  - documentation
+  - needs-triage
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this for documentation and reporting problems: broken links, outdated install steps, unclear server guidance, README/CurseForge mismatch, mod list mistakes, screenshots, typos, or formatting.
+
+        Do not use this for gameplay bugs, crashes, install failures, or feature pitches. Pick the template that matches the actual problem.
+
+  - type: checkboxes
+    id: preflight
+    attributes:
+      label: Preflight checks
+      options:
+        - label: I checked the latest version of the document/page before reporting.
+          required: true
+        - label: I searched existing issues and did not find a duplicate.
+          required: true
+        - label: This is a documentation/reporting issue, not a gameplay bug, crash, install failure, or support question.
+          required: true
+
+  - type: input
+    id: affected-document-page
+    attributes:
+      label: Affected document or page
+      placeholder: "Example: README.md / installation-guide.md / CurseForge description / latest-modlist.html"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: problem-type
+    attributes:
+      label: Problem type
+      options:
+        - Broken link
+        - Outdated information
+        - Unclear installation/update step
+        - Unclear server setup step
+        - README/CurseForge mismatch
+        - Mod list mistake
+        - Screenshot/media issue
+        - Typo/grammar/formatting
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: current-text-link-location
+    attributes:
+      label: Current text, link, or location
+      description: Quote the text, paste the link, or describe the exact section. Line numbers help.
+      placeholder: "Current text/link/location..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: what-is-wrong
+    attributes:
+      label: What is wrong?
+      description: Explain the actual problem. "Bad docs" is not a diagnosis.
+      placeholder: "This is wrong because..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: suggested-fix
+    attributes:
+      label: Suggested fix
+      description: Suggest the replacement text, corrected link, or clearer wording if you have one.
+      placeholder: "Change it to..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots, if useful
+      description: Attach screenshots only if they clarify the documentation issue.
+      placeholder: "Attach screenshots here if useful."

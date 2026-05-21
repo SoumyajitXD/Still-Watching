@@ -1,5 +1,5 @@
 name: Installation or update issue
-description: Report problems installing, updating, importing, or launching the official modpack files.
+description: Install, import, update, dependency resolution, launcher profile, or first-launch failure.
 title: "[Install]: "
 labels:
   - installation
@@ -9,20 +9,22 @@ body:
   - type: markdown
     attributes:
       value: |
-        Use this when Still Watching fails to install, update, import, or launch before normal gameplay starts.
+        Use this only for problems before normal gameplay starts: install, import, update, launcher profile creation, dependency resolution, or first launch.
 
-        Only report issues from official pack files. Third-party repacks and edited ZIPs are outside the blast radius.
+        The GitHub ZIP is not the playable modpack. Use the official CurseForge release. If you installed from a random mirror or edited ZIP, that is not a supported setup.
 
   - type: checkboxes
     id: preflight
     attributes:
       label: Preflight checks
       options:
-        - label: I downloaded the pack from an official Still Watching source.
+        - label: I downloaded the pack from CurseForge or another official Still Watching source.
           required: true
         - label: I followed the installation guide before opening this issue.
           required: true
         - label: I searched existing issues and did not find a duplicate.
+          required: true
+        - label: I understand the GitHub ZIP is not a supported playable install source.
           required: true
 
   - type: dropdown
@@ -37,7 +39,28 @@ body:
         - Launcher profile will not create
         - Launcher profile created but will not launch
         - Dependency/mod resolution issue
+        - First launch fails
         - Other
+    validations:
+      required: true
+
+  - type: dropdown
+    id: official-source
+    attributes:
+      label: Official source
+      options:
+        - CurseForge App
+        - CurseForge ZIP/manual import
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: pack-version
+    attributes:
+      label: Still Watching version / CurseForge file
+      description: Use the exact CurseForge file/version shown.
+      placeholder: "Example: V1.0.x / CurseForge file name"
     validations:
       required: true
 
@@ -58,13 +81,8 @@ body:
     id: launcher-version
     attributes:
       label: Launcher version
-      placeholder: "Example: CurseForge 1.x / Prism 9.x"
-
-  - type: input
-    id: pack-version
-    attributes:
-      label: Still Watching version
-      placeholder: "V1.0.x"
+      description: Required when available. If the launcher does not show a version, write "Not shown".
+      placeholder: "Example: CurseForge 1.x / Prism 9.x / Not shown"
     validations:
       required: true
 
@@ -81,6 +99,8 @@ body:
     attributes:
       label: Forge version shown by launcher
       placeholder: "Forge 47.x.x"
+    validations:
+      required: true
 
   - type: input
     id: java-version
@@ -99,16 +119,25 @@ body:
       required: true
 
   - type: textarea
+    id: exact-error-message
+    attributes:
+      label: Exact error message
+      description: Paste the exact launcher/game error. Do not summarize the one sentence that matters into mush.
+      placeholder: "Paste the full error text here."
+    validations:
+      required: true
+
+  - type: textarea
     id: what-happened
     attributes:
       label: What happened?
-      description: Include the exact error message if there is one.
+      description: Describe where the process failed and what you clicked before it failed.
       placeholder: "The launcher shows..."
     validations:
       required: true
 
   - type: textarea
-    id: steps
+    id: steps-to-reproduce
     attributes:
       label: Steps to reproduce
       placeholder: |
@@ -120,17 +149,19 @@ body:
       required: true
 
   - type: textarea
-    id: logs
+    id: attempted-fixes
     attributes:
-      label: Launcher logs or game logs
-      description: Attach launcher logs, latest.log, or screenshots of the full error. Remove private info before posting.
-      placeholder: "Drag and drop logs here, or paste a link."
+      label: Attempted fixes
+      description: Mention reinstalling, clearing launcher cache, redownloading, changing Java, changing memory, or trying a clean profile.
+      placeholder: "I tried..."
     validations:
       required: true
 
   - type: textarea
-    id: attempted-fixes
+    id: logs-screenshots
     attributes:
-      label: What have you tried?
-      description: Mention reinstalling, clearing cache, changing Java, changing memory, or redownloading.
-      placeholder: "I tried..."
+      label: Logs or screenshots of the full error
+      description: Required. Attach launcher logs, latest.log, or screenshots showing the full error window. Remove private information before posting.
+      placeholder: "Drag and drop logs/screenshots here, or paste a link."
+    validations:
+      required: true

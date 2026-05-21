@@ -1,16 +1,17 @@
 name: Feature or content request
-description: Suggest a new feature, config change, mod, quest, structure, mechanic, or content improvement.
+description: Thoughtful modpack change proposal, not random cool-mod soup.
 title: "[Request]: "
 labels:
   - enhancement
+  - needs-triage
 
 body:
   - type: markdown
     attributes:
       value: |
-        Use this for thoughtful additions to Still Watching.
+        Use this for thoughtful changes to Still Watching: mods, configs, quests, structures, mobs, items, ambience, accessibility, documentation, or balance.
 
-        Good requests explain the problem, the proposed change, and why it belongs in this modpack's horror/progression loop.
+        This is not a dumping ground for every mod that looked cool at 2 AM. The pack needs horror, atmosphere, survival pressure, progression, and multiplayer stability.
 
   - type: checkboxes
     id: preflight
@@ -19,43 +20,46 @@ body:
       options:
         - label: I searched existing issues and did not find this suggestion already posted.
           required: true
-        - label: I checked that this request fits Still Watching's horror-focused survival identity.
+        - label: I checked that this request fits Still Watching's horror-survival identity.
           required: true
         - label: I am not asking for support, a crash fix, or help installing the pack.
           required: true
+        - label: This is not just "add this random cool mod"; I explain fit, tradeoffs, and impact below.
+          required: true
 
   - type: dropdown
-    id: request-type
+    id: request-category
     attributes:
-      label: Request type
+      label: Request category
       options:
-        - New mod suggestion
-        - Remove or replace a mod
-        - Config/balance change
-        - Quest/progression change
-        - Structure/world generation change
-        - Mob/entity behavior change
-        - Item/block/recipe change
-        - Visual/audio/ambience improvement
-        - Accessibility or quality-of-life change
+        - New mod
+        - Remove/replace mod
+        - Config/balance
+        - Quest/progression
+        - Structure/worldgen
+        - Mob/entity behavior
+        - Item/block/recipe
+        - Horror/ambience/audio
+        - Accessibility/QOL
+        - Documentation
         - Other
     validations:
       required: true
 
   - type: textarea
-    id: problem
+    id: problem-being-solved
     attributes:
-      label: What problem does this solve?
-      description: Explain the gap, annoyance, imbalance, or missing experience.
+      label: Problem being solved
+      description: Explain the gap, annoyance, imbalance, missing experience, or unclear documentation.
       placeholder: "Currently, the pack..."
     validations:
       required: true
 
   - type: textarea
-    id: proposal
+    id: proposed-change
     attributes:
       label: Proposed change
-      description: Be specific. Name the mod, config, quest, or mechanic and describe what should change.
+      description: Be specific. Name the mod, config, quest, mechanic, structure, item, or document section and describe what should change.
       placeholder: "I suggest adding/changing/removing..."
     validations:
       required: true
@@ -63,9 +67,22 @@ body:
   - type: textarea
     id: fit
     attributes:
-      label: Why does this fit Still Watching?
-      description: Explain how it improves horror, survival, progression, atmosphere, or multiplayer.
+      label: Why this fits Still Watching
+      description: Explain why this belongs in a Forge 1.20.1 horror-survival modpack instead of just being neat.
       placeholder: "This fits because..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: impact
+    attributes:
+      label: Effect on horror, survival, progression, and multiplayer
+      description: Say how this changes atmosphere, difficulty, survival pressure, progression, server play, or co-op balance.
+      placeholder: |
+        Horror/atmosphere:
+        Survival pressure:
+        Progression:
+        Multiplayer/server impact:
     validations:
       required: true
 
@@ -73,14 +90,14 @@ body:
     id: tradeoffs
     attributes:
       label: Tradeoffs, risks, or compatibility concerns
-      description: Mention performance cost, balance problems, dependencies, conflicts, licensing, server impact, or known bugs.
+      description: Mention performance cost, balance problems, dependencies, conflicts, licensing, server compatibility, update risk, or known bugs.
       placeholder: "Possible downside: ..."
     validations:
       required: true
 
   - type: textarea
-    id: references
+    id: links-examples
     attributes:
       label: Links, examples, or screenshots
-      description: Add mod pages, docs, videos, screenshots, or examples if relevant.
+      description: Add CurseForge/mod pages, docs, videos, screenshots, issue links, or examples if relevant.
       placeholder: "Links/examples here."

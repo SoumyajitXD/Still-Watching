@@ -1,5 +1,5 @@
 name: Performance issue
-description: Report FPS drops, freezes, stuttering, memory pressure, server TPS loss, or excessive load times.
+description: FPS, stutter, freezes, memory, startup/load time, TPS/MSPT, or profiling reports.
 title: "[Performance]: "
 labels:
   - performance
@@ -9,9 +9,9 @@ body:
   - type: markdown
     attributes:
       value: |
-        Use this for measurable performance problems. Include numbers, context, and logs.
+        Use this for measurable performance problems: FPS drops, stutter, freezes, memory pressure, load time, server TPS/MSPT, or profiling.
 
-        "Laggy" is not data. FPS, TPS, memory use, render distance, player count, location, and reproduction steps are data.
+        Bring numbers. "Laggy" is not a bug report; it is a weather report for your PC. FPS, TPS, MSPT, memory use, render distance, player count, logs, and profiler/spark reports are useful.
 
   - type: checkboxes
     id: preflight
@@ -22,13 +22,13 @@ body:
           required: true
         - label: I searched existing issues and did not find a duplicate.
           required: true
-        - label: I reproduced this without extra mods, shaders, resource packs, or config edits unless listed below.
+        - label: I reproduced this without extra mods, shaders, resource packs, datapacks, or config edits unless listed below.
           required: true
 
   - type: dropdown
-    id: performance-type
+    id: performance-problem-type
     attributes:
-      label: Performance problem
+      label: Performance problem type
       options:
         - Low FPS
         - Stuttering or frame spikes
@@ -41,11 +41,24 @@ body:
     validations:
       required: true
 
+  - type: dropdown
+    id: mode
+    attributes:
+      label: Mode
+      options:
+        - Singleplayer
+        - Multiplayer client
+        - LAN
+        - Dedicated server
+    validations:
+      required: true
+
   - type: input
     id: pack-version
     attributes:
       label: Still Watching version
-      placeholder: "V1.0.x"
+      description: Use the CurseForge file/version shown by your launcher or server pack.
+      placeholder: "Example: V1.0.x / CurseForge file name"
     validations:
       required: true
 
@@ -62,33 +75,14 @@ body:
     attributes:
       label: Forge version
       placeholder: "Forge 47.x.x"
-
-  - type: dropdown
-    id: mode
-    attributes:
-      label: Mode
-      options:
-        - Singleplayer
-        - Multiplayer client
-        - LAN
-        - Dedicated server
     validations:
       required: true
 
   - type: input
-    id: hardware
+    id: java-version
     attributes:
-      label: Hardware
-      description: CPU, GPU, RAM, storage type if known.
-      placeholder: "CPU / GPU / RAM / SSD or HDD"
-    validations:
-      required: true
-
-  - type: input
-    id: allocated-memory
-    attributes:
-      label: Allocated memory
-      placeholder: "Example: 6 GB / 6144 MB"
+      label: Java version
+      placeholder: "Java 17"
     validations:
       required: true
 
@@ -101,17 +95,51 @@ body:
       required: true
 
   - type: textarea
-    id: settings
+    id: hardware
     attributes:
-      label: Relevant settings
-      description: Include render distance, simulation distance, shaders, resource packs, graphics settings, JVM args, and server view distance if relevant.
+      label: Hardware
+      description: CPU, GPU, total RAM, storage type, and whether this is a laptop/desktop/server.
       placeholder: |
-        Render distance:
-        Simulation distance:
-        Shaders/resource packs:
-        Graphics settings:
-        JVM args:
-        Server view distance:
+        CPU:
+        GPU:
+        Total RAM:
+        Storage:
+        Laptop/desktop/server:
+    validations:
+      required: true
+
+  - type: input
+    id: allocated-memory
+    attributes:
+      label: Allocated memory
+      placeholder: "Example: 6 GB / 6144 MB"
+    validations:
+      required: true
+
+  - type: input
+    id: render-distance
+    attributes:
+      label: Render distance
+      placeholder: "Example: 8 chunks"
+    validations:
+      required: true
+
+  - type: input
+    id: simulation-distance
+    attributes:
+      label: Simulation distance
+      placeholder: "Example: 6 chunks"
+    validations:
+      required: true
+
+  - type: textarea
+    id: shaders-resource-packs
+    attributes:
+      label: Shaders and resource packs
+      description: Write "None" if disabled. Include shader preset/settings if used.
+      placeholder: |
+        Shaders:
+        Resource packs:
     validations:
       required: true
 
@@ -119,51 +147,53 @@ body:
     id: measurements
     attributes:
       label: Measurements
-      description: Give before/after or normal/problem numbers where possible.
+      description: Fill the lines that apply. Numbers, not vibes.
       placeholder: |
-        FPS before/problem:
-        Server TPS/MSPT:
+        FPS normal/problem:
+        TPS:
+        MSPT:
         Memory usage:
         Startup/load time:
-        Number of players:
+        Player count:
+        Network ping/desync notes:
     validations:
       required: true
 
   - type: textarea
-    id: trigger
+    id: trigger-location-context
     attributes:
-      label: When does it happen?
-      description: Describe the location, dimension, biome, structure, mob/event, action, or time played before the issue appears.
+      label: Trigger, location, or context
+      description: Describe dimension, biome, structure, mob/event, action, time played, player count, or server location before the issue appears.
       placeholder: "It happens when..."
     validations:
       required: true
 
   - type: textarea
-    id: steps
+    id: steps-to-reproduce
     attributes:
       label: Steps to reproduce
       placeholder: |
         1. Load world/server
         2. Go to...
         3. Do...
-        4. FPS/TPS drops to...
+        4. FPS/TPS/MSPT drops to...
     validations:
       required: true
 
   - type: textarea
-    id: logs
+    id: logs-profiler
     attributes:
-      label: Logs, spark report, or profiler output
-      description: Attach latest.log and profiler/spark reports if available. Server TPS issues are almost useless without profiling data.
+      label: Logs, profiler, or spark report
+      description: Attach latest.log and profiler/spark reports when available. Server TPS/MSPT issues need profiling if possible; otherwise we are hunting a ghost with a spoon.
       placeholder: "Drag and drop logs/reports here, or paste links."
     validations:
       required: true
 
   - type: textarea
-    id: modifications
+    id: extra-content
     attributes:
-      label: Extra mods, shaders, resource packs, or config changes
-      description: Write "None" if the install is clean.
+      label: Extra mods, shaders, resource packs, datapacks, or config edits
+      description: Write "None" if the install/server is clean. List both added and removed content.
       placeholder: "None"
     validations:
       required: true
