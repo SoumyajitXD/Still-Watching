@@ -61,7 +61,7 @@ You are still playing Minecraft. You are just no longer allowed to pretend the d
 | **Type** | Minecraft Java Edition horror-survival modpack |
 | **Minecraft version** | `1.20.1` |
 | **Loader** | Forge |
-| **Official playable release** | [CurseForge](https://www.curseforge.com/minecraft/modpacks/still-watching) |
+| **Official release** | [CurseForge](https://www.curseforge.com/minecraft/modpacks/still-watching) |
 | **CurseForge Project ID** | `1420406` |
 | **RAM** | `5 GB` minimum; `6–8 GB` preferred |
 | **Java** | Java `17` if the launcher asks |
@@ -101,8 +101,6 @@ This is not a kitchen-sink pack with horror mobs taped onto the side like cheap 
 
 Still Watching includes horror entities, worldgen, structures, ambience, visual pressure, sound mods, performance support, exploration tools, and quality-of-life utilities.
 
-A few major categories:
-
 | Category | Examples |
 | --- | --- |
 | **Horror** | The Anomaly, The Man From The Fog, From The Fog, The Mimicer, Apollyon, Siren Head, GoatMan, Cave Dweller Reimagined |
@@ -141,7 +139,7 @@ Detailed install, RAM, update, backup, server, and troubleshooting notes live in
 6. Launch once clean before adding extra mods, shaders, or resource packs.
 7. Put on headphones. The pack is not subtle about sound.
 
-Need manual import notes, server setup, backups, logs, or actual troubleshooting? Use [`installation-guide.md`](./installation-guide.md).
+Need manual import notes, server setup, backups, logs, or real troubleshooting? Use [`installation-guide.md`](./installation-guide.md).
 
 <div align="center">
 
