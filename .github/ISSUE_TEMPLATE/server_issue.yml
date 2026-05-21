@@ -1,5 +1,5 @@
 name: Server issue
-description: Report a Still Watching multiplayer, LAN, or dedicated server problem.
+description: Dedicated server, LAN, hosted server, connection, mismatch, or multiplayer-only behavior.
 title: "[Server]: "
 labels:
   - server
@@ -10,9 +10,9 @@ body:
   - type: markdown
     attributes:
       value: |
-        Use this for hosted servers, dedicated servers, LAN, connection issues, and multiplayer-only crashes or bugs.
+        Use this for dedicated servers, LAN, hosted servers, connection errors, client/server mismatches, and bugs that only happen in multiplayer.
 
-        Client and server versions must match unless the changelog says otherwise. Include both client and server context when possible.
+        Crashes go in Crash report when the client/server terminates. FPS/TPS/MSPT investigations go in Performance issue unless the problem is clearly server setup or mismatch. Client and server versions must match unless a release note says otherwise.
 
   - type: checkboxes
     id: preflight
@@ -21,7 +21,7 @@ body:
       options:
         - label: I searched existing issues and did not find a duplicate.
           required: true
-        - label: Client and server are using the same Still Watching version.
+        - label: Client and server are using the same Still Watching version unless noted below.
           required: true
         - label: Client and server are using Minecraft 1.20.1.
           required: true
@@ -33,19 +33,48 @@ body:
     attributes:
       label: Server type
       options:
-        - Hosted server with CurseForge/modpack installer
-        - Official server pack from CurseForge
-        - Manual Forge server setup
+        - Dedicated server
+        - Hosted server/provider
         - LAN
+        - Multiplayer client joining server
         - Other
     validations:
       required: true
 
   - type: input
-    id: pack-version
+    id: host-provider
     attributes:
-      label: Still Watching version
-      placeholder: "V1.0.x"
+      label: Host/provider
+      description: Write "Self-hosted" if you run it yourself.
+      placeholder: "Example: Self-hosted / Apex / Bisect / Other"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: server-pack-source
+    attributes:
+      label: Server pack source
+      options:
+        - CurseForge server pack
+        - Host one-click installer
+        - Manually built from CurseForge client pack
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: client-pack-version
+    attributes:
+      label: Client pack version
+      placeholder: "Example: V1.0.x / CurseForge file name"
+    validations:
+      required: true
+
+  - type: input
+    id: server-pack-version
+    attributes:
+      label: Server pack version
+      placeholder: "Example: V1.0.x / CurseForge file name"
     validations:
       required: true
 
@@ -58,16 +87,15 @@ body:
       required: true
 
   - type: input
-    id: server-host
+    id: java-version
     attributes:
-      label: Server host/provider
-      description: Write "Self-hosted" if you run it yourself.
-      placeholder: "Example: Self-hosted / Apex / Bisect / Other"
+      label: Java version
+      placeholder: "Java 17"
     validations:
       required: true
 
   - type: input
-    id: server-memory
+    id: server-ram
     attributes:
       label: Server RAM
       placeholder: "Example: 6 GB"
@@ -75,10 +103,30 @@ body:
       required: true
 
   - type: input
-    id: client-memory
+    id: client-ram
     attributes:
       label: Client allocated RAM
       placeholder: "Example: 6 GB / 6144 MB"
+    validations:
+      required: true
+
+  - type: input
+    id: player-count
+    attributes:
+      label: Player count when issue happened
+      placeholder: "Example: 1/10, 4/20"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: affected-side
+    attributes:
+      label: Affected side
+      options:
+        - Client
+        - Server
+        - Both
+        - Unknown
     validations:
       required: true
 
@@ -92,33 +140,36 @@ body:
         - Missing mod or config mismatch
         - Server crash
         - Client crash when joining
-        - Severe lag/TPS issue
-        - Multiplayer-only gameplay issue
-        - Commands issue
+        - Severe TPS/MSPT lag
+        - Multiplayer-only gameplay bug
+        - LAN issue
+        - Commands/permissions issue
         - Other
     validations:
       required: true
 
-  - type: input
-    id: player-count
-    attributes:
-      label: Player count when issue happened
-      placeholder: "Example: 1/10, 4/20"
-
   - type: textarea
-    id: description
+    id: what-happened
     attributes:
       label: What happened?
-      placeholder: "Describe the server problem clearly."
+      placeholder: "Describe the server or multiplayer problem clearly."
     validations:
       required: true
 
   - type: textarea
-    id: steps
+    id: expected-result
+    attributes:
+      label: Expected result
+      placeholder: "I expected..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps-to-reproduce
     attributes:
       label: Steps to reproduce
       placeholder: |
-        1. Start server
+        1. Start server/LAN
         2. Join with matching client
         3. Do...
         4. Issue happens
@@ -126,42 +177,36 @@ body:
       required: true
 
   - type: textarea
-    id: expected
-    attributes:
-      label: What did you expect to happen?
-      placeholder: "I expected..."
-    validations:
-      required: true
-
-  - type: textarea
-    id: server-log
+    id: server-logs
     attributes:
       label: Server log or crash report
-      description: Attach or link server latest.log, debug.log, or crash report. Review logs before posting.
+      description: Required. Attach or link server latest.log, debug.log, or crash report. Full files beat tiny screenshots every time.
       placeholder: "Drag and drop server logs here, or paste a link."
     validations:
       required: true
 
   - type: textarea
-    id: client-log
+    id: client-logs
     attributes:
       label: Client log or crash report
-      description: Attach or link the client latest.log or crash report when relevant.
+      description: Required when the client cannot connect, crashes, disconnects, or shows a mismatch/error screen.
       placeholder: "Drag and drop client logs here, or paste a link."
 
   - type: textarea
-    id: modifications
+    id: server-client-modifications
     attributes:
-      label: Server/client changes
-      description: List extra mods, removed mods, edited configs, plugins, datapacks, or host panel changes. Write "None" for clean client/server.
-      placeholder: "None"
+      label: Server/client modifications
+      description: List extra mods, removed mods, edited configs, plugins, datapacks, host panel changes, or mismatched files. Write "None" for clean client/server.
+      placeholder: |
+        Server changes:
+        Client changes:
     validations:
       required: true
 
   - type: checkboxes
-    id: client-only-check
+    id: client-only-mod-check
     attributes:
       label: Client-only mod check
       options:
-        - label: I checked that the dedicated server does not contain client-only mods such as shader loaders, minimap renderers, HUD-only mods, or client rendering/performance mods.
+        - label: I checked that the dedicated server does not contain client-only content such as shader loaders, minimaps, HUD-only mods, rendering/performance client mods, or resource-pack-only visual helpers.
           required: true
