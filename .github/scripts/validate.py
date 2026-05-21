@@ -23,6 +23,19 @@ BISECT_SPONSOR_BANNER = (
     "description_0434b1be-41ee-4fa8-a2f5-177b2fe87c95.png"
 )
 
+PROJECT_NAME = "Still Watching"
+MINECRAFT_VERSION = "1.20.1"
+LOADER = "Forge"
+JAVA_VERSION = "17"
+CURSEFORGE_PROJECT_ID = "1420406"
+RELEASE_FACT_FILES = [
+    ROOT / "README.md",
+    ROOT / "installation-guide.md",
+    ROOT / "curseforge-description.html",
+    ROOT / "latest-modlist.md",
+]
+REQUIRED_FACT_FILES = {"README.md", "installation-guide.md", "curseforge-description.html"}
+
 
 def fail(message: str) -> None:
     print(f"ERROR: {message}", file=sys.stderr)
@@ -36,6 +49,15 @@ def read(path: Path) -> str:
 def load_yaml(path: Path):
     with path.open(encoding="utf-8-sig") as handle:
         return yaml.safe_load(handle)
+
+
+def line_number(text: str, index: int) -> int:
+    return text.count("\n", 0, index) + 1
+
+
+def plain(text: str) -> str:
+    text = re.sub(r"<[^>]+>", " ", text)
+    return " ".join(text.split())
 
 
 def layout() -> None:
@@ -215,6 +237,93 @@ def project_facts() -> None:
     print("Project facts OK")
 
 
+def _bad_contexts(path: Path, text: str, label: str, expected: str, patterns: list[str]) -> list[str]:
+    errors = []
+    for pattern in patterns:
+        for match in re.finditer(pattern, text, re.I):
+            value = match.group(1)
+            if value != expected:
+                line = line_number(text, match.start(1))
+                errors.append(f"{path.name}:{line} has {label} '{value}', expected '{expected}'")
+    return errors
+
+
+def release_facts() -> None:
+    required = {
+        "project name Still Watching": re.compile(r"\bStill\s+Watching\b", re.I),
+        "Minecraft 1.20.1": re.compile(r"\b1\.20\.1\b"),
+        "Forge loader": re.compile(r"\bForge\b", re.I),
+        "Java 17": re.compile(r"\bJava\b[\s\S]{0,100}\b17\b|\b17\b[\s\S]{0,100}\bJava\b", re.I),
+        "CurseForge Project ID 1420406": re.compile(r"\b1420406\b"),
+    }
+    release_versions: dict[str, list[str]] = {}
+    errors = []
+
+    for path in RELEASE_FACT_FILES:
+        if not path.is_file():
+            errors.append(f"missing {path.relative_to(ROOT)}")
+            continue
+        text = read(path)
+
+        if path.name in REQUIRED_FACT_FILES:
+            for label, pattern in required.items():
+                if not pattern.search(text):
+                    errors.append(f"{path.name} missing {label}")
+
+        errors.extend(_bad_contexts(path, text, "Minecraft version", MINECRAFT_VERSION, [
+            r"\bMinecraft(?:\s+version)?\b[^\n<|]{0,80}\b(\d+\.\d+(?:\.\d+)?)\b",
+            r"\b(\d+\.\d+(?:\.\d+)?)\b[^\n<|]{0,80}\bMinecraft\b",
+        ]))
+        errors.extend(_bad_contexts(path, text, "Java version", JAVA_VERSION, [
+            r"\bJava\b[^\n<|]{0,80}\b(\d{1,2})\b",
+            r"\b(\d{1,2})\b[^\n<|]{0,80}\bJava\b",
+        ]))
+        errors.extend(_bad_contexts(path, text, "CurseForge Project ID", CURSEFORGE_PROJECT_ID, [
+            r"\bCurseForge\s+Project\s+ID\b[^\n<|]{0,80}\b(\d+)\b",
+            r"/curseforge/(?:v|dt)/(\d+)",
+            r"attachments/description/(\d+)/",
+        ]))
+
+        for pattern in [
+            r"\b(?:Loader|Mod Loader)\b[^\n<|]{0,80}\b(Fabric|Quilt|NeoForge)\b",
+            r"\b(Fabric|Quilt|NeoForge)\b[^\n<|]{0,80}\b(?:Loader|Mod Loader)\b",
+        ]:
+            for match in re.finditer(pattern, text, re.I):
+                start = max(0, match.start() - 70)
+                end = min(len(text), match.end() + 70)
+                errors.append(
+                    f"{path.name}:{line_number(text, match.start())} mentions non-{LOADER} loader near: "
+                    f"{plain(text[start:end])}"
+                )
+
+        for pattern in [
+            r"\bStill\s+Watching\s+V(\d+\.\d+\.\d+)\b",
+            r"\bCurrent\s+release\b[\s\S]{0,120}\bV(\d+\.\d+\.\d+)\b",
+            r"\bLatest\s+Version\b[\s\S]{0,120}\bV?(\d+\.\d+\.\d+)\b",
+        ]:
+            for match in re.finditer(pattern, text, re.I):
+                version = match.group(1)
+                release_versions.setdefault(version, []).append(f"{path.name}:{line_number(text, match.start(1))}")
+
+    if len(release_versions) > 1:
+        details = "; ".join(
+            f"V{version} in {', '.join(locations)}"
+            for version, locations in sorted(release_versions.items())
+        )
+        errors.append(f"release/version text is inconsistent: {details}")
+
+    if errors:
+        fail("; ".join(errors))
+
+    suffix = ""
+    if release_versions:
+        suffix = ", V" + next(iter(release_versions))
+    print(
+        f"Release facts OK: {PROJECT_NAME}, Minecraft {MINECRAFT_VERSION}, "
+        f"{LOADER}, Java {JAVA_VERSION}, CurseForge Project ID {CURSEFORGE_PROJECT_ID}{suffix}"
+    )
+
+
 def sponsor_guard() -> None:
     path = ROOT / "README.md"
     if not path.is_file():
@@ -303,7 +412,7 @@ def issue_templates() -> None:
 
 
 def all_checks() -> None:
-    for check in [layout, yaml_files, html, project_facts, issue_templates, modlist, sponsor_guard, release_zips]:
+    for check in [layout, yaml_files, html, release_facts, issue_templates, modlist, sponsor_guard, release_zips]:
         check()
 
 
@@ -315,6 +424,7 @@ def main() -> None:
         "html": html,
         "modlist": modlist,
         "release-zips": release_zips,
+        "release-facts": release_facts,
         "project-facts": project_facts,
         "issue-templates": issue_templates,
         "sponsor": sponsor_guard,
