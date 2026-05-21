@@ -64,39 +64,39 @@
 
 ## Map
 
-29. [JourneyMap](https://www.curseforge.com/minecraft/mc-mods/journeymap)
+30. [JourneyMap](https://www.curseforge.com/minecraft/mc-mods/journeymap)
 
 ## Menu
 
-30. [FancyMenu](https://www.curseforge.com/minecraft/mc-mods/fancymenu)
-31. [BisectHosting Server Integration Menu](https://www.curseforge.com/minecraft/mc-mods/bisecthosting-server-integration-menu-forge)
+31. [FancyMenu](https://www.curseforge.com/minecraft/mc-mods/fancymenu)
+32. [BisectHosting Server Integration Menu](https://www.curseforge.com/minecraft/mc-mods/bisecthosting-server-integration-menu-forge)
 
 ## APIs / Cores / Libs
 
-32. [CreativeCore](https://www.curseforge.com/minecraft/mc-mods/creativecore)
-33. [Architectury API](https://www.curseforge.com/minecraft/mc-mods/architectury-api)
-34. [Melody](https://www.curseforge.com/minecraft/mc-mods/melody)
-35. [GeckoLib](https://www.curseforge.com/minecraft/mc-mods/geckolib)
-36. [FTB Teams](https://www.curseforge.com/minecraft/mc-mods/ftb-teams-forge)
-37. [FTB Library](https://www.curseforge.com/minecraft/mc-mods/ftb-library-forge)
-38. [Exposure Catalog](https://www.curseforge.com/minecraft/mc-mods/exposure-catalog)
-39. [FTB XMod Compat](https://www.curseforge.com/minecraft/mc-mods/ftb-xmod-compat)
-40. [GlitchCore](https://www.curseforge.com/minecraft/mc-mods/glitchcore)
-41. [TerraBlender](https://www.curseforge.com/minecraft/mc-mods/terrablender)
-42. [Entity Texture Features](https://www.curseforge.com/minecraft/mc-mods/entity-texture-features-fabric)
-43. [Entity Model Features](https://www.curseforge.com/minecraft/mc-mods/entity-model-features)
-44. [Structure Gel API](https://www.curseforge.com/minecraft/mc-mods/structure-gel-api)
-45. [Citadel](https://www.curseforge.com/minecraft/mc-mods/citadel)
-46. [Konkrete](https://www.curseforge.com/minecraft/mc-mods/konkrete)
-47. [Cristel Lib](https://www.curseforge.com/minecraft/mc-mods/cristel-lib)
-48. [Valhelsia Core](https://www.curseforge.com/minecraft/mc-mods/valhelsia-core)
+33. [CreativeCore](https://www.curseforge.com/minecraft/mc-mods/creativecore)
+34. [Architectury API](https://www.curseforge.com/minecraft/mc-mods/architectury-api)
+35. [Melody](https://www.curseforge.com/minecraft/mc-mods/melody)
+36. [GeckoLib](https://www.curseforge.com/minecraft/mc-mods/geckolib)
+37. [FTB Teams](https://www.curseforge.com/minecraft/mc-mods/ftb-teams-forge)
+38. [FTB Library](https://www.curseforge.com/minecraft/mc-mods/ftb-library-forge)
+39. [Exposure Catalog](https://www.curseforge.com/minecraft/mc-mods/exposure-catalog)
+40. [FTB XMod Compat](https://www.curseforge.com/minecraft/mc-mods/ftb-xmod-compat)
+41. [GlitchCore](https://www.curseforge.com/minecraft/mc-mods/glitchcore)
+42. [TerraBlender](https://www.curseforge.com/minecraft/mc-mods/terrablender)
+43. [Entity Texture Features](https://www.curseforge.com/minecraft/mc-mods/entity-texture-features-fabric)
+44. [Entity Model Features](https://www.curseforge.com/minecraft/mc-mods/entity-model-features)
+45. [Structure Gel API](https://www.curseforge.com/minecraft/mc-mods/structure-gel-api)
+46. [Citadel](https://www.curseforge.com/minecraft/mc-mods/citadel)
+47. [Konkrete](https://www.curseforge.com/minecraft/mc-mods/konkrete)
+48. [Cristel Lib](https://www.curseforge.com/minecraft/mc-mods/cristel-lib)
+49. [Valhelsia Core](https://www.curseforge.com/minecraft/mc-mods/valhelsia-core)
 
 ## Sound
 
-49. [Sound Physics Remastered](https://www.curseforge.com/minecraft/mc-mods/sound-physics-remastered)
-50. [Presence Footsteps](https://www.curseforge.com/minecraft/mc-mods/presence-footsteps-forge)
-51. [AmbientSounds 6](https://www.curseforge.com/minecraft/mc-mods/ambientsounds)
-52. [Simple Voice Chat](https://www.curseforge.com/minecraft/mc-mods/simple-voice-chat)
+50. [Sound Physics Remastered](https://www.curseforge.com/minecraft/mc-mods/sound-physics-remastered)
+51. [Presence Footsteps](https://www.curseforge.com/minecraft/mc-mods/presence-footsteps-forge)
+52. [AmbientSounds 6](https://www.curseforge.com/minecraft/mc-mods/ambientsounds)
+53. [Simple Voice Chat](https://www.curseforge.com/minecraft/mc-mods/simple-voice-chat)
 
 ## Zoom
 
