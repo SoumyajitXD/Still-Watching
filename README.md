@@ -12,22 +12,46 @@
 [![Downloads](https://img.shields.io/curseforge/dt/1420406?style=for-the-badge&logo=curseforge&logoColor=white&label=Downloads)](https://www.curseforge.com/minecraft/modpacks/still-watching)
 [![License](https://img.shields.io/badge/License-Apache--2.0-2f81f7?style=for-the-badge)](./LICENSE)
 
-**[Install on CurseForge](https://www.curseforge.com/minecraft/modpacks/still-watching)** ·
-**[Installation Guide](./installation-guide.md)** ·
+<br />
+
+[![Install Still Watching on CurseForge](https://img.shields.io/badge/INSTALL%20ON-CURSEFORGE-f16436?style=for-the-badge&logo=curseforge&logoColor=white)](https://www.curseforge.com/minecraft/modpacks/still-watching/files)
+[![Read Installation Guide](https://img.shields.io/badge/READ-INSTALLATION%20GUIDE-2f81f7?style=for-the-badge)](./installation-guide.md)
+[![Report a Bug](https://img.shields.io/badge/REPORT-A%20BUG-fa1d04?style=for-the-badge&logo=github&logoColor=white)](../../issues)
+
 **[Mod List](./latest-modlist.md)** ·
 **[Screenshots](./Screenshots)** ·
-**[Report Issue](../../issues)**
+**[CurseForge Gallery](https://www.curseforge.com/minecraft/modpacks/still-watching/gallery)**
 
 </div>
 
 ---
 
 > [!IMPORTANT]
-> **Install Still Watching from CurseForge.**
+> ## Install from CurseForge. Not the GitHub ZIP.
 >
-> The GitHub ZIP is **not** a playable modpack installer. This repository is for documentation, issue tracking, source-side files, screenshots, release-side files, and licensing clarity.
+> The GitHub ZIP is **not** a playable modpack installer. It will not behave like the CurseForge release, it will not pull the pack the way the launcher does, and it is exactly how people manufacture broken installs.
 >
-> If GitHub and CurseForge disagree, trust CurseForge and report the mismatch.
+> Use the official CurseForge release. If GitHub and CurseForge disagree, **trust CurseForge** and report the mismatch.
+
+<div align="center">
+
+[![Get the Playable Release](https://img.shields.io/badge/GET%20THE%20PLAYABLE%20RELEASE-CurseForge-f16436?style=for-the-badge&logo=curseforge&logoColor=white)](https://www.curseforge.com/minecraft/modpacks/still-watching)
+[![Download Specific Files](https://img.shields.io/badge/DOWNLOAD%20SPECIFIC%20FILES-CurseForge-f16436?style=for-the-badge&logo=curseforge&logoColor=white)](https://www.curseforge.com/minecraft/modpacks/still-watching/files)
+
+</div>
+
+---
+
+## Choose Your Door
+
+| Role | Start here | Do not skip |
+| --- | --- | --- |
+| **Players** | [Install on CurseForge](https://www.curseforge.com/minecraft/modpacks/still-watching) | Allocate `5 GB` minimum RAM; `6–8 GB` preferred. |
+| **Server admins** | [`installation-guide.md`](./installation-guide.md#multiplayer--server-setup) | Match pack version, Forge version, configs, and files. No client-only junk on dedicated servers. |
+| **Bug reporters** | [GitHub Issues](../../issues) | Test a clean CurseForge install and attach logs. Vibes are not diagnostics. |
+| **Maintainers** | [`python .github/scripts/validate.py all`](#maintainer-checks) | Validate before release-side edits. Guesswork belongs in horror, not maintenance. |
+
+---
 
 ## What Is Still Watching?
 
@@ -36,19 +60,6 @@
 It keeps the familiar survival loop — mine, build, loot, travel, recover — then drags it through fog, darkness, hostile structures, audio pressure, and stalking horror. The goal is not random noise spam. The goal is dread with consequences.
 
 You are still playing Minecraft. You are just no longer allowed to pretend the dark is decorative.
-
----
-
-## Start Here
-
-| I want to... | Go here |
-| --- | --- |
-| **Play the modpack** | [Install on CurseForge](https://www.curseforge.com/minecraft/modpacks/still-watching) |
-| **Download a specific release** | [CurseForge Files](https://www.curseforge.com/minecraft/modpacks/still-watching/files) |
-| **Install, update, host, or troubleshoot** | [`installation-guide.md`](./installation-guide.md) |
-| **Check included mods** | [`latest-modlist.md`](./latest-modlist.md) |
-| **View screenshots** | [`Screenshots/`](./Screenshots) or [CurseForge Gallery](https://www.curseforge.com/minecraft/modpacks/still-watching/gallery) |
-| **Report a bug** | [GitHub Issues](../../issues) |
 
 ---
 
@@ -61,7 +72,7 @@ You are still playing Minecraft. You are just no longer allowed to pretend the d
 | **Type** | Minecraft Java Edition horror-survival modpack |
 | **Minecraft version** | `1.20.1` |
 | **Loader** | Forge |
-| **Official release** | [CurseForge](https://www.curseforge.com/minecraft/modpacks/still-watching) |
+| **Official playable release** | [CurseForge](https://www.curseforge.com/minecraft/modpacks/still-watching) |
 | **CurseForge Project ID** | `1420406` |
 | **RAM** | `5 GB` minimum; `6–8 GB` preferred |
 | **Java** | Java `17` if the launcher asks |
@@ -71,16 +82,17 @@ You are still playing Minecraft. You are just no longer allowed to pretend the d
 
 ---
 
-## Play the Modpack vs. Browse the Repo
+## Quick Install
 
-| Play Still Watching | Browse this GitHub repo |
-| --- | --- |
-| Use CurseForge. | Read docs and project files. |
-| Let the launcher install dependencies. | Report issues with logs and reproduction steps. |
-| Use official release files. | Check screenshots, release-side files, and licensing notes. |
-| Match client/server versions for multiplayer. | Do **not** use the GitHub ZIP as an installer. |
+1. Install the [CurseForge App](https://www.curseforge.com/download/app).
+2. Open [Still Watching on CurseForge](https://www.curseforge.com/minecraft/modpacks/still-watching).
+3. Install the latest release.
+4. Allocate **5 GB minimum RAM**; **6–8 GB preferred**.
+5. Use **Java 17** if the launcher asks.
+6. Launch once clean before adding extra mods, shaders, or resource packs.
+7. Put on headphones. The pack is not subtle about sound.
 
-The CurseForge page is where players belong. GitHub is where documentation, reports, and source-side cleanup live. Mixing those two up is how installs get mangled.
+Need manual import notes, server setup, backups, logs, or actual troubleshooting? Use [`installation-guide.md`](./installation-guide.md). The README is the front door, not the entire filing cabinet.
 
 ---
 
@@ -109,44 +121,7 @@ Still Watching includes horror entities, worldgen, structures, ambience, visual 
 | **Multiplayer & utility** | Simple Voice Chat, FTB Teams, FTB Quests, JourneyMap, Corpse |
 | **Performance & visuals** | Embeddium, Embeddium Extras, Oculus, Euphoria Patches |
 
-For the complete list, use [`latest-modlist.md`](./latest-modlist.md). The README is the front door, not the entire filing cabinet.
-
----
-
-## Requirements
-
-| Requirement | Recommendation |
-| --- | --- |
-| **Edition** | Minecraft: Java Edition |
-| **Minecraft** | `1.20.1` |
-| **Loader** | Forge |
-| **RAM** | `5 GB` minimum; `6–8 GB` preferred |
-| **Java** | Java `17` if required by your launcher |
-| **Audio** | Headphones recommended |
-| **Install source** | CurseForge |
-
-Detailed install, RAM, update, backup, server, and troubleshooting notes live in the [installation guide](./installation-guide.md).
-
----
-
-## Quick Install
-
-1. Install the [CurseForge App](https://www.curseforge.com/download/app).
-2. Open [Still Watching on CurseForge](https://www.curseforge.com/minecraft/modpacks/still-watching).
-3. Install the latest release.
-4. Allocate **5 GB minimum RAM**; **6–8 GB preferred**.
-5. Use **Java 17** if the launcher asks.
-6. Launch once clean before adding extra mods, shaders, or resource packs.
-7. Put on headphones. The pack is not subtle about sound.
-
-Need manual import notes, server setup, backups, logs, or real troubleshooting? Use [`installation-guide.md`](./installation-guide.md).
-
-<div align="center">
-
-[![Install Still Watching](https://img.shields.io/badge/Install%20Still%20Watching-CurseForge-f16436?style=for-the-badge&logo=curseforge&logoColor=white)](https://www.curseforge.com/minecraft/modpacks/still-watching/files)
-[![Read Installation Guide](https://img.shields.io/badge/Read-Installation%20Guide-2f81f7?style=for-the-badge)](./installation-guide.md)
-
-</div>
+For the complete list, use [`latest-modlist.md`](./latest-modlist.md).
 
 ---
 
@@ -188,24 +163,6 @@ For the real setup notes, read [`installation-guide.md`](./installation-guide.md
 | **Bug after adding mods** | Reproduce on a clean CurseForge install before reporting. Extra mods are suspects, not innocent civilians. |
 
 Full fixes: [`installation-guide.md`](./installation-guide.md#troubleshooting)
-
----
-
-## Repository Map
-
-| Path | Purpose |
-| --- | --- |
-| [`README.md`](./README.md) | Main GitHub landing page. |
-| [`installation-guide.md`](./installation-guide.md) | Install, update, multiplayer, server, backup, and troubleshooting guide. |
-| [`latest-modlist.md`](./latest-modlist.md) | Current repository mod list. |
-| [`curseforge-description.html`](./curseforge-description.html) | CurseForge description source. |
-| [`Screenshots/`](./Screenshots) | Screenshot assets. |
-| [`Releases/`](./Releases) | Release-side files. |
-| [`.github/ISSUE_TEMPLATE/`](./.github/ISSUE_TEMPLATE) | Issue templates. |
-| [`.github/workflows/ci.yml`](./.github/workflows/ci.yml) | Repository validation workflow. |
-| [`still-watching-logo.jpg`](./still-watching-logo.jpg) | Project logo. |
-| [`bisecthosting-banner.png`](./bisecthosting-banner.png) | Sponsor banner asset. |
-| [`LICENSE`](./LICENSE) | Apache License 2.0 for original repository files. |
 
 ---
 
@@ -257,6 +214,37 @@ Logs matter. Vibes are not diagnostics.
 [![Open an Issue](https://img.shields.io/badge/Open-Issue-fa1d04?style=for-the-badge&logo=github&logoColor=white)](../../issues)
 
 </div>
+
+---
+
+## Repository Map
+
+| Path | Purpose |
+| --- | --- |
+| [`README.md`](./README.md) | Main GitHub landing page. |
+| [`installation-guide.md`](./installation-guide.md) | Install, update, multiplayer, server, backup, and troubleshooting guide. |
+| [`latest-modlist.md`](./latest-modlist.md) | Current repository mod list. |
+| [`curseforge-description.html`](./curseforge-description.html) | CurseForge description source. |
+| [`Screenshots/`](./Screenshots) | Screenshot assets. |
+| [`Releases/`](./Releases) | Release-side files. |
+| [`.github/ISSUE_TEMPLATE/`](./.github/ISSUE_TEMPLATE) | Issue templates. |
+| [`.github/workflows/ci.yml`](./.github/workflows/ci.yml) | Repository validation workflow. |
+| [`.github/scripts/validate.py`](./.github/scripts/validate.py) | Local validation script for layout, metadata, links, sponsor markers, and release-facing files. |
+| [`still-watching-logo.jpg`](./still-watching-logo.jpg) | Project logo. |
+| [`bisecthosting-banner.png`](./bisecthosting-banner.png) | Sponsor banner asset. |
+| [`LICENSE`](./LICENSE) | Apache License 2.0 for original repository files. |
+
+---
+
+## Maintainer Checks
+
+Before touching release-facing docs, run the local validator from the repository root:
+
+```bash
+python .github/scripts/validate.py all
+```
+
+That check exists to catch boring-but-expensive mistakes: broken layout assumptions, bad metadata, damaged sponsor markers, link rot, and release text drift. Ship dread, not sloppy Markdown shrapnel.
 
 ---
 
