@@ -1,11 +1,23 @@
 # Still Watching Installation Guide
 
-This guide explains how to install, launch, update, troubleshoot, and report issues for **Still Watching**, a Minecraft Java Edition horror-survival modpack for **Minecraft 1.20.1** on **Forge**.
+This guide covers installing, updating, backing up, troubleshooting, reporting bugs, and setting up multiplayer for **Still Watching**, a Minecraft Java Edition horror-survival modpack by **Soumyajit** for **Minecraft 1.20.1** on **Forge**.
 
 > [!IMPORTANT]
-> **Install from CurseForge. Do not use the GitHub ZIP as a modpack installer.**
+> **CurseForge is the supported install source.** The playable release is distributed through CurseForge.
 >
-> The GitHub repository is for documentation, issue tracking, source-side files, project maintenance, and licensing clarity. The playable modpack release lives on CurseForge.
+> The GitHub ZIP is **not** a playable modpack installer. It is repository source content for documentation, issue tracking, maintenance, screenshots, release-side files, and licensing clarity.
+
+## Start Here
+
+| Goal | Use this section |
+| --- | --- |
+| Install and play | [Quick Install](#quick-install) |
+| Need a specific version | [Installing a Specific Version](#installing-a-specific-version) |
+| Updating safely | [Updating Safely](#updating-safely) |
+| Make backups | [Backups](#backups) |
+| Fix a crash or broken install | [Troubleshooting](#troubleshooting) |
+| Host a server | [Multiplayer & Server Setup](#multiplayer--server-setup) |
+| Report a bug | [Bug Reports](#bug-reports) |
 
 ## Official Links
 
@@ -15,30 +27,9 @@ This guide explains how to install, launch, update, troubleshoot, and report iss
 | CurseForge files page | [Still Watching Files](https://www.curseforge.com/minecraft/modpacks/still-watching/files) |
 | GitHub issues | [Report an issue](../../issues) |
 | README | [README.md](./README.md) |
+| Latest mod list | [latest-modlist.md](./latest-modlist.md) |
 
-CurseForge is the source of truth for released files. If GitHub and CurseForge disagree, trust CurseForge and report the mismatch.
-
----
-
-## Quick Install
-
-Use this path if you just want to play.
-
-1. Install the [CurseForge App](https://www.curseforge.com/download/app).
-2. Open the **Minecraft** section.
-3. Search for **Still Watching**.
-4. Confirm:
-   - Project name: **Still Watching**
-   - Creator: **Soumyajit**
-   - Minecraft: **1.20.1**
-   - Loader: **Forge**
-5. Click **Install**.
-6. Allocate RAM if needed.
-7. Launch once with **no extra mods, shaders, or resource packs**.
-8. Create a new test world.
-9. Confirm the game loads, audio works, and FPS is playable.
-
-That is the clean path. Do not turn the first launch into a science experiment.
+If GitHub and CurseForge disagree about a released file, trust CurseForge and report the mismatch. Do not turn a source ZIP into a fake installer and then blame the fog.
 
 ---
 
@@ -47,105 +38,83 @@ That is the clean path. Do not turn the first launch into a science experiment.
 | Requirement | Details |
 | --- | --- |
 | Minecraft edition | Minecraft: Java Edition |
-| Minecraft version | 1.20.1 |
+| Minecraft version | `1.20.1` |
 | Loader | Forge |
-| Java | Java 17 if required by the launcher |
-| RAM | 5 GB minimum, 6–8 GB recommended |
-| Disk space | 5–10 GB recommended |
-| Internet connection | Required for download |
-| Headphones | Recommended, not required |
-| Official source | CurseForge |
+| Recommended installer | CurseForge App |
+| Java | Java 17 if the launcher asks |
+| RAM | `5 GB` minimum; `6–8 GB` recommended |
+| Disk space | `5–10 GB` recommended |
+| Internet | Required for download and dependency installation |
+| Headphones | Recommended for audio cues and atmosphere |
 | CurseForge Project ID | `1420406` |
 
-> [!TIP]
-> CurseForge is the source of truth for released files. If GitHub and CurseForge disagree, trust CurseForge and report the mismatch.
-
 ---
 
-## What Not To Do
+## Quick Install
 
-> [!WARNING]
-> These are the classic ways to break the pack before it even gets to scare you.
+Use this path if you just want to play.
 
-- Do **not** install from the GitHub source ZIP.
-- Do **not** use random mirrors.
-- Do **not** add extra mods before first launch.
-- Do **not** allocate all system RAM.
-- Do **not** report modified-profile bugs until tested on a clean profile.
-
----
-
-## CurseForge App Install
-
-This is the recommended install method.
-
-1. Download and install the [CurseForge App](https://www.curseforge.com/download/app).
-2. Open CurseForge.
-3. Select **Minecraft**.
-4. Open **Browse** or **Discover**.
-5. Search for **Still Watching**.
-6. Verify the project details:
+1. Install the [CurseForge App](https://www.curseforge.com/download/app).
+2. Open **Minecraft** in CurseForge.
+3. Search for **Still Watching**.
+4. Verify the project details:
    - Name: **Still Watching**
    - Creator: **Soumyajit**
    - Minecraft: **1.20.1**
    - Loader: **Forge**
-7. Click **Install**.
-8. Wait for CurseForge to create the profile and download dependencies.
-9. Open **My Modpacks**.
-10. Select **Still Watching**.
-11. Open **Profile Options**.
-12. Configure RAM if needed.
-13. Launch the pack.
+5. Click **Install**.
+6. Allocate RAM if needed.
+7. Launch once with **no extra mods, shaders, or resource packs**.
+8. Create a new test world.
+9. Confirm loading, audio, and FPS are playable.
 
-### Verification Checklist
-
-Before you start serious play, confirm:
-
-- The profile is installed from CurseForge.
-- The Minecraft version is **1.20.1**.
-- The loader is **Forge**.
-- RAM is set between **5 GB and 8 GB**.
-- No extra mods, shaders, or resource packs were added before the first launch.
-- A new test world loads successfully.
+That is the clean route. Save the experiments for after the pack actually launches.
 
 ---
 
-## CurseForge Website Install
+## Installing from CurseForge
 
-Use this if you found the pack through your browser.
+CurseForge is the normal install path and the source of truth for released files.
 
-1. Open the official page: [Still Watching on CurseForge](https://www.curseforge.com/minecraft/modpacks/still-watching).
-2. Click **Install**, **Install via App**, or the current CurseForge equivalent.
-3. Allow your browser to open the CurseForge App.
-4. Let CurseForge create the profile.
-5. Open the profile from **My Modpacks**.
-6. Configure RAM if needed.
-7. Launch clean once before changing anything.
+### CurseForge App
 
-For specific versions, use the [CurseForge Files page](https://www.curseforge.com/minecraft/modpacks/still-watching/files).
+1. Download and install the [CurseForge App](https://www.curseforge.com/download/app).
+2. Open **Minecraft**.
+3. Search for **Still Watching**.
+4. Verify the name, creator, Minecraft version, and Forge loader.
+5. Click **Install**.
+6. Open the profile from **My Modpacks**.
+7. Adjust RAM if needed.
+8. Launch clean once before changing anything.
 
-Use the latest release unless a server or existing world requires a specific older version.
+### CurseForge Website
+
+1. Open [Still Watching on CurseForge](https://www.curseforge.com/minecraft/modpacks/still-watching).
+2. Click **Install**, **Install via App**, or CurseForge’s current equivalent.
+3. Allow the browser to open CurseForge.
+4. Let CurseForge create the profile and download dependencies.
+5. Launch clean once before adding extras.
+
+### Installing a Specific Version
+
+Use the [CurseForge Files page](https://www.curseforge.com/minecraft/modpacks/still-watching/files) when a server, world, or testing case requires a specific version.
+
+For normal play, use the latest available CurseForge release. For multiplayer, install the exact version used by the server.
 
 ---
 
 ## Other Launchers
 
-Other launchers may work only if they properly support CurseForge manifests and dependency downloads.
+Other launchers are only reasonable if they properly handle CurseForge manifests and dependencies.
 
-Use the official CurseForge export/import flow where supported.
+General rule:
 
-General flow:
+- Import from CurseForge or a proper CurseForge export when supported.
+- Confirm Minecraft **1.20.1** and Forge.
+- Launch clean before adding extras.
+- Reproduce issues on the CurseForge App before reporting them.
 
-1. Choose **Import Modpack**, **Install from CurseForge**, or the launcher’s equivalent.
-2. Search for **Still Watching**, or import the official CurseForge archive.
-3. Confirm Minecraft **1.20.1**.
-4. Confirm the loader is **Forge**.
-5. Allocate RAM.
-6. Launch with no extra modifications.
-7. Test a new world.
-
-> [!CAUTION]
-> Manual assembly is unsupported unless you know exactly what you are doing. Bugs from third-party launcher installs should be reproduced on CurseForge before reporting.
+Manual assembly is unsupported unless you already know how Forge mod sides, dependencies, configs, and logs work. Random file-dragging is not installation. It is ritual sacrifice with worse documentation.
 
 ---
 
@@ -153,12 +122,10 @@ General flow:
 
 | System RAM | Suggested Minecraft RAM |
 | --- | --- |
-| 8 GB | 5 GB, close background apps |
+| 8 GB | 5 GB; close background apps |
 | 12 GB | 5–6 GB |
 | 16 GB | 6–8 GB |
 | 32 GB+ | 8 GB |
-
-Useful values:
 
 | RAM | MB value |
 | --- | ---: |
@@ -167,7 +134,7 @@ Useful values:
 | 8 GB | `8192 MB` |
 
 > [!WARNING]
-> More RAM is not always better. Do not allocate all system RAM. If the whole PC freezes, stutters badly, or starts swapping heavily, allocation may be too high.
+> Do not allocate all system RAM. Minecraft needs memory, but Windows/macOS/Linux and background apps still need to breathe. Starving the OS is not optimization; it is self-sabotage with a slider.
 
 ### CurseForge RAM Steps
 
@@ -175,8 +142,8 @@ Useful values:
 2. Go to **My Modpacks**.
 3. Select **Still Watching**.
 4. Open **Profile Options**.
-5. Disable **Use System Memory Settings**.
-6. Set the MB value:
+5. Disable **Use System Memory Settings** if needed.
+6. Set the memory value:
    - `5120 MB` = 5 GB
    - `6144 MB` = 6 GB
    - `8192 MB` = 8 GB
@@ -187,79 +154,61 @@ Useful values:
 
 ## First Launch Checklist
 
-Launch clean before changing anything:
+- [ ] No extra mods.
+- [ ] No shaders.
+- [ ] No extra resource packs.
+- [ ] New test world created.
+- [ ] Game loads successfully.
+- [ ] Audio works.
+- [ ] FPS is playable.
+- [ ] Game exits normally.
+- [ ] Optional changes are added one at a time afterward.
 
-- No extra mods.
-- No shaders.
-- No extra resource packs.
-- Create a new test world.
-- Check loading.
-- Check audio.
-- Check FPS.
-- Exit normally.
-- Add optional changes one at a time.
-
-If the clean pack works and the modified profile breaks, the modification is the suspect. Drag it into the light and test it.
+If the clean pack works and your modified profile breaks, the modification is the suspect. Drag it into the light and test it properly.
 
 ---
 
 ## Recommended Game Settings
 
-| Setting | Starting Point | Why |
+| Setting | Starting point | Notes |
 | --- | --- | --- |
-| Render Distance | 8–10 chunks | Keeps performance stable without crushing atmosphere |
-| Simulation Distance | 5–6 chunks | Reduces CPU load |
-| Brightness | 30–60%, adjust for accessibility | Preserves darkness without making the game uncomfortable |
-| Shaders | Off first | Confirms the base pack works before adding GPU load |
-| Resource packs | Off first | Prevents conflicts during first launch |
-| Hostile/Ambient audio | 70–100% | Sound matters in a horror pack |
-| Subtitles | Optional/accessibility | Useful if audio cues are hard to track |
-| Headphones | Recommended | Better directional audio and atmosphere |
+| Render distance | 8–10 chunks | Lower first if FPS drops. |
+| Simulation distance | 5–6 chunks | Helps reduce CPU load. |
+| Brightness | Adjust for comfort/accessibility | Darkness is part of the mood, but eye strain is useless. |
+| Shaders | Off for first launch | Add later only after the base pack works. |
+| Extra resource packs | Off for first launch | Prevents first-run conflict noise. |
+| Subtitles | Optional | Useful for accessibility and tracking audio cues. |
+| Headphones | Recommended | Directional sound matters in a horror pack. |
 
-### Accessibility Notes
-
-- Subtitles are fine.
-- Higher brightness is fine if needed.
-- Lower visual intensity if fog, darkness, or shaders cause discomfort.
-- Take breaks.
-
-Accessibility is not “playing wrong.” The goal is fear, not eye strain.
+Accessibility is not “playing wrong.” Use subtitles, brightness, and breaks as needed. The goal is fear, not a migraine.
 
 ---
 
 ## Updating Safely
 
-Do not raw-dog updates on your main world. Back up first.
-
-1. Back up worlds.
+1. Back up your worlds.
 2. Check the [CurseForge Files page](https://www.curseforge.com/minecraft/modpacks/still-watching/files).
 3. Update through the launcher.
 4. Launch clean.
 5. Test a disposable or new world.
-6. Only then open your main world.
+6. Open your main world only after the update passes basic testing.
 
 > [!IMPORTANT]
-> All clients and the server must use the same pack version, Minecraft version, Forge version, and required configs.
+> Multiplayer requires all clients and the server to match the pack version, Minecraft version, Forge version, and required configs.
+
+Do not test an update for the first time on your only serious world. That is not bravery. That is how save files become ghost stories.
 
 ---
 
 ## Backups
 
-Back up before:
+Back up before updates, server moves, config edits, world migrations, or major experiments.
 
-- Updates.
-- Server moves.
-- Config edits.
-- World migration.
-- Adding major extra mods.
-
-Back up these when relevant:
-
-| Folder/File | Why |
+| Folder/File | Why it matters |
 | --- | --- |
 | `saves/` | Singleplayer worlds |
 | `config/` | Main mod configuration |
-| `defaultconfigs/` | Default world/server config templates |
+| `defaultconfigs/` | Default config templates for new worlds/servers |
 | `serverconfig/` | Per-world server configs |
 | `journeymap/` | Map data, if present |
 | `screenshots/` | Screenshots you care about |
@@ -274,116 +223,120 @@ Example backup name:
 Still-Watching-worldname-before-vX.X.X-update.zip
 ```
 
-> [!TIP]
-> Test that the archive actually contains the files. A backup you never checked is just a bedtime story.
+Check that the archive actually contains files. An empty backup is just a lie with a `.zip` extension.
 
 ---
 
+<a id="multiplayer--server-notes"></a>
 ## Multiplayer & Server Setup
 
-Still Watching supports multiplayer when the client, server, Minecraft version, Forge version, pack version, and configs match.
+Still Watching multiplayer works only when **every client and the server use matching pack version, Minecraft version, Forge version, required mods, and configs**.
 
-> [!WARNING]
-> Do not mix pack versions between players and server. Version mismatch errors are not mysterious. They are Minecraft screaming the answer at you.
+If those do not match, stop. Fix that first. The server is not haunted; your versions are fighting in a trench coat.
 
-### Recommended Server Path
+### Path A: Hosting Provider CurseForge Installer
 
-Use this if your hosting provider supports CurseForge modpacks.
+Best for most users.
 
 1. Open your hosting panel.
-2. Find **Modpacks**, **CurseForge Modpacks**, or the host’s equivalent.
+2. Find the **CurseForge**, **Modpacks**, or **Modpack Installer** section.
 3. Search for **Still Watching**.
-4. Install the exact same Still Watching version as all clients.
-5. Start the server.
-6. Check the console for errors.
-7. Join with a clean matching client.
+4. Choose the exact same pack version as all clients.
+5. Install it.
+6. Start the server.
+7. Check the console for errors.
+8. Join with a clean matching client.
 
-This is the cleanest route. Let the host installer do the boring work.
+Use this path when your host supports it. Let the installer handle dependencies instead of hand-crafting a crash log.
 
-### Official Server Pack
+### Path B: Official Server Pack from CurseForge
 
-Use this if CurseForge provides a server pack for your chosen release.
+Use this only if the selected CurseForge release provides a server pack.
 
 1. Open the [CurseForge Files page](https://www.curseforge.com/minecraft/modpacks/still-watching/files).
-2. Select the exact same version used by clients.
-3. Download the server pack, if available.
-4. Extract it into a clean server folder.
+2. Pick the exact client version.
+3. Download the server pack if one is available for that file.
+4. Extract it to a clean folder.
 5. Run the included start script or Forge server jar.
 6. Accept the Minecraft EULA when prompted.
 7. Restart the server.
-8. Check the console.
+8. Check logs and console output.
 9. Join with a matching client.
 
-> [!CAUTION]
-> Do not invent your own server pack unless you understand mod sides, configs, and Forge logs. The server will not politely ignore client-only nonsense.
+Do not use a server pack from one version with clients from another. That is dependency roulette.
 
-### Manual Forge Server
+### Path C: Manual Forge Server
 
-Manual setup is advanced and not the recommended support path.
+Manual setup is advanced and unsupported unless verified for the exact release.
 
 1. Install a clean Forge **1.20.1** server.
-2. Use the required Forge build for the selected release.
-3. Copy server-compatible mods only.
+2. Use the Forge build required by the selected CurseForge release.
+3. Copy only server-compatible mods.
 4. Copy required configs.
 5. Remove client-only mods.
 6. Allocate server RAM.
 7. Start the server.
-8. Read logs.
-9. Fix errors.
-10. Test before inviting players.
+8. Read the logs.
+9. Fix errors before inviting players.
+10. Test with one clean matching client.
 
-Client-only categories often include:
+Do **not** provide, trust, or paste an exact server mod list unless it was verified from the actual release files. Client-only categories commonly include shader loaders, minimap/map renderers, HUD-only mods, visual-only mods, audio-only mods, and client rendering/performance mods.
 
-- Shader loaders.
-- Minimap/map rendering mods.
-- HUD-only mods.
-- Rendering/performance mods.
-- Visual-only mods.
-- Audio-only mods.
+### Common Server Failure Causes
 
-Do **not** provide or rely on an exact server mod list unless it has been verified from the actual pack files for that release.
+| Problem | What it usually means | First fix |
+| --- | --- | --- |
+| Client/server version mismatch | Pack versions differ | Install the same CurseForge file on server and clients. |
+| Wrong Forge build | Server and client are not using the release’s required Forge build | Check the selected file/profile and match it. |
+| Missing dependencies | A required library or mod is absent | Reinstall through the host installer or official server pack. |
+| Client-only mods on server | Dedicated server is loading client-side code | Remove wrong-side mods and read the server log. |
+| Config mismatch | Server and client configs differ where they must match | Recopy required configs from the selected release. |
+| Too little RAM | Server cannot load or TPS collapses | Increase server memory and reduce load. |
+| Wrong Java/runtime | Server starts with an incompatible Java | Use Java 17 when required. |
+| Bad manual assembly | Files were copied by guesswork | Rebuild using Path A or Path B. |
 
 ---
 
 ## Troubleshooting
 
-Before reporting, try this clean baseline:
+Start with a clean baseline before chasing demons.
+
+### Clean Baseline Test
 
 1. Restart the launcher.
 2. Confirm Minecraft **1.20.1**.
-3. Confirm **Forge** loader.
+3. Confirm the loader is **Forge**.
 4. Allocate **5–8 GB** RAM.
 5. Remove extra mods.
-6. Disable shaders and resource packs.
+6. Disable shaders and extra resource packs.
 7. Repair or reinstall the profile.
 8. Test a new world.
-9. Check `latest.log` or the crash report.
+9. Check `logs/latest.log` or the crash report.
 
-### Diagnosis Table
+### Symptom Table
 
-| Problem | First Check | Next Action |
+| Problem | First check | Next action |
 | --- | --- | --- |
-| Won’t launch | Correct launcher profile, Forge, Java, RAM | Repair/reinstall the CurseForge profile and launch clean |
-| Crash during loading | Extra mods, shaders, corrupted files, memory errors | Remove extras, allocate 5–8 GB, check crash report |
-| Crash after joining world | Whether it happens in a new world | Restore backup if only one world crashes |
-| Server crashes on boot | Client-only mods, missing mods, Forge mismatch | Read server `latest.log` and remove wrong-side mods |
-| Server rejects client | Pack version, Minecraft version, Forge version, configs | Make client and server match exactly |
-| Bad FPS | Render distance, simulation distance, shaders | Lower settings, close background apps, launch without extras |
-| Missing mods/config mismatch | Client/server files and configs | Reinstall matching versions on both sides |
-| Audio feels wrong | Output device, Minecraft audio sliders, headphones | Check hostile/ambient volume and system output |
-| Weird behavior after update | Update path and old configs | Test clean profile and disposable world |
-| Issue appears only after extra mods | The added mods | Reproduce on clean Still Watching before reporting |
+| Won’t launch | Profile, Minecraft version, loader, RAM | Repair/reinstall the CurseForge profile. |
+| Crash during loading | Extras, shaders, memory, corrupted profile | Remove extras, use 5–8 GB RAM, check crash report. |
+| Crash after joining world | New world vs old world | Restore backup if the crash is world-specific. |
+| Server crashes on boot | Client-only mods, missing mods, Forge mismatch | Read server log and remove wrong-side mods. |
+| Server rejects client | Version/config mismatch | Make server and client match exactly. |
+| Bad FPS | Render distance, shaders, background apps | Lower settings and launch without extras. |
+| Missing mods/config mismatch | Install source and version | Reinstall matching CurseForge version. |
+| Audio feels wrong | Output device, sliders, headphones | Check Minecraft and system audio settings. |
+| Weird behavior after update | Old configs/world data | Test a clean profile and disposable world. |
+| Only breaks with extra mods | Added mods/config edits | Reproduce clean before reporting. |
 
 ### Clean Reinstall
 
 1. Back up worlds first.
 2. Open CurseForge.
-3. Go to **My Modpacks**.
-4. Delete the broken **Still Watching** profile.
-5. Reinstall from the official CurseForge page.
-6. Allocate RAM again.
-7. Launch once before restoring worlds or adding extras.
-8. Restore backed-up worlds only after the clean install works.
+3. Delete the broken **Still Watching** profile.
+4. Reinstall from the official CurseForge page.
+5. Allocate RAM again.
+6. Launch clean before restoring worlds or adding extras.
+7. Restore backed-up worlds only after the clean install works.
 
 ### Crash During Loading
 
@@ -392,24 +345,26 @@ Common causes:
 - Wrong Minecraft version.
 - Wrong loader.
 - Wrong Java version.
-- Not enough RAM.
+- Too little RAM.
 - Corrupted profile.
 - Broken extra mods.
-- Shader or resource pack conflict.
-- Client-only/server-only mismatch.
+- Shader or resource pack conflicts.
+- Client/server-side mod mismatch.
 - Outdated graphics drivers.
+
+Attach the crash report and `latest.log` if you report it. A screenshot of the launcher saying “Exit Code 1” is basically a ransom note with no address.
 
 ### Crash After Joining a World
 
-Ask:
+Check this order:
 
-1. Does it happen in a new world?
-2. Did you add or remove mods after creating the world?
-3. Did you update without a backup?
-4. Does the crash report name a specific mod, entity, biome, structure, or dimension?
-5. Can you reproduce it at the same location or with the same action?
+1. Does a new world work?
+2. Did you update recently?
+3. Did you add or remove mods after creating the world?
+4. Does the crash happen at the same place or after the same action?
+5. Does the crash report name a mod, entity, structure, biome, or dimension?
 
-If one world crashes but fresh worlds work, the issue may be world-specific. If every world crashes, the install or config is probably broken.
+If only one world crashes, treat it as world-specific and restore a backup. If every world crashes, treat the install/profile/config as broken.
 
 ### Lag or Bad FPS
 
@@ -417,19 +372,31 @@ Try:
 
 1. Lower render distance.
 2. Lower simulation distance.
-3. Close background apps.
-4. Disable shaders.
-5. Remove extra resource packs.
+3. Disable shaders.
+4. Remove extra resource packs.
+5. Close background apps.
 6. Keep included performance mods and configs intact.
 7. Restart after major video setting changes.
 
-Do not max graphics, pile on shaders, and then act shocked when the frames get buried.
+Do not max graphics, stack shaders, and then act shocked when the frames get buried.
+
+### Server/Client Mismatch
+
+Check:
+
+- Same Still Watching pack version.
+- Same Minecraft version: **1.20.1**.
+- Same required Forge version for the selected release.
+- Required server mods are present.
+- Client-only mods are not on the dedicated server.
+- Required configs match.
+- Both sides were installed from the same CurseForge release or official server pack.
 
 ---
 
 ## Logs and Crash Reports
 
-Useful files are inside the modpack profile folder.
+Useful files live inside the modpack profile or server folder.
 
 Client:
 
@@ -446,22 +413,18 @@ logs/debug.log
 crash-reports/
 ```
 
-### Find the CurseForge Profile Folder
+### Open the CurseForge Profile Folder
 
 1. Open **CurseForge**.
 2. Go to **My Modpacks**.
-3. Right-click **Still Watching**, or click the three dots.
+3. Right-click **Still Watching** or click the three dots.
 4. Choose **Open Folder**.
-5. Check:
-   - `logs/`
-   - `crash-reports/`
-   - `saves/`
-   - `config/`
+5. Check `logs/`, `crash-reports/`, `saves/`, and `config/`.
 
 > [!CAUTION]
-> Logs may contain usernames, local file paths, server IPs, system details, or tokens. Review before posting publicly.
+> Logs may contain usernames, local file paths, server IPs, tokens, or system details. Review files before posting them publicly.
 
-Useful log search terms:
+Useful search terms:
 
 ```text
 Caused by
@@ -474,30 +437,30 @@ mismatch
 requires
 ```
 
-Read the first meaningful error, not only the final line. The last line often just describes the wreckage.
+Read the first meaningful error, not just the final line. The last line often only describes the wreckage.
 
 ---
 
 ## Bug Reports
 
-Open bug reports here: [GitHub Issues](../../issues)
+Open reports here: [GitHub Issues](../../issues)
 
-Reports should be based on clean install reproduction where possible.
+Before reporting, reproduce on a clean CurseForge install when possible. Use the matching issue template: bug, crash, server, performance, installation/update, or another template if present.
 
-Include:
+### Required Info Checklist
 
-- Still Watching version.
-- Launcher.
-- Minecraft version.
-- Forge version, if visible.
-- Java version, if relevant.
-- Operating system.
-- Singleplayer or multiplayer.
-- Dedicated server, LAN, or hosted server, if relevant.
-- Crash report or `latest.log`.
-- Steps to reproduce.
-- Screenshots or clips, if useful.
-- Extra mods, shaders, resource packs, or config edits.
+- [ ] Still Watching pack version.
+- [ ] Launcher.
+- [ ] Minecraft version.
+- [ ] Forge version, if visible.
+- [ ] Java version, if relevant.
+- [ ] Operating system.
+- [ ] Singleplayer or multiplayer.
+- [ ] Server type, host/provider, and server RAM if relevant.
+- [ ] `latest.log` and crash report when relevant.
+- [ ] Steps to reproduce.
+- [ ] Expected result and actual result.
+- [ ] Extra mods, shaders, resource packs, datapacks, plugins, config edits, or launcher changes.
 
 ### Good Report Example
 
@@ -506,8 +469,9 @@ Pack version: Still Watching vX.X.X
 Launcher: CurseForge App
 Minecraft: 1.20.1
 Loader: Forge
-Mode: Singleplayer
+Java: Java 17
 OS: Windows 11
+Mode: Singleplayer
 
 Issue:
 Game crashes when entering a cave structure in a new world.
@@ -520,9 +484,11 @@ Steps to reproduce:
 5. Game crashes.
 
 Attached:
-- latest.log
+- logs/latest.log
 - crash report
-- screenshot of location before crash
+
+Modifications:
+None
 ```
 
 ### Bad Report Example
@@ -531,7 +497,7 @@ Attached:
 it broke fix pls
 ```
 
-That report gives nothing to debug. Logs and steps, or everyone is just throwing bones at the wall.
+That report contains nothing to debug. Logs and steps, or everyone is just throwing bones at the wall.
 
 ---
 
@@ -541,63 +507,41 @@ That report gives nothing to debug. Logs and steps, or everyone is just throwing
 
 No. Install from CurseForge.
 
-The GitHub ZIP is not a playable modpack installer. It is repository source content for documentation, issue tracking, maintenance, and licensing clarity.
+The GitHub ZIP is not a playable modpack installer. It is repository source content, not the distributed pack profile.
 
 ### Can I add extra mods?
 
-Yes, but added mods are your responsibility.
-
-If something breaks, reproduce the issue on a clean CurseForge install before reporting it.
+Yes, but added mods are your responsibility. Reproduce issues on a clean CurseForge install before reporting them.
 
 ### Can I use shaders?
 
-Yes, if your system can handle them.
-
-Launch clean first. Add shaders only after the base pack works.
+Yes, if your system can handle them. Launch clean first, then add shaders one at a time.
 
 ### Can I play without headphones?
 
-Yes.
-
-Headphones are recommended because sound is part of the horror design, but they are not required.
+Yes. Headphones are recommended because sound is part of the pack’s horror design, but they are not required.
 
 ### Which version should I install?
 
-Use the latest version on the [CurseForge Files page](https://www.curseforge.com/minecraft/modpacks/still-watching/files), unless your world or server requires a specific older version.
+Use the latest version on the [CurseForge Files page](https://www.curseforge.com/minecraft/modpacks/still-watching/files), unless your server or world requires a specific older version.
 
 ### Where do I find the Forge version?
 
-Check:
-
-- The selected CurseForge file.
-- The launcher profile details.
-- The top section of `logs/latest.log`.
+Check the selected CurseForge file, the launcher profile details, or the top section of `logs/latest.log`.
 
 ### Should I report bugs after modifying the pack?
 
-Only after testing the same issue on a clean profile.
-
-If the issue only happens with extra mods, shaders, edited configs, or third-party launcher changes, the problem is probably in the modification.
+Only after testing the same issue on a clean profile. If it only breaks with extra mods, shaders, edited configs, or third-party launcher changes, the modification is probably the culprit.
 
 ### Can I use another launcher?
 
-Maybe.
-
-The launcher must properly support CurseForge manifests and dependency downloads. If a third-party launcher install breaks, reproduce the issue in CurseForge before reporting.
+Maybe. It must properly support CurseForge manifests and dependency downloads. If it fails, reproduce the issue in CurseForge before reporting.
 
 ### Why does server setup fail?
 
-Usually one of these:
+Usually because the server and clients do not match, the wrong Forge build is used, dependencies are missing, client-only mods are on the server, configs differ, RAM is too low, Java is wrong, or the server pack was manually assembled badly.
 
-- Client and server pack versions do not match.
-- Forge version does not match.
-- Configs do not match.
-- Client-only mods were placed on the server.
-- Server pack was manually assembled incorrectly.
-- Server RAM is too low.
-- The wrong Minecraft version was used.
-
-Read the server log. It is usually less mysterious than it looks.
+Read the server log. Minecraft is noisy, but it usually tells on itself.
 
 ---
 
@@ -605,14 +549,15 @@ Read the server log. It is usually less mysterious than it looks.
 
 Before serious play:
 
-- Installed from CurseForge.
-- Confirmed Minecraft **1.20.1** and Forge.
-- Allocated **5–8 GB** RAM.
-- Launched clean.
-- Tested a new world.
-- Audio works.
-- Backed up important worlds.
-- Matched client/server versions for multiplayer.
-- Saved logs/crash reports for useful bug reports.
+- [ ] Installed from CurseForge.
+- [ ] Minecraft **1.20.1** confirmed.
+- [ ] Forge confirmed.
+- [ ] `5–8 GB` RAM allocated.
+- [ ] Launched clean.
+- [ ] New test world works.
+- [ ] Audio works.
+- [ ] Backups made.
+- [ ] Client/server versions match for multiplayer.
+- [ ] Logs/crash reports are ready for useful bug reports.
 
 Then step into the fog. Do not trust the quiet.
