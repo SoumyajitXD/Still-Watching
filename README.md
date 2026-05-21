@@ -244,7 +244,7 @@ Before touching release-facing docs, run the local validator from the repository
 python .github/scripts/validate.py all
 ```
 
-That check exists to catch boring-but-expensive mistakes: broken layout assumptions, bad metadata, damaged sponsor markers, link rot, and release text drift. Ship dread, not sloppy Markdown shrapnel.
+That check catches boring-but-expensive mistakes early: broken local Markdown links, missing referenced files, Repository Map drift, missing required docs links, CurseForge ID mismatches, sponsor block damage, and release text drift. Ship dread, not sloppy Markdown shrapnel.
 
 ---
 

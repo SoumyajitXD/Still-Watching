@@ -5,6 +5,7 @@ import argparse
 import re
 import sys
 import zipfile
+from dataclasses import dataclass
 from collections import Counter
 from html.parser import HTMLParser
 from pathlib import Path
@@ -35,6 +36,34 @@ RELEASE_FACT_FILES = [
     ROOT / "latest-modlist.md",
 ]
 REQUIRED_FACT_FILES = {"README.md", "installation-guide.md", "curseforge-description.html"}
+
+
+REQUIRED_README_DOC_LINKS = [
+    "./installation-guide.md",
+    "./latest-modlist.md",
+    "./curseforge-description.html",
+]
+REQUIRED_REPO_MAP_PATHS = [
+    "README.md",
+    "installation-guide.md",
+    "latest-modlist.md",
+    "curseforge-description.html",
+    "Screenshots/",
+    "Releases/",
+    ".github/ISSUE_TEMPLATE/",
+    ".github/workflows/ci.yml",
+    ".github/scripts/validate.py",
+    "LICENSE",
+]
+
+
+@dataclass
+class LocalLink:
+    source: Path
+    target: str
+    line: int
+
+
 
 
 def fail(message: str) -> None:
@@ -411,8 +440,98 @@ def issue_templates() -> None:
     print("Issue templates OK")
 
 
+def _collect_local_markdown_links(path: Path, text: str) -> list[LocalLink]:
+    links: list[LocalLink] = []
+    pattern = re.compile(r"(?<!!)(?:\[[^\]\n]+\]|<[^>\n]+>)\(([^)\n]+)\)")
+    for match in pattern.finditer(text):
+        href = match.group(1).strip()
+        if not href or href.startswith(("http://", "https://", "mailto:", "#")):
+            continue
+        if href.startswith(("./", "../")) or not urlparse(href).scheme:
+            links.append(LocalLink(path, href, line_number(text, match.start(1))))
+    return links
+
+
+def markdown_links_local() -> None:
+    md_paths = sorted(ROOT.glob("*.md"))
+    errors: list[str] = []
+    for path in md_paths:
+        text = read(path)
+        for link in _collect_local_markdown_links(path, text):
+            target = link.target.split("#", 1)[0].split("?", 1)[0].strip()
+            if not target:
+                continue
+            resolved = (link.source.parent / target).resolve()
+            if not resolved.exists():
+                errors.append(f"{link.source.name}:{link.line} missing local link target {link.target}")
+    if errors:
+        fail("; ".join(errors))
+    print("Local markdown links OK")
+
+
+def readme_docs() -> None:
+    readme = ROOT / "README.md"
+    if not readme.is_file():
+        fail("README.md is missing")
+    text = read(readme)
+    errors: list[str] = []
+
+    for href in REQUIRED_README_DOC_LINKS:
+        if f"]({href})" not in text and f"`{href}`" not in text:
+            errors.append(f"README.md missing required docs link: {href}")
+
+    table_match = re.search(r"##\s+Repository Map\n\n\| Path \| Purpose \|\n\| --- \| --- \|\n([\s\S]*?)(?:\n---|\Z)", text)
+    if not table_match:
+        errors.append("README.md missing Repository Map table")
+    else:
+        rows = re.findall(r"\|\s*\[`]?([^`|]+?)[`]?\s*\]\(([^)]+)\)\s*\|", table_match.group(1))
+        listed_paths = []
+        for label, href in rows:
+            label = label.strip()
+            href = href.strip()
+            if not href.startswith("./"):
+                errors.append(f"Repository Map uses non-local link for {label}: {href}")
+                continue
+            normalized = href[2:]
+            listed_paths.append(normalized)
+            fs_path = ROOT / normalized.rstrip("/")
+            if normalized.endswith("/") and not fs_path.is_dir():
+                errors.append(f"Repository Map entry points to missing directory: {normalized}")
+            elif not normalized.endswith("/") and not fs_path.is_file():
+                errors.append(f"Repository Map entry points to missing file: {normalized}")
+
+        for required_path in REQUIRED_REPO_MAP_PATHS:
+            if required_path not in listed_paths:
+                errors.append(f"Repository Map missing required path: {required_path}")
+
+    if errors:
+        fail("; ".join(errors))
+    print("README docs and repository map OK")
+
+
+def curseforge_id_consistency() -> None:
+    pattern = re.compile(r"(?:/curseforge/(?:v|dt)/|attachments/description/|Project\s+ID[^\d]{0,20})(\d+)", re.I)
+    ids = {}
+    for path in RELEASE_FACT_FILES:
+        if not path.is_file():
+            continue
+        text = read(path)
+        matches = pattern.findall(text)
+        if matches:
+            ids[path.name] = sorted(set(matches))
+    errors = []
+    for name, found in ids.items():
+        if found != [CURSEFORGE_PROJECT_ID]:
+            errors.append(f"{name} has CurseForge IDs {found}, expected [{CURSEFORGE_PROJECT_ID}]")
+    if errors:
+        fail("; ".join(errors))
+    print(f"CurseForge project ID consistency OK ({CURSEFORGE_PROJECT_ID})")
+
+
+
+
 def all_checks() -> None:
-    for check in [layout, yaml_files, html, release_facts, issue_templates, modlist, sponsor_guard, release_zips]:
+    for check in [layout, yaml_files, html, markdown_links_local, readme_docs, curseforge_id_consistency, release_facts, issue_templates, modlist, sponsor_guard, release_zips]:
         check()
 
 
@@ -423,6 +542,9 @@ def main() -> None:
         "yaml": yaml_files,
         "html": html,
         "modlist": modlist,
+        "markdown-links": markdown_links_local,
+        "readme-docs": readme_docs,
+        "curseforge-id": curseforge_id_consistency,
         "release-zips": release_zips,
         "release-facts": release_facts,
         "project-facts": project_facts,

@@ -36,10 +36,10 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  repository-validation:
-    name: Repository validation
+  validation:
+    name: Validation
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 12
 
     steps:
       - name: Checkout repository
@@ -53,94 +53,5 @@ jobs:
       - name: Install validation dependencies
         run: python -m pip install --disable-pip-version-check --quiet PyYAML
 
-      - name: Check required repository layout
-        run: python .github/scripts/validate.py layout
-
-      - name: Validate YAML syntax
-        run: python .github/scripts/validate.py yaml
-
-      - name: Validate HTML files
-        run: python .github/scripts/validate.py html
-
-      - name: Check release facts
-        run: python .github/scripts/validate.py release-facts
-
-  issue-template-validation:
-    name: Issue template validation
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.x"
-
-      - name: Install validation dependencies
-        run: python -m pip install --disable-pip-version-check --quiet PyYAML
-
-      - name: Validate issue template config and forms
-        run: python .github/scripts/validate.py issue-templates
-
-  modlist-validation:
-    name: Modlist validation
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.x"
-
-      - name: Install validation dependencies
-        run: python -m pip install --disable-pip-version-check --quiet PyYAML
-
-      - name: Parse and validate modlist links
-        run: python .github/scripts/validate.py modlist
-
-  sponsor-guard:
-    name: Sponsor guard
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.x"
-
-      - name: Install validation dependencies
-        run: python -m pip install --disable-pip-version-check --quiet PyYAML
-
-      - name: Protect BisectHosting sponsor block
-        run: python .github/scripts/validate.py sponsor
-
-  release-zip-audit:
-    name: Release ZIP audit
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.x"
-
-      - name: Install validation dependencies
-        run: python -m pip install --disable-pip-version-check --quiet PyYAML
-
-      - name: Audit ZIP archives
-        run: python .github/scripts/validate.py release-zips
+      - name: Run all repository validation checks
+        run: python .github/scripts/validate.py all
