@@ -97,6 +97,22 @@ def numbered_markdown_links(text: str) -> list[tuple[int, str, str]]:
     return [(int(number), href.strip(), " ".join(label.split())) for number, label, href in pattern.findall(text)]
 
 
+def table_markdown_links(text: str) -> list[tuple[int, str, str]]:
+    """Return modlist table rows as (number, href, mod_name)."""
+    pattern = re.compile(
+        r"(?m)^\|\s*(\d+)\s*"
+        r"\|\s*([^|\n]+?)\s*"
+        r"\|\s*([^|\n]+?)\s*"
+        r"\|\s*(Client|Server|Both|Unknown)\s*"
+        r"\|\s*([^|\n]+?)\s*"
+        r"\|\s*\[([^\]\n]+)\]\((https?://[^\s)]+)\)\s*\|"
+    )
+    rows = []
+    for number, mod_name, _category, _side, _purpose, _label, href in pattern.findall(text):
+        rows.append((int(number), href.strip(), " ".join(mod_name.split())))
+    return rows
+
+
 def modlist() -> None:
     if not MODLIST_PATH.is_file():
         fail(f"{MODLIST_PATH.name} is missing")
@@ -104,28 +120,38 @@ def modlist() -> None:
     text = read(MODLIST_PATH)
     links = markdown_links(text)
     numbered_links = numbered_markdown_links(text)
+    table_links = table_markdown_links(text)
+    mod_entries = table_links or numbered_links
     errors = []
 
     if len(links) < 40:
         errors.append(f"expected at least 40 modlist links, found {len(links)}")
-    if len(numbered_links) != len(links):
+    if not mod_entries:
+        errors.append("expected modlist entries as numbered Markdown links or table rows")
+    elif len(mod_entries) != len(links):
         errors.append(
-            f"expected every modlist link to be in a numbered list item, "
-            f"found {len(numbered_links)} numbered links for {len(links)} links"
+            f"expected every modlist link to be a mod entry, "
+            f"found {len(mod_entries)} mod entries for {len(links)} links"
         )
 
-    expected_numbers = list(range(1, len(numbered_links) + 1))
-    actual_numbers = [number for number, _, _ in numbered_links]
+    expected_numbers = list(range(1, len(mod_entries) + 1))
+    actual_numbers = [number for number, _, _ in mod_entries]
     if actual_numbers != expected_numbers:
         errors.append(
             "modlist numbering must be continuous from 1 to "
-            f"{len(numbered_links)}; found {actual_numbers}"
+            f"{len(mod_entries)}; found {actual_numbers}"
         )
 
-    for index, (href, text) in enumerate(links, 1):
+    if table_links:
+        required_headers = ["# | Mod | Category", "Side: Client / Server / Both / Unknown", "Purpose | CurseForge link"]
+        for header in required_headers:
+            if header not in text:
+                errors.append(f"modlist table missing header fragment: {header}")
+
+    for index, (href, link_text) in enumerate(links, 1):
         parsed = urlparse(href)
         parts = [part for part in parsed.path.split("/") if part]
-        if not text:
+        if not link_text:
             errors.append(f"link #{index} has empty text: {href}")
         if parsed.scheme != "https" or parsed.netloc != "www.curseforge.com":
             errors.append(f"non-CurseForge link: {href}")
@@ -138,7 +164,7 @@ def modlist() -> None:
 
     if errors:
         fail("; ".join(errors))
-    print(f"Modlist OK: {len(links)} links")
+    print(f"Modlist OK: {len(mod_entries)} entries, {len(links)} links")
 
 
 def release_zips() -> None:
