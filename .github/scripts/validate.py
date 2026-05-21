@@ -14,6 +14,14 @@ import yaml
 
 ROOT = Path(__file__).resolve().parents[2]
 
+BISECT_SPONSOR_START = "<!-- sponsor:bisecthosting:start -->"
+BISECT_SPONSOR_END = "<!-- sponsor:bisecthosting:end -->"
+BISECT_SPONSOR_LINK = "https://url-shortener.curseforge.com/AZDOs"
+BISECT_SPONSOR_BANNER = (
+    "https://media.forgecdn.net/attachments/description/1420406/"
+    "description_0434b1be-41ee-4fa8-a2f5-177b2fe87c95.png"
+)
+
 
 def fail(message: str) -> None:
     print(f"ERROR: {message}", file=sys.stderr)
@@ -172,6 +180,42 @@ def project_facts() -> None:
     print("Project facts OK")
 
 
+def sponsor_guard() -> None:
+    path = ROOT / "README.md"
+    if not path.is_file():
+        fail("README.md is missing")
+
+    text = read(path)
+    required_items = {
+        "BisectHosting sponsor start marker": BISECT_SPONSOR_START,
+        "BisectHosting sponsor end marker": BISECT_SPONSOR_END,
+        "BisectHosting sponsor link": BISECT_SPONSOR_LINK,
+        "BisectHosting sponsor banner": BISECT_SPONSOR_BANNER,
+    }
+    missing = [label for label, needle in required_items.items() if needle not in text]
+    if missing:
+        fail("README.md missing required sponsor content: " + ", ".join(missing))
+
+    blocks = []
+    cursor = 0
+    while True:
+        left = text.find(BISECT_SPONSOR_START, cursor)
+        if left == -1:
+            break
+        right = text.find(BISECT_SPONSOR_END, left)
+        if right == -1:
+            fail("BisectHosting sponsor block start marker has no matching end marker")
+        blocks.append(text[left : right + len(BISECT_SPONSOR_END)])
+        cursor = right + len(BISECT_SPONSOR_END)
+
+    if not blocks:
+        fail("README.md must contain at least one complete BisectHosting sponsor block")
+    if not any(BISECT_SPONSOR_LINK in block and BISECT_SPONSOR_BANNER in block for block in blocks):
+        fail("No BisectHosting sponsor block contains both the required link and banner image")
+
+    print("BisectHosting sponsor guard OK")
+
+
 def issue_templates() -> None:
     template_dir = ROOT / ".github" / "ISSUE_TEMPLATE"
     if not template_dir.is_dir():
@@ -224,7 +268,7 @@ def issue_templates() -> None:
 
 
 def all_checks() -> None:
-    for check in [layout, yaml_files, html, modlist, project_facts, issue_templates, release_zips]:
+    for check in [layout, yaml_files, html, project_facts, issue_templates, modlist, sponsor_guard, release_zips]:
         check()
 
 
@@ -238,6 +282,7 @@ def main() -> None:
         "release-zips": release_zips,
         "project-facts": project_facts,
         "issue-templates": issue_templates,
+        "sponsor": sponsor_guard,
     }
     parser = argparse.ArgumentParser()
     parser.add_argument("check", choices=checks)
