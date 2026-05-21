@@ -4,10 +4,12 @@ on:
   push:
     paths:
       - ".github/ISSUE_TEMPLATE/**"
+      - ".github/scripts/validate.py"
       - ".github/workflows/issue-template-check.yml"
   pull_request:
     paths:
       - ".github/ISSUE_TEMPLATE/**"
+      - ".github/scripts/validate.py"
       - ".github/workflows/issue-template-check.yml"
   workflow_dispatch:
 
@@ -15,7 +17,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: issue-template-check-${{ github.workflow }}-${{ github.ref }}
+  group: issue-template-check-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
@@ -28,124 +30,8 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Install validation dependencies
+        run: python -m pip install --disable-pip-version-check --quiet PyYAML
+
       - name: Validate issue template config and forms
-        shell: bash
-        run: |
-          set -euo pipefail
-          ruby <<'RUBY'
-          require 'date'
-          require 'yaml'
-
-          template_dir = '.github/ISSUE_TEMPLATE'
-          abort('Missing .github/ISSUE_TEMPLATE directory') unless Dir.exist?(template_dir)
-
-          config_path = File.join(template_dir, 'config.yml')
-          failed = false
-
-          unless File.file?(config_path)
-            warn 'Missing .github/ISSUE_TEMPLATE/config.yml'
-            failed = true
-          else
-            begin
-              config = YAML.safe_load_file(config_path, permitted_classes: [Date, Time], aliases: true)
-              unless config.is_a?(Hash)
-                warn "#{config_path} must contain a YAML mapping"
-                failed = true
-              end
-              if config.is_a?(Hash) && config['blank_issues_enabled'] != false
-                warn "#{config_path} should keep blank_issues_enabled: false"
-                failed = true
-              end
-            rescue Psych::Exception => e
-              warn "YAML ERROR: #{config_path}: #{e.message}"
-              failed = true
-            end
-          end
-
-          form_paths = Dir[File.join(template_dir, '*.{yml,yaml}')].reject { |path| File.basename(path) == 'config.yml' }.sort
-          if form_paths.empty?
-            warn 'No issue form YAML files found'
-            failed = true
-          end
-
-          required_top_level = %w[name description title labels body]
-          required_field_types = %w[input textarea dropdown checkboxes]
-
-          form_paths.each do |path|
-            puts "Checking #{path}"
-            begin
-              data = YAML.safe_load_file(path, permitted_classes: [Date, Time], aliases: true)
-            rescue Psych::Exception => e
-              warn "YAML ERROR: #{path}: #{e.message}"
-              failed = true
-              next
-            end
-
-            unless data.is_a?(Hash)
-              warn "#{path} must contain a YAML mapping"
-              failed = true
-              next
-            end
-
-            required_top_level.each do |key|
-              value = data[key]
-              if value.nil? || (value.respond_to?(:empty?) && value.empty?)
-                warn "#{path} missing non-empty top-level key: #{key}"
-                failed = true
-              end
-            end
-
-            labels = data['labels']
-            unless labels.is_a?(Array) || labels.is_a?(String)
-              warn "#{path} labels must be a string or list"
-              failed = true
-            end
-
-            body = data['body']
-            unless body.is_a?(Array) && !body.empty?
-              warn "#{path} must have a non-empty body list"
-              failed = true
-              next
-            end
-
-            has_required_user_field = false
-            body.each_with_index do |item, index|
-              unless item.is_a?(Hash)
-                warn "#{path} body item #{index + 1} must be a mapping"
-                failed = true
-                next
-              end
-
-              type = item['type']
-              if type.nil? || type.to_s.strip.empty?
-                warn "#{path} body item #{index + 1} missing type"
-                failed = true
-              end
-
-              attrs = item['attributes']
-              if type != 'markdown' && !item.key?('id')
-                warn "#{path} #{type || 'unknown'} field #{index + 1} missing id"
-                failed = true
-              end
-
-              if type != 'markdown'
-                unless attrs.is_a?(Hash) && attrs['label'].to_s.strip != ''
-                  warn "#{path} #{type || 'unknown'} field #{index + 1} missing attributes.label"
-                  failed = true
-                end
-              end
-
-              validations = item['validations']
-              if required_field_types.include?(type.to_s) && validations.is_a?(Hash) && validations['required'] == true
-                has_required_user_field = true
-              end
-            end
-
-            unless has_required_user_field
-              warn "#{path} should contain at least one required user-fillable field"
-              failed = true
-            end
-          end
-
-          exit(failed ? 1 : 0)
-          RUBY
+        run: python .github/scripts/validate.py issue-templates
