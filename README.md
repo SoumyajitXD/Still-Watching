@@ -204,7 +204,7 @@ Full fixes: [`installation-guide.md`](./installation-guide.md#troubleshooting)
 | [`Screenshots/`](./Screenshots) | Screenshot assets. |
 | [`Releases/`](./Releases) | Release-side files. |
 | [`.github/ISSUE_TEMPLATE/`](./.github/ISSUE_TEMPLATE) | Issue templates. |
-| [`.github/workflows/sponsor-guard.yml`](./.github/workflows/sponsor-guard.yml) | Guardrail for required sponsor content. |
+| [`.github/workflows/ci.yml`](./.github/workflows/ci.yml) | Repository validation workflow. |
 | [`still-watching-logo.jpg`](./still-watching-logo.jpg) | Project logo. |
 | [`bisecthosting-banner.png`](./bisecthosting-banner.png) | Sponsor banner asset. |
 | [`LICENSE`](./LICENSE) | Apache License 2.0 for original repository files. |

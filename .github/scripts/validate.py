@@ -91,14 +91,36 @@ def markdown_links(text: str) -> list[tuple[str, str]]:
     return [(href.strip(), " ".join(label.split())) for label, href in pattern.findall(text)]
 
 
+def numbered_markdown_links(text: str) -> list[tuple[int, str, str]]:
+    """Return numbered Markdown links as (number, href, text), ignoring image links."""
+    pattern = re.compile(r"(?m)^(\d+)\.\s+\[([^\]\n]+)\]\((https?://[^\s)]+)\)")
+    return [(int(number), href.strip(), " ".join(label.split())) for number, label, href in pattern.findall(text)]
+
+
 def modlist() -> None:
     if not MODLIST_PATH.is_file():
         fail(f"{MODLIST_PATH.name} is missing")
 
-    links = markdown_links(read(MODLIST_PATH))
+    text = read(MODLIST_PATH)
+    links = markdown_links(text)
+    numbered_links = numbered_markdown_links(text)
     errors = []
+
     if len(links) < 40:
         errors.append(f"expected at least 40 modlist links, found {len(links)}")
+    if len(numbered_links) != len(links):
+        errors.append(
+            f"expected every modlist link to be in a numbered list item, "
+            f"found {len(numbered_links)} numbered links for {len(links)} links"
+        )
+
+    expected_numbers = list(range(1, len(numbered_links) + 1))
+    actual_numbers = [number for number, _, _ in numbered_links]
+    if actual_numbers != expected_numbers:
+        errors.append(
+            "modlist numbering must be continuous from 1 to "
+            f"{len(numbered_links)}; found {actual_numbers}"
+        )
 
     for index, (href, text) in enumerate(links, 1):
         parsed = urlparse(href)
