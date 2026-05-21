@@ -62,8 +62,8 @@ jobs:
       - name: Validate HTML files
         run: python .github/scripts/validate.py html
 
-      - name: Check project facts
-        run: python .github/scripts/validate.py project-facts
+      - name: Check release facts
+        run: python .github/scripts/validate.py release-facts
 
   issue-template-validation:
     name: Issue template validation
