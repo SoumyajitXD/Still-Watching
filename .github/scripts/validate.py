@@ -13,6 +13,7 @@ from urllib.parse import urlparse
 import yaml
 
 ROOT = Path(__file__).resolve().parents[2]
+MODLIST_PATH = ROOT / "latest-modlist.md"
 
 BISECT_SPONSOR_START = "<!-- sponsor:bisecthosting:start -->"
 BISECT_SPONSOR_END = "<!-- sponsor:bisecthosting:end -->"
@@ -38,7 +39,7 @@ def load_yaml(path: Path):
 
 
 def layout() -> None:
-    required_files = ["README.md", "installation-guide.md", "latest-modlist.html", "curseforge-description.html", "LICENSE"]
+    required_files = ["README.md", "installation-guide.md", "latest-modlist.md", "curseforge-description.html", "LICENSE"]
     required_dirs = [".github/ISSUE_TEMPLATE", ".github/workflows", "Releases", "Screenshots"]
     missing = [item for item in required_files if not (ROOT / item).is_file()]
     missing += [item for item in required_dirs if not (ROOT / item).is_dir()]
@@ -84,37 +85,21 @@ def html() -> None:
         raise SystemExit(1)
 
 
-class LinkParser(HTMLParser):
-    def __init__(self) -> None:
-        super().__init__()
-        self.links = []
-        self.current = None
-
-    def handle_starttag(self, tag, attrs):
-        if tag.lower() == "a":
-            self.current = {"href": dict(attrs).get("href", "").strip(), "text": []}
-
-    def handle_data(self, data):
-        if self.current is not None:
-            self.current["text"].append(data)
-
-    def handle_endtag(self, tag):
-        if tag.lower() == "a" and self.current is not None:
-            self.links.append((self.current["href"], " ".join("".join(self.current["text"]).split())))
-            self.current = None
+def markdown_links(text: str) -> list[tuple[str, str]]:
+    """Return regular Markdown links as (href, text), ignoring image links."""
+    pattern = re.compile(r"(?<!!)\[([^\]\n]+)\]\((https?://[^\s)]+)\)")
+    return [(href.strip(), " ".join(label.split())) for label, href in pattern.findall(text)]
 
 
 def modlist() -> None:
-    path = ROOT / "latest-modlist.html"
-    if not path.is_file():
-        fail("latest-modlist.html is missing")
-    parser = LinkParser()
-    parser.feed(read(path))
-    parser.close()
-    links = parser.links
+    if not MODLIST_PATH.is_file():
+        fail(f"{MODLIST_PATH.name} is missing")
+
+    links = markdown_links(read(MODLIST_PATH))
     errors = []
     if len(links) < 40:
         errors.append(f"expected at least 40 modlist links, found {len(links)}")
+
     for index, (href, text) in enumerate(links, 1):
         parsed = urlparse(href)
         parts = [part for part in parsed.path.split("/") if part]
@@ -124,9 +109,11 @@ def modlist() -> None:
             errors.append(f"non-CurseForge link: {href}")
         elif len(parts) < 3 or parts[0] != "minecraft" or parts[1] not in {"mc-mods", "texture-packs", "shaders", "modpacks"}:
             errors.append(f"unexpected CurseForge path: {href}")
+
     for href, count in Counter(href for href, _ in links).items():
         if count > 1:
             errors.append(f"duplicate link: {href}")
+
     if errors:
         fail("; ".join(errors))
     print(f"Modlist OK: {len(links)} links")
