@@ -1,195 +1,235 @@
 # Latest Modlist
 
 > [!WARNING]
-> This file is documentation, not a substitute for the actual CurseForge manifest.
-> Server-side status must be verified against the exact release files before making server packs.
+> This is an admin reference, not a playable manifest. Use CurseForge release files for exact mod versions and truth.
 
-This reference is for players and server admins who need a fast read on what each mod does. It does **not** invent exact mod versions. Use the CurseForge release manifest when you need the truth with teeth.
+Current documented release: **Still Watching V1.0.9**.
+Minecraft: **1.20.1** | Loader: **Forge** | Java: **17** | CurseForge Project ID: **1420406**
 
-Side legend: **Client** = client-side candidate, **Server** = server-only, **Both** = expected on both client and server, **Unknown** = do not guess; verify before building a server pack.
+## Summary
 
-## Horror Mods
-| # | Mod | Category | Side: Client / Server / Both / Unknown | Purpose | CurseForge link |
-|---:|---|---|---|---|---|
-| 1 | The Anomaly | Horror Mods | Both | Primary stalker threat; keeps the woods hostile. | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/the-anomaly) |
-| 2 | Apollyon | Horror Mods | Both | Late-game horror pressure and hostile encounters. | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/apollyon) |
-| 3 | The Mimicer | Horror Mods | Both | Mimic-style horror encounters and ambush tension. | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/the-mimicer) |
-| 4 | The Man From The Fog | Horror Mods | Both | Night stalking threat for the main horror loop. | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/the-man-from-the-fog) |
-| 5 | From The Fog | Horror Mods | Both | Herobrine-style sightings and paranoia fuel. | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/from-the-fog) |
-| 6 | The End of Herobrine | Horror Mods | Both | Herobrine encounter content and escalation. | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/endofherobrine) |
-| 7 | The Knocker | Horror Mods | Both | Audio/encounter scare layer for hostile nights. | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/the-knocker) |
-| 8 | Cave Dweller Reimagined | Horror Mods | Both | Underground predator pressure; caves stop being safe. | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/cave-dweller-reimagined) |
-| 9 | Siren Head: The Arrival | Horror Mods | Both | Large horror entity encounter content. | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/siren-head-the-arrival) |
-| 10 | GoatMan | Horror Mods | Both | Forest/ambient monster threat for roaming players. | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/goatman) |
-| 11 | The Midnight Lurker | Horror Mods | Both | Nighttime stalker pressure and jump-scare risk. | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/the-midnight-lurker) |
-| 12 | Eyes in the Darkness | Horror Mods | Both | Darkness-based scare presence and visual paranoia. | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/eyes-in-the-darkness) |
-
-## Biomes
-| # | Mod | Category | Side: Client / Server / Both / Unknown | Purpose | CurseForge link |
-|---:|---|---|---|---|---|
-| 13 | Biomes O' Plenty | Biomes | Both | Biome expansion for exploration variety. | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/biomes-o-plenty) |
-
-## Quests
-| # | Mod | Category | Side: Client / Server / Both / Unknown | Purpose | CurseForge link |
-|---:|---|---|---|---|---|
-| 14 | FTB Quests | Quests | Both | Questbook structure and progression guidance. | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/ftb-quests-forge) |
-
-## Structures
-| # | Mod | Category | Side: Client / Server / Both / Unknown | Purpose | CurseForge link |
-|---:|---|---|---|---|---|
-| 15 | Valhelsia Structures | Structures | Both | Exploration structures and world landmarks. | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/valhelsia-structures) |
-| 16 | Dungeons Enhanced | Structures | Both | Dungeon content for risk/reward exploration. | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/dungeonsenhanced) |
-| 17 | Towns and Towers | Structures | Both | Village and tower variety for overworld travel. | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/towns-and-towers) |
-| 18 | Explorify – Dungeons & Structures | Structures | Both | Extra structures without changing the pack identity. | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/explorify) |
-
-## Other World Gen
-| # | Mod | Category | Side: Client / Server / Both / Unknown | Purpose | CurseForge link |
-|---:|---|---|---|---|---|
-| 19 | Realm RPG: Fallen Adventurers | Other World Gen | Both | Adds fallen adventurer encounters/loot flavor. | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/realm-rpg-fallen-adventurers) |
-
-## Performance
-| # | Mod | Category | Side: Client / Server / Both / Unknown | Purpose | CurseForge link |
-|---:|---|---|---|---|---|
-| 20 | Embeddium | Performance | Client | Renderer performance; server packs should not need it. | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/embeddium) |
-| 21 | Embeddium Extras | Performance | Client | Extra client graphics/performance options. | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/magnesium-extras) |
-
-## Shaders
-| # | Mod | Category | Side: Client / Server / Both / Unknown | Purpose | CurseForge link |
-|---:|---|---|---|---|---|
-| 22 | Oculus | Shaders | Client | Shader support for Forge clients. | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/oculus) |
-| 23 | Euphoria Patches | Shaders | Client | Shader patch support for the client visuals stack. | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/euphoria-patches) |
-
-## Mobs
-| # | Mod | Category | Side: Client / Server / Both / Unknown | Purpose | CurseForge link |
-|---:|---|---|---|---|---|
-| 24 | Alex's Mobs | Mobs | Both | Creature variety and hostile/ambient mob content. | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/alexs-mobs) |
-
-## Camera
-| # | Mod | Category | Side: Client / Server / Both / Unknown | Purpose | CurseForge link |
-|---:|---|---|---|---|---|
-| 25 | Exposure | Camera | Both | Camera/photos system; verify exact side before trimming. | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/exposure) |
-
-## Tree Cutting
-| # | Mod | Category | Side: Client / Server / Both / Unknown | Purpose | CurseForge link |
-|---:|---|---|---|---|---|
-| 26 | HT's TreeChop | Tree Cutting | Both | Tree-chopping gameplay convenience. | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/treechop) |
-
-## Visuals
-| # | Mod | Category | Side: Client / Server / Both / Unknown | Purpose | CurseForge link |
-|---:|---|---|---|---|---|
-| 27 | EnhancedVisuals | Visuals | Client | Screen effects and damage/immersion visuals. | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/enhancedvisuals) |
-| 28 | CravenCraft's Bloody Bits | Visuals | Both | Gore/blood visual content for horror tone. | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/cravencrafts-bloody-bits) |
-| 29 | Sodium/Embeddium Dynamic Lights | Visuals | Client | Dynamic lighting for held/emissive light sources. | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/dynamiclights-reforged) |
-
-## Map
-| # | Mod | Category | Side: Client / Server / Both / Unknown | Purpose | CurseForge link |
-|---:|---|---|---|---|---|
-| 30 | JourneyMap | Map | Client | Client map/minimap; server-side use is optional/admin-driven. | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/journeymap) |
-
-## Menu
-| # | Mod | Category | Side: Client / Server / Both / Unknown | Purpose | CurseForge link |
-|---:|---|---|---|---|---|
-| 31 | FancyMenu | Menu | Client | Custom main-menu presentation and pack identity. | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/fancymenu) |
-| 32 | BisectHosting Server Integration Menu | Menu | Client | Host integration/menu entry; not gameplay-critical server logic. | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/bisecthosting-server-integration-menu-forge) |
+| Metric | Count |
+| --- | ---: |
+| Total mods | 64 |
+| Both-side count | 40 |
+| Client candidate count | 17 |
+| Unknown count | 7 |
 
 ## APIs / Cores / Libs
-| # | Mod | Category | Side: Client / Server / Both / Unknown | Purpose | CurseForge link |
-|---:|---|---|---|---|---|
-| 33 | CreativeCore | APIs / Cores / Libs | Unknown | Dependency library; verify against dependent mod files. | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/creativecore) |
-| 34 | Architectury API | APIs / Cores / Libs | Unknown | Cross-platform API dependency for other mods. | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/architectury-api) |
-| 35 | Melody | APIs / Cores / Libs | Unknown | Library dependency; keep with mods that require it. | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/melody) |
-| 36 | GeckoLib | APIs / Cores / Libs | Unknown | Animation library for entity/content mods. | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/geckolib) |
-| 37 | FTB Teams | APIs / Cores / Libs | Both | Team system support for FTB features. | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/ftb-teams-forge) |
-| 38 | FTB Library | APIs / Cores / Libs | Both | Core FTB dependency used by FTB modules. | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/ftb-library-forge) |
-| 39 | Exposure Catalog | APIs / Cores / Libs | Both | Exposure add-on/dependency content support. | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/exposure-catalog) |
-| 40 | FTB XMod Compat | APIs / Cores / Libs | Both | Compatibility bridge for FTB-related integrations. | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/ftb-xmod-compat) |
-| 41 | GlitchCore | APIs / Cores / Libs | Unknown | Library/core dependency for world/content mods. | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/glitchcore) |
-| 42 | TerraBlender | APIs / Cores / Libs | Both | Biome/worldgen compatibility layer. | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/terrablender) |
-| 43 | Entity Texture Features | APIs / Cores / Libs | Client | Client entity texture feature support. | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/entity-texture-features-fabric) |
-| 44 | Entity Model Features | APIs / Cores / Libs | Client | Client entity model feature support. | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/entity-model-features) |
-| 45 | Structure Gel API | APIs / Cores / Libs | Both | Structure-generation API dependency. | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/structure-gel-api) |
-| 46 | Citadel | APIs / Cores / Libs | Both | Library dependency for mob/content mods. | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/citadel) |
-| 47 | Konkrete | APIs / Cores / Libs | Unknown | Library dependency; verify exact required side. | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/konkrete) |
-| 48 | Cristel Lib | APIs / Cores / Libs | Unknown | Library dependency; verify with dependent mods. | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/cristel-lib) |
-| 49 | Valhelsia Core | APIs / Cores / Libs | Both | Core dependency for Valhelsia modules. | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/valhelsia-core) |
 
-## Sound
-| # | Mod | Category | Side: Client / Server / Both / Unknown | Purpose | CurseForge link |
-|---:|---|---|---|---|---|
-| 50 | Sound Physics Remastered | Sound | Client | Client sound occlusion/reverb immersion. | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/sound-physics-remastered) |
-| 51 | Presence Footsteps | Sound | Client | Client footstep audio detail and atmosphere. | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/presence-footsteps-forge) |
-| 52 | AmbientSounds 6 | Sound | Client | Client ambient soundscape and mood layer. | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/ambientsounds) |
-| 53 | Simple Voice Chat | Sound | Both | Proximity voice chat; clients and server must align. | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/simple-voice-chat) |
+| # | Mod | Side | Confidence | Purpose | CurseForge |
+| ---: | --- | --- | --- | --- | --- |
+| 1 | CreativeCore | unknown | unknown | Dependency library; verify against dependent mod files. | [Link](https://www.curseforge.com/minecraft/mc-mods/creativecore) |
+| 2 | Architectury API | unknown | unknown | Cross-platform API dependency for other mods. | [Link](https://www.curseforge.com/minecraft/mc-mods/architectury-api) |
+| 3 | Melody | unknown | unknown | Library dependency; keep with mods that require it. | [Link](https://www.curseforge.com/minecraft/mc-mods/melody) |
+| 4 | GeckoLib | unknown | unknown | Animation library for entity/content mods. | [Link](https://www.curseforge.com/minecraft/mc-mods/geckolib) |
+| 5 | FTB Teams | both | likely | Team system support for FTB features. | [Link](https://www.curseforge.com/minecraft/mc-mods/ftb-teams-forge) |
+| 6 | FTB Library | both | likely | Core FTB dependency used by FTB modules. | [Link](https://www.curseforge.com/minecraft/mc-mods/ftb-library-forge) |
+| 7 | Exposure Catalog | both | likely | Exposure add-on/dependency content support. | [Link](https://www.curseforge.com/minecraft/mc-mods/exposure-catalog) |
+| 8 | FTB XMod Compat | both | likely | Compatibility bridge for FTB-related integrations. | [Link](https://www.curseforge.com/minecraft/mc-mods/ftb-xmod-compat) |
+| 9 | GlitchCore | unknown | unknown | Library/core dependency for world/content mods. | [Link](https://www.curseforge.com/minecraft/mc-mods/glitchcore) |
+| 10 | TerraBlender | both | likely | Biome/worldgen compatibility layer. | [Link](https://www.curseforge.com/minecraft/mc-mods/terrablender) |
+| 11 | Entity Texture Features | client | likely | Client entity texture feature support. | [Link](https://www.curseforge.com/minecraft/mc-mods/entity-texture-features-fabric) |
+| 12 | Entity Model Features | client | likely | Client entity model feature support. | [Link](https://www.curseforge.com/minecraft/mc-mods/entity-model-features) |
+| 13 | Structure Gel API | both | likely | Structure-generation API dependency. | [Link](https://www.curseforge.com/minecraft/mc-mods/structure-gel-api) |
+| 14 | Citadel | both | likely | Library dependency for mob/content mods. | [Link](https://www.curseforge.com/minecraft/mc-mods/citadel) |
+| 15 | Konkrete | unknown | unknown | Library dependency; verify exact required side. | [Link](https://www.curseforge.com/minecraft/mc-mods/konkrete) |
+| 16 | Cristel Lib | unknown | unknown | Library dependency; verify with dependent mods. | [Link](https://www.curseforge.com/minecraft/mc-mods/cristel-lib) |
+| 17 | Valhelsia Core | both | likely | Core dependency for Valhelsia modules. | [Link](https://www.curseforge.com/minecraft/mc-mods/valhelsia-core) |
 
-## Zoom
-| # | Mod | Category | Side: Client / Server / Both / Unknown | Purpose | CurseForge link |
-|---:|---|---|---|---|---|
-| 54 | Just Zoom | Zoom | Client | Client zoom control. | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/just-zoom) |
+## Biomes
 
-## Weapons
-| # | Mod | Category | Side: Client / Server / Both / Unknown | Purpose | CurseForge link |
-|---:|---|---|---|---|---|
-| 55 | Timeless and Classics Zero Guns | Weapons | Both | Firearms gameplay content. | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/timeless-and-classics-zero) |
+| # | Mod | Side | Confidence | Purpose | CurseForge |
+| ---: | --- | --- | --- | --- | --- |
+| 18 | Biomes O' Plenty | both | likely | Biome expansion for exploration variety. | [Link](https://www.curseforge.com/minecraft/mc-mods/biomes-o-plenty) |
 
-## Tweaks
-| # | Mod | Category | Side: Client / Server / Both / Unknown | Purpose | CurseForge link |
-|---:|---|---|---|---|---|
-| 56 | Mouse Tweaks | Tweaks | Client | Client inventory mouse behavior improvements. | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/mouse-tweaks) |
+## Camera
 
-## Inventory Recover
-| # | Mod | Category | Side: Client / Server / Both / Unknown | Purpose | CurseForge link |
-|---:|---|---|---|---|---|
-| 57 | Corpse | Inventory Recover | Both | Death inventory recovery corpse system. | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/corpse) |
-
-## Transportation
-| # | Mod | Category | Side: Client / Server / Both / Unknown | Purpose | CurseForge link |
-|---:|---|---|---|---|---|
-| 58 | Immersive Aircraft | Transportation | Both | Aircraft/transportation gameplay content. | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/immersive-aircraft) |
-| 59 | Carry On | Transportation | Both | Pick up and move blocks/entities gameplay. | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/carry-on) |
-
-## Furniture
-| # | Mod | Category | Side: Client / Server / Both / Unknown | Purpose | CurseForge link |
-|---:|---|---|---|---|---|
-| 60 | Valhelsia Furniture | Furniture | Both | Furniture blocks and decoration content. | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/valhelsia-furniture) |
-
-## Inventory
-| # | Mod | Category | Side: Client / Server / Both / Unknown | Purpose | CurseForge link |
-|---:|---|---|---|---|---|
-| 61 | Traveler's Backpack | Inventory | Both | Wearable/portable storage gameplay content. | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/travelers-backpack) |
+| # | Mod | Side | Confidence | Purpose | CurseForge |
+| ---: | --- | --- | --- | --- | --- |
+| 19 | Exposure | both | likely | Camera/photos system; verify exact side before trimming. | [Link](https://www.curseforge.com/minecraft/mc-mods/exposure) |
 
 ## Crafting
-| # | Mod | Category | Side: Client / Server / Both / Unknown | Purpose | CurseForge link |
-|---:|---|---|---|---|---|
-| 62 | Just Enough Items | Crafting | Client | Recipe/item lookup UI; server pack usually does not need it. | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/jei) |
 
-## Security
-| # | Mod | Category | Side: Client / Server / Both / Unknown | Purpose | CurseForge link |
-|---:|---|---|---|---|---|
-| 63 | Security Craft | Security | Both | Security blocks, traps, and base-defense utility. | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/security-craft) |
+| # | Mod | Side | Confidence | Purpose | CurseForge |
+| ---: | --- | --- | --- | --- | --- |
+| 20 | Just Enough Items | client | likely | Recipe/item lookup UI; server pack usually does not need it. | [Link](https://www.curseforge.com/minecraft/mc-mods/jei) |
+
+## Furniture
+
+| # | Mod | Side | Confidence | Purpose | CurseForge |
+| ---: | --- | --- | --- | --- | --- |
+| 21 | Valhelsia Furniture | both | likely | Furniture blocks and decoration content. | [Link](https://www.curseforge.com/minecraft/mc-mods/valhelsia-furniture) |
+
+## Horror Mods
+
+| # | Mod | Side | Confidence | Purpose | CurseForge |
+| ---: | --- | --- | --- | --- | --- |
+| 22 | The Anomaly | both | likely | Primary stalker threat; keeps the woods hostile. | [Link](https://www.curseforge.com/minecraft/mc-mods/the-anomaly) |
+| 23 | Apollyon | both | likely | Late-game horror pressure and hostile encounters. | [Link](https://www.curseforge.com/minecraft/mc-mods/apollyon) |
+| 24 | The Mimicer | both | likely | Mimic-style horror encounters and ambush tension. | [Link](https://www.curseforge.com/minecraft/mc-mods/the-mimicer) |
+| 25 | The Man From The Fog | both | likely | Night stalking threat for the main horror loop. | [Link](https://www.curseforge.com/minecraft/mc-mods/the-man-from-the-fog) |
+| 26 | From The Fog | both | likely | Herobrine-style sightings and paranoia fuel. | [Link](https://www.curseforge.com/minecraft/mc-mods/from-the-fog) |
+| 27 | The End of Herobrine | both | likely | Herobrine encounter content and escalation. | [Link](https://www.curseforge.com/minecraft/mc-mods/endofherobrine) |
+| 28 | The Knocker | both | likely | Audio/encounter scare layer for hostile nights. | [Link](https://www.curseforge.com/minecraft/mc-mods/the-knocker) |
+| 29 | Cave Dweller Reimagined | both | likely | Underground predator pressure; caves stop being safe. | [Link](https://www.curseforge.com/minecraft/mc-mods/cave-dweller-reimagined) |
+| 30 | Siren Head: The Arrival | both | likely | Large horror entity encounter content. | [Link](https://www.curseforge.com/minecraft/mc-mods/siren-head-the-arrival) |
+| 31 | GoatMan | both | likely | Forest/ambient monster threat for roaming players. | [Link](https://www.curseforge.com/minecraft/mc-mods/goatman) |
+| 32 | The Midnight Lurker | both | likely | Nighttime stalker pressure and jump-scare risk. | [Link](https://www.curseforge.com/minecraft/mc-mods/the-midnight-lurker) |
+| 33 | Eyes in the Darkness | both | likely | Darkness-based scare presence and visual paranoia. | [Link](https://www.curseforge.com/minecraft/mc-mods/eyes-in-the-darkness) |
+
+## Inventory
+
+| # | Mod | Side | Confidence | Purpose | CurseForge |
+| ---: | --- | --- | --- | --- | --- |
+| 34 | Traveler's Backpack | both | likely | Wearable/portable storage gameplay content. | [Link](https://www.curseforge.com/minecraft/mc-mods/travelers-backpack) |
+
+## Inventory Recover
+
+| # | Mod | Side | Confidence | Purpose | CurseForge |
+| ---: | --- | --- | --- | --- | --- |
+| 35 | Corpse | both | likely | Death inventory recovery corpse system. | [Link](https://www.curseforge.com/minecraft/mc-mods/corpse) |
+
+## Map
+
+| # | Mod | Side | Confidence | Purpose | CurseForge |
+| ---: | --- | --- | --- | --- | --- |
+| 36 | JourneyMap | client | likely | Client map/minimap; server-side use is optional/admin-driven. | [Link](https://www.curseforge.com/minecraft/mc-mods/journeymap) |
+
+## Menu
+
+| # | Mod | Side | Confidence | Purpose | CurseForge |
+| ---: | --- | --- | --- | --- | --- |
+| 37 | FancyMenu | client | likely | Custom main-menu presentation and pack identity. | [Link](https://www.curseforge.com/minecraft/mc-mods/fancymenu) |
+| 38 | BisectHosting Server Integration Menu | client | likely | Host integration/menu entry; not gameplay-critical server logic. | [Link](https://www.curseforge.com/minecraft/mc-mods/bisecthosting-server-integration-menu-forge) |
+
+## Mobs
+
+| # | Mod | Side | Confidence | Purpose | CurseForge |
+| ---: | --- | --- | --- | --- | --- |
+| 39 | Alex's Mobs | both | likely | Creature variety and hostile/ambient mob content. | [Link](https://www.curseforge.com/minecraft/mc-mods/alexs-mobs) |
 
 ## Other
-| # | Mod | Category | Side: Client / Server / Both / Unknown | Purpose | CurseForge link |
-|---:|---|---|---|---|---|
-| 64 | Nyf's Spiders | Other | Both | Spider behavior/model horror upgrade. | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/nyfs-spiders) |
 
-## Client-side candidates to verify before server use
+| # | Mod | Side | Confidence | Purpose | CurseForge |
+| ---: | --- | --- | --- | --- | --- |
+| 40 | Nyf's Spiders | both | likely | Spider behavior/model horror upgrade. | [Link](https://www.curseforge.com/minecraft/mc-mods/nyfs-spiders) |
 
-These are the obvious first suspects when cutting a dedicated server pack. Verify against the exact release files before deleting anything; dependencies love hiding knives in the dark.
+## Other World Gen
 
-- Embeddium
-- Embeddium Extras
-- Oculus
-- Euphoria Patches
-- EnhancedVisuals
-- Sodium/Embeddium Dynamic Lights
-- JourneyMap
-- FancyMenu
-- BisectHosting Server Integration Menu
-- Entity Texture Features
-- Entity Model Features
-- Sound Physics Remastered
-- Presence Footsteps
-- AmbientSounds 6
-- Just Zoom
-- Mouse Tweaks
-- Just Enough Items
+| # | Mod | Side | Confidence | Purpose | CurseForge |
+| ---: | --- | --- | --- | --- | --- |
+| 41 | Realm RPG: Fallen Adventurers | both | likely | Adds fallen adventurer encounters/loot flavor. | [Link](https://www.curseforge.com/minecraft/mc-mods/realm-rpg-fallen-adventurers) |
+
+## Performance
+
+| # | Mod | Side | Confidence | Purpose | CurseForge |
+| ---: | --- | --- | --- | --- | --- |
+| 42 | Embeddium | client | likely | Renderer performance; server packs should not need it. | [Link](https://www.curseforge.com/minecraft/mc-mods/embeddium) |
+| 43 | Embeddium Extras | client | likely | Extra client graphics/performance options. | [Link](https://www.curseforge.com/minecraft/mc-mods/magnesium-extras) |
+
+## Quests
+
+| # | Mod | Side | Confidence | Purpose | CurseForge |
+| ---: | --- | --- | --- | --- | --- |
+| 44 | FTB Quests | both | likely | Questbook structure and progression guidance. | [Link](https://www.curseforge.com/minecraft/mc-mods/ftb-quests-forge) |
+
+## Security
+
+| # | Mod | Side | Confidence | Purpose | CurseForge |
+| ---: | --- | --- | --- | --- | --- |
+| 45 | Security Craft | both | likely | Security blocks, traps, and base-defense utility. | [Link](https://www.curseforge.com/minecraft/mc-mods/security-craft) |
+
+## Shaders
+
+| # | Mod | Side | Confidence | Purpose | CurseForge |
+| ---: | --- | --- | --- | --- | --- |
+| 46 | Oculus | client | likely | Shader support for Forge clients. | [Link](https://www.curseforge.com/minecraft/mc-mods/oculus) |
+| 47 | Euphoria Patches | client | likely | Shader patch support for the client visuals stack. | [Link](https://www.curseforge.com/minecraft/mc-mods/euphoria-patches) |
+
+## Sound
+
+| # | Mod | Side | Confidence | Purpose | CurseForge |
+| ---: | --- | --- | --- | --- | --- |
+| 48 | Sound Physics Remastered | client | likely | Client sound occlusion/reverb immersion. | [Link](https://www.curseforge.com/minecraft/mc-mods/sound-physics-remastered) |
+| 49 | Presence Footsteps | client | likely | Client footstep audio detail and atmosphere. | [Link](https://www.curseforge.com/minecraft/mc-mods/presence-footsteps-forge) |
+| 50 | AmbientSounds 6 | client | likely | Client ambient soundscape and mood layer. | [Link](https://www.curseforge.com/minecraft/mc-mods/ambientsounds) |
+| 51 | Simple Voice Chat | both | likely | Proximity voice chat; clients and server must align. | [Link](https://www.curseforge.com/minecraft/mc-mods/simple-voice-chat) |
+
+## Structures
+
+| # | Mod | Side | Confidence | Purpose | CurseForge |
+| ---: | --- | --- | --- | --- | --- |
+| 52 | Valhelsia Structures | both | likely | Exploration structures and world landmarks. | [Link](https://www.curseforge.com/minecraft/mc-mods/valhelsia-structures) |
+| 53 | Dungeons Enhanced | both | likely | Dungeon content for risk/reward exploration. | [Link](https://www.curseforge.com/minecraft/mc-mods/dungeonsenhanced) |
+| 54 | Towns and Towers | both | likely | Village and tower variety for overworld travel. | [Link](https://www.curseforge.com/minecraft/mc-mods/towns-and-towers) |
+| 55 | Explorify – Dungeons & Structures | both | likely | Extra structures without changing the pack identity. | [Link](https://www.curseforge.com/minecraft/mc-mods/explorify) |
+
+## Transportation
+
+| # | Mod | Side | Confidence | Purpose | CurseForge |
+| ---: | --- | --- | --- | --- | --- |
+| 56 | Immersive Aircraft | both | likely | Aircraft/transportation gameplay content. | [Link](https://www.curseforge.com/minecraft/mc-mods/immersive-aircraft) |
+| 57 | Carry On | both | likely | Pick up and move blocks/entities gameplay. | [Link](https://www.curseforge.com/minecraft/mc-mods/carry-on) |
+
+## Tree Cutting
+
+| # | Mod | Side | Confidence | Purpose | CurseForge |
+| ---: | --- | --- | --- | --- | --- |
+| 58 | HT's TreeChop | both | likely | Tree-chopping gameplay convenience. | [Link](https://www.curseforge.com/minecraft/mc-mods/treechop) |
+
+## Tweaks
+
+| # | Mod | Side | Confidence | Purpose | CurseForge |
+| ---: | --- | --- | --- | --- | --- |
+| 59 | Mouse Tweaks | client | likely | Client inventory mouse behavior improvements. | [Link](https://www.curseforge.com/minecraft/mc-mods/mouse-tweaks) |
+
+## Visuals
+
+| # | Mod | Side | Confidence | Purpose | CurseForge |
+| ---: | --- | --- | --- | --- | --- |
+| 60 | EnhancedVisuals | client | likely | Screen effects and damage/immersion visuals. | [Link](https://www.curseforge.com/minecraft/mc-mods/enhancedvisuals) |
+| 61 | CravenCraft's Bloody Bits | both | likely | Gore/blood visual content for horror tone. | [Link](https://www.curseforge.com/minecraft/mc-mods/cravencrafts-bloody-bits) |
+| 62 | Sodium/Embeddium Dynamic Lights | client | likely | Dynamic lighting for held/emissive light sources. | [Link](https://www.curseforge.com/minecraft/mc-mods/dynamiclights-reforged) |
+
+## Weapons
+
+| # | Mod | Side | Confidence | Purpose | CurseForge |
+| ---: | --- | --- | --- | --- | --- |
+| 63 | Timeless and Classics Zero Guns | both | likely | Firearms gameplay content. | [Link](https://www.curseforge.com/minecraft/mc-mods/timeless-and-classics-zero) |
+
+## Zoom
+
+| # | Mod | Side | Confidence | Purpose | CurseForge |
+| ---: | --- | --- | --- | --- | --- |
+| 64 | Just Zoom | client | likely | Client zoom control. | [Link](https://www.curseforge.com/minecraft/mc-mods/just-zoom) |
+
+## Server pack trimming candidates
+
+1. **Embeddium** — Likely client-side only on dedicated server; verify before removal.
+2. **Embeddium Extras** — Likely client-side only on dedicated server; verify before removal.
+3. **Oculus** — Likely client-side only on dedicated server; verify before removal.
+4. **Euphoria Patches** — Likely client-side only on dedicated server; verify before removal.
+5. **EnhancedVisuals** — Likely client-side only on dedicated server; verify before removal.
+6. **Sodium/Embeddium Dynamic Lights** — Likely client-side only on dedicated server; verify before removal.
+7. **JourneyMap** — Likely client-side only on dedicated server; verify before removal.
+8. **FancyMenu** — Likely client-side only on dedicated server; verify before removal.
+9. **BisectHosting Server Integration Menu** — Likely client-side only on dedicated server; verify before removal.
+10. **Entity Texture Features** — Likely client-side only on dedicated server; verify before removal.
+11. **Entity Model Features** — Likely client-side only on dedicated server; verify before removal.
+12. **Sound Physics Remastered** — Likely client-side only on dedicated server; verify before removal.
+13. **Presence Footsteps** — Likely client-side only on dedicated server; verify before removal.
+14. **AmbientSounds 6** — Likely client-side only on dedicated server; verify before removal.
+15. **Just Zoom** — Likely client-side only on dedicated server; verify before removal.
+16. **Mouse Tweaks** — Likely client-side only on dedicated server; verify before removal.
+17. **Just Enough Items** — Likely client-side only on dedicated server; verify before removal.
+
+## Needs verification
+
+1. **CreativeCore** — Side not proven in repository sources.
+2. **Architectury API** — Side not proven in repository sources.
+3. **Melody** — Side not proven in repository sources.
+4. **GeckoLib** — Side not proven in repository sources.
+5. **GlitchCore** — Side not proven in repository sources.
+6. **Konkrete** — Side not proven in repository sources.
+7. **Cristel Lib** — Side not proven in repository sources.
