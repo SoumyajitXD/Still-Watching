@@ -7,8 +7,27 @@ Use this when you run multiplayer. If server/client files drift, the fog is not 
 2. **Official server pack path:** download matching file from CurseForge files page if provided.
 3. **Manual Forge server path:** only if no official server pack; build from exact release artifacts.
 
-## Client-only candidates
-Use `latest-modlist.md` section **Server pack trimming candidates** as likely removals. Verify before deleting.
+## Source of truth
+
+Use this order when resolving mod-side or server-pack questions:
+
+1. Current CurseForge release files / manifest for **Still Watching V1.0.9**.
+2. Actual pack files in this repository under `Releases/`, if present and relevant.
+3. Official CurseForge pages for each mod.
+4. Known dedicated-server testing results.
+5. If none of that proves it, treat the side as `unknown` and the server action as `verify`.
+
+Do not use this repository's generated mod list as proof of itself. That is circular logic wearing a fake mustache.
+
+## Server-pack actions
+
+- `keep` means the mod is needed server-side or shared by gameplay/worldgen/content.
+- `remove` means it is safely client-only for a dedicated server.
+- `verify` means the exact release file or server log still needs to prove the decision.
+
+## Client-only removals
+
+Use `latest-modlist.md` section **Server pack trimming candidates** as the working list, but only remove entries whose reason says they are dedicated-server safe. Anything marked `verify` is not free loot; test it first.
 
 ## Unknown-side warning
 Mods marked unknown/verify are not safe assumptions. Test with logs before production.
