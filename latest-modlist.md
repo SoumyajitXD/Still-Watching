@@ -194,38 +194,3 @@ Minecraft: **1.20.1** | Loader: **Forge** | Java: **17** | CurseForge Project ID
 | # | Mod | Purpose | CurseForge |
 | ---: | --- | --- | --- |
 | 64 | Just Zoom | Client zoom control. | [Link](https://www.curseforge.com/minecraft/mc-mods/just-zoom) |
-
-## Server pack trimming candidates
-
-1. **Embeddium** — Remove from server pack as a client renderer optimization; verify exact release if strict proof is required.
-2. **[Embeddium] Extra Mod Integrations** — Likely client-side, but exact release behavior was not proven.
-3. **Oculus** — Remove from server pack as shader/rendering support; verify exact release if strict proof is required.
-4. **Euphoria Patches** — Remove from server pack as shader patching; verify exact release if strict proof is required.
-5. **EnhancedVisuals** — Remove from server pack as client screen effects; verify exact release if strict proof is required.
-6. **Sodium/Embeddium Dynamic Lights** — Likely client lighting, but exact release behavior was not proven.
-7. **JourneyMap** — Client map tool, but optional server components can exist.
-8. **FancyMenu** — Remove from server pack as menu customization; verify exact release if strict proof is required.
-9. **BisectHosting Server Integration Menu [FORGE]** — Remove from server pack as client menu integration; verify exact release if strict proof is required.
-10. **[ETF] Entity Texture Features - [Fabric & Forge]** — Remove from server pack as client entity texture features; verify exact release if strict proof is required.
-11. **[EMF] Entity Model Features [Fabric & Forge]** — Remove from server pack as client entity model features; verify exact release if strict proof is required.
-12. **Sound Physics Remastered** — Remove from server pack as client sound simulation; verify exact release if strict proof is required.
-13. **Presence Footsteps** — Remove from server pack as client footstep audio; verify exact release if strict proof is required.
-14. **AmbientSounds 6** — Remove from server pack as client ambient audio; verify exact release if strict proof is required.
-15. **Just Zoom** — Remove from server pack as client zoom control; verify exact release if strict proof is required.
-16. **Mouse Tweaks** — Remove from server pack as client inventory controls; verify exact release if strict proof is required.
-17. **Just Enough Items** — Client UI tool, but exact release behavior was not proven.
-
-## Needs verification
-
-1. **[Embeddium] Extra Mod Integrations** — Likely client-side, but exact release behavior was not proven.
-2. **CravenCraft's Bloody Bits** — Not proven safely removable; keep unless testing proves otherwise.
-3. **Sodium/Embeddium Dynamic Lights** — Likely client lighting, but exact release behavior was not proven.
-4. **JourneyMap** — Client map tool, but optional server components can exist.
-5. **CreativeCore** — Library side not proven; do not remove blindly.
-6. **Architectury API** — Library side not proven; do not remove blindly.
-7. **Melody** — Library side not proven; do not remove blindly.
-8. **GeckoLib** — Library side not proven; do not remove blindly.
-9. **GlitchCore** — Library side not proven; do not remove blindly.
-10. **Konkrete** — Library side not proven; do not remove blindly.
-11. **Cristel Lib** — Library side not proven; do not remove blindly.
-12. **Just Enough Items** — Client UI tool, but exact release behavior was not proven.
