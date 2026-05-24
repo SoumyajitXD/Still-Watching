@@ -1,43 +1,96 @@
 # Release Checklist
 
-## Pre-release checks
-- Confirm `data/project.yml` reflects reality.
-- Run `python .github/scripts/generate_docs.py`.
-- Run `python .github/scripts/validate.py all`.
+Use this before publishing or touching release-facing docs. The goal is simple: ship dread, not contradictions.
 
-## CurseForge file checks
+Current documented baseline:
+
+| Item | Value |
+| --- | --- |
+| Release | Still Watching V1.0.9 |
+| Minecraft | `1.20.1` |
+| Loader | Forge |
+| Java | Java 17 where required |
+| Official install source | CurseForge |
+| CurseForge Project ID | `1420406` |
+
+## Pre-Release Checks
+
+- Confirm `data/project.yml` reflects the actual release facts.
+- Confirm CurseForge remains the official playable install source.
+- Confirm the GitHub ZIP is never described as a playable installer.
+- Run docs generation only when source data changed:
+
+```bash
+python .github/scripts/generate_docs.py
+```
+
+- Run validation:
+
+```bash
+python .github/scripts/validate.py all
+```
+
+- Run whitespace checks:
+
+```bash
+git diff --check
+```
+
+## CurseForge File Checks
+
 - Upload only tested build files.
-- Verify project ID `1420406`, Minecraft `1.20.1`, Forge, Java 17 guidance.
-- Confirm file changelog matches GitHub `CHANGELOG.md`.
+- Verify project ID `1420406`.
+- Verify Minecraft `1.20.1`.
+- Verify Forge loader.
+- Keep Java 17 guidance where relevant.
+- Confirm the CurseForge file changelog does not conflict with GitHub `CHANGELOG.md`.
+- Do not promise a server pack unless the selected CurseForge file actually provides one.
 
-## Version bump checklist
+## Version Bump Checklist
+
 - Update `current_release` in `data/project.yml`.
-- Update README/installation/CurseForge description references.
-- Add changelog entry.
+- Update README, installation guide, CurseForge description source, support/security docs, and changelog references.
+- Add a changelog entry.
+- Regenerate generated docs if source metadata changed.
+- Validate before commit.
 
-## Modlist update checklist
-- Update `data/mods.yml` from release source files.
+## Modlist Update Checklist
+
+- Update `data/mods.yml` from release source files, not memory.
+- Keep `unknown` or `verify` side labels where proof is missing.
 - Regenerate `latest-modlist.md`.
-- Keep unknown side labels where proof is missing.
+- Do not convert client-only guesses into server-pack facts.
 
-## Server pack verification checklist
-- Check hosted installer path first.
-- If official server pack exists, test it clean.
-- Verify client-only trims and unknown-side mods before production.
+## Server Pack Verification Checklist
 
-## Screenshot/gallery checklist
-- Ensure screenshots reflect current release tone and content.
+- Check hosted CurseForge installer path first.
+- If an official server pack exists, test it clean with the matching client version.
+- Verify client-only trims against the exact release files or logs.
+- Leave uncertain mods as `verify` until tested.
+- Back up worlds before production updates.
+
+## Screenshot and Gallery Checklist
+
+- Ensure screenshots reflect the current release tone and content.
 - Remove misleading outdated UI/version captures.
+- Do not imply features, shaders, or settings that are not part of the documented release.
 
-## Sponsor-content checklist
+## Sponsor Content Checklist
+
 - Keep sponsor marker block unchanged.
-- Keep required sponsor link/banner intact.
+- Keep required sponsor link and banner intact.
+- Do not move sponsor content into a place where it gets lost, hidden, or stripped by tooling.
 
-## Post-release checks
-- Verify CurseForge file page is live.
+## Post-Release Checks
+
+- Verify the CurseForge file page is live.
 - Verify README quick links.
-- Open one smoke-test issue template.
+- Open one issue template smoke test.
+- Check that docs still agree on release, Minecraft, Forge, Java, CurseForge source, and Project ID.
 
-## If GitHub docs and CurseForge disagree
-- CurseForge is source of truth for playable release.
-- Fix GitHub docs immediately and note mismatch in changelog/issue.
+## If GitHub Docs and CurseForge Disagree
+
+- CurseForge is the source of truth for playable release files.
+- Fix GitHub docs immediately.
+- Note the mismatch in changelog or an issue when useful.
+- Do not patch the mismatch with fake certainty. That is how documentation becomes fan fiction.
