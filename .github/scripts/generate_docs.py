@@ -129,7 +129,7 @@ def main() -> None:
         mod
         for mod in mods
         if mod["side"] == "unknown"
-        or mod["side_confidence"] == "unknown"
+        or mod["side_confidence"] in {"unknown", "needs verification"}
         or mod["server_pack_action"] == "verify"
     ]
     for index, mod in enumerate(verification_candidates, 1):
