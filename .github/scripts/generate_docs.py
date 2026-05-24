@@ -1,42 +1,142 @@
 #!/usr/bin/env python3
+from __future__ import annotations
+
 from pathlib import Path
-ROOT=Path(__file__).resolve().parents[2]
 
-def parse_project():
- d={};s={}
- for l in (ROOT/'data/project.yml').read_text().splitlines():
-  if not l.strip() or l.lstrip().startswith('#'): continue
-  if l.startswith('  '):
-   if ':' in l: k,v=l.strip().split(':',1); s[k]=v.strip().strip('"')
-  elif ':' in l:
-   k,v=l.split(':',1); d[k.strip()]=v.strip().strip('"')
- d['sponsor']=s; return d
+import yaml
 
-def parse_mods():
- mods=[];cur={}
- for l in (ROOT/'data/mods.yml').read_text().splitlines():
-  if l.startswith('  - '):
-   if cur: mods.append(cur)
-   cur={};k,v=l[4:].split(':',1);cur[k.strip()]=v.strip().strip('"')
-  elif l.startswith('    ') and ':' in l:
-   k,v=l.strip().split(':',1); cur[k.strip()]=v.strip().strip('"')
- if cur: mods.append(cur)
- return mods
+ROOT = Path(__file__).resolve().parents[2]
+REQUIRED_MOD_FIELDS = [
+    "name",
+    "category",
+    "side",
+    "side_confidence",
+    "purpose",
+    "curseforge_url",
+    "notes",
+    "server_pack_action",
+    "reason",
+]
+ALLOWED_SIDES = {"client", "server", "both", "unknown"}
+ALLOWED_SERVER_PACK_ACTIONS = {"keep", "remove", "verify", "unknown"}
 
-p=parse_project();mods=parse_mods()
-total=len(mods);both=sum(m['side']=='both' for m in mods);client=sum(m['side']=='client' for m in mods);unknown=sum(m['side']=='unknown' for m in mods)
-out=['# Latest Modlist','', '> [!WARNING]','> This is an admin reference, not a playable manifest. Use CurseForge release files for exact mod versions and truth.','',f"Current documented release: **{p['current_release']}**.",f"Minecraft: **{p['minecraft_version']}** | Loader: **{p['loader']}** | Java: **{p['java_version']}** | CurseForge Project ID: **{p['curseforge_project_id']}**",'', '## Summary','','| Metric | Count |','| --- | ---: |',f'| Total mods | {total} |',f'| Both-side count | {both} |',f'| Client candidate count | {client} |',f'| Unknown count | {unknown} |','']
-cats={}
-for m in mods: cats.setdefault(m['category'],[]).append(m)
-n=1
-for cat in sorted(cats):
- out+=[f'## {cat}','','| # | Mod | Side | Confidence | Purpose | CurseForge |','| ---: | --- | --- | --- | --- | --- |']
- for m in cats[cat]:
-  out.append(f"| {n} | {m['name']} | {m['side']} | {m['side_confidence']} | {m['purpose']} | [Link]({m['curseforge_url']}) |")
-  n+=1
- out.append('')
-out+=['## Server pack trimming candidates','']
-for i,m in enumerate([x for x in mods if x['side']=='client' or x['server_pack_action']=='remove'],1): out.append(f"{i}. **{m['name']}** — {m['reason']}")
-out+=['','## Needs verification','']
-for i,m in enumerate([x for x in mods if x['side']=='unknown' or x['side_confidence']=='unknown' or x['server_pack_action']=='verify'],1): out.append(f"{i}. **{m['name']}** — {m['reason']}")
-(ROOT/'latest-modlist.md').write_text('\n'.join(out)+'\n')
+
+def fail(message: str) -> None:
+    raise SystemExit(f"ERROR: {message}")
+
+
+def load_yaml(path: Path):
+    with path.open(encoding="utf-8-sig") as handle:
+        return yaml.safe_load(handle)
+
+
+def parse_project() -> dict:
+    data = load_yaml(ROOT / "data/project.yml")
+    if not isinstance(data, dict):
+        fail("data/project.yml must be a mapping")
+    return data
+
+
+def parse_mods() -> list[dict]:
+    data = load_yaml(ROOT / "data/mods.yml")
+    mods = data.get("mods") if isinstance(data, dict) else None
+    if not isinstance(mods, list) or not mods:
+        fail("data/mods.yml must contain a non-empty mods list")
+
+    errors: list[str] = []
+    for index, mod in enumerate(mods, 1):
+        if not isinstance(mod, dict):
+            errors.append(f"mod #{index} must be a mapping")
+            continue
+
+        name = str(mod.get("name") or f"#{index}")
+        for field in REQUIRED_MOD_FIELDS:
+            if field not in mod or mod[field] in (None, ""):
+                errors.append(f"mod {name!r} missing {field}")
+
+        side = mod.get("side")
+        if side not in ALLOWED_SIDES:
+            errors.append(f"mod {name!r} invalid side {side!r}")
+
+        action = mod.get("server_pack_action")
+        if action not in ALLOWED_SERVER_PACK_ACTIONS:
+            errors.append(f"mod {name!r} invalid server_pack_action {action!r}")
+
+    if errors:
+        fail("; ".join(errors))
+    return mods
+
+
+def main() -> None:
+    project = parse_project()
+    mods = parse_mods()
+
+    total = len(mods)
+    both = sum(mod["side"] == "both" for mod in mods)
+    client = sum(mod["side"] == "client" for mod in mods)
+    unknown = sum(mod["side"] == "unknown" for mod in mods)
+
+    out = [
+        "# Latest Modlist",
+        "",
+        "> [!WARNING]",
+        "> This is an admin reference, not a playable manifest. Use CurseForge release files for exact mod versions and truth.",
+        "",
+        f"Current documented release: **{project['current_release']}**.",
+        f"Minecraft: **{project['minecraft_version']}** | Loader: **{project['loader']}** | Java: **{project['java_version']}** | CurseForge Project ID: **{project['curseforge_project_id']}**",
+        "",
+        "## Summary",
+        "",
+        "| Metric | Count |",
+        "| --- | ---: |",
+        f"| Total mods | {total} |",
+        f"| Both-side count | {both} |",
+        f"| Client candidate count | {client} |",
+        f"| Unknown count | {unknown} |",
+        "",
+    ]
+
+    # Deterministic category order, while preserving the existing source order
+    # within each category so the generated modlist does not churn needlessly.
+    categories: dict[str, list[dict]] = {}
+    for mod in mods:
+        categories.setdefault(mod["category"], []).append(mod)
+
+    row_number = 1
+    for category in sorted(categories):
+        out += [
+            f"## {category}",
+            "",
+            "| # | Mod | Side | Confidence | Purpose | CurseForge |",
+            "| ---: | --- | --- | --- | --- | --- |",
+        ]
+        for mod in categories[category]:
+            out.append(
+                f"| {row_number} | {mod['name']} | {mod['side']} | {mod['side_confidence']} | {mod['purpose']} | [Link]({mod['curseforge_url']}) |"
+            )
+            row_number += 1
+        out.append("")
+
+    out += ["## Server pack trimming candidates", ""]
+    trimming_candidates = [
+        mod for mod in mods if mod["side"] == "client" or mod["server_pack_action"] == "remove"
+    ]
+    for index, mod in enumerate(trimming_candidates, 1):
+        out.append(f"{index}. **{mod['name']}** — {mod['reason']}")
+
+    out += ["", "## Needs verification", ""]
+    verification_candidates = [
+        mod
+        for mod in mods
+        if mod["side"] == "unknown"
+        or mod["side_confidence"] == "unknown"
+        or mod["server_pack_action"] == "verify"
+    ]
+    for index, mod in enumerate(verification_candidates, 1):
+        out.append(f"{index}. **{mod['name']}** — {mod['reason']}")
+
+    (ROOT / "latest-modlist.md").write_text("\n".join(out) + "\n", encoding="utf-8")
+
+
+if __name__ == "__main__":
+    main()
