@@ -23,7 +23,7 @@
 - [Dungeons Enhanced (by Valarauko9)](https://www.curseforge.com/minecraft/mc-mods/dungeonsenhanced)
 - [The Anomaly (by clorobored)](https://www.curseforge.com/minecraft/mc-mods/the-anomaly)
 - [Valhelsia Core (by ValhelsiaTeam)](https://www.curseforge.com/minecraft/mc-mods/valhelsia-core)
-- [\[TaCZ\] Timeless and Classics Zero Guns (by nekocrane)](https://www.curseforge.com/minecraft/shaders/hysteria-shaders)
+- [\[TaCZ\] Timeless and Classics Zero Guns (by nekocrane)](https://www.curseforge.com/minecraft/mc-mods/timeless-and-classics-zero)
 - [👻 Hysteria Shaders (by ElocinDev)](https://www.curseforge.com/minecraft/shaders/hysteria-shaders)
 - [Simple Voice Chat (by henkelmax)](https://www.curseforge.com/minecraft/mc-mods/simple-voice-chat)
 - [Towns and Towers (by Biban_Auriu)](https://www.curseforge.com/minecraft/mc-mods/towns-and-towers)
