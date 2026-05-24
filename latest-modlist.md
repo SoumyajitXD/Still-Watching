@@ -1,4 +1,4 @@
-# Latest Modlist
+# Modlist
 
 **Version:** V1.0.9 (latest)
 
