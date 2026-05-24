@@ -19,8 +19,8 @@ Current documented release: **Still Watching V1.0.9**.
 | 8 | FTB XMod Compat | FTB compatibility bridge. | [Link](https://www.curseforge.com/minecraft/mc-mods/ftb-xmod-compat) |
 | 9 | GlitchCore | Library/core dependency. | [Link](https://www.curseforge.com/minecraft/mc-mods/glitchcore) |
 | 10 | TerraBlender | Biome/worldgen compatibility. | [Link](https://www.curseforge.com/minecraft/mc-mods/terrablender) |
-| 11 | [ETF] Entity Texture Features - [Fabric & Forge] | Client entity texture features. | [Link](https://www.curseforge.com/minecraft/mc-mods/entity-texture-features-fabric) |
-| 12 | [EMF] Entity Model Features [Fabric & Forge] | Client entity model features. | [Link](https://www.curseforge.com/minecraft/mc-mods/entity-model-features) |
+| 11 | Entity Texture Features | Client entity texture features. | [Link](https://www.curseforge.com/minecraft/mc-mods/entity-texture-features-fabric) |
+| 12 | Entity Model Features | Client entity model features. | [Link](https://www.curseforge.com/minecraft/mc-mods/entity-model-features) |
 | 13 | Structure Gel API | Structure-generation API. | [Link](https://www.curseforge.com/minecraft/mc-mods/structure-gel-api) |
 | 14 | Citadel | Mob/content dependency library. | [Link](https://www.curseforge.com/minecraft/mc-mods/citadel) |
 | 15 | Konkrete | Dependency library. | [Link](https://www.curseforge.com/minecraft/mc-mods/konkrete) |
@@ -91,7 +91,7 @@ Current documented release: **Still Watching V1.0.9**.
 | # | Mod | Purpose | CurseForge |
 | ---: | --- | --- | --- |
 | 37 | FancyMenu | Main menu customization. | [Link](https://www.curseforge.com/minecraft/mc-mods/fancymenu) |
-| 38 | BisectHosting Server Integration Menu [FORGE] | Hosting menu integration. | [Link](https://www.curseforge.com/minecraft/mc-mods/bisecthosting-server-integration-menu-forge) |
+| 38 | BisectHosting Server Integration Menu | Hosting menu integration. | [Link](https://www.curseforge.com/minecraft/mc-mods/bisecthosting-server-integration-menu-forge) |
 
 ## Mobs
 
@@ -116,7 +116,7 @@ Current documented release: **Still Watching V1.0.9**.
 | # | Mod | Purpose | CurseForge |
 | ---: | --- | --- | --- |
 | 42 | Embeddium | Client renderer performance. | [Link](https://www.curseforge.com/minecraft/mc-mods/embeddium) |
-| 43 | [Embeddium] Extra Mod Integrations | Client performance integrations. | [Link](https://www.curseforge.com/minecraft/mc-mods/magnesium-extras) |
+| 43 | Extra Mod Integrations | Client performance integrations. | [Link](https://www.curseforge.com/minecraft/mc-mods/magnesium-extras) |
 
 ## Quests
 
@@ -186,7 +186,7 @@ Current documented release: **Still Watching V1.0.9**.
 
 | # | Mod | Purpose | CurseForge |
 | ---: | --- | --- | --- |
-| 63 | [TaCZ] Timeless and Classics Zero Guns | Firearms gameplay content. | [Link](https://www.curseforge.com/minecraft/mc-mods/timeless-and-classics-zero) |
+| 63 | Timeless and Classics Zero Guns | Firearms gameplay content. | [Link](https://www.curseforge.com/minecraft/mc-mods/timeless-and-classics-zero) |
 
 ## Zoom
 
