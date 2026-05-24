@@ -29,16 +29,9 @@
 > [!IMPORTANT]
 > ## Install from CurseForge. Not the GitHub ZIP.
 >
-> The GitHub ZIP is **not** a playable modpack installer. It will not behave like the CurseForge release, it will not pull the pack the way the launcher does, and it is exactly how people manufacture broken installs.
+> The GitHub ZIP is **not** a playable modpack installer. It is source-side repository content for docs, issues, screenshots, release-side files, validation, and licensing clarity.
 >
-> Use the official CurseForge release. If GitHub and CurseForge disagree, **trust CurseForge** and report the mismatch.
-
-<div align="center">
-
-[![Get the Playable Release](https://img.shields.io/badge/GET%20THE%20PLAYABLE%20RELEASE-CurseForge-f16436?style=for-the-badge&logo=curseforge&logoColor=white)](https://www.curseforge.com/minecraft/modpacks/still-watching)
-[![Download Specific Files](https://img.shields.io/badge/DOWNLOAD%20SPECIFIC%20FILES-CurseForge-f16436?style=for-the-badge&logo=curseforge&logoColor=white)](https://www.curseforge.com/minecraft/modpacks/still-watching/files)
-
-</div>
+> Use the official CurseForge release. If GitHub and CurseForge disagree about a playable file, **trust CurseForge** and report the mismatch.
 
 ---
 
@@ -47,7 +40,7 @@
 | Role | Start here | Do not skip |
 | --- | --- | --- |
 | **Players** | [Install on CurseForge](https://www.curseforge.com/minecraft/modpacks/still-watching) | Allocate `5 GB` minimum RAM; `6–8 GB` preferred. |
-| **Server admins** | [`installation-guide.md`](./installation-guide.md#multiplayer--server-setup) | Match pack version, Forge version, configs, and files. No client-only junk on dedicated servers. |
+| **Server admins** | [`installation-guide.md`](./installation-guide.md#multiplayer--server-setup) and [`server-pack-guide.md`](./docs/server-pack-guide.md) | Match versions/configs. Keep client-only junk off dedicated servers. |
 | **Bug reporters** | [GitHub Issues](https://github.com/SoumyajitXD/Still-Watching/issues) | Test a clean CurseForge install and attach logs. Vibes are not diagnostics. |
 | **Maintainers** | [`python .github/scripts/validate.py all`](#maintainer-checks) | Validate before release-side edits. Guesswork belongs in horror, not maintenance. |
 
@@ -70,15 +63,13 @@ You are still playing Minecraft. You are just no longer allowed to pretend the d
 | **Project name** | Still Watching |
 | **Creator** | Soumyajit |
 | **Type** | Minecraft Java Edition horror-survival modpack |
+| **Current documented release** | Still Watching V1.0.9 |
 | **Minecraft version** | `1.20.1` |
 | **Loader** | Forge |
+| **Java** | Java `17` if the launcher asks |
 | **Official playable release** | [CurseForge](https://www.curseforge.com/minecraft/modpacks/still-watching) |
-| **Current documented release** | Still Watching V1.0.9 |
 | **CurseForge Project ID** | `1420406` |
 | **RAM** | `5 GB` minimum; `6–8 GB` preferred |
-| **Java** | Java `17` if the launcher asks |
-| **Multiplayer** | Supported when server and clients use matching pack versions, configs, and files |
-| **Repository purpose** | Documentation, issue tracking, source-side files, screenshots, release-side files, and licensing clarity |
 | **Repository license** | [Apache License 2.0](./LICENSE) for original repository files only |
 
 ---
@@ -91,28 +82,26 @@ You are still playing Minecraft. You are just no longer allowed to pretend the d
 4. Allocate **5 GB minimum RAM**; **6–8 GB preferred**.
 5. Use **Java 17** if the launcher asks.
 6. Launch once clean before adding extra mods, shaders, or resource packs.
-7. Put on headphones. The pack is not subtle about sound.
 
 Need manual import notes, server setup, backups, logs, or actual troubleshooting? Use [`installation-guide.md`](./installation-guide.md). The README is the front door, not the entire filing cabinet.
 
 ---
 
-## What the Pack Focuses On
+## Pack Focus
 
-- **Fog-heavy exploration** where distance and visibility matter.
-- **Sound-led tension** from ambience, footsteps, movement, silence, and proximity cues.
-- **Stalking horror entities** that make careless travel expensive.
-- **Caves, forests, roads, towns, ruins, and structures** that feel worth exploring but unsafe.
-- **Survival pressure** where awareness, backups, escape routes, and preparation matter more than swagger.
-- **Multiplayer paranoia** where voice chat can turn one strange sound into a full team collapse.
+- Fog-heavy exploration where distance and visibility matter.
+- Sound-led tension from ambience, footsteps, silence, and proximity cues.
+- Stalking horror entities that make careless travel expensive.
+- Caves, forests, roads, towns, ruins, and structures that are worth exploring but unsafe.
+- Multiplayer paranoia where voice chat can turn one strange sound into a full team collapse.
 
 This is not a kitchen-sink pack with horror mobs taped onto the side like cheap Halloween stickers. The pack has a job: make survival feel watched.
 
 ---
 
-## Included Content Snapshot
+## Content Snapshot
 
-Still Watching includes horror entities, worldgen, structures, ambience, visual pressure, sound mods, performance support, exploration tools, and quality-of-life utilities.
+Still Watching includes horror entities, worldgen, structures, ambience, visual pressure, sound mods, performance support, exploration tools, and quality-of-life utilities. For the complete repository list, use [`latest-modlist.md`](./latest-modlist.md).
 
 | Category | Examples |
 | --- | --- |
@@ -121,8 +110,6 @@ Still Watching includes horror entities, worldgen, structures, ambience, visual 
 | **World & structures** | Biomes O' Plenty, Valhelsia Structures, Dungeons Enhanced, Towns and Towers, Explorify |
 | **Multiplayer & utility** | Simple Voice Chat, FTB Teams, FTB Quests, JourneyMap, Corpse |
 | **Performance & visuals** | Embeddium, Embeddium Extras, Oculus, Euphoria Patches |
-
-For the complete list, use [`latest-modlist.md`](./latest-modlist.md).
 
 ---
 
@@ -136,10 +123,10 @@ Keep it boring:
 - Same Minecraft version: `1.20.1`.
 - Same required Forge version for the selected release.
 - Matching configs and server files.
-- No client-only visual, shader, UI, map, or rendering mods on a dedicated server.
+- No client-only visual, shader, UI, map, audio-only, or rendering mods on a dedicated server.
 - Backups before updates or server moves.
 
-For the real setup notes, read [`installation-guide.md`](./installation-guide.md#multiplayer--server-setup). Guessing at Forge server files is not bravery. It is just feeding the crash log.
+For setup details, read [`installation-guide.md`](./installation-guide.md#multiplayer--server-setup). For conservative server-pack trimming notes, read [`docs/server-pack-guide.md`](./docs/server-pack-guide.md). Guessing at Forge server files is not bravery. It is just feeding the crash log.
 
 <div align="center">
 
@@ -171,19 +158,7 @@ Full fixes: [`installation-guide.md`](./installation-guide.md#troubleshooting)
 
 Before opening an issue, test on a clean CurseForge install when possible.
 
-Include:
-
-- Still Watching version.
-- Launcher.
-- Minecraft version.
-- Forge version, if visible.
-- Java version, if relevant.
-- Operating system.
-- Singleplayer or multiplayer.
-- Server type, if relevant.
-- Crash report or `latest.log`.
-- Reproduction steps.
-- Extra mods, shaders, resource packs, or config edits.
+Include the pack version, launcher, Minecraft version, Forge version if visible, Java version if relevant, operating system, singleplayer/multiplayer status, crash report or `latest.log`, reproduction steps, and any extra mods/shaders/resource packs/config edits.
 
 Bad report:
 
@@ -194,7 +169,7 @@ it broke fix pls
 Good report:
 
 ```text
-Pack version: Still Watching vX.X.X
+Pack version: Still Watching V1.0.9
 Launcher: CurseForge App
 Minecraft: 1.20.1
 Mode: Singleplayer
@@ -210,12 +185,6 @@ Attached: latest.log and crash report
 
 Logs matter. Vibes are not diagnostics.
 
-<div align="center">
-
-[![Open an Issue](https://img.shields.io/badge/Open-Issue-fa1d04?style=for-the-badge&logo=github&logoColor=white)](https://github.com/SoumyajitXD/Still-Watching/issues)
-
-</div>
-
 ---
 
 ## Repository Map
@@ -230,44 +199,31 @@ Logs matter. Vibes are not diagnostics.
 | [`Releases/`](./Releases) | Release-side files. |
 | [`.github/ISSUE_TEMPLATE/`](./.github/ISSUE_TEMPLATE) | Issue templates. |
 | [`.github/workflows/ci.yml`](./.github/workflows/ci.yml) | Repository validation workflow. |
-| [`.github/scripts/validate.py`](./.github/scripts/validate.py) | Local validation script for layout, metadata, links, sponsor markers, and release-facing files. |
-| [`still-watching-logo.jpg`](./still-watching-logo.jpg) | Project logo. |
-| [`bisecthosting-banner.png`](./bisecthosting-banner.png) | Sponsor banner asset. |
+| [`.github/scripts/validate.py`](./.github/scripts/validate.py) | Local validation script. |
 | [`LICENSE`](./LICENSE) | Apache License 2.0 for original repository files. |
 
 ---
 
 ## Maintainer Checks
 
-Before touching release-facing docs, run the local validator from the repository root:
+Before touching release-facing docs, run:
 
 ```bash
 python .github/scripts/validate.py all
 ```
 
-That check catches boring-but-expensive mistakes early: broken local Markdown links, missing referenced files, Repository Map drift, missing required docs links, CurseForge ID mismatches, sponsor block damage, and release text drift. Ship dread, not sloppy Markdown shrapnel.
+That check catches boring-but-expensive mistakes early: broken local Markdown links, missing referenced files, Repository Map drift, CurseForge ID mismatches, sponsor block damage, and release text drift. Ship dread, not sloppy Markdown shrapnel.
 
 ---
 
-## Contributing
+## Contributing, Support, and Security
 
-Useful contributions:
+- Contribution rules: [`CONTRIBUTING.md`](./CONTRIBUTING.md)
+- Support boundaries: [`SUPPORT.md`](./SUPPORT.md)
+- Security/reporting suspicious downloads: [`SECURITY.md`](./SECURITY.md)
+- Changes by release: [`CHANGELOG.md`](./CHANGELOG.md)
 
-- Documentation fixes.
-- Broken link fixes.
-- Reproducible bug reports.
-- Missing credit or attribution corrections.
-- Compatibility notes backed by testing.
-- Useful screenshots, logs, and setup notes.
-
-Not useful:
-
-- Random mod requests with no design reason.
-- Crash complaints with no logs.
-- Changes that turn the pack into generic mod soup.
-- Removing or weakening required sponsor content.
-
-More mods do not automatically make the pack better. Sometimes they just make the crash report fatter.
+Useful contributions are tested docs, reproducible reports, compatibility notes backed by evidence, and missing credit/attribution corrections. Not useful: random mod soup, crash complaints with no logs, or anything that weakens required sponsor content.
 
 ---
 
@@ -277,9 +233,7 @@ More mods do not automatically make the pack better. Sometimes they just make th
 
 Credit goes to the Minecraft modding community: mod authors, library maintainers, shader and resource creators, artists, sound designers, tool developers, and everyone whose work makes modded Minecraft possible.
 
-Original files in this repository are licensed under the **Apache License 2.0**. See [`LICENSE`](./LICENSE).
-
-That license applies only to original repository files. Third-party mods, shaders, resource packs, sounds, textures, libraries, tools, and external assets remain under their own licenses, permissions, and distribution terms.
+Original files in this repository are licensed under the **Apache License 2.0**. See [`LICENSE`](./LICENSE). Third-party mods, shaders, resource packs, sounds, textures, libraries, tools, and external assets remain under their own licenses, permissions, and distribution terms.
 
 Support the original authors. Modding only works when people get credited for the work they actually did.
 
