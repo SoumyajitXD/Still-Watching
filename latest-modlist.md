@@ -6,15 +6,6 @@
 Current documented release: **Still Watching V1.0.9**.
 Minecraft: **1.20.1** | Loader: **Forge** | Java: **17** | CurseForge Project ID: **1420406**
 
-## Summary
-
-| Metric | Count |
-| --- | ---: |
-| Total mods | 64 |
-| Both-side count | 40 |
-| Client candidate count | 17 |
-| Unknown count | 7 |
-
 ## APIs / Cores / Libs
 
 | # | Mod | Purpose | CurseForge |
