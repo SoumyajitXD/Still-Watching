@@ -16,6 +16,9 @@ SPONSOR_BANNER="https://media.forgecdn.net/attachments/description/1420406/descr
 REPO_MAP=["README.md","installation-guide.md","latest-modlist.md","curseforge-description.html","Screenshots/","Releases/",".github/ISSUE_TEMPLATE/",".github/workflows/ci.yml",".github/scripts/validate.py","LICENSE"]
 MOD_FIELDS=["name","category","side","side_confidence","purpose","curseforge_url","notes","server_pack_action","reason"]
 SIDES={"client","server","both","unknown"}; ACTIONS={"keep","remove","verify","unknown"}
+SIDE_CONFIDENCE={"manifest","official mod page","dedicated-server tested","inferred","needs verification","unknown"}
+REMOVE_CONFIDENCE={"official mod page","dedicated-server tested"}
+CLIENT_EVIDENCE_TERMS=("client-only","client ","renderer","rendering","shader","menu","screen","audio","sound","zoom","texture","model","inventory ui","ui/control")
 
 def fail(msg:str)->None:
  print(f"ERROR: {msg}",file=sys.stderr); raise SystemExit(1)
@@ -50,6 +53,11 @@ def html()->None:
   except Exception as exc: errors.append(f"{path.name}: {exc}")
  if errors: fail("; ".join(errors))
 
+def _has_clear_remove_evidence(mod:dict)->bool:
+ evidence=str(mod.get("evidence","")).strip().lower()
+ if not evidence: return False
+ return any(term in evidence for term in CLIENT_EVIDENCE_TERMS)
+
 def metadata()->None:
  errors=[]; project=yload(ROOT/"data/project.yml"); mods_doc=yload(ROOT/"data/mods.yml")
  if not isinstance(project,dict): fail("data/project.yml must be a mapping")
@@ -66,10 +74,12 @@ def metadata()->None:
    if not isinstance(mod,dict): errors.append(f"mod #{index} must be a mapping"); continue
    for key in MOD_FIELDS:
     if key not in mod or mod[key] in (None,""): errors.append(f"mod #{index} missing {key}")
-   name=str(mod.get("name","")).strip(); side=str(mod.get("side","")).lower(); action=str(mod.get("server_pack_action","")).lower(); url=str(mod.get("curseforge_url","")).strip()
+   name=str(mod.get("name","")).strip(); side=str(mod.get("side","")).lower(); action=str(mod.get("server_pack_action","")).lower(); url=str(mod.get("curseforge_url","")).strip(); conf=str(mod.get("side_confidence","")).strip().lower()
    names.append(name); urls.append(url)
    if side not in SIDES: errors.append(f"{name} invalid side {side!r}")
    if action not in ACTIONS: errors.append(f"{name} invalid server_pack_action {action!r}")
+   if conf not in SIDE_CONFIDENCE: errors.append(f"{name} invalid side_confidence {conf!r}")
+   if action=="remove" and conf not in REMOVE_CONFIDENCE and not _has_clear_remove_evidence(mod): errors.append(f"{name} remove action needs dedicated-server tested, official mod page, or clear client-only evidence")
    parsed=urlparse(url); parts=[part for part in parsed.path.split("/") if part]
    if parsed.scheme!="https" or parsed.netloc!="www.curseforge.com" or len(parts)<3 or parts[0]!="minecraft" or parts[1] not in {"mc-mods","texture-packs","shaders","modpacks"}: errors.append(f"{name} unexpected CurseForge URL {url}")
   errors += [f"duplicate mod name: {n}" for n,c in Counter(names).items() if n and c>1]
@@ -81,8 +91,7 @@ def generated_docs()->None:
  path=ROOT/"latest-modlist.md"; before=read(path)
  result=subprocess.run([sys.executable,str(ROOT/".github/scripts/generate_docs.py")],cwd=ROOT,text=True,capture_output=True,check=False)
  if result.returncode:
-  output="\n".join(part for part in [result.stdout,result.stderr] if part).strip()
-  fail("generated docs step failed"+(f": {output}" if output else ""))
+  output="\n".join(part for part in [result.stdout,result.stderr] if part).strip(); fail("generated docs step failed"+(f": {output}" if output else ""))
  if before!=read(path): fail("latest-modlist.md is stale; run python .github/scripts/generate_docs.py and commit the result")
  print("Generated docs freshness OK")
 
