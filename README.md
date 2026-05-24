@@ -6,18 +6,14 @@
 
 ### A Forge 1.20.1 horror-survival modpack where the fog has teeth, the caves answer back, and the quiet is usually lying.
 
-[![Minecraft](https://img.shields.io/badge/Minecraft-1.20.1-2ea043?style=for-the-badge&logo=minecraft&logoColor=white)](#project-at-a-glance)
-[![Loader](https://img.shields.io/badge/Loader-Forge-f16436?style=for-the-badge)](#project-at-a-glance)
-[![Latest CurseForge File](https://img.shields.io/curseforge/v/1420406?style=for-the-badge&logo=curseforge&logoColor=white&label=Latest)](https://www.curseforge.com/minecraft/modpacks/still-watching/files)
-[![Downloads](https://img.shields.io/curseforge/dt/1420406?style=for-the-badge&logo=curseforge&logoColor=white&label=Downloads)](https://www.curseforge.com/minecraft/modpacks/still-watching)
-[![License](https://img.shields.io/badge/License-Apache--2.0-2f81f7?style=for-the-badge)](./LICENSE)
+[![CI](https://github.com/SoumyajitXD/Still-Watching/actions/workflows/ci.yml/badge.svg)](https://github.com/SoumyajitXD/Still-Watching/actions/workflows/ci.yml)
+[![CurseForge](https://img.shields.io/curseforge/v/1420406?logo=curseforge&label=CurseForge)](https://www.curseforge.com/minecraft/modpacks/still-watching/files)
+[![Downloads](https://img.shields.io/curseforge/dt/1420406?logo=curseforge&label=Downloads)](https://www.curseforge.com/minecraft/modpacks/still-watching)
+[![License](https://img.shields.io/badge/License-Apache--2.0-2f81f7)](./LICENSE)
 
-<br />
-
-[![Install Still Watching on CurseForge](https://img.shields.io/badge/INSTALL%20ON-CURSEFORGE-f16436?style=for-the-badge&logo=curseforge&logoColor=white)](https://www.curseforge.com/minecraft/modpacks/still-watching/files)
-[![Read Installation Guide](https://img.shields.io/badge/READ-INSTALLATION%20GUIDE-2f81f7?style=for-the-badge)](./installation-guide.md)
-[![Report a Bug](https://img.shields.io/badge/REPORT-A%20BUG-fa1d04?style=for-the-badge&logo=github&logoColor=white)](https://github.com/SoumyajitXD/Still-Watching/issues)
-
+**[Install on CurseForge](https://www.curseforge.com/minecraft/modpacks/still-watching/files)** ·
+**[Installation Guide](./installation-guide.md)** ·
+**[Report a Bug](https://github.com/SoumyajitXD/Still-Watching/issues)** ·
 **[Mod List](./latest-modlist.md)** ·
 **[Screenshots](./Screenshots)** ·
 **[CurseForge Gallery](https://www.curseforge.com/minecraft/modpacks/still-watching/gallery)**
@@ -243,6 +239,6 @@ Support the original authors. Modding only works when people get credited for th
 
 **Install through CurseForge. Back up your world. Put on headphones. Do not trust the quiet.**
 
-[![Install Still Watching](https://img.shields.io/badge/Install%20Still%20Watching-CurseForge-f16436?style=for-the-badge&logo=curseforge&logoColor=white)](https://www.curseforge.com/minecraft/modpacks/still-watching/files)
+[Install Still Watching](https://www.curseforge.com/minecraft/modpacks/still-watching/files)
 
 </div>
