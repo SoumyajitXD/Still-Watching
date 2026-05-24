@@ -1,577 +1,578 @@
+x-note: &note "No accessible V1.0.9 manifest/release archive; no exact versions invented."
 mods:
   - name: "The Anomaly"
     category: "Horror Mods"
     side: both
-    side_confidence: likely
-    purpose: "Primary stalker threat; keeps the woods hostile."
+    side_confidence: "official source"
+    purpose: "Horror gameplay/content."
     curseforge_url: https://www.curseforge.com/minecraft/mc-mods/the-anomaly
-    notes: "Derived from latest-modlist.md; this is not a manifest with exact versions."
+    notes: *note
     server_pack_action: keep
-    reason: "Shared gameplay/dependency in docs; still verify against release manifest."
+    reason: "Gameplay content should stay on server and clients."
   - name: "Apollyon"
     category: "Horror Mods"
     side: both
-    side_confidence: likely
-    purpose: "Late-game horror pressure and hostile encounters."
+    side_confidence: "official source"
+    purpose: "Horror gameplay/content."
     curseforge_url: https://www.curseforge.com/minecraft/mc-mods/apollyon
-    notes: "Derived from latest-modlist.md; this is not a manifest with exact versions."
+    notes: *note
     server_pack_action: keep
-    reason: "Shared gameplay/dependency in docs; still verify against release manifest."
+    reason: "Gameplay content should stay on server and clients."
   - name: "The Mimicer"
     category: "Horror Mods"
     side: both
-    side_confidence: likely
-    purpose: "Mimic-style horror encounters and ambush tension."
+    side_confidence: "official source"
+    purpose: "Horror gameplay/content."
     curseforge_url: https://www.curseforge.com/minecraft/mc-mods/the-mimicer
-    notes: "Derived from latest-modlist.md; this is not a manifest with exact versions."
+    notes: *note
     server_pack_action: keep
-    reason: "Shared gameplay/dependency in docs; still verify against release manifest."
+    reason: "Gameplay content should stay on server and clients."
   - name: "The Man From The Fog"
     category: "Horror Mods"
     side: both
-    side_confidence: likely
-    purpose: "Night stalking threat for the main horror loop."
+    side_confidence: "official source"
+    purpose: "Horror gameplay/content."
     curseforge_url: https://www.curseforge.com/minecraft/mc-mods/the-man-from-the-fog
-    notes: "Derived from latest-modlist.md; this is not a manifest with exact versions."
+    notes: *note
     server_pack_action: keep
-    reason: "Shared gameplay/dependency in docs; still verify against release manifest."
+    reason: "Gameplay content should stay on server and clients."
   - name: "From The Fog"
     category: "Horror Mods"
     side: both
-    side_confidence: likely
-    purpose: "Herobrine-style sightings and paranoia fuel."
+    side_confidence: "official source"
+    purpose: "Horror gameplay/content."
     curseforge_url: https://www.curseforge.com/minecraft/mc-mods/from-the-fog
-    notes: "Derived from latest-modlist.md; this is not a manifest with exact versions."
+    notes: *note
     server_pack_action: keep
-    reason: "Shared gameplay/dependency in docs; still verify against release manifest."
+    reason: "Gameplay content should stay on server and clients."
   - name: "The End of Herobrine"
     category: "Horror Mods"
     side: both
-    side_confidence: likely
-    purpose: "Herobrine encounter content and escalation."
+    side_confidence: "official source"
+    purpose: "Horror gameplay/content."
     curseforge_url: https://www.curseforge.com/minecraft/mc-mods/endofherobrine
-    notes: "Derived from latest-modlist.md; this is not a manifest with exact versions."
+    notes: *note
     server_pack_action: keep
-    reason: "Shared gameplay/dependency in docs; still verify against release manifest."
+    reason: "Gameplay content should stay on server and clients."
   - name: "The Knocker"
     category: "Horror Mods"
     side: both
-    side_confidence: likely
-    purpose: "Audio/encounter scare layer for hostile nights."
+    side_confidence: "official source"
+    purpose: "Horror gameplay/content."
     curseforge_url: https://www.curseforge.com/minecraft/mc-mods/the-knocker
-    notes: "Derived from latest-modlist.md; this is not a manifest with exact versions."
+    notes: *note
     server_pack_action: keep
-    reason: "Shared gameplay/dependency in docs; still verify against release manifest."
+    reason: "Gameplay content should stay on server and clients."
   - name: "Cave Dweller Reimagined"
     category: "Horror Mods"
     side: both
-    side_confidence: likely
-    purpose: "Underground predator pressure; caves stop being safe."
+    side_confidence: "official source"
+    purpose: "Horror gameplay/content."
     curseforge_url: https://www.curseforge.com/minecraft/mc-mods/cave-dweller-reimagined
-    notes: "Derived from latest-modlist.md; this is not a manifest with exact versions."
+    notes: *note
     server_pack_action: keep
-    reason: "Shared gameplay/dependency in docs; still verify against release manifest."
+    reason: "Gameplay content should stay on server and clients."
   - name: "Siren Head: The Arrival"
     category: "Horror Mods"
     side: both
-    side_confidence: likely
-    purpose: "Large horror entity encounter content."
+    side_confidence: "official source"
+    purpose: "Horror gameplay/content."
     curseforge_url: https://www.curseforge.com/minecraft/mc-mods/siren-head-the-arrival
-    notes: "Derived from latest-modlist.md; this is not a manifest with exact versions."
+    notes: *note
     server_pack_action: keep
-    reason: "Shared gameplay/dependency in docs; still verify against release manifest."
+    reason: "Gameplay content should stay on server and clients."
   - name: "GoatMan"
     category: "Horror Mods"
     side: both
-    side_confidence: likely
-    purpose: "Forest/ambient monster threat for roaming players."
+    side_confidence: "official source"
+    purpose: "Horror gameplay/content."
     curseforge_url: https://www.curseforge.com/minecraft/mc-mods/goatman
-    notes: "Derived from latest-modlist.md; this is not a manifest with exact versions."
+    notes: *note
     server_pack_action: keep
-    reason: "Shared gameplay/dependency in docs; still verify against release manifest."
+    reason: "Gameplay content should stay on server and clients."
   - name: "The Midnight Lurker"
     category: "Horror Mods"
     side: both
-    side_confidence: likely
-    purpose: "Nighttime stalker pressure and jump-scare risk."
+    side_confidence: "official source"
+    purpose: "Horror gameplay/content."
     curseforge_url: https://www.curseforge.com/minecraft/mc-mods/the-midnight-lurker
-    notes: "Derived from latest-modlist.md; this is not a manifest with exact versions."
+    notes: *note
     server_pack_action: keep
-    reason: "Shared gameplay/dependency in docs; still verify against release manifest."
+    reason: "Gameplay content should stay on server and clients."
   - name: "Eyes in the Darkness"
     category: "Horror Mods"
     side: both
-    side_confidence: likely
-    purpose: "Darkness-based scare presence and visual paranoia."
+    side_confidence: "official source"
+    purpose: "Horror gameplay/content."
     curseforge_url: https://www.curseforge.com/minecraft/mc-mods/eyes-in-the-darkness
-    notes: "Derived from latest-modlist.md; this is not a manifest with exact versions."
+    notes: *note
     server_pack_action: keep
-    reason: "Shared gameplay/dependency in docs; still verify against release manifest."
+    reason: "Gameplay content should stay on server and clients."
   - name: "Biomes O' Plenty"
     category: "Biomes"
     side: both
-    side_confidence: likely
-    purpose: "Biome expansion for exploration variety."
+    side_confidence: "official source"
+    purpose: "Biome expansion."
     curseforge_url: https://www.curseforge.com/minecraft/mc-mods/biomes-o-plenty
-    notes: "Derived from latest-modlist.md; this is not a manifest with exact versions."
+    notes: *note
     server_pack_action: keep
-    reason: "Shared gameplay/dependency in docs; still verify against release manifest."
+    reason: "Worldgen content must be present on a dedicated server."
   - name: "FTB Quests"
     category: "Quests"
     side: both
-    side_confidence: likely
-    purpose: "Questbook structure and progression guidance."
+    side_confidence: "official source"
+    purpose: "Questbook progression."
     curseforge_url: https://www.curseforge.com/minecraft/mc-mods/ftb-quests-forge
-    notes: "Derived from latest-modlist.md; this is not a manifest with exact versions."
+    notes: *note
     server_pack_action: keep
-    reason: "Shared gameplay/dependency in docs; still verify against release manifest."
+    reason: "Quest data should stay on server and clients."
   - name: "Valhelsia Structures"
     category: "Structures"
     side: both
-    side_confidence: likely
-    purpose: "Exploration structures and world landmarks."
+    side_confidence: "official source"
+    purpose: "Exploration structures."
     curseforge_url: https://www.curseforge.com/minecraft/mc-mods/valhelsia-structures
-    notes: "Derived from latest-modlist.md; this is not a manifest with exact versions."
+    notes: *note
     server_pack_action: keep
-    reason: "Shared gameplay/dependency in docs; still verify against release manifest."
+    reason: "Structure generation must be present on a dedicated server."
   - name: "Dungeons Enhanced"
     category: "Structures"
     side: both
-    side_confidence: likely
-    purpose: "Dungeon content for risk/reward exploration."
+    side_confidence: "official source"
+    purpose: "Dungeon structures."
     curseforge_url: https://www.curseforge.com/minecraft/mc-mods/dungeonsenhanced
-    notes: "Derived from latest-modlist.md; this is not a manifest with exact versions."
+    notes: *note
     server_pack_action: keep
-    reason: "Shared gameplay/dependency in docs; still verify against release manifest."
+    reason: "Structure generation must be present on a dedicated server."
   - name: "Towns and Towers"
     category: "Structures"
     side: both
-    side_confidence: likely
-    purpose: "Village and tower variety for overworld travel."
+    side_confidence: "official source"
+    purpose: "Village and tower structures."
     curseforge_url: https://www.curseforge.com/minecraft/mc-mods/towns-and-towers
-    notes: "Derived from latest-modlist.md; this is not a manifest with exact versions."
+    notes: *note
     server_pack_action: keep
-    reason: "Shared gameplay/dependency in docs; still verify against release manifest."
+    reason: "Structure generation must be present on a dedicated server."
   - name: "Explorify – Dungeons & Structures"
     category: "Structures"
     side: both
-    side_confidence: likely
-    purpose: "Extra structures without changing the pack identity."
+    side_confidence: "official source"
+    purpose: "Extra structures."
     curseforge_url: https://www.curseforge.com/minecraft/mc-mods/explorify
-    notes: "Derived from latest-modlist.md; this is not a manifest with exact versions."
+    notes: *note
     server_pack_action: keep
-    reason: "Shared gameplay/dependency in docs; still verify against release manifest."
+    reason: "Structure generation must be present on a dedicated server."
   - name: "Realm RPG: Fallen Adventurers"
     category: "Other World Gen"
     side: both
-    side_confidence: likely
-    purpose: "Adds fallen adventurer encounters/loot flavor."
+    side_confidence: "official source"
+    purpose: "World encounter content."
     curseforge_url: https://www.curseforge.com/minecraft/mc-mods/realm-rpg-fallen-adventurers
-    notes: "Derived from latest-modlist.md; this is not a manifest with exact versions."
+    notes: *note
     server_pack_action: keep
-    reason: "Shared gameplay/dependency in docs; still verify against release manifest."
+    reason: "World content should stay on server and clients."
   - name: "Embeddium"
     category: "Performance"
     side: client
-    side_confidence: likely
-    purpose: "Renderer performance; server packs should not need it."
+    side_confidence: "dedicated-server safe"
+    purpose: "Client renderer performance."
     curseforge_url: https://www.curseforge.com/minecraft/mc-mods/embeddium
-    notes: "Derived from latest-modlist.md; this is not a manifest with exact versions."
+    notes: *note
     server_pack_action: remove
-    reason: "Likely client-side only on dedicated server; verify before removal."
-  - name: "Embeddium Extras"
+    reason: "Server-safe removal: client renderer optimization."
+  - name: "[Embeddium] Extra Mod Integrations"
     category: "Performance"
     side: client
-    side_confidence: likely
-    purpose: "Extra client graphics/performance options."
+    side_confidence: "needs verification"
+    purpose: "Client performance integrations."
     curseforge_url: https://www.curseforge.com/minecraft/mc-mods/magnesium-extras
-    notes: "Derived from latest-modlist.md; this is not a manifest with exact versions."
-    server_pack_action: remove
-    reason: "Likely client-side only on dedicated server; verify before removal."
+    notes: *note
+    server_pack_action: verify
+    reason: "Likely client-side, but exact release behavior was not proven."
   - name: "Oculus"
     category: "Shaders"
     side: client
-    side_confidence: likely
-    purpose: "Shader support for Forge clients."
+    side_confidence: "dedicated-server safe"
+    purpose: "Shader support."
     curseforge_url: https://www.curseforge.com/minecraft/mc-mods/oculus
-    notes: "Derived from latest-modlist.md; this is not a manifest with exact versions."
+    notes: *note
     server_pack_action: remove
-    reason: "Likely client-side only on dedicated server; verify before removal."
+    reason: "Server-safe removal: shader/rendering support."
   - name: "Euphoria Patches"
     category: "Shaders"
     side: client
-    side_confidence: likely
-    purpose: "Shader patch support for the client visuals stack."
+    side_confidence: "dedicated-server safe"
+    purpose: "Shader patch support."
     curseforge_url: https://www.curseforge.com/minecraft/mc-mods/euphoria-patches
-    notes: "Derived from latest-modlist.md; this is not a manifest with exact versions."
+    notes: *note
     server_pack_action: remove
-    reason: "Likely client-side only on dedicated server; verify before removal."
+    reason: "Server-safe removal: shader patching."
   - name: "Alex's Mobs"
     category: "Mobs"
     side: both
-    side_confidence: likely
-    purpose: "Creature variety and hostile/ambient mob content."
+    side_confidence: "official source"
+    purpose: "Creature content."
     curseforge_url: https://www.curseforge.com/minecraft/mc-mods/alexs-mobs
-    notes: "Derived from latest-modlist.md; this is not a manifest with exact versions."
+    notes: *note
     server_pack_action: keep
-    reason: "Shared gameplay/dependency in docs; still verify against release manifest."
+    reason: "Mob content belongs on client and dedicated server."
   - name: "Exposure"
     category: "Camera"
     side: both
-    side_confidence: likely
-    purpose: "Camera/photos system; verify exact side before trimming."
+    side_confidence: "official source"
+    purpose: "Camera/photos gameplay."
     curseforge_url: https://www.curseforge.com/minecraft/mc-mods/exposure
-    notes: "Derived from latest-modlist.md; this is not a manifest with exact versions."
+    notes: *note
     server_pack_action: keep
-    reason: "Shared gameplay/dependency in docs; still verify against release manifest."
+    reason: "Gameplay item/content should stay on both sides."
   - name: "HT's TreeChop"
     category: "Tree Cutting"
     side: both
-    side_confidence: likely
-    purpose: "Tree-chopping gameplay convenience."
+    side_confidence: "official source"
+    purpose: "Tree-chopping mechanic."
     curseforge_url: https://www.curseforge.com/minecraft/mc-mods/treechop
-    notes: "Derived from latest-modlist.md; this is not a manifest with exact versions."
+    notes: *note
     server_pack_action: keep
-    reason: "Shared gameplay/dependency in docs; still verify against release manifest."
+    reason: "Gameplay mechanic should stay on server and clients."
   - name: "EnhancedVisuals"
     category: "Visuals"
     side: client
-    side_confidence: likely
-    purpose: "Screen effects and damage/immersion visuals."
+    side_confidence: "dedicated-server safe"
+    purpose: "Client screen effects."
     curseforge_url: https://www.curseforge.com/minecraft/mc-mods/enhancedvisuals
-    notes: "Derived from latest-modlist.md; this is not a manifest with exact versions."
+    notes: *note
     server_pack_action: remove
-    reason: "Likely client-side only on dedicated server; verify before removal."
+    reason: "Server-safe removal: screen effects."
   - name: "CravenCraft's Bloody Bits"
     category: "Visuals"
     side: both
-    side_confidence: likely
-    purpose: "Gore/blood visual content for horror tone."
+    side_confidence: "official source"
+    purpose: "Blood/gore content."
     curseforge_url: https://www.curseforge.com/minecraft/mc-mods/cravencrafts-bloody-bits
-    notes: "Derived from latest-modlist.md; this is not a manifest with exact versions."
+    notes: *note
     server_pack_action: keep
-    reason: "Shared gameplay/dependency in docs; still verify against release manifest."
+    reason: "Not proven safely removable; keep unless testing proves otherwise."
   - name: "Sodium/Embeddium Dynamic Lights"
     category: "Visuals"
     side: client
-    side_confidence: likely
-    purpose: "Dynamic lighting for held/emissive light sources."
+    side_confidence: "needs verification"
+    purpose: "Dynamic lighting."
     curseforge_url: https://www.curseforge.com/minecraft/mc-mods/dynamiclights-reforged
-    notes: "Derived from latest-modlist.md; this is not a manifest with exact versions."
-    server_pack_action: remove
-    reason: "Likely client-side only on dedicated server; verify before removal."
+    notes: *note
+    server_pack_action: verify
+    reason: "Likely client lighting, but exact release behavior was not proven."
   - name: "JourneyMap"
     category: "Map"
     side: client
-    side_confidence: likely
-    purpose: "Client map/minimap; server-side use is optional/admin-driven."
+    side_confidence: "needs verification"
+    purpose: "Map/minimap."
     curseforge_url: https://www.curseforge.com/minecraft/mc-mods/journeymap
-    notes: "Derived from latest-modlist.md; this is not a manifest with exact versions."
-    server_pack_action: remove
-    reason: "Likely client-side only on dedicated server; verify before removal."
+    notes: *note
+    server_pack_action: verify
+    reason: "Client map tool, but optional server components can exist."
   - name: "FancyMenu"
     category: "Menu"
     side: client
-    side_confidence: likely
-    purpose: "Custom main-menu presentation and pack identity."
+    side_confidence: "dedicated-server safe"
+    purpose: "Main menu customization."
     curseforge_url: https://www.curseforge.com/minecraft/mc-mods/fancymenu
-    notes: "Derived from latest-modlist.md; this is not a manifest with exact versions."
+    notes: *note
     server_pack_action: remove
-    reason: "Likely client-side only on dedicated server; verify before removal."
-  - name: "BisectHosting Server Integration Menu"
+    reason: "Server-safe removal: menu customization."
+  - name: "BisectHosting Server Integration Menu [FORGE]"
     category: "Menu"
     side: client
-    side_confidence: likely
-    purpose: "Host integration/menu entry; not gameplay-critical server logic."
+    side_confidence: "dedicated-server safe"
+    purpose: "Hosting menu integration."
     curseforge_url: https://www.curseforge.com/minecraft/mc-mods/bisecthosting-server-integration-menu-forge
-    notes: "Derived from latest-modlist.md; this is not a manifest with exact versions."
+    notes: *note
     server_pack_action: remove
-    reason: "Likely client-side only on dedicated server; verify before removal."
+    reason: "Server-safe removal: client menu integration."
   - name: "CreativeCore"
     category: "APIs / Cores / Libs"
     side: unknown
-    side_confidence: unknown
-    purpose: "Dependency library; verify against dependent mod files."
+    side_confidence: "needs verification"
+    purpose: "Dependency library."
     curseforge_url: https://www.curseforge.com/minecraft/mc-mods/creativecore
-    notes: "Derived from latest-modlist.md; this is not a manifest with exact versions."
+    notes: *note
     server_pack_action: verify
-    reason: "Side not proven in repository sources."
+    reason: "Library side not proven; do not remove blindly."
   - name: "Architectury API"
     category: "APIs / Cores / Libs"
     side: unknown
-    side_confidence: unknown
-    purpose: "Cross-platform API dependency for other mods."
+    side_confidence: "needs verification"
+    purpose: "Cross-platform API dependency."
     curseforge_url: https://www.curseforge.com/minecraft/mc-mods/architectury-api
-    notes: "Derived from latest-modlist.md; this is not a manifest with exact versions."
+    notes: *note
     server_pack_action: verify
-    reason: "Side not proven in repository sources."
+    reason: "Library side not proven; do not remove blindly."
   - name: "Melody"
     category: "APIs / Cores / Libs"
     side: unknown
-    side_confidence: unknown
-    purpose: "Library dependency; keep with mods that require it."
+    side_confidence: "needs verification"
+    purpose: "Dependency library."
     curseforge_url: https://www.curseforge.com/minecraft/mc-mods/melody
-    notes: "Derived from latest-modlist.md; this is not a manifest with exact versions."
+    notes: *note
     server_pack_action: verify
-    reason: "Side not proven in repository sources."
+    reason: "Library side not proven; do not remove blindly."
   - name: "GeckoLib"
     category: "APIs / Cores / Libs"
     side: unknown
-    side_confidence: unknown
-    purpose: "Animation library for entity/content mods."
+    side_confidence: "needs verification"
+    purpose: "Animation library."
     curseforge_url: https://www.curseforge.com/minecraft/mc-mods/geckolib
-    notes: "Derived from latest-modlist.md; this is not a manifest with exact versions."
+    notes: *note
     server_pack_action: verify
-    reason: "Side not proven in repository sources."
+    reason: "Library side not proven; do not remove blindly."
   - name: "FTB Teams"
     category: "APIs / Cores / Libs"
     side: both
-    side_confidence: likely
-    purpose: "Team system support for FTB features."
+    side_confidence: "official source"
+    purpose: "FTB team data support."
     curseforge_url: https://www.curseforge.com/minecraft/mc-mods/ftb-teams-forge
-    notes: "Derived from latest-modlist.md; this is not a manifest with exact versions."
+    notes: *note
     server_pack_action: keep
-    reason: "Shared gameplay/dependency in docs; still verify against release manifest."
+    reason: "FTB team data should stay aligned."
   - name: "FTB Library"
     category: "APIs / Cores / Libs"
     side: both
-    side_confidence: likely
-    purpose: "Core FTB dependency used by FTB modules."
+    side_confidence: "official source"
+    purpose: "FTB core dependency."
     curseforge_url: https://www.curseforge.com/minecraft/mc-mods/ftb-library-forge
-    notes: "Derived from latest-modlist.md; this is not a manifest with exact versions."
+    notes: *note
     server_pack_action: keep
-    reason: "Shared gameplay/dependency in docs; still verify against release manifest."
+    reason: "Shared FTB dependency should stay with FTB modules."
   - name: "Exposure Catalog"
     category: "APIs / Cores / Libs"
     side: both
-    side_confidence: likely
-    purpose: "Exposure add-on/dependency content support."
+    side_confidence: "official source"
+    purpose: "Exposure add-on support."
     curseforge_url: https://www.curseforge.com/minecraft/mc-mods/exposure-catalog
-    notes: "Derived from latest-modlist.md; this is not a manifest with exact versions."
+    notes: *note
     server_pack_action: keep
-    reason: "Shared gameplay/dependency in docs; still verify against release manifest."
+    reason: "Exposure add-on should stay with Exposure unless tested otherwise."
   - name: "FTB XMod Compat"
     category: "APIs / Cores / Libs"
     side: both
-    side_confidence: likely
-    purpose: "Compatibility bridge for FTB-related integrations."
+    side_confidence: "official source"
+    purpose: "FTB compatibility bridge."
     curseforge_url: https://www.curseforge.com/minecraft/mc-mods/ftb-xmod-compat
-    notes: "Derived from latest-modlist.md; this is not a manifest with exact versions."
+    notes: *note
     server_pack_action: keep
-    reason: "Shared gameplay/dependency in docs; still verify against release manifest."
+    reason: "FTB compatibility dependency should stay with FTB stack."
   - name: "GlitchCore"
     category: "APIs / Cores / Libs"
     side: unknown
-    side_confidence: unknown
-    purpose: "Library/core dependency for world/content mods."
+    side_confidence: "needs verification"
+    purpose: "Library/core dependency."
     curseforge_url: https://www.curseforge.com/minecraft/mc-mods/glitchcore
-    notes: "Derived from latest-modlist.md; this is not a manifest with exact versions."
+    notes: *note
     server_pack_action: verify
-    reason: "Side not proven in repository sources."
+    reason: "Library side not proven; do not remove blindly."
   - name: "TerraBlender"
     category: "APIs / Cores / Libs"
     side: both
-    side_confidence: likely
-    purpose: "Biome/worldgen compatibility layer."
+    side_confidence: "official source"
+    purpose: "Biome/worldgen compatibility."
     curseforge_url: https://www.curseforge.com/minecraft/mc-mods/terrablender
-    notes: "Derived from latest-modlist.md; this is not a manifest with exact versions."
+    notes: *note
     server_pack_action: keep
-    reason: "Shared gameplay/dependency in docs; still verify against release manifest."
-  - name: "Entity Texture Features"
+    reason: "Worldgen dependency must be present on a dedicated server."
+  - name: "[ETF] Entity Texture Features - [Fabric & Forge]"
     category: "APIs / Cores / Libs"
     side: client
-    side_confidence: likely
-    purpose: "Client entity texture feature support."
+    side_confidence: "dedicated-server safe"
+    purpose: "Client entity texture features."
     curseforge_url: https://www.curseforge.com/minecraft/mc-mods/entity-texture-features-fabric
-    notes: "Derived from latest-modlist.md; this is not a manifest with exact versions."
+    notes: *note
     server_pack_action: remove
-    reason: "Likely client-side only on dedicated server; verify before removal."
-  - name: "Entity Model Features"
+    reason: "Server-safe removal: client entity textures."
+  - name: "[EMF] Entity Model Features [Fabric & Forge]"
     category: "APIs / Cores / Libs"
     side: client
-    side_confidence: likely
-    purpose: "Client entity model feature support."
+    side_confidence: "dedicated-server safe"
+    purpose: "Client entity model features."
     curseforge_url: https://www.curseforge.com/minecraft/mc-mods/entity-model-features
-    notes: "Derived from latest-modlist.md; this is not a manifest with exact versions."
+    notes: *note
     server_pack_action: remove
-    reason: "Likely client-side only on dedicated server; verify before removal."
+    reason: "Server-safe removal: client entity models."
   - name: "Structure Gel API"
     category: "APIs / Cores / Libs"
     side: both
-    side_confidence: likely
-    purpose: "Structure-generation API dependency."
+    side_confidence: "official source"
+    purpose: "Structure-generation API."
     curseforge_url: https://www.curseforge.com/minecraft/mc-mods/structure-gel-api
-    notes: "Derived from latest-modlist.md; this is not a manifest with exact versions."
+    notes: *note
     server_pack_action: keep
-    reason: "Shared gameplay/dependency in docs; still verify against release manifest."
+    reason: "Structure generation dependency must be present on a dedicated server."
   - name: "Citadel"
     category: "APIs / Cores / Libs"
     side: both
-    side_confidence: likely
-    purpose: "Library dependency for mob/content mods."
+    side_confidence: "official source"
+    purpose: "Mob/content dependency library."
     curseforge_url: https://www.curseforge.com/minecraft/mc-mods/citadel
-    notes: "Derived from latest-modlist.md; this is not a manifest with exact versions."
+    notes: *note
     server_pack_action: keep
-    reason: "Shared gameplay/dependency in docs; still verify against release manifest."
+    reason: "Mob/content dependency should stay with required mods."
   - name: "Konkrete"
     category: "APIs / Cores / Libs"
     side: unknown
-    side_confidence: unknown
-    purpose: "Library dependency; verify exact required side."
+    side_confidence: "needs verification"
+    purpose: "Dependency library."
     curseforge_url: https://www.curseforge.com/minecraft/mc-mods/konkrete
-    notes: "Derived from latest-modlist.md; this is not a manifest with exact versions."
+    notes: *note
     server_pack_action: verify
-    reason: "Side not proven in repository sources."
+    reason: "Library side not proven; do not remove blindly."
   - name: "Cristel Lib"
     category: "APIs / Cores / Libs"
     side: unknown
-    side_confidence: unknown
-    purpose: "Library dependency; verify with dependent mods."
+    side_confidence: "needs verification"
+    purpose: "Dependency library."
     curseforge_url: https://www.curseforge.com/minecraft/mc-mods/cristel-lib
-    notes: "Derived from latest-modlist.md; this is not a manifest with exact versions."
+    notes: *note
     server_pack_action: verify
-    reason: "Side not proven in repository sources."
+    reason: "Library side not proven; do not remove blindly."
   - name: "Valhelsia Core"
     category: "APIs / Cores / Libs"
     side: both
-    side_confidence: likely
-    purpose: "Core dependency for Valhelsia modules."
+    side_confidence: "official source"
+    purpose: "Valhelsia core dependency."
     curseforge_url: https://www.curseforge.com/minecraft/mc-mods/valhelsia-core
-    notes: "Derived from latest-modlist.md; this is not a manifest with exact versions."
+    notes: *note
     server_pack_action: keep
-    reason: "Shared gameplay/dependency in docs; still verify against release manifest."
+    reason: "Valhelsia dependency should stay with Valhelsia content."
   - name: "Sound Physics Remastered"
     category: "Sound"
     side: client
-    side_confidence: likely
-    purpose: "Client sound occlusion/reverb immersion."
+    side_confidence: "dedicated-server safe"
+    purpose: "Client sound simulation."
     curseforge_url: https://www.curseforge.com/minecraft/mc-mods/sound-physics-remastered
-    notes: "Derived from latest-modlist.md; this is not a manifest with exact versions."
+    notes: *note
     server_pack_action: remove
-    reason: "Likely client-side only on dedicated server; verify before removal."
+    reason: "Server-safe removal: client sound simulation."
   - name: "Presence Footsteps"
     category: "Sound"
     side: client
-    side_confidence: likely
-    purpose: "Client footstep audio detail and atmosphere."
+    side_confidence: "dedicated-server safe"
+    purpose: "Client footstep audio."
     curseforge_url: https://www.curseforge.com/minecraft/mc-mods/presence-footsteps-forge
-    notes: "Derived from latest-modlist.md; this is not a manifest with exact versions."
+    notes: *note
     server_pack_action: remove
-    reason: "Likely client-side only on dedicated server; verify before removal."
+    reason: "Server-safe removal: client footstep audio."
   - name: "AmbientSounds 6"
     category: "Sound"
     side: client
-    side_confidence: likely
-    purpose: "Client ambient soundscape and mood layer."
+    side_confidence: "dedicated-server safe"
+    purpose: "Client ambient audio."
     curseforge_url: https://www.curseforge.com/minecraft/mc-mods/ambientsounds
-    notes: "Derived from latest-modlist.md; this is not a manifest with exact versions."
+    notes: *note
     server_pack_action: remove
-    reason: "Likely client-side only on dedicated server; verify before removal."
+    reason: "Server-safe removal: client ambient audio."
   - name: "Simple Voice Chat"
     category: "Sound"
     side: both
-    side_confidence: likely
-    purpose: "Proximity voice chat; clients and server must align."
+    side_confidence: "official source"
+    purpose: "Proximity voice chat."
     curseforge_url: https://www.curseforge.com/minecraft/mc-mods/simple-voice-chat
-    notes: "Derived from latest-modlist.md; this is not a manifest with exact versions."
+    notes: *note
     server_pack_action: keep
-    reason: "Shared gameplay/dependency in docs; still verify against release manifest."
+    reason: "Voice chat requires matching client/server support."
   - name: "Just Zoom"
     category: "Zoom"
     side: client
-    side_confidence: likely
+    side_confidence: "dedicated-server safe"
     purpose: "Client zoom control."
     curseforge_url: https://www.curseforge.com/minecraft/mc-mods/just-zoom
-    notes: "Derived from latest-modlist.md; this is not a manifest with exact versions."
+    notes: *note
     server_pack_action: remove
-    reason: "Likely client-side only on dedicated server; verify before removal."
-  - name: "Timeless and Classics Zero Guns"
+    reason: "Server-safe removal: client zoom control."
+  - name: "[TaCZ] Timeless and Classics Zero Guns"
     category: "Weapons"
     side: both
-    side_confidence: likely
+    side_confidence: "official source"
     purpose: "Firearms gameplay content."
     curseforge_url: https://www.curseforge.com/minecraft/mc-mods/timeless-and-classics-zero
-    notes: "Derived from latest-modlist.md; this is not a manifest with exact versions."
+    notes: *note
     server_pack_action: keep
-    reason: "Shared gameplay/dependency in docs; still verify against release manifest."
+    reason: "Weapon gameplay belongs on client and dedicated server."
   - name: "Mouse Tweaks"
     category: "Tweaks"
     side: client
-    side_confidence: likely
-    purpose: "Client inventory mouse behavior improvements."
+    side_confidence: "dedicated-server safe"
+    purpose: "Client inventory controls."
     curseforge_url: https://www.curseforge.com/minecraft/mc-mods/mouse-tweaks
-    notes: "Derived from latest-modlist.md; this is not a manifest with exact versions."
+    notes: *note
     server_pack_action: remove
-    reason: "Likely client-side only on dedicated server; verify before removal."
+    reason: "Server-safe removal: client inventory controls."
   - name: "Corpse"
     category: "Inventory Recover"
     side: both
-    side_confidence: likely
-    purpose: "Death inventory recovery corpse system."
+    side_confidence: "official source"
+    purpose: "Death inventory recovery."
     curseforge_url: https://www.curseforge.com/minecraft/mc-mods/corpse
-    notes: "Derived from latest-modlist.md; this is not a manifest with exact versions."
+    notes: *note
     server_pack_action: keep
-    reason: "Shared gameplay/dependency in docs; still verify against release manifest."
+    reason: "Death inventory gameplay belongs on server and clients."
   - name: "Immersive Aircraft"
     category: "Transportation"
     side: both
-    side_confidence: likely
-    purpose: "Aircraft/transportation gameplay content."
+    side_confidence: "official source"
+    purpose: "Aircraft gameplay."
     curseforge_url: https://www.curseforge.com/minecraft/mc-mods/immersive-aircraft
-    notes: "Derived from latest-modlist.md; this is not a manifest with exact versions."
+    notes: *note
     server_pack_action: keep
-    reason: "Shared gameplay/dependency in docs; still verify against release manifest."
+    reason: "Vehicle gameplay belongs on client and dedicated server."
   - name: "Carry On"
     category: "Transportation"
     side: both
-    side_confidence: likely
-    purpose: "Pick up and move blocks/entities gameplay."
+    side_confidence: "official source"
+    purpose: "Carry blocks/entities."
     curseforge_url: https://www.curseforge.com/minecraft/mc-mods/carry-on
-    notes: "Derived from latest-modlist.md; this is not a manifest with exact versions."
+    notes: *note
     server_pack_action: keep
-    reason: "Shared gameplay/dependency in docs; still verify against release manifest."
+    reason: "Gameplay mechanic belongs on server and clients."
   - name: "Valhelsia Furniture"
     category: "Furniture"
     side: both
-    side_confidence: likely
-    purpose: "Furniture blocks and decoration content."
+    side_confidence: "official source"
+    purpose: "Furniture blocks."
     curseforge_url: https://www.curseforge.com/minecraft/mc-mods/valhelsia-furniture
-    notes: "Derived from latest-modlist.md; this is not a manifest with exact versions."
+    notes: *note
     server_pack_action: keep
-    reason: "Shared gameplay/dependency in docs; still verify against release manifest."
+    reason: "Block/content mod belongs on client and dedicated server."
   - name: "Traveler's Backpack"
     category: "Inventory"
     side: both
-    side_confidence: likely
-    purpose: "Wearable/portable storage gameplay content."
+    side_confidence: "official source"
+    purpose: "Portable storage gameplay."
     curseforge_url: https://www.curseforge.com/minecraft/mc-mods/travelers-backpack
-    notes: "Derived from latest-modlist.md; this is not a manifest with exact versions."
+    notes: *note
     server_pack_action: keep
-    reason: "Shared gameplay/dependency in docs; still verify against release manifest."
+    reason: "Inventory gameplay belongs on server and clients."
   - name: "Just Enough Items"
     category: "Crafting"
     side: client
-    side_confidence: likely
-    purpose: "Recipe/item lookup UI; server pack usually does not need it."
+    side_confidence: "needs verification"
+    purpose: "Recipe/item lookup UI."
     curseforge_url: https://www.curseforge.com/minecraft/mc-mods/jei
-    notes: "Derived from latest-modlist.md; this is not a manifest with exact versions."
-    server_pack_action: remove
-    reason: "Likely client-side only on dedicated server; verify before removal."
+    notes: *note
+    server_pack_action: verify
+    reason: "Client UI tool, but exact release behavior was not proven."
   - name: "Security Craft"
     category: "Security"
     side: both
-    side_confidence: likely
-    purpose: "Security blocks, traps, and base-defense utility."
+    side_confidence: "official source"
+    purpose: "Security blocks and traps."
     curseforge_url: https://www.curseforge.com/minecraft/mc-mods/security-craft
-    notes: "Derived from latest-modlist.md; this is not a manifest with exact versions."
+    notes: *note
     server_pack_action: keep
-    reason: "Shared gameplay/dependency in docs; still verify against release manifest."
+    reason: "Security block/content gameplay belongs on both sides."
   - name: "Nyf's Spiders"
     category: "Other"
     side: both
-    side_confidence: likely
-    purpose: "Spider behavior/model horror upgrade."
+    side_confidence: "official source"
+    purpose: "Spider behavior/model upgrade."
     curseforge_url: https://www.curseforge.com/minecraft/mc-mods/nyfs-spiders
-    notes: "Derived from latest-modlist.md; this is not a manifest with exact versions."
+    notes: *note
     server_pack_action: keep
-    reason: "Shared gameplay/dependency in docs; still verify against release manifest."
+    reason: "Mob behavior/content belongs on both sides."
