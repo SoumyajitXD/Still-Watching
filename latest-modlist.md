@@ -4,7 +4,6 @@
 > This is an admin reference, not a playable manifest. Use CurseForge release files for exact mod versions and truth.
 
 Current documented release: **Still Watching V1.0.9**.
-Minecraft: **1.20.1** | Loader: **Forge** | Java: **17** | CurseForge Project ID: **1420406**
 
 ## APIs / Cores / Libs
 
