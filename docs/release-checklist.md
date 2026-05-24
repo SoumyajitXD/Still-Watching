@@ -42,6 +42,8 @@ git diff --check
 - Verify project ID `1420406`.
 - Verify Minecraft `1.20.1`.
 - Verify Forge loader.
+- Try to inspect the exact CurseForge file manifest or matching release archive for **Still Watching V1.0.9** before changing exact mod membership, versions, file IDs, overrides, or server-pack claims.
+- If the exact V1.0.9 manifest/server pack is not accessible, keep exact mod metadata marked as requiring manifest/server-pack verification. Do not invent exact versions or exact membership.
 - Keep Java 17 guidance where relevant.
 - Confirm the CurseForge file changelog does not conflict with GitHub `CHANGELOG.md`.
 - Do not promise a server pack unless the selected CurseForge file actually provides one.
