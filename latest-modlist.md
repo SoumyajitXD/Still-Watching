@@ -65,11 +65,11 @@
 | Just Enough Items (JEI) (by mezz) | [Curseforge](https://www.curseforge.com/minecraft/mc-mods/jei) |
 | From The Fog (by LunarEclipseStudios) | [Curseforge](https://www.curseforge.com/minecraft/mc-mods/from-the-fog) |
 | FTB Teams (NeoForge) (by FTB) | [Curseforge](https://www.curseforge.com/minecraft/mc-mods/ftb-teams-forge) |
-| Sodium/Embeddium Extras (by Txni) | [Curseforge](https://www.curseforge.com/minecraft/mc-mods/magnesium-extras) |
+| Chloride (Previously Embeddium++/Sodium++) (by SrRapero720) | [Curseforge](https://www.curseforge.com/minecraft/mc-mods/chloride) |
 | Biomes O' Plenty (by Forstride) | [Curseforge](https://www.curseforge.com/minecraft/mc-mods/biomes-o-plenty) |
 | CreativeCore (by CreativeMD) | [Curseforge](https://www.curseforge.com/minecraft/mc-mods/creativecore) |
 | FTB Library (NeoForge) (by FTB) | [Curseforge](https://www.curseforge.com/minecraft/mc-mods/ftb-library-forge) |
-| Sodium/Embeddium Dynamic Lights (by Txni) | [Curseforge](https://www.curseforge.com/minecraft/mc-mods/dynamiclights-reforged) |
+| Dynamic Lights (by atomicstrykergrumpy) | [Curseforge](https://www.curseforge.com/minecraft/mc-mods/dynamic-lights) |
 | Architectury API (by shedaniel) | [Curseforge](https://www.curseforge.com/minecraft/mc-mods/architectury-api) |
 | Explorify – Dungeons & Structures (by bebebea_loste) | [Curseforge](https://www.curseforge.com/minecraft/mc-mods/explorify) |
 | Traveler's Backpack (by Tiviacz1337) | [Curseforge](https://www.curseforge.com/minecraft/mc-mods/travelers-backpack) |
