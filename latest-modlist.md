@@ -1,6 +1,6 @@
 # Modlist
 
-**Version:** Still Watching V1.0.9 (latest)
+**Version:** Still Watching V1.1.0 (latest)
 
 | Name | Curseforge |
 |---|---|
