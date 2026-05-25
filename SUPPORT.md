@@ -1,6 +1,6 @@
 # Support
 
-Need help with **Still Watching V1.0.9**? Start with the official path before blaming the fog.
+Need help with **Still Watching V1.1.0**? Start with the official path before blaming the fog.
 
 | Item | Value |
 | --- | --- |
