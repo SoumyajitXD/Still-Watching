@@ -1,0 +1,10 @@
+mods:
+  - name: Still Watching modlist reference
+    category: Repository metadata
+    side: unknown
+    side_confidence: unknown
+    purpose: Placeholder metadata record used only when data/project.yml is present.
+    curseforge_url: https://www.curseforge.com/minecraft/modpacks/still-watching
+    notes: The authoritative playable modpack manifest remains the CurseForge release file; latest-modlist.md preserves the human-readable pack reference.
+    server_pack_action: verify
+    reason: Use CurseForge release files and dedicated-server testing for exact server pack decisions.
