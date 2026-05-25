@@ -6,7 +6,7 @@ Current documented baseline:
 
 | Item | Value |
 | --- | --- |
-| Release | Still Watching V1.0.9 |
+| Release | Still Watching V1.1.0 |
 | Minecraft | `1.20.1` |
 | Loader | Forge |
 | Java | Java 17 where required |
