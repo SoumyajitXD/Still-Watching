@@ -1,5 +1,8 @@
 # Modlist
 
+> [!WARNING]
+> This is an admin reference, not a playable manifest. Use the official CurseForge release files for exact versions and installation truth.
+
 **Version:** Still Watching V1.0.9 (latest)
 
 | Name | Curseforge |
