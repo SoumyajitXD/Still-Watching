@@ -59,7 +59,7 @@ You are still playing Minecraft. You are just no longer allowed to pretend the d
 | **Project name** | Still Watching |
 | **Creator** | Soumyajit |
 | **Type** | Minecraft Java Edition horror-survival modpack |
-| **Current documented release** | Still Watching V1.0.9 |
+| **Current documented release** | Still Watching V1.1.0 |
 | **Minecraft version** | `1.20.1` |
 | **Loader** | Forge |
 | **Java** | Java `17` if the launcher asks |
@@ -165,7 +165,7 @@ it broke fix pls
 Good report:
 
 ```text
-Pack version: Still Watching V1.0.9
+Pack version: Still Watching V1.1.0
 Launcher: CurseForge App
 Minecraft: 1.20.1
 Mode: Singleplayer
