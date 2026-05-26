@@ -1,71 +1,193 @@
 # Contributing
 
-Still Watching accepts useful work, not random noise wearing a pull request costume.
+Still Watching accepts useful work: fixes, evidence, clean documentation, reproducible bug reports, and changes that make the modpack easier to install, maintain, validate, or troubleshoot.
 
-Current documented baseline:
+It does not need random noise wearing a pull request costume.
+
+---
+
+## Project Baseline
 
 | Item | Value |
 | --- | --- |
-| Release | Still Watching V1.1.0 |
+| Project | Still Watching |
+| Type | Minecraft Java Edition horror-survival modpack |
 | Minecraft | `1.20.1` |
 | Loader | Forge |
 | Java | Java 17 where required |
-| Official install source | CurseForge |
+| Official playable release | CurseForge |
 | CurseForge Project ID | `1420406` |
+| Repository license | Apache-2.0 for original repository files only |
 
-## What We Accept
+Install from CurseForge when testing playable behavior. The GitHub ZIP is repository source content, not a playable modpack installer.
 
-- Documentation fixes that help players, server admins, or maintainers.
-- Reproducible bug reports with logs and clean-install status.
-- Compatibility notes backed by testing on the documented release.
-- Corrections to broken links, metadata, credits, attribution, or release facts.
-- Validation or automation changes that keep docs and release-side files consistent.
+---
 
-## What We Reject
+## What Contributions Help
 
-- Claims that the GitHub ZIP is a playable installer.
-- Random mod requests with no design reason, testing, or compatibility evidence.
-- Server-pack guesses presented as fact.
-- Crash reports with no logs, no reproduction steps, and no clean baseline.
-- Edits that flatten the pack into generic modpack paste.
-- Changes that remove, weaken, or damage required sponsor content.
+Good contributions usually fall into one of these buckets:
 
-## Tone
+- documentation fixes for players, server admins, contributors, or maintainers;
+- reproducible bug reports with logs and clean-install testing;
+- server-pack corrections backed by actual dedicated-server testing;
+- mod metadata corrections backed by source/release evidence;
+- broken link fixes;
+- typo, formatting, table, and navigation improvements;
+- validation or automation improvements;
+- compatibility notes for the documented release;
+- performance observations with hardware, settings, and logs;
+- screenshots or presentation improvements that fit the pack’s identity.
 
-Keep it sharp, direct, and horror-flavored. No corporate fog machine. No bland wiki sludge. The pack has personality; do not sandblast it into beige.
+Useful work makes the project clearer. Useless work makes maintainers dig through fog with a spoon.
 
-That said, personality is not a permission slip for fake certainty. If something is unverified, say so.
+---
 
-## Before You Edit Release-Facing Docs
+## What Will Usually Be Rejected
 
-Run the generator only when you are intentionally updating generated files from source data:
+Do not open issues or pull requests for:
 
-```bash
-python .github/scripts/generate_docs.py
-```
+- installing from the GitHub ZIP and then reporting that it does not work;
+- cracked-launcher support;
+- reuploaded modpack files or unofficial mirrors;
+- random mod dumps with no design reason or testing;
+- adding horror mobs just because they exist;
+- server/client-side claims without evidence;
+- crash screenshots without logs;
+- vague reports like “broken,” “fix,” or “doesn’t work”;
+- copyrighted assets, copied branding, stolen files, or bundled mod JARs that do not belong in this repository;
+- changes that strip the pack’s horror identity into bland generic modpack sludge;
+- changes that remove required credits, attribution, licensing notes, or sponsor-related content.
 
-Always run validation before committing release-facing documentation:
+The pack has a theme. If a change does not serve that theme or maintenance reality, it is probably clutter.
+
+---
+
+## Before Opening an Issue
+
+Check the basics first:
+
+1. Install the latest release from CurseForge.
+2. Launch once with no extra mods, shaders, or resource packs.
+3. Confirm Minecraft `1.20.1` and the correct Forge environment.
+4. Use Java 17 if the launcher/server asks.
+5. Allocate enough RAM: `5 GB` minimum, `6–8 GB` preferred.
+6. Reproduce the issue.
+7. Collect `logs/latest.log` and any crash report.
+
+A bug report without logs is not a report. It is a campfire story with stack traces missing.
+
+---
+
+## Bug Report Checklist
+
+When reporting a bug, include:
+
+- Still Watching version;
+- whether it came from CurseForge;
+- singleplayer or multiplayer;
+- client or dedicated server;
+- operating system;
+- Java version, if relevant;
+- steps to reproduce;
+- expected behavior;
+- actual behavior;
+- logs and crash reports;
+- whether the issue happens on a clean CurseForge install;
+- any extra mods, shaders, resource packs, or config edits.
+
+Do not paste giant logs directly into the issue body unless they are short. Use attachments or a paste service when needed, and remove secrets/private details first.
+
+---
+
+## Pull Request Guidelines
+
+Pull requests should be focused. One clear job per PR.
+
+Good PRs:
+
+- explain what changed and why;
+- link related issues when relevant;
+- avoid unrelated rewrites;
+- preserve the existing project tone;
+- keep tables and docs readable;
+- include validation results when the change touches generated or release-facing files.
+
+Bad PRs try to remodel the whole haunted house because one window squeaked.
+
+---
+
+## Documentation Style
+
+Keep the writing:
+
+- direct;
+- specific;
+- useful;
+- horror-flavored where it fits;
+- honest about uncertainty.
+
+Avoid:
+
+- corporate filler;
+- fake certainty;
+- giant paragraphs nobody will read;
+- jokes that hide important instructions;
+- vague claims like “optimized,” “fixed,” or “compatible” without proof.
+
+Personality is seasoning. Accuracy is the meal. Do not serve a bowl of paprika.
+
+---
+
+## Mod Metadata and Server-Pack Changes
+
+Changes involving mods, sides, dependencies, loaders, or server-pack behavior need evidence.
+
+Rules:
+
+1. Edit source metadata only when you have real release evidence.
+2. Keep `unknown`, `verify`, or cautious wording when proof is missing.
+3. Do not call a mod server-safe because it “looks client-only.” That is how servers become smoke.
+4. Regenerate derived docs when source data changes.
+5. Validate before committing.
+
+If a change affects dedicated servers, test it on a dedicated server or clearly say it still needs testing.
+
+---
+
+## Validation
+
+Before committing release-facing documentation or generated-file changes, run:
 
 ```bash
 python .github/scripts/validate.py all
 ```
 
-Also check whitespace before shipping:
+When intentionally updating generated docs from source data, run the generator first:
+
+```bash
+python .github/scripts/generate_docs.py
+```
+
+Then check for whitespace errors:
 
 ```bash
 git diff --check
 ```
 
-## Updating Mod Metadata
+If you cannot run validation, say so in the PR or issue. Silence makes reviewers assume you skipped it and hoped the fog would cover the body.
 
-1. Edit `data/mods.yml` only from real release evidence.
-2. Keep `unknown` or `verify` labels when side/support proof is missing.
-3. Do not call a mod server-safe because it "looks client-only".
-4. Regenerate `latest-modlist.md` after metadata changes.
-5. Validate the repository.
+---
 
-## Bug Reports
+## Security Reports
 
-Use the issue templates. Include logs, reproduction steps, version details, and whether the issue happens on a clean CurseForge install.
+Do not post secrets, tokens, private server addresses, or sensitive logs publicly.
 
-A useful report gives someone a trail to follow. A useless report just screams in the woods and expects the trees to debug Java.
+Use normal GitHub Issues only for non-sensitive security concerns, suspicious public links, fake downloads, or unsafe public references. See [`SECURITY.md`](./SECURITY.md) before reporting security-related issues.
+
+---
+
+## Support
+
+For installation help, troubleshooting, and where to ask questions, read [`SUPPORT.md`](./SUPPORT.md).
+
+A Discord server may be added later. Until it exists and is officially linked, GitHub and CurseForge are the project’s public support path.
