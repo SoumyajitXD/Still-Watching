@@ -23,6 +23,26 @@ Install from CurseForge when testing playable behavior. The GitHub ZIP is reposi
 
 ---
 
+## License Scope
+
+This repository is licensed under the [Apache License 2.0](./LICENSE) for original repository files created for Still Watching, such as documentation, metadata, scripts, configuration source, validation helpers, and other project-maintained files unless a file clearly says otherwise.
+
+That does **not** relicense Minecraft, Forge, CurseForge, third-party mods, third-party assets, screenshots containing third-party content, trademarks, logos, mod names, or external project content. Those stay under their own owners' licenses, terms, and permissions.
+
+Do not submit files you do not have the right to contribute. Do not upload mod JARs, copied assets, ripped textures, stolen logos, private files, or anything that would make licensing a dumpster fire with a README.
+
+---
+
+## Contribution License
+
+By opening a pull request or otherwise contributing original content to this repository, you agree that your contribution may be used, modified, reproduced, and distributed under the repository's Apache-2.0 license unless you clearly mark a different compatible license and the maintainer accepts it.
+
+Contributions must be your own work, public-domain material, or material you are allowed to submit under compatible terms. If attribution is required, include it clearly in the relevant file or PR description.
+
+This is not legal advice. It is the project rule: do not bring licensing grenades into the modpack.
+
+---
+
 ## What Contributions Help
 
 Good contributions usually fall into one of these buckets:
@@ -54,7 +74,7 @@ Do not open issues or pull requests for:
 - server/client-side claims without evidence;
 - crash screenshots without logs;
 - vague reports like “broken,” “fix,” or “doesn’t work”;
-- copyrighted assets, copied branding, stolen files, or bundled mod JARs that do not belong in this repository;
+- copyrighted assets, copied branding, stolen files, bundled mod JARs, or content you cannot license to this repository;
 - changes that strip the pack’s horror identity into bland generic modpack sludge;
 - changes that remove required credits, attribution, licensing notes, or sponsor-related content.
 
@@ -110,7 +130,8 @@ Good PRs:
 - avoid unrelated rewrites;
 - preserve the existing project tone;
 - keep tables and docs readable;
-- include validation results when the change touches generated or release-facing files.
+- include validation results when the change touches generated or release-facing files;
+- preserve license notices, attribution, credits, and third-party references.
 
 Bad PRs try to remodel the whole haunted house because one window squeaked.
 
@@ -147,8 +168,9 @@ Rules:
 1. Edit source metadata only when you have real release evidence.
 2. Keep `unknown`, `verify`, or cautious wording when proof is missing.
 3. Do not call a mod server-safe because it “looks client-only.” That is how servers become smoke.
-4. Regenerate derived docs when source data changes.
-5. Validate before committing.
+4. Preserve third-party mod names, links, credits, and license/permission notes.
+5. Regenerate derived docs when source data changes.
+6. Validate before committing.
 
 If a change affects dedicated servers, test it on a dedicated server or clearly say it still needs testing.
 
