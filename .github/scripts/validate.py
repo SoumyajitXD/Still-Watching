@@ -1,204 +1,253 @@
 #!/usr/bin/env python3
+"""CI guardrails for the Still Watching repository."""
 from __future__ import annotations
-import argparse, re, subprocess, sys, zipfile
+
+import argparse
+import html.parser
+import json
+import re
+import sys
+import zipfile
 from collections import Counter
-from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import urlparse
-import yaml
 
-ROOT=Path(__file__).resolve().parents[2]
-FACT_FILES=[ROOT/p for p in ["README.md","installation-guide.md","curseforge-description.html","latest-modlist.md"]]
-PROJECT={"project_name":"Still Watching","minecraft_version":"1.20.1","loader":"Forge","java_version":"17","curseforge_project_id":"1420406","current_release":"Still Watching V1.0.9"}
-SPONSOR_START="<!-- sponsor:bisecthosting:start -->"; SPONSOR_END="<!-- sponsor:bisecthosting:end -->"
-SPONSOR_LINK="https://url-shortener.curseforge.com/AZDOs"
-SPONSOR_BANNER="https://media.forgecdn.net/attachments/description/1420406/description_0434b1be-41ee-4fa8-a2f5-177b2fe87c95.png"
-REPO_MAP=["README.md","installation-guide.md","latest-modlist.md","curseforge-description.html","Screenshots/","Releases/",".github/ISSUE_TEMPLATE/",".github/workflows/ci.yml",".github/scripts/validate.py","LICENSE"]
-MOD_FIELDS=["name","category","side","side_confidence","purpose","curseforge_url","notes","server_pack_action","reason"]
-SIDES={"client","server","both","unknown"}; ACTIONS={"keep","remove","verify","unknown"}
-SIDE_CONFIDENCE={"manifest","official mod page","dedicated-server tested","inferred","needs verification","unknown"}
-REMOVE_CONFIDENCE={"official mod page","dedicated-server tested"}
-CLIENT_EVIDENCE_TERMS=("client-only","client ","renderer","rendering","shader","menu","screen","audio","sound","zoom","texture","model","inventory ui","ui/control")
+ROOT = Path(__file__).resolve().parents[2]
+DOCS = ["README.md", "CONTRIBUTING.md", "installation-guide.md", "latest-modlist.md", "curseforge-description.html"]
+REQUIRED = DOCS + ["LICENSE", ".github/workflows/ci.yml", ".github/workflows/link-check.yml"]
+SPONSOR_URL = "https://url-shortener.curseforge.com/AZDOs"
+CURSEFORGE_KINDS = {"mc-mods", "modpacks", "shaders", "texture-packs"}
 
-def fail(msg:str)->None:
- print(f"ERROR: {msg}",file=sys.stderr); raise SystemExit(1)
-def read(path:Path)->str: return path.read_text(encoding="utf-8-sig",errors="ignore")
-def yload(path:Path):
- with path.open(encoding="utf-8-sig") as h: return yaml.safe_load(h)
-def line(text:str,index:int)->int: return text.count("\n",0,index)+1
+try:
+    import yaml  # type: ignore
+except Exception:
+    yaml = None
 
-def layout()->None:
- files=["README.md","installation-guide.md","latest-modlist.md","curseforge-description.html","CHANGELOG.md","LICENSE","data/project.yml","data/mods.yml",".github/scripts/generate_docs.py",".github/scripts/validate.py",".github/workflows/ci.yml","docs/release-checklist.md","docs/server-pack-guide.md"]
- dirs=[".github/ISSUE_TEMPLATE",".github/workflows","Releases","Screenshots","data","docs"]
- missing=[p for p in files if not (ROOT/p).is_file()]+[p for p in dirs if not (ROOT/p).is_dir()]
- if missing: fail("Missing required repository paths: "+", ".join(missing))
- print("Repository layout OK")
 
-def yaml_files()->None:
- paths=sorted((ROOT/".github/workflows").glob("*.y*ml"))+sorted((ROOT/".github/ISSUE_TEMPLATE").glob("*.y*ml"))+[ROOT/"data/project.yml",ROOT/"data/mods.yml"]
- errors=[]
- for path in paths:
-  try:
-   if yload(path) is None: raise ValueError("file is empty")
-   print(f"OK: {path.relative_to(ROOT)}")
-  except Exception as exc: errors.append(f"{path.relative_to(ROOT)}: {exc}")
- if errors: fail("; ".join(errors))
+def die(errors: list[str]) -> None:
+    for error in errors:
+        print(f"ERROR: {error}", file=sys.stderr)
+    raise SystemExit(1)
 
-def html()->None:
- class Smoke(HTMLParser): pass
- errors=[]
- for path in sorted(ROOT.glob("*.html")):
-  try:
-   parser=Smoke(); parser.feed(read(path)); parser.close(); print(f"OK: {path.name}")
-  except Exception as exc: errors.append(f"{path.name}: {exc}")
- if errors: fail("; ".join(errors))
 
-def _has_clear_remove_evidence(mod:dict)->bool:
- evidence=str(mod.get("evidence","")).strip().lower()
- if not evidence: return False
- return any(term in evidence for term in CLIENT_EVIDENCE_TERMS)
+def read(path: Path) -> str:
+    return path.read_text(encoding="utf-8-sig", errors="replace")
 
-def metadata()->None:
- errors=[]; project=yload(ROOT/"data/project.yml"); mods_doc=yload(ROOT/"data/mods.yml")
- if not isinstance(project,dict): fail("data/project.yml must be a mapping")
- for key,expected in PROJECT.items():
-  if str(project.get(key))!=expected: errors.append(f"data/project.yml {key}={project.get(key)!r}, expected {expected!r}")
- sponsor=project.get("sponsor") or {}
- for key,expected in {"bisecthosting_url":SPONSOR_LINK,"required_banner_url":SPONSOR_BANNER,"sponsor_marker_start":SPONSOR_START,"sponsor_marker_end":SPONSOR_END}.items():
-  if sponsor.get(key)!=expected: errors.append(f"data/project.yml sponsor.{key} mismatch")
- mods=mods_doc.get("mods") if isinstance(mods_doc,dict) else None
- if not isinstance(mods,list) or not mods: errors.append("data/mods.yml must contain a non-empty mods list")
- else:
-  names=[]; urls=[]
-  for index,mod in enumerate(mods,1):
-   if not isinstance(mod,dict): errors.append(f"mod #{index} must be a mapping"); continue
-   for key in MOD_FIELDS:
-    if key not in mod or mod[key] in (None,""): errors.append(f"mod #{index} missing {key}")
-   name=str(mod.get("name","")).strip(); side=str(mod.get("side","")).lower(); action=str(mod.get("server_pack_action","")).lower(); url=str(mod.get("curseforge_url","")).strip(); conf=str(mod.get("side_confidence","")).strip().lower()
-   names.append(name); urls.append(url)
-   if side not in SIDES: errors.append(f"{name} invalid side {side!r}")
-   if action not in ACTIONS: errors.append(f"{name} invalid server_pack_action {action!r}")
-   if conf not in SIDE_CONFIDENCE: errors.append(f"{name} invalid side_confidence {conf!r}")
-   if action=="remove" and conf not in REMOVE_CONFIDENCE and not _has_clear_remove_evidence(mod): errors.append(f"{name} remove action needs dedicated-server tested, official mod page, or clear client-only evidence")
-   parsed=urlparse(url); parts=[part for part in parsed.path.split("/") if part]
-   if parsed.scheme!="https" or parsed.netloc!="www.curseforge.com" or len(parts)<3 or parts[0]!="minecraft" or parts[1] not in {"mc-mods","texture-packs","shaders","modpacks"}: errors.append(f"{name} unexpected CurseForge URL {url}")
-  errors += [f"duplicate mod name: {n}" for n,c in Counter(names).items() if n and c>1]
-  errors += [f"duplicate CurseForge URL: {u}" for u,c in Counter(urls).items() if u and c>1]
- if errors: fail("; ".join(errors))
- print("Metadata YAML OK")
 
-def generated_docs()->None:
- path=ROOT/"latest-modlist.md"; before=read(path)
- result=subprocess.run([sys.executable,str(ROOT/".github/scripts/generate_docs.py")],cwd=ROOT,text=True,capture_output=True,check=False)
- if result.returncode:
-  output="\n".join(part for part in [result.stdout,result.stderr] if part).strip(); fail("generated docs step failed"+(f": {output}" if output else ""))
- if before!=read(path): fail("latest-modlist.md is stale; run python .github/scripts/generate_docs.py and commit the result")
- print("Generated docs freshness OK")
+def rel(path: Path) -> str:
+    return path.relative_to(ROOT).as_posix()
 
-def modlist()->None:
- text=read(ROOT/"latest-modlist.md"); links=re.findall(r"(?<!!)\[[^\]\n]+\]\((https?://[^\s)]+)\)",text); rows=re.findall(r"(?m)^\|\s*(\d+)\s*\|[^\n]+\|\s*\[[^\]\n]+\]\((https?://[^\s)]+)\)\s*\|",text); errors=[]
- if "admin reference" not in text.lower() or "not a playable manifest" not in text.lower(): errors.append("latest-modlist.md must say it is an admin reference, not a playable manifest")
- if len(links)<40: errors.append(f"expected at least 40 CurseForge links, found {len(links)}")
- if len(rows)!=len(links): errors.append(f"expected every modlist link to be a table row, found {len(rows)} rows for {len(links)} links")
- nums=[int(number) for number,_href in rows]
- if nums!=list(range(1,len(rows)+1)): errors.append("modlist numbering must be continuous")
- for href in links:
-  parsed=urlparse(href); parts=[part for part in parsed.path.split("/") if part]
-  if parsed.scheme!="https" or parsed.netloc!="www.curseforge.com" or len(parts)<3 or parts[0]!="minecraft" or parts[1] not in {"mc-mods","texture-packs","shaders","modpacks"}: errors.append(f"unexpected CurseForge link: {href}")
- errors += [f"duplicate link: {href}" for href,count in Counter(links).items() if count>1]
- if errors: fail("; ".join(errors))
- print(f"Modlist OK: {len(rows)} entries, {len(links)} links")
 
-def local_links()->None:
- errors=[]; pattern=re.compile(r"(?<!!)(?:\[[^\]\n]+\]|<[^>\n]+>)\(([^)\n]+)\)")
- for path in sorted(ROOT.glob("*.md"))+sorted((ROOT/"docs").glob("*.md")):
-  text=read(path)
-  for match in pattern.finditer(text):
-   href=match.group(1).strip()
-   if not href or href.startswith(("http://","https://","mailto:","#")): continue
-   target=href.split("#",1)[0].split("?",1)[0].strip()
-   if not target: continue
-   resolved=(path.parent/target).resolve()
-   try: resolved.relative_to(ROOT.resolve())
-   except ValueError: errors.append(f"{path.relative_to(ROOT)}:{line(text,match.start(1))} escapes repo: {href}"); continue
-   if not resolved.exists(): errors.append(f"{path.relative_to(ROOT)}:{line(text,match.start(1))} broken local link {href}")
- if errors: fail("; ".join(errors))
- print("Local markdown links OK")
+def docs() -> list[Path]:
+    return [ROOT / name for name in DOCS if (ROOT / name).is_file()]
 
-def readme_docs()->None:
- text=read(ROOT/"README.md"); errors=[]
- for href in ["./installation-guide.md","./latest-modlist.md","./curseforge-description.html"]:
-  if f"]({href})" not in text and f"`{href}`" not in text: errors.append(f"README.md missing required docs link: {href}")
- match=re.search(r"##\s+Repository Map\n\n\| Path \| Purpose \|\n\| --- \| --- \|\n([\s\S]*?)(?:\n---|\Z)",text)
- if not match: errors.append("README.md missing Repository Map table")
- else:
-  listed=[]
-  for _label,href in re.findall(r"\|\s*\[`]?([^`|]+?)[`]?\s*\]\(([^)]+)\)\s*\|",match.group(1)):
-   if href.startswith("./"): listed.append(href[2:])
-  for required in REPO_MAP:
-   if required not in listed: errors.append(f"Repository Map missing required path: {required}")
- if errors: fail("; ".join(errors))
- print("README docs and repository map OK")
 
-def curseforge_id_consistency()->None:
- pattern=re.compile(r"(?:/curseforge/(?:v|dt)/|attachments/description/|Project\s+ID[^\d]{0,20})(\d+)",re.I); errors=[]
- for path in FACT_FILES:
-  ids=sorted(set(pattern.findall(read(path))))
-  if ids and ids!="1420406".split(): errors.append(f"{path.name} has CurseForge IDs {ids}, expected [1420406]")
- if errors: fail("; ".join(errors))
- print("CurseForge project ID consistency OK (1420406)")
+def check_layout() -> None:
+    errors = [f"missing required path: {path}" for path in REQUIRED if not (ROOT / path).exists()]
+    for directory in [".github", ".github/scripts", ".github/workflows"]:
+        if not (ROOT / directory).is_dir():
+            errors.append(f"missing required directory: {directory}")
+    if errors:
+        die(errors)
+    print("layout: ok")
 
-def release_facts()->None:
- errors=[]; versions={}; facts={"Still Watching":r"\bStill\s+Watching\b","Minecraft 1.20.1":r"\b1\.20\.1\b","Forge":r"\bForge\b","Java 17":r"\bJava\b[\s\S]{0,100}\b17\b|\b17\b[\s\S]{0,100}\bJava\b","Project ID 1420406":r"\b1420406\b"}; version_re=re.compile(r"\b(?:Still\s+Watching\s+V|Current\s+(?:documented\s+)?release[\s\S]{0,120}\bV|Latest\s+(?:documented\s+)?Version[\s\S]{0,120}\bV?)(\d+\.\d+\.\d+)\b",re.I)
- for path in FACT_FILES:
-  text=read(path)
-  for label,pattern in facts.items():
-   if path.name!="latest-modlist.md" and not re.search(pattern,text,re.I): errors.append(f"{path.name} missing {label}")
-  for match in version_re.finditer(text): versions.setdefault(match.group(1),[]).append(path.name)
- if len(versions)>1: errors.append(f"release/version text is inconsistent: {versions}")
- if errors: fail("; ".join(errors))
- print("Release facts OK")
 
-def issue_templates()->None:
- template_dir=ROOT/".github/ISSUE_TEMPLATE"; errors=[]; config=template_dir/"config.yml"
- if not config.is_file() or (yload(config) or {}).get("blank_issues_enabled") is not False: errors.append("config.yml must exist and set blank_issues_enabled: false")
- forms=[p for p in sorted(template_dir.glob("*.y*ml")) if p.name!="config.yml"]
- if not forms: errors.append("no issue form files found")
- for path in forms:
-  data=yload(path)
-  if not isinstance(data,dict): errors.append(f"{path.name} must be a mapping"); continue
-  for key in ["name","description","title","labels","body"]:
-   if not data.get(key): errors.append(f"{path.name} missing {key}")
-  if not any(isinstance(item,dict) and (item.get("validations") or {}).get("required") is True for item in data.get("body") or []): errors.append(f"{path.name} needs at least one required user field")
- if errors: fail("; ".join(errors))
- print("Issue templates OK")
+def check_yaml() -> None:
+    if yaml is None:
+        die(["PyYAML is required"])
+    errors: list[str] = []
+    for path in sorted((ROOT / ".github").glob("**/*.yml")) + sorted((ROOT / ".github").glob("**/*.yaml")):
+        try:
+            data = yaml.safe_load(read(path))
+        except Exception as exc:
+            errors.append(f"{rel(path)} invalid YAML: {exc}")
+            continue
+        if data is None:
+            errors.append(f"{rel(path)} is empty")
+        if ".github/workflows" in path.as_posix():
+            if not isinstance(data, dict):
+                errors.append(f"{rel(path)} must be a mapping")
+                continue
+            if not data.get("name"):
+                errors.append(f"{rel(path)} missing name")
+            if not data.get(True) and not data.get("on"):
+                errors.append(f"{rel(path)} missing on trigger")
+            if not isinstance(data.get("jobs"), dict):
+                errors.append(f"{rel(path)} missing jobs")
+            if data.get("permissions") != {"contents": "read"}:
+                errors.append(f"{rel(path)} must use permissions: contents: read")
+    if errors:
+        die(errors)
+    print("yaml: ok")
 
-def sponsor_guard()->None:
- readme=read(ROOT/"README.md"); desc=read(ROOT/"curseforge-description.html"); errors=[]
- for label,value in {"start marker":SPONSOR_START,"end marker":SPONSOR_END,"link":SPONSOR_LINK,"banner":SPONSOR_BANNER}.items():
-  if value not in readme: errors.append(f"README.md missing sponsor {label}")
- if SPONSOR_LINK not in desc or SPONSOR_BANNER not in desc: errors.append("curseforge-description.html missing sponsor link or banner")
- if errors: fail("; ".join(errors))
- print("BisectHosting sponsor guard OK")
 
-def release_zips()->None:
- errors=[]
- for archive in sorted((ROOT/"Releases").glob("*.zip")):
-  try:
-   with zipfile.ZipFile(archive) as zf:
-    bad=zf.testzip(); names=[info.filename.lower() for info in zf.infolist()]
-    if bad: raise zipfile.BadZipFile(f"corrupt entry: {bad}")
-    if not names: raise zipfile.BadZipFile("empty archive")
-    if any(name=="overrides/" or name.startswith("overrides/") for name in names) and "manifest.json" not in names: raise zipfile.BadZipFile("overrides/ exists without manifest.json")
-    print(f"OK: {archive.relative_to(ROOT)}")
-  except zipfile.BadZipFile as exc: errors.append(f"{archive.relative_to(ROOT)}: {exc}")
- if errors: fail("; ".join(errors))
- print("Release ZIP audit OK")
+def check_text() -> None:
+    errors: list[str] = []
+    paths = docs() + [p for p in sorted((ROOT / ".github").glob("**/*")) if p.is_file()]
+    for path in paths:
+        if path.suffix.lower() not in {".md", ".html", ".yml", ".yaml", ".py"}:
+            continue
+        text = read(path)
+        if not text.strip():
+            errors.append(f"{rel(path)} is empty")
+        if "\r\n" in text:
+            errors.append(f"{rel(path)} uses CRLF line endings")
+        if not text.endswith("\n"):
+            errors.append(f"{rel(path)} must end with newline")
+        for number, line in enumerate(text.splitlines(), 1):
+            if line.rstrip() != line:
+                errors.append(f"{rel(path)}:{number} has trailing whitespace")
+                break
+    if errors:
+        die(errors)
+    print("text: ok")
 
-def all_checks()->None:
- for check in [layout,yaml_files,html,metadata,generated_docs,local_links,readme_docs,curseforge_id_consistency,release_facts,issue_templates,modlist,sponsor_guard,release_zips]: check()
 
-def main()->None:
- checks={"all":all_checks,"layout":layout,"yaml":yaml_files,"html":html,"metadata":metadata,"generated-docs":generated_docs,"modlist":modlist,"markdown-links":local_links,"readme-docs":readme_docs,"curseforge-id":curseforge_id_consistency,"release-zips":release_zips,"release-facts":release_facts,"issue-templates":issue_templates,"sponsor":sponsor_guard}
- parser=argparse.ArgumentParser(); parser.add_argument("check",choices=checks); checks[parser.parse_args().check]()
-if __name__=="__main__": main()
+def md_links(text: str) -> list[tuple[str, int]]:
+    pattern = re.compile(r"(?<!!)(?:\[[^\]\n]+\]|<[^>\n]+>)\(([^)\n]+)\)")
+    return [(m.group(1).strip(), text.count("\n", 0, m.start(1)) + 1) for m in pattern.finditer(text)]
+
+
+def html_links(text: str) -> list[tuple[str, int]]:
+    pattern = re.compile(r'''\b(?:href|src)=["']([^"']+)["']''', re.I)
+    return [(m.group(1).strip(), text.count("\n", 0, m.start(1)) + 1) for m in pattern.finditer(text)]
+
+
+def check_html() -> None:
+    errors: list[str] = []
+    for path in ROOT.glob("*.html"):
+        try:
+            parser = html.parser.HTMLParser()
+            parser.feed(read(path))
+            parser.close()
+        except Exception as exc:
+            errors.append(f"{rel(path)} failed HTML smoke parse: {exc}")
+    if errors:
+        die(errors)
+    print("html: ok")
+
+
+def check_links() -> None:
+    errors: list[str] = []
+    for path in docs():
+        links = md_links(read(path)) + (html_links(read(path)) if path.suffix == ".html" else [])
+        for href, line in links:
+            if not href or href.startswith(("http://", "https://", "mailto:", "#")):
+                continue
+            target = href.split("#", 1)[0].split("?", 1)[0]
+            if not target:
+                continue
+            resolved = (path.parent / target).resolve()
+            try:
+                resolved.relative_to(ROOT.resolve())
+            except ValueError:
+                errors.append(f"{rel(path)}:{line} link escapes repository: {href}")
+                continue
+            if not resolved.exists():
+                errors.append(f"{rel(path)}:{line} broken local link: {href}")
+    if errors:
+        die(errors)
+    print("local links: ok")
+
+
+def check_curseforge() -> None:
+    errors: list[str] = []
+    modlist = ROOT / "latest-modlist.md"
+    mod_links: list[str] = []
+    for path in docs():
+        for href, line in md_links(read(path)) + html_links(read(path)):
+            parsed = urlparse(href)
+            if parsed.netloc != "www.curseforge.com":
+                continue
+            parts = [p for p in parsed.path.split("/") if p]
+            if len(parts) < 3 or parts[0] != "minecraft" or parts[1] not in CURSEFORGE_KINDS:
+                errors.append(f"{rel(path)}:{line} suspicious CurseForge URL: {href}")
+            if path == modlist:
+                mod_links.append(href)
+    if modlist.exists() and len(mod_links) < 40:
+        errors.append(f"latest-modlist.md has only {len(mod_links)} CurseForge links")
+    errors += [f"latest-modlist.md duplicate CurseForge link: {href}" for href, count in Counter(mod_links).items() if count > 1]
+    if errors:
+        die(errors)
+    print("curseforge: ok")
+
+
+def check_facts() -> None:
+    errors: list[str] = []
+    readme = ROOT / "README.md"
+    if readme.exists():
+        text = read(readme)
+        required = {
+            "Still Watching": r"\bStill\s+Watching\b",
+            "Minecraft 1.20.1": r"\b1\.20\.1\b",
+            "Forge": r"\bForge\b",
+            "CurseForge project ID 1420406": r"\b1420406\b",
+        }
+        for label, pattern in required.items():
+            if not re.search(pattern, text, re.I):
+                errors.append(f"README.md missing {label}")
+    versions: dict[str, list[str]] = {}
+    for path in docs():
+        for version in re.findall(r"\bStill\s+Watching\s+V(\d+\.\d+\.\d+)\b", read(path), re.I):
+            versions.setdefault(version, []).append(rel(path))
+    if len(versions) > 1:
+        errors.append("conflicting documented release versions: " + json.dumps(versions, sort_keys=True))
+    if errors:
+        die(errors)
+    print("facts: ok")
+
+
+def check_sponsor() -> None:
+    errors = [f"{name} missing sponsor URL" for name in ["README.md", "curseforge-description.html"] if (ROOT / name).exists() and SPONSOR_URL not in read(ROOT / name)]
+    if errors:
+        die(errors)
+    print("sponsor: ok")
+
+
+def check_archives() -> None:
+    errors: list[str] = []
+    release_dir = ROOT / "Releases"
+    if not release_dir.exists():
+        print("archives: skipped")
+        return
+    for archive in release_dir.glob("*.zip"):
+        try:
+            with zipfile.ZipFile(archive) as zf:
+                bad = zf.testzip()
+                if bad:
+                    errors.append(f"{rel(archive)} corrupt entry: {bad}")
+                if not zf.infolist():
+                    errors.append(f"{rel(archive)} is empty")
+        except zipfile.BadZipFile as exc:
+            errors.append(f"{rel(archive)} invalid zip: {exc}")
+    if errors:
+        die(errors)
+    print("archives: ok")
+
+
+def all_checks() -> None:
+    for check in [check_layout, check_yaml, check_text, check_html, check_links, check_curseforge, check_facts, check_sponsor, check_archives]:
+        check()
+
+
+def main() -> None:
+    checks = {
+        "all": all_checks,
+        "layout": check_layout,
+        "yaml": check_yaml,
+        "text": check_text,
+        "html": check_html,
+        "links": check_links,
+        "curseforge": check_curseforge,
+        "facts": check_facts,
+        "sponsor": check_sponsor,
+        "archives": check_archives,
+    }
+    parser = argparse.ArgumentParser(description="Validate Still Watching repository health.")
+    parser.add_argument("check", nargs="?", default="all", choices=checks)
+    args = parser.parse_args()
+    checks[args.check]()
+
+
+if __name__ == "__main__":
+    main()

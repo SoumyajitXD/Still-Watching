@@ -1,24 +1,45 @@
 name: CI
 
 on:
+  pull_request:
+    branches: [main]
   push:
     branches: [main]
-  pull_request:
   workflow_dispatch:
 
 permissions:
   contents: read
 
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
-  validate:
+  repository-health:
+    name: Repository health
     runs-on: ubuntu-latest
+    timeout-minutes: 10
+
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
-          python-version: "3.11"
-          cache: "pip"
-      - name: Install validator dependencies
-        run: python -m pip install --upgrade pip PyYAML
-      - name: Run validation
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install validation dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install PyYAML
+
+      - name: Validate repository
         run: python .github/scripts/validate.py all
+
+      - name: Check generated docs are stable when sources exist
+        run: python .github/scripts/generate_docs.py --check
+
+      - name: Check git whitespace
+        run: git diff --check
