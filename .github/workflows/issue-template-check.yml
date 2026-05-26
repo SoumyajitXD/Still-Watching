@@ -1,0 +1,135 @@
+name: Issue Template Check
+
+"on":
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  validate-issue-templates:
+    name: Validate issue templates
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install YAML parser
+        run: python -m pip install --disable-pip-version-check PyYAML
+
+      - name: Validate issue templates
+        shell: python
+        run: |
+          from pathlib import Path
+          import sys
+          import yaml
+
+          template_dir = Path(".github/ISSUE_TEMPLATE")
+
+          if not template_dir.exists():
+              print("No issue templates found under .github/ISSUE_TEMPLATE/. Passing check.")
+              sys.exit(0)
+
+          templates = sorted(path for path in template_dir.rglob("*") if path.is_file())
+
+          if not templates:
+              print("No issue templates found under .github/ISSUE_TEMPLATE/. Passing check.")
+              sys.exit(0)
+
+          issue_forms = [path for path in templates if path.suffix.lower() in {".yml", ".yaml"}]
+          markdown_templates = [path for path in templates if path.suffix.lower() == ".md"]
+          other_templates = [
+              path
+              for path in templates
+              if path.suffix.lower() not in {".yml", ".yaml", ".md"}
+          ]
+
+          for path in markdown_templates:
+              print(f"Legacy Markdown issue template found; skipping form checks: {path}")
+
+          for path in other_templates:
+              print(f"Non-form issue template file found; skipping form checks: {path}")
+
+          if not issue_forms:
+              print("No YAML issue forms found. Passing check.")
+              sys.exit(0)
+
+          errors = []
+          required_top_level_fields = ["name", "description", "title", "labels", "body"]
+
+          def is_present(value):
+              if value is None:
+                  return False
+              if isinstance(value, str):
+                  return bool(value.strip())
+              if isinstance(value, (list, dict)):
+                  return bool(value)
+              return True
+
+          def has_required_user_field(body):
+              if not isinstance(body, list):
+                  return False
+
+              for item in body:
+                  if not isinstance(item, dict):
+                      continue
+
+                  field_type = item.get("type")
+                  if field_type == "markdown":
+                      continue
+
+                  validations = item.get("validations") or {}
+                  if isinstance(validations, dict) and validations.get("required") is True:
+                      return True
+
+                  attributes = item.get("attributes") or {}
+                  options = attributes.get("options") if isinstance(attributes, dict) else None
+                  if isinstance(options, list):
+                      for option in options:
+                          if isinstance(option, dict) and option.get("required") is True:
+                              return True
+
+              return False
+
+          for path in issue_forms:
+              try:
+                  with path.open("r", encoding="utf-8") as handle:
+                      data = yaml.safe_load(handle)
+              except yaml.YAMLError as exc:
+                  errors.append(f"{path}: YAML does not parse: {exc}")
+                  continue
+              except OSError as exc:
+                  errors.append(f"{path}: could not read file: {exc}")
+                  continue
+
+              if not isinstance(data, dict):
+                  errors.append(f"{path}: issue form must parse to a YAML mapping/object.")
+                  continue
+
+              for field in required_top_level_fields:
+                  if field not in data or not is_present(data.get(field)):
+                      errors.append(f"{path}: missing or empty required top-level field: {field}")
+
+              if "body" in data and not isinstance(data.get("body"), list):
+                  errors.append(f"{path}: body must be a list of form fields.")
+              elif "body" in data and not has_required_user_field(data.get("body")):
+                  errors.append(
+                      f"{path}: body must contain at least one required user field. "
+                      "Markdown-only fields do not count."
+                  )
+
+          if errors:
+              print("Issue template validation failed:")
+              for error in errors:
+                  print(f"- {error}")
+              sys.exit(1)
+
+          print(f"Validated {len(issue_forms)} YAML issue form(s).")
+          print("Issue template validation passed.")
