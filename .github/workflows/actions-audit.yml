@@ -1,0 +1,94 @@
+name: GitHub Actions Dependency Audit
+
+"on":
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  audit-actions:
+    name: Audit GitHub Actions dependencies
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Audit action references
+        shell: python
+        run: |
+          import glob
+          import re
+          import sys
+
+          workflow_paths = sorted(
+              set(glob.glob(".github/workflows/*.yml"))
+              | set(glob.glob(".github/workflows/*.yaml"))
+          )
+
+          uses_pattern = re.compile(r"^\s*uses\s*:\s*(.+?)\s*(?:#.*)?$")
+          full_sha_pattern = re.compile(r"^[0-9a-fA-F]{40}$")
+
+          action_refs = []
+          errors = []
+          warnings = []
+
+          for path in workflow_paths:
+              with open(path, "r", encoding="utf-8") as workflow_file:
+                  for line_number, line in enumerate(workflow_file, start=1):
+                      match = uses_pattern.match(line)
+                      if not match:
+                          continue
+
+                      ref = match.group(1).strip().strip('"\'')
+                      action_refs.append((path, line_number, ref))
+
+                      if ref.startswith(("./", "docker://")):
+                          continue
+
+                      if "@" not in ref:
+                          errors.append(
+                              f"{path}:{line_number}: {ref} is missing a version/ref"
+                          )
+                          continue
+
+                      action_name, action_ref = ref.rsplit("@", 1)
+                      if not action_ref:
+                          errors.append(
+                              f"{path}:{line_number}: {ref} is missing a version/ref"
+                          )
+                          continue
+
+                      if action_ref in {"main", "master"}:
+                          errors.append(
+                              f"{path}:{line_number}: {ref} must not use @{action_ref}"
+                          )
+                      elif not full_sha_pattern.fullmatch(action_ref):
+                          warnings.append(
+                              f"{path}:{line_number}: {ref} is not pinned to a full commit SHA"
+                          )
+
+          print("GitHub Actions references found:")
+          if action_refs:
+              for path, line_number, ref in action_refs:
+                  print(f"- {path}:{line_number}: {ref}")
+          else:
+              print("- None")
+
+          if warnings:
+              print("\nWarnings:")
+              for warning in warnings:
+                  print(f"::warning::{warning}")
+
+          if errors:
+              print("\nErrors:")
+              for error in errors:
+                  print(f"::error::{error}")
+              sys.exit(1)
