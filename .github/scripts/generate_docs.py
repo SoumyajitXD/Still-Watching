@@ -1,24 +1,22 @@
 #!/usr/bin/env python3
+"""Lightweight documentation helper for Still Watching.
+
+If `data/mods.yml` and `data/project.yml` exist, this regenerates
+`latest-modlist.md`. If they do not exist, it performs a safe dry validation and
+leaves tracked documentation untouched.
+"""
 from __future__ import annotations
 
+import argparse
 from pathlib import Path
 
-import yaml
+try:
+    import yaml  # type: ignore
+except Exception:  # pragma: no cover - CI installs PyYAML.
+    yaml = None
 
 ROOT = Path(__file__).resolve().parents[2]
-REQUIRED_MOD_FIELDS = [
-    "name",
-    "category",
-    "side",
-    "side_confidence",
-    "purpose",
-    "curseforge_url",
-    "notes",
-    "server_pack_action",
-    "reason",
-]
-ALLOWED_SIDES = {"client", "server", "both", "unknown"}
-ALLOWED_SERVER_PACK_ACTIONS = {"keep", "remove", "verify", "unknown"}
+MOD_FIELDS = ["name", "curseforge_url"]
 
 
 def fail(message: str) -> None:
@@ -26,116 +24,71 @@ def fail(message: str) -> None:
 
 
 def load_yaml(path: Path):
+    if yaml is None:
+        fail("PyYAML is not installed; run `python -m pip install PyYAML`")
     with path.open(encoding="utf-8-sig") as handle:
         return yaml.safe_load(handle)
 
 
-def parse_project() -> dict:
-    data = load_yaml(ROOT / "data/project.yml")
-    if not isinstance(data, dict):
+def build_from_data() -> str:
+    project_path = ROOT / "data/project.yml"
+    mods_path = ROOT / "data/mods.yml"
+    project = load_yaml(project_path)
+    mods_doc = load_yaml(mods_path)
+    mods = mods_doc.get("mods") if isinstance(mods_doc, dict) else None
+    if not isinstance(project, dict):
         fail("data/project.yml must be a mapping")
-    return data
-
-
-def parse_mods() -> list[dict]:
-    data = load_yaml(ROOT / "data/mods.yml")
-    mods = data.get("mods") if isinstance(data, dict) else None
     if not isinstance(mods, list) or not mods:
         fail("data/mods.yml must contain a non-empty mods list")
 
-    errors: list[str] = []
+    rows: list[str] = []
     for index, mod in enumerate(mods, 1):
         if not isinstance(mod, dict):
-            errors.append(f"mod #{index} must be a mapping")
-            continue
+            fail(f"mod #{index} must be a mapping")
+        for field in MOD_FIELDS:
+            if not mod.get(field):
+                fail(f"mod #{index} missing {field}")
+        rows.append(f"| {mod['name']} | [Curseforge]({mod['curseforge_url']}) |")
 
-        name = str(mod.get("name") or f"#{index}")
-        for field in REQUIRED_MOD_FIELDS:
-            if field not in mod or mod[field] in (None, ""):
-                errors.append(f"mod {name!r} missing {field}")
-
-        side = mod.get("side")
-        if side not in ALLOWED_SIDES:
-            errors.append(f"mod {name!r} invalid side {side!r}")
-
-        action = mod.get("server_pack_action")
-        if action not in ALLOWED_SERVER_PACK_ACTIONS:
-            errors.append(f"mod {name!r} invalid server_pack_action {action!r}")
-
-    if errors:
-        fail("; ".join(errors))
-    return mods
+    release = project.get("current_release", "Still Watching")
+    out = [
+        "# Modlist",
+        "",
+        f"**Version:** {release} (latest)",
+        "",
+        "| Name | Curseforge |",
+        "|---|---|",
+        *rows,
+        "",
+    ]
+    return "\n".join(out)
 
 
 def main() -> None:
-    project = parse_project()
-    mods = parse_mods()
+    parser = argparse.ArgumentParser(description="Regenerate latest-modlist.md when source data exists.")
+    parser.add_argument("--check", action="store_true", help="Verify generated output matches latest-modlist.md.")
+    args = parser.parse_args()
 
-    total = len(mods)
-    both = sum(mod["side"] == "both" for mod in mods)
-    client = sum(mod["side"] == "client" for mod in mods)
-    unknown = sum(mod["side"] == "unknown" for mod in mods)
+    project_path = ROOT / "data/project.yml"
+    mods_path = ROOT / "data/mods.yml"
+    target = ROOT / "latest-modlist.md"
 
-    out = [
-        "# Latest Modlist",
-        "",
-        "> [!WARNING]",
-        "> This is an admin reference, not a playable manifest. Use CurseForge release files for exact mod versions and truth.",
-        "",
-        f"Current documented release: **{project['current_release']}**.",
-        f"Minecraft: **{project['minecraft_version']}** | Loader: **{project['loader']}** | Java: **{project['java_version']}** | CurseForge Project ID: **{project['curseforge_project_id']}**",
-        "",
-        "## Summary",
-        "",
-        "| Metric | Count |",
-        "| --- | ---: |",
-        f"| Total mods | {total} |",
-        f"| Both-side count | {both} |",
-        f"| Client candidate count | {client} |",
-        f"| Unknown count | {unknown} |",
-        "",
-    ]
+    if not project_path.exists() or not mods_path.exists():
+        if not target.exists() or not target.read_text(encoding="utf-8-sig", errors="replace").strip():
+            fail("latest-modlist.md is missing or empty, and source data files are absent")
+        print("No data/*.yml source files found; kept latest-modlist.md unchanged.")
+        return
 
-    # Deterministic category order, while preserving the existing source order
-    # within each category so the generated modlist does not churn needlessly.
-    categories: dict[str, list[dict]] = {}
-    for mod in mods:
-        categories.setdefault(mod["category"], []).append(mod)
+    generated = build_from_data()
+    if args.check:
+        current = target.read_text(encoding="utf-8-sig", errors="replace") if target.exists() else ""
+        if current != generated:
+            fail("latest-modlist.md is stale; run python .github/scripts/generate_docs.py")
+        print("generated docs: ok")
+        return
 
-    row_number = 1
-    for category in sorted(categories):
-        out += [
-            f"## {category}",
-            "",
-            "| # | Mod | Side | Confidence | Purpose | CurseForge |",
-            "| ---: | --- | --- | --- | --- | --- |",
-        ]
-        for mod in categories[category]:
-            out.append(
-                f"| {row_number} | {mod['name']} | {mod['side']} | {mod['side_confidence']} | {mod['purpose']} | [Link]({mod['curseforge_url']}) |"
-            )
-            row_number += 1
-        out.append("")
-
-    out += ["## Server pack trimming candidates", ""]
-    trimming_candidates = [
-        mod for mod in mods if mod["side"] == "client" or mod["server_pack_action"] == "remove"
-    ]
-    for index, mod in enumerate(trimming_candidates, 1):
-        out.append(f"{index}. **{mod['name']}** — {mod['reason']}")
-
-    out += ["", "## Needs verification", ""]
-    verification_candidates = [
-        mod
-        for mod in mods
-        if mod["side"] == "unknown"
-        or mod["side_confidence"] in {"unknown", "needs verification"}
-        or mod["server_pack_action"] == "verify"
-    ]
-    for index, mod in enumerate(verification_candidates, 1):
-        out.append(f"{index}. **{mod['name']}** — {mod['reason']}")
-
-    (ROOT / "latest-modlist.md").write_text("\n".join(out) + "\n", encoding="utf-8")
+    target.write_text(generated, encoding="utf-8")
+    print("Wrote latest-modlist.md")
 
 
 if __name__ == "__main__":
