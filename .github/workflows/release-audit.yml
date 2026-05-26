@@ -1,0 +1,88 @@
+name: Release archive audit
+
+"on":
+  push:
+    branches: [main]
+    paths:
+      - "Releases/**"
+      - ".github/workflows/release-audit.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - "Releases/**"
+      - ".github/workflows/release-audit.yml"
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  audit-release-archives:
+    name: Audit release ZIP archives
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Check release ZIP archives
+        shell: bash
+        run: |
+          python <<'PY'
+          from __future__ import annotations
+
+          import sys
+          import zipfile
+          from pathlib import Path
+
+          releases_dir = Path("Releases")
+          failures: list[str] = []
+
+          if not releases_dir.exists():
+              print("Releases/ does not exist; skipping release archive audit.")
+              sys.exit(0)
+
+          if not releases_dir.is_dir():
+              print("Release archive audit failed:")
+              print("- Releases exists but is not a directory.")
+              sys.exit(1)
+
+          zip_paths = sorted(path for path in releases_dir.rglob("*.zip") if path.is_file())
+
+          if not zip_paths:
+              print("Releases/ exists but contains no .zip files; nothing to audit.")
+              sys.exit(0)
+
+          for zip_path in zip_paths:
+              display_path = zip_path.as_posix()
+
+              try:
+                  with zipfile.ZipFile(zip_path) as archive:
+                      members = archive.infolist()
+                      file_members = [member for member in members if not member.is_dir()]
+
+                      if not file_members:
+                          failures.append(f"{display_path}: ZIP archive is empty.")
+                          continue
+
+                      first_bad_member = archive.testzip()
+                      if first_bad_member is not None:
+                          failures.append(
+                              f"{display_path}: corrupt ZIP member: {first_bad_member}"
+                          )
+              except zipfile.BadZipFile:
+                  failures.append(f"{display_path}: corrupt ZIP archive.")
+              except zipfile.LargeZipFile as exc:
+                  failures.append(f"{display_path}: ZIP64 error: {exc}")
+              except OSError as exc:
+                  failures.append(f"{display_path}: could not read archive: {exc}")
+
+          if failures:
+              print("Release archive audit failed:")
+              for failure in failures:
+                  print(f"- {failure}")
+              sys.exit(1)
+
+          print(f"Release archive audit passed: checked {len(zip_paths)} ZIP archive(s).")
+          print("No server-pack structure was enforced by this audit.")
+          PY
