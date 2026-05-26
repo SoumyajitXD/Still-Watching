@@ -1,19 +1,21 @@
 name: Link Check
 
-on:
-  pull_request:
-    branches: [main]
+"on":
   push:
-    branches: [main]
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
   schedule:
     - cron: "30 4 * * 1"
-  workflow_dispatch:
+  workflow_dispatch: {}
 
 permissions:
   contents: read
 
 concurrency:
-  group: links-${{ github.workflow }}-${{ github.ref }}
+  group: link-check-${{ github.ref_name }}
   cancel-in-progress: true
 
 jobs:
@@ -30,24 +32,6 @@ jobs:
         uses: lycheeverse/lychee-action@v2
         with:
           fail: true
-          args: >-
-            --no-progress
-            --verbose
-            --max-concurrency 4
-            --max-retries 2
-            --retry-wait-time 5
-            --timeout 20
-            --accept 200,204,206,301,302,303,307,308,403,406,418,429,999
-            --exclude '^file://'
-            --exclude '^https://www\.curseforge\.com/'
-            --exclude '^https://media\.forgecdn\.net/'
-            README.md
-            CONTRIBUTING.md
-            SUPPORT.md
-            SECURITY.md
-            CHANGELOG.md
-            installation-guide.md
-            latest-modlist.md
-            curseforge-description.html
+          args: "--no-progress --verbose --max-concurrency 4 --max-retries 2 --retry-wait-time 5 --timeout 20 --accept 200,204,206,301,302,303,307,308,403,406,418,429,999 --exclude '^file://' --exclude '^https://www\\.curseforge\\.com/' --exclude '^https://media\\.forgecdn\\.net/' README.md CONTRIBUTING.md SUPPORT.md SECURITY.md CHANGELOG.md installation-guide.md latest-modlist.md curseforge-description.html"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
