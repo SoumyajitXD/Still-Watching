@@ -2,6 +2,12 @@
 
 **Version:** Still Watching V1.1.0 (latest)
 
+- **Minecraft:** `1.20.1`
+- **Loader:** Forge
+- **Java:** Java `17` if needed
+- **CurseForge Project ID:** `1420406`
+- **RAM:** `5 GB` minimum; `6–8 GB` preferred
+
 | Name | Curseforge |
 |---|---|
 | Cave Dweller Sound Overhaul (by Scorchy) | [Curseforge](https://www.curseforge.com/minecraft/texture-packs/cave-dweller-sound-overhaul) |
