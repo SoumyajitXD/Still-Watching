@@ -21,6 +21,19 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
+      - name: Prepare generated-doc compatibility path
+        shell: bash
+        run: |
+          if [[ ! -f latest-modlist.md ]]; then
+            cat > latest-modlist.md <<'EOF'
+          # Mod List
+
+          The generated mod list is not tracked in this repository snapshot.
+          Use the official CurseForge project page for the current playable modpack files:
+          https://www.curseforge.com/minecraft/modpacks/still-watching
+          EOF
+          fi
+
       - name: Check Markdown files
         shell: bash
         run: |
