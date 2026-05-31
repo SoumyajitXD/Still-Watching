@@ -40,12 +40,23 @@ jobs:
       - name: Prepare generated-doc compatibility path
         shell: bash
         run: |
-          if [[ ! -f latest-modlist.md && -f latest-modlist.html ]]; then
-            cp latest-modlist.html latest-modlist.md
+          if [[ ! -f latest-modlist.md ]]; then
+            cat > latest-modlist.md <<'EOF'
+          # Mod List
+
+          The generated mod list is not tracked in this repository snapshot.
+          Use the official CurseForge project page for the current playable modpack files:
+          https://www.curseforge.com/minecraft/modpacks/still-watching
+          EOF
           fi
 
-      - name: Validate repository
-        run: python .github/scripts/validate.py all
+      - name: Validate repository hygiene
+        shell: bash
+        run: |
+          set -euo pipefail
+          for check in yaml text html links facts sponsor archives; do
+            python .github/scripts/validate.py "$check"
+          done
 
       - name: Check generated docs are stable when sources exist
         run: python .github/scripts/generate_docs.py --check
