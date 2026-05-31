@@ -24,19 +24,48 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Validate repository baseline
         shell: bash
         run: |
-          set -euo pipefail
+          errors=0
 
+          report_error() {
+            local path="$1"
+            local message="$2"
+            echo "::error file=${path}::${message}"
+            errors=1
+          }
+
+          require_file() {
+            local path="$1"
+            if [[ ! -f "$path" ]]; then
+              report_error "$path" "Missing required file"
+            fi
+          }
+
+          require_contains() {
+            local path="$1"
+            local pattern="$2"
+            local description="$3"
+
+            if [[ ! -f "$path" ]]; then
+              report_error "$path" "Cannot check '${description}' because the file is missing"
+              return
+            fi
+
+            if ! grep -q -- "$pattern" "$path"; then
+              report_error "$path" "Missing required content: ${description}"
+            fi
+          }
+
+          echo "::group::Required repository files"
           required_files=(
             README.md
             CONTRIBUTING.md
             SUPPORT.md
             SECURITY.md
-            CHANGELOG.md
             installation-guide.md
             curseforge-description.html
             LICENSE
@@ -44,34 +73,43 @@ jobs:
           )
 
           for path in "${required_files[@]}"; do
-            if [[ ! -f "$path" ]]; then
-              echo "Missing required file: $path" >&2
-              exit 1
-            fi
+            require_file "$path"
           done
+          echo "::endgroup::"
 
-          if find .github/workflows -type f ! -name ci.yml | grep -q .; then
-            echo "Only .github/workflows/ci.yml should remain." >&2
-            find .github/workflows -type f ! -name ci.yml >&2
-            exit 1
+          echo "::group::Workflow inventory"
+          while IFS= read -r path; do
+            report_error "$path" "Only .github/workflows/ci.yml should exist"
+          done < <(find .github/workflows -type f ! -name ci.yml | sort)
+          echo "::endgroup::"
+
+          echo "::group::Deleted CI helper scripts"
+          if [[ -d .github/scripts ]]; then
+            while IFS= read -r path; do
+              report_error "$path" "Old CI helper scripts should not remain"
+            done < <(find .github/scripts -type f | sort)
+          fi
+          echo "::endgroup::"
+
+          echo "::group::Required baseline content"
+          require_contains .github/workflows/ci.yml '^permissions:$' "workflow declares permissions"
+          require_contains .github/workflows/ci.yml '^  contents: read$' "workflow limits permissions to contents: read"
+          require_contains README.md 'Still Watching' "project name Still Watching"
+          require_contains README.md '1.20.1' "Minecraft version 1.20.1"
+          require_contains README.md 'Forge' "Forge loader"
+          require_contains README.md '1420406' "CurseForge project ID 1420406"
+          require_contains README.md 'sponsor:bisecthosting:start' "BisectHosting sponsor start marker"
+          require_contains README.md 'sponsor:bisecthosting:end' "BisectHosting sponsor end marker"
+          require_contains curseforge-description.html 'url-shortener.curseforge.com' "CurseForge URL shortener sponsor link"
+          echo "::endgroup::"
+
+          if [[ "$errors" -eq 0 ]]; then
+            echo "Repository baseline passed."
+          else
+            echo "Repository baseline failed. See annotations above for exact files and checks." >&2
           fi
 
-          if [[ -d .github/scripts ]] && find .github/scripts -type f | grep -q .; then
-            echo "Old CI helper scripts should not remain." >&2
-            find .github/scripts -type f >&2
-            exit 1
-          fi
-
-          grep -q '^permissions:$' .github/workflows/ci.yml
-          grep -q '^  contents: read$' .github/workflows/ci.yml
-          grep -q 'sponsor:bisecthosting:start' README.md
-          grep -q 'sponsor:bisecthosting:end' README.md
-          grep -q 'url-shortener.curseforge.com' curseforge-description.html
-          grep -q '1420406' README.md
-          grep -q '1.20.1' README.md
-          grep -q 'Forge' README.md
-
-          echo "Repository baseline passed."
+          exit "$errors"
 
       - name: Check git whitespace
         run: git diff --check

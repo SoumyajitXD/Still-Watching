@@ -38,7 +38,7 @@
 | **Players** | [Install on CurseForge](https://www.curseforge.com/minecraft/modpacks/still-watching) | Allocate `5 GB` minimum RAM; `6–8 GB` preferred. |
 | **Server admins** | [`installation-guide.md`](./installation-guide.md#multiplayer--server-setup) and [`server-pack-guide.md`](./docs/server-pack-guide.md) | Match versions/configs. Keep client-only junk off dedicated servers. |
 | **Bug reporters** | [GitHub Issues](https://github.com/SoumyajitXD/Still-Watching/issues) | Test a clean CurseForge install and attach logs. Vibes are not diagnostics. |
-| **Maintainers** | [`python .github/scripts/validate.py all`](#maintainer-checks) | Validate before release-side edits. Guesswork belongs in horror, not maintenance. |
+| **Maintainers** | [CI baseline](#maintainer-checks) | Let GitHub Actions validate release-facing edits. Guesswork belongs in horror, not maintenance. |
 
 ---
 
@@ -195,20 +195,19 @@ Logs matter. Vibes are not diagnostics.
 | [`Releases/`](./Releases) | Release-side files. |
 | [`.github/ISSUE_TEMPLATE/`](./.github/ISSUE_TEMPLATE) | Issue templates. |
 | [`.github/workflows/ci.yml`](./.github/workflows/ci.yml) | Repository validation workflow. |
-| [`.github/scripts/validate.py`](./.github/scripts/validate.py) | Local validation script. |
 | [`LICENSE`](./LICENSE) | Apache License 2.0 for original repository files. |
 
 ---
 
 ## Maintainer Checks
 
-Before touching release-facing docs, run:
+Before touching release-facing docs, rely on the repository CI baseline and run a local whitespace check when practical:
 
 ```bash
-python .github/scripts/validate.py all
+git diff --check
 ```
 
-That check catches boring-but-expensive mistakes early: broken local Markdown links, missing referenced files, Repository Map drift, CurseForge ID mismatches, sponsor block damage, and release text drift. Ship dread, not sloppy Markdown shrapnel.
+The CI baseline keeps the required repository files, single workflow, deleted legacy helper scripts, CurseForge ID, Forge/Minecraft facts, sponsor markers, and CurseForge sponsor link honest. It intentionally does not check external links or require generated/optional navigation targets such as `latest-modlist.md`, `Screenshots/`, `Releases/`, or `docs/server-pack-guide.md`.
 
 ---
 
