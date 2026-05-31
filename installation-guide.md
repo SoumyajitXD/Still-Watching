@@ -1,3 +1,5 @@
+<!-- markdownlint-disable MD026 -->
+
 # Still Watching Installation Guide
 
 This guide covers installing, updating, backing up, troubleshooting, reporting bugs, and setting up multiplayer for **Still Watching**, a Minecraft Java Edition horror-survival modpack by **Soumyajit** for **Minecraft 1.20.1** on **Forge**.
@@ -230,6 +232,7 @@ Check that the archive actually contains files. An empty backup is just a lie wi
 ---
 
 <a id="multiplayer--server-notes"></a>
+
 ## Multiplayer & Server Setup
 
 Still Watching multiplayer works only when **every client and the server use matching pack version, Minecraft version, Forge version, required mods, and configs**.
