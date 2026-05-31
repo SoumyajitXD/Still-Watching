@@ -4,7 +4,7 @@
 
 # Still Watching
 
-### A Forge 1.20.1 horror-survival modpack where the fog has teeth, the caves answer back, and the quiet is usually lying.
+## A Forge 1.20.1 horror-survival modpack where the fog has teeth, the caves answer back, and the quiet is usually lying
 
 [![CI](https://github.com/SoumyajitXD/Still-Watching/actions/workflows/ci.yml/badge.svg)](https://github.com/SoumyajitXD/Still-Watching/actions/workflows/ci.yml)
 [![CurseForge](https://img.shields.io/curseforge/v/1420406?logo=curseforge&label=CurseForge)](https://www.curseforge.com/minecraft/modpacks/still-watching/files)
@@ -23,7 +23,8 @@
 ---
 
 > [!IMPORTANT]
-> ## Install from CurseForge. Not the GitHub ZIP.
+>
+> ## Install from CurseForge, not the GitHub ZIP
 >
 > The GitHub ZIP is **not** a playable modpack installer. It is source-side repository content for docs, issues, screenshots, release-side files, validation, and licensing clarity.
 >
@@ -42,7 +43,7 @@
 
 ---
 
-## What Is Still Watching?
+## What Is Still Watching
 
 **Still Watching** is a Minecraft Java Edition **horror-survival modpack** by **Soumyajit** for **Minecraft 1.20.1** on **Forge**.
 
