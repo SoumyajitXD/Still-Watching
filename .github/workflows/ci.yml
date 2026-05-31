@@ -17,99 +17,100 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  validate:
-    name: Validate repository
+  repo-baseline:
+    name: Repository baseline
     runs-on: ubuntu-latest
     timeout-minutes: 5
-
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v6
-
-      - name: Validate repository baseline
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2 pinned to immutable commit
+      - name: Validate required files, paths, and legacy script references
         shell: bash
         run: |
-          errors=0
+          set -euo pipefail
+          python3 .github/ci/validate_repository.py baseline
 
-          report_error() {
-            local path="$1"
-            local message="$2"
-            echo "::error file=${path}::${message}"
-            errors=1
-          }
+  metadata-consistency:
+    name: Metadata consistency
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2 pinned to immutable commit
+      - name: Validate project metadata across docs
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 .github/ci/validate_repository.py metadata modlist
 
-          require_file() {
-            local path="$1"
-            if [[ ! -f "$path" ]]; then
-              report_error "$path" "Missing required file"
-            fi
-          }
+  markdown-lint:
+    name: Markdown lint
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2 pinned to immutable commit
+      - name: Run markdownlint-cli2
+        shell: bash
+        run: |
+          set -euo pipefail
+          npx --yes markdownlint-cli2@0.18.1 "**/*.md" "!Releases/**"
 
-          require_contains() {
-            local path="$1"
-            local pattern="$2"
-            local description="$3"
+  link-check:
+    name: Link check
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2 pinned to immutable commit
+      - name: Validate internal links and probe external links
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 .github/ci/validate_repository.py links --external-links
 
-            if [[ ! -f "$path" ]]; then
-              report_error "$path" "Cannot check '${description}' because the file is missing"
-              return
-            fi
+  html-validation:
+    name: CurseForge HTML validation
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2 pinned to immutable commit
+      - name: Validate curseforge-description.html
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 .github/ci/validate_repository.py html
 
-            if ! grep -q -- "$pattern" "$path"; then
-              report_error "$path" "Missing required content: ${description}"
-            fi
-          }
+  repo-hygiene:
+    name: Repository hygiene
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2 pinned to immutable commit
+      - name: Check whitespace, junk files, conflict markers, and secrets
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 .github/ci/validate_repository.py hygiene
 
-          echo "::group::Required repository files"
-          required_files=(
-            README.md
-            CONTRIBUTING.md
-            SUPPORT.md
-            SECURITY.md
-            installation-guide.md
-            curseforge-description.html
-            LICENSE
-            .github/workflows/ci.yml
-          )
-
-          for path in "${required_files[@]}"; do
-            require_file "$path"
-          done
-          echo "::endgroup::"
-
-          echo "::group::Workflow inventory"
-          while IFS= read -r path; do
-            report_error "$path" "Only .github/workflows/ci.yml should exist"
-          done < <(find .github/workflows -type f ! -name ci.yml | sort)
-          echo "::endgroup::"
-
-          echo "::group::Deleted CI helper scripts"
-          if [[ -d .github/scripts ]]; then
-            while IFS= read -r path; do
-              report_error "$path" "Old CI helper scripts should not remain"
-            done < <(find .github/scripts -type f | sort)
-          fi
-          echo "::endgroup::"
-
-          echo "::group::Required baseline content"
-          require_contains .github/workflows/ci.yml '^permissions:$' "workflow declares permissions"
-          require_contains .github/workflows/ci.yml '^  contents: read$' "workflow limits permissions to contents: read"
-          require_contains README.md 'Still Watching' "project name Still Watching"
-          require_contains README.md '1.20.1' "Minecraft version 1.20.1"
-          require_contains README.md 'Forge' "Forge loader"
-          require_contains README.md '1420406' "CurseForge project ID 1420406"
-          require_contains README.md 'sponsor:bisecthosting:start' "BisectHosting sponsor start marker"
-          require_contains README.md 'sponsor:bisecthosting:end' "BisectHosting sponsor end marker"
-          require_contains curseforge-description.html 'url-shortener.curseforge.com' "CurseForge URL shortener sponsor link"
-          echo "::endgroup::"
-
-          if [[ "$errors" -eq 0 ]]; then
-            echo "Repository baseline passed."
-          else
-            echo "Repository baseline failed. See annotations above for exact files and checks." >&2
-          fi
-
-          exit "$errors"
-
-      - name: Check git whitespace
-        run: git diff --check
+  workflow-lint:
+    name: Workflow lint
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2 pinned to immutable commit
+      - name: Install actionlint
+        shell: bash
+        run: |
+          set -euo pipefail
+          go install github.com/rhysd/actionlint/cmd/actionlint@v1.7.7
+          echo "$(go env GOPATH)/bin" >> "$GITHUB_PATH"
+      - name: Run actionlint and workflow security checks
+        shell: bash
+        run: |
+          set -euo pipefail
+          actionlint .github/workflows/ci.yml
+          python3 .github/ci/validate_repository.py workflow

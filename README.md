@@ -201,13 +201,21 @@ Logs matter. Vibes are not diagnostics.
 
 ## Maintainer Checks
 
-Before touching release-facing docs, rely on the repository CI baseline and run a local whitespace check when practical:
+Before touching release-facing docs, run the maintained local checks that mirror CI:
 
 ```bash
+python3 .github/ci/validate_repository.py all
+npx --yes markdownlint-cli2@0.18.1 "**/*.md" "!Releases/**"
 git diff --check
 ```
 
-The CI baseline keeps the required repository files, single workflow, deleted legacy helper scripts, CurseForge ID, Forge/Minecraft facts, sponsor markers, and CurseForge sponsor link honest. It intentionally does not check external links or require generated/optional navigation targets such as `latest-modlist.md`, `Screenshots/`, `Releases/`, or `docs/server-pack-guide.md`.
+For link-heavy changes, also probe external links:
+
+```bash
+python3 .github/ci/validate_repository.py links --external-links
+```
+
+The CI checks required files, single-workflow policy, metadata drift, Markdown/table shape, internal links, CurseForge HTML, modlist rows, workflow security, whitespace, suspicious secrets, conflict markers, junk files, and dead legacy helper-script references. It intentionally does **not** build Minecraft, download the whole modpack, or pretend the GitHub ZIP is a playable installer.
 
 ---
 

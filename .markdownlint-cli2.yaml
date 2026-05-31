@@ -1,0 +1,14 @@
+config:
+  default: true
+  MD013: false # The modpack docs intentionally use readable long table rows and horror-flavored prose.
+  MD033: false # README and CurseForge-facing docs intentionally include inline HTML.
+  MD036: false # Release metadata callouts use bold labels without needing extra headings.
+  MD041: false # README starts with centered HTML before the H1.
+  MD024:
+    siblings_only: true
+  MD026:
+    punctuation: ".,;:!！?？"
+globs:
+  - "**/*.md"
+ignores:
+  - "Releases/**"

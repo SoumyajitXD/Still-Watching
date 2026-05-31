@@ -17,6 +17,8 @@ It does not need random noise wearing a pull request costume.
 | Java | Java 17 where required |
 | Official playable release | CurseForge |
 | CurseForge Project ID | `1420406` |
+| Current documented release | Still Watching V1.1.0 |
+| RAM | `5 GB` minimum; `6–8 GB` preferred |
 | Repository license | Apache-2.0 for original repository files only |
 
 Install from CurseForge when testing playable behavior. The GitHub ZIP is repository source content, not a playable modpack installer.
@@ -178,19 +180,25 @@ If a change affects dedicated servers, test it on a dedicated server or clearly 
 
 ## Validation
 
-Before committing release-facing documentation or generated-file changes, run:
+Before committing release-facing documentation, metadata, workflow, or link changes, run the same maintained checks CI uses. The old helper scripts are gone on purpose; maintained validation lives under `.github/ci/` so contributors do not chase dead ghosts.
 
 ```bash
-python .github/scripts/validate.py all
+python3 .github/ci/validate_repository.py all
 ```
 
-When intentionally updating generated docs from source data, run the generator first:
+Run Markdown linting before touching tables, headings, fenced blocks, or README navigation:
 
 ```bash
-python .github/scripts/generate_docs.py
+npx --yes markdownlint-cli2@0.18.1 "**/*.md" "!Releases/**"
 ```
 
-Then check for whitespace errors:
+If your change touches links, run the link check. It verifies internal links and probes external links with soft warnings for rate-limited CurseForge-style hosts:
+
+```bash
+python3 .github/ci/validate_repository.py links --external-links
+```
+
+Always check for whitespace errors before committing:
 
 ```bash
 git diff --check
