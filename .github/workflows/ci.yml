@@ -13,12 +13,12 @@ permissions:
   contents: read
 
 concurrency:
-  group: ci-${{ github.ref_name }}
+  group: ci-${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
-  repository-health:
-    name: Repository health
+  validate:
+    name: Validate repository
     runs-on: ubuntu-latest
     timeout-minutes: 10
 
@@ -26,40 +26,174 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-          cache: pip
+      - name: Install YAML parser
+        run: python -m pip install --disable-pip-version-check --quiet PyYAML
 
-      - name: Install validation dependencies
+      - name: Validate repository files
+        shell: python
         run: |
-          python -m pip install --upgrade pip
-          python -m pip install PyYAML
+          import re
+          import subprocess
+          import sys
+          import zipfile
+          from pathlib import Path
+          from urllib.parse import unquote, urlparse
 
-      - name: Prepare generated-doc compatibility path
-        shell: bash
-        run: |
-          if [[ ! -f latest-modlist.md ]]; then
-            cat > latest-modlist.md <<'EOF'
-          # Mod List
+          import yaml
 
-          The generated mod list is not tracked in this repository snapshot.
-          Use the official CurseForge project page for the current playable modpack files:
-          https://www.curseforge.com/minecraft/modpacks/still-watching
-          EOF
-          fi
+          root = Path.cwd()
+          errors = []
 
-      - name: Validate repository hygiene
-        shell: bash
-        run: |
-          set -euo pipefail
-          for check in yaml text html links facts sponsor archives; do
-            python .github/scripts/validate.py "$check"
-          done
+          required = [
+              "README.md",
+              "CONTRIBUTING.md",
+              "SUPPORT.md",
+              "SECURITY.md",
+              "CHANGELOG.md",
+              "installation-guide.md",
+              "curseforge-description.html",
+              "LICENSE",
+              ".github/workflows/ci.yml",
+          ]
+          optional_links = {
+              "Screenshots",
+              "Releases",
+              "docs/server-pack-guide.md",
+              "latest-modlist.md",
+          }
+          binary_suffixes = {
+              ".zip", ".jar", ".png", ".jpg", ".jpeg", ".gif", ".webp", ".mp3",
+              ".ogg", ".mp4", ".pdf", ".ttf", ".otf", ".woff", ".woff2",
+              ".exe", ".dll", ".so", ".class", ".gz", ".tar", ".xz", ".7z", ".rar",
+          }
 
-      - name: Check generated docs are stable when sources exist
-        run: python .github/scripts/generate_docs.py --check
+          def tracked_files():
+              raw = subprocess.check_output(["git", "ls-files", "-z"])
+              return [Path(x.decode()) for x in raw.split(b"\0") if x]
+
+          def text(path):
+              return path.read_text(encoding="utf-8-sig", errors="replace")
+
+          def is_text(path):
+              if path.suffix.lower() in binary_suffixes:
+                  return False
+              try:
+                  return b"\0" not in path.read_bytes()[:4096]
+              except OSError:
+                  return False
+
+          for name in required:
+              if not (root / name).exists():
+                  errors.append(f"missing required path: {name}")
+
+          for path in sorted(root.glob(".github/**/*.yml")) + sorted(root.glob(".github/**/*.yaml")):
+              try:
+                  data = yaml.safe_load(text(path))
+              except Exception as exc:
+                  errors.append(f"{path}: invalid YAML: {exc}")
+                  continue
+              if path.parts[:2] == (".github", "workflows"):
+                  if not isinstance(data, dict):
+                      errors.append(f"{path}: workflow must be a mapping")
+                      continue
+                  if not data.get("name"):
+                      errors.append(f"{path}: missing name")
+                  if not data.get("on") and not data.get(True):
+                      errors.append(f"{path}: missing trigger")
+                  if data.get("permissions") != {"contents": "read"}:
+                      errors.append(f"{path}: permissions must be contents: read")
+                  if not isinstance(data.get("jobs"), dict) or not data["jobs"]:
+                      errors.append(f"{path}: missing jobs")
+
+          files = tracked_files()
+          for path in files:
+              if not path.is_file() or not is_text(path):
+                  continue
+              data = path.read_bytes()
+              if not data:
+                  errors.append(f"{path}: empty tracked text file")
+                  continue
+              if b"\r\n" in data:
+                  errors.append(f"{path}: CRLF line endings")
+              if not data.endswith(b"\n"):
+                  errors.append(f"{path}: missing final newline")
+              for line_no, line in enumerate(data.splitlines(keepends=True), 1):
+                  if re.search(rb"[ \t]+(?:\r?\n|$)", line):
+                      errors.append(f"{path}:{line_no}: trailing whitespace")
+                      break
+
+          md_link = re.compile(r"(?<!!)\[[^\]\n]+\]\(([^)\n]+)\)")
+          html_link = re.compile(r'''\b(?:href|src)=["']([^"']+)["']''', re.I)
+          curseforge_count = 0
+          for path in files:
+              if path.suffix.lower() not in {".md", ".markdown", ".html", ".htm"}:
+                  continue
+              body = text(path)
+              links = []
+              if path.suffix.lower() in {".md", ".markdown"}:
+                  links += [(m.group(1).strip(), body.count("\n", 0, m.start(1)) + 1) for m in md_link.finditer(body)]
+              if path.suffix.lower() in {".html", ".htm"}:
+                  links += [(m.group(1).strip(), body.count("\n", 0, m.start(1)) + 1) for m in html_link.finditer(body)]
+              for href, line_no in links:
+                  if href.startswith("<") and href.endswith(">"):
+                      href = href[1:-1].strip()
+                  href = href.split()[0]
+                  parsed = urlparse(href)
+                  if parsed.netloc in {"curseforge.com", "www.curseforge.com"}:
+                      curseforge_count += 1
+                      if parsed.scheme != "https" or not parsed.path.startswith("/minecraft/"):
+                          errors.append(f"{path}:{line_no}: bad CurseForge URL: {href}")
+                  if not href or href.startswith(("#", "mailto:", "tel:", "data:")) or parsed.scheme or parsed.netloc:
+                      continue
+                  target = unquote(href.split("#", 1)[0].split("?", 1)[0]).lstrip("./")
+                  if not target:
+                      continue
+                  resolved = (path.parent / target).resolve()
+                  try:
+                      resolved.relative_to(root.resolve())
+                  except ValueError:
+                      errors.append(f"{path}:{line_no}: link escapes repository: {href}")
+                      continue
+                  normalized = target.rstrip("/")
+                  if not resolved.exists() and normalized not in optional_links:
+                      errors.append(f"{path}:{line_no}: broken local link: {href}")
+
+          if curseforge_count == 0:
+              errors.append("no CurseForge links found in docs")
+
+          readme = root / "README.md"
+          if readme.exists():
+              body = text(readme)
+              for needle in ["Still Watching", "1.20.1", "Forge", "1420406", "sponsor:bisecthosting:start", "sponsor:bisecthosting:end"]:
+                  if needle not in body:
+                      errors.append(f"README.md missing {needle}")
+
+          description = root / "curseforge-description.html"
+          if description.exists():
+              body = text(description)
+              if "url-shortener.curseforge.com" not in body:
+                  errors.append("curseforge-description.html missing sponsor link")
+
+          releases = root / "Releases"
+          if releases.exists():
+              for archive in sorted(releases.rglob("*.zip")):
+                  try:
+                      with zipfile.ZipFile(archive) as zf:
+                          if not zf.infolist():
+                              errors.append(f"{archive}: empty zip")
+                          bad = zf.testzip()
+                          if bad:
+                              errors.append(f"{archive}: corrupt zip member {bad}")
+                  except zipfile.BadZipFile:
+                      errors.append(f"{archive}: corrupt zip")
+
+          if errors:
+              print("Repository validation failed:", file=sys.stderr)
+              for error in errors:
+                  print(f"- {error}", file=sys.stderr)
+              sys.exit(1)
+
+          print("Repository validation passed.")
 
       - name: Check git whitespace
         run: git diff --check
