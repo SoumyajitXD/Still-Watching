@@ -28,10 +28,29 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Build tracked documentation list
+        id: docs
+        shell: bash
+        run: |
+          set -euo pipefail
+          docs=()
+          for path in README.md CONTRIBUTING.md SUPPORT.md SECURITY.md CHANGELOG.md installation-guide.md latest-modlist.md curseforge-description.html; do
+            if [[ -f "$path" ]]; then
+              docs+=("$path")
+            fi
+          done
+          if (( ${#docs[@]} == 0 )); then
+            echo "No documentation files found for link checking." >&2
+            exit 1
+          fi
+          printf 'args<<EOF\n' >> "$GITHUB_OUTPUT"
+          printf '%s\n' "--no-progress --verbose --max-concurrency 4 --max-retries 2 --retry-wait-time 5 --timeout 20 --accept 200,204,206,301,302,303,307,308,403,406,418,429,999 --exclude '^file://' --exclude '^https://www\.curseforge\.com/' --exclude '^https://media\.forgecdn\.net/' ${docs[*]}" >> "$GITHUB_OUTPUT"
+          printf 'EOF\n' >> "$GITHUB_OUTPUT"
+
       - name: Run lychee
         uses: lycheeverse/lychee-action@v2
         with:
           fail: true
-          args: "--no-progress --verbose --max-concurrency 4 --max-retries 2 --retry-wait-time 5 --timeout 20 --accept 200,204,206,301,302,303,307,308,403,406,418,429,999 --exclude '^file://' --exclude '^https://www\\.curseforge\\.com/' --exclude '^https://media\\.forgecdn\\.net/' README.md CONTRIBUTING.md SUPPORT.md SECURITY.md CHANGELOG.md installation-guide.md latest-modlist.md curseforge-description.html"
+          args: ${{ steps.docs.outputs.args }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
