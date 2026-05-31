@@ -37,6 +37,13 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install PyYAML
 
+      - name: Prepare generated-doc compatibility path
+        shell: bash
+        run: |
+          if [[ ! -f latest-modlist.md && -f latest-modlist.html ]]; then
+            cp latest-modlist.html latest-modlist.md
+          fi
+
       - name: Validate repository
         run: python .github/scripts/validate.py all
 
