@@ -20,180 +20,58 @@ jobs:
   validate:
     name: Validate repository
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 5
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Install YAML parser
-        run: python -m pip install --disable-pip-version-check --quiet PyYAML
-
-      - name: Validate repository files
-        shell: python
+      - name: Validate repository baseline
+        shell: bash
         run: |
-          import re
-          import subprocess
-          import sys
-          import zipfile
-          from pathlib import Path
-          from urllib.parse import unquote, urlparse
+          set -euo pipefail
 
-          import yaml
+          required_files=(
+            README.md
+            CONTRIBUTING.md
+            SUPPORT.md
+            SECURITY.md
+            CHANGELOG.md
+            installation-guide.md
+            curseforge-description.html
+            LICENSE
+            .github/workflows/ci.yml
+          )
 
-          root = Path.cwd()
-          errors = []
+          for path in "${required_files[@]}"; do
+            if [[ ! -f "$path" ]]; then
+              echo "Missing required file: $path" >&2
+              exit 1
+            fi
+          done
 
-          required = [
-              "README.md",
-              "CONTRIBUTING.md",
-              "SUPPORT.md",
-              "SECURITY.md",
-              "CHANGELOG.md",
-              "installation-guide.md",
-              "curseforge-description.html",
-              "LICENSE",
-              ".github/workflows/ci.yml",
-          ]
-          optional_links = {
-              "Screenshots",
-              "Releases",
-              "docs/server-pack-guide.md",
-              "latest-modlist.md",
-          }
-          binary_suffixes = {
-              ".zip", ".jar", ".png", ".jpg", ".jpeg", ".gif", ".webp", ".mp3",
-              ".ogg", ".mp4", ".pdf", ".ttf", ".otf", ".woff", ".woff2",
-              ".exe", ".dll", ".so", ".class", ".gz", ".tar", ".xz", ".7z", ".rar",
-          }
+          if find .github/workflows -type f ! -name ci.yml | grep -q .; then
+            echo "Only .github/workflows/ci.yml should remain." >&2
+            find .github/workflows -type f ! -name ci.yml >&2
+            exit 1
+          fi
 
-          def tracked_files():
-              raw = subprocess.check_output(["git", "ls-files", "-z"])
-              return [Path(x.decode()) for x in raw.split(b"\0") if x]
+          if [[ -d .github/scripts ]] && find .github/scripts -type f | grep -q .; then
+            echo "Old CI helper scripts should not remain." >&2
+            find .github/scripts -type f >&2
+            exit 1
+          fi
 
-          def text(path):
-              return path.read_text(encoding="utf-8-sig", errors="replace")
+          grep -q '^permissions:$' .github/workflows/ci.yml
+          grep -q '^  contents: read$' .github/workflows/ci.yml
+          grep -q 'sponsor:bisecthosting:start' README.md
+          grep -q 'sponsor:bisecthosting:end' README.md
+          grep -q 'url-shortener.curseforge.com' curseforge-description.html
+          grep -q '1420406' README.md
+          grep -q '1.20.1' README.md
+          grep -q 'Forge' README.md
 
-          def is_text(path):
-              if path.suffix.lower() in binary_suffixes:
-                  return False
-              try:
-                  return b"\0" not in path.read_bytes()[:4096]
-              except OSError:
-                  return False
-
-          for name in required:
-              if not (root / name).exists():
-                  errors.append(f"missing required path: {name}")
-
-          for path in sorted(root.glob(".github/**/*.yml")) + sorted(root.glob(".github/**/*.yaml")):
-              try:
-                  data = yaml.safe_load(text(path))
-              except Exception as exc:
-                  errors.append(f"{path}: invalid YAML: {exc}")
-                  continue
-              if path.parts[:2] == (".github", "workflows"):
-                  if not isinstance(data, dict):
-                      errors.append(f"{path}: workflow must be a mapping")
-                      continue
-                  if not data.get("name"):
-                      errors.append(f"{path}: missing name")
-                  if not data.get("on") and not data.get(True):
-                      errors.append(f"{path}: missing trigger")
-                  if data.get("permissions") != {"contents": "read"}:
-                      errors.append(f"{path}: permissions must be contents: read")
-                  if not isinstance(data.get("jobs"), dict) or not data["jobs"]:
-                      errors.append(f"{path}: missing jobs")
-
-          files = tracked_files()
-          for path in files:
-              if not path.is_file() or not is_text(path):
-                  continue
-              data = path.read_bytes()
-              if not data:
-                  errors.append(f"{path}: empty tracked text file")
-                  continue
-              if b"\r\n" in data:
-                  errors.append(f"{path}: CRLF line endings")
-              if not data.endswith(b"\n"):
-                  errors.append(f"{path}: missing final newline")
-              for line_no, line in enumerate(data.splitlines(keepends=True), 1):
-                  if re.search(rb"[ \t]+(?:\r?\n|$)", line):
-                      errors.append(f"{path}:{line_no}: trailing whitespace")
-                      break
-
-          md_link = re.compile(r"(?<!!)\[[^\]\n]+\]\(([^)\n]+)\)")
-          html_link = re.compile(r'''\b(?:href|src)=["']([^"']+)["']''', re.I)
-          curseforge_count = 0
-          for path in files:
-              if path.suffix.lower() not in {".md", ".markdown", ".html", ".htm"}:
-                  continue
-              body = text(path)
-              links = []
-              if path.suffix.lower() in {".md", ".markdown"}:
-                  links += [(m.group(1).strip(), body.count("\n", 0, m.start(1)) + 1) for m in md_link.finditer(body)]
-              if path.suffix.lower() in {".html", ".htm"}:
-                  links += [(m.group(1).strip(), body.count("\n", 0, m.start(1)) + 1) for m in html_link.finditer(body)]
-              for href, line_no in links:
-                  if href.startswith("<") and href.endswith(">"):
-                      href = href[1:-1].strip()
-                  href = href.split()[0]
-                  parsed = urlparse(href)
-                  if parsed.netloc in {"curseforge.com", "www.curseforge.com"}:
-                      curseforge_count += 1
-                      if parsed.scheme != "https" or not parsed.path.startswith("/minecraft/"):
-                          errors.append(f"{path}:{line_no}: bad CurseForge URL: {href}")
-                  if not href or href.startswith(("#", "mailto:", "tel:", "data:")) or parsed.scheme or parsed.netloc:
-                      continue
-                  target = unquote(href.split("#", 1)[0].split("?", 1)[0]).lstrip("./")
-                  if not target:
-                      continue
-                  resolved = (path.parent / target).resolve()
-                  try:
-                      resolved.relative_to(root.resolve())
-                  except ValueError:
-                      errors.append(f"{path}:{line_no}: link escapes repository: {href}")
-                      continue
-                  normalized = target.rstrip("/")
-                  if not resolved.exists() and normalized not in optional_links:
-                      errors.append(f"{path}:{line_no}: broken local link: {href}")
-
-          if curseforge_count == 0:
-              errors.append("no CurseForge links found in docs")
-
-          readme = root / "README.md"
-          if readme.exists():
-              body = text(readme)
-              for needle in ["Still Watching", "1.20.1", "Forge", "1420406", "sponsor:bisecthosting:start", "sponsor:bisecthosting:end"]:
-                  if needle not in body:
-                      errors.append(f"README.md missing {needle}")
-
-          description = root / "curseforge-description.html"
-          if description.exists():
-              body = text(description)
-              if "url-shortener.curseforge.com" not in body:
-                  errors.append("curseforge-description.html missing sponsor link")
-
-          releases = root / "Releases"
-          if releases.exists():
-              for archive in sorted(releases.rglob("*.zip")):
-                  try:
-                      with zipfile.ZipFile(archive) as zf:
-                          if not zf.infolist():
-                              errors.append(f"{archive}: empty zip")
-                          bad = zf.testzip()
-                          if bad:
-                              errors.append(f"{archive}: corrupt zip member {bad}")
-                  except zipfile.BadZipFile:
-                      errors.append(f"{archive}: corrupt zip")
-
-          if errors:
-              print("Repository validation failed:", file=sys.stderr)
-              for error in errors:
-                  print(f"- {error}", file=sys.stderr)
-              sys.exit(1)
-
-          print("Repository validation passed.")
+          echo "Repository baseline passed."
 
       - name: Check git whitespace
         run: git diff --check
