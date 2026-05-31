@@ -9,7 +9,7 @@
 - **RAM:** `5 GB` minimum; `6–8 GB` preferred
 
 | Name | Curseforge |
-|---|---|
+| --- | --- |
 | Cave Dweller Sound Overhaul (by Scorchy) | [Curseforge](https://www.curseforge.com/minecraft/texture-packs/cave-dweller-sound-overhaul) |
 | EnhancedVisuals (by CreativeMD) | [Curseforge](https://www.curseforge.com/minecraft/mc-mods/enhancedvisuals) |
 | Complementary Shaders - Unbound (by EminGT) | [Curseforge](https://www.curseforge.com/minecraft/shaders/complementary-unbound) |
