@@ -1,3 +1,5 @@
+<!-- markdownlint-disable MD026 -->
+
 # Security Policy
 
 Still Watching is a Minecraft Java Edition horror-survival modpack. Most problems here are gameplay bugs, mod conflicts, broken installs, bad configs, or cursed launcher behavior — annoying, yes; security vulnerabilities, usually no.
