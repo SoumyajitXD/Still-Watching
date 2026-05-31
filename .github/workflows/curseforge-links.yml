@@ -148,7 +148,7 @@ jobs:
                       f"based on {len(table_rows)} modlist rows."
                   )
           else:
-              failures.append("latest-modlist.md is missing; cannot check CurseForge link health.")
+              print("latest-modlist.md is not tracked; skipping generated modlist density check.")
 
           if failures:
               print("CurseForge link sanity check failed:")
@@ -156,6 +156,10 @@ jobs:
               sys.exit(1)
 
           total_links = sum(len(urls) for urls in curseforge_urls_by_file.values())
+          if total_links == 0:
+              print("CurseForge link sanity check failed:")
+              print("- No CurseForge links found in Markdown/HTML docs.")
+              sys.exit(1)
           print(f"Checked {len(docs)} Markdown/HTML files and {total_links} CurseForge links.")
           print("CurseForge link sanity check passed.")
           PY
