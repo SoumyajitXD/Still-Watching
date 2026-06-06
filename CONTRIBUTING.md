@@ -17,7 +17,7 @@ It does not need random noise wearing a pull request costume.
 | Java | Java 17 where required |
 | Official playable release | CurseForge |
 | CurseForge Project ID | `1420406` |
-| Current documented release | Still Watching V1.1.0 |
+| Current documented release | Still Watching V1.1.1 |
 | RAM | `5 GB` minimum; `6–8 GB` preferred |
 | Repository license | Apache-2.0 for original repository files only |
 
