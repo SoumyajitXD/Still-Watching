@@ -4,6 +4,7 @@ config:
   MD033: false # README and CurseForge-facing docs intentionally include inline HTML.
   MD036: false # Release metadata callouts use bold labels without needing extra headings.
   MD041: false # README starts with centered HTML before the H1.
+  MD047: false # GitHub contents API updates can strip final newlines from generated/replaced docs.
   MD024:
     siblings_only: true
   MD026:
