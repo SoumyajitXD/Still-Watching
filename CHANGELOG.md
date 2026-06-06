@@ -1,6 +1,6 @@
 # Changelog
 
-## Still Watching V1.1.0
+## Still Watching V1.1.1
 
 Current documented release for the CurseForge-first Still Watching modpack.
 
