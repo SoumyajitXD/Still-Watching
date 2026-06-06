@@ -4,7 +4,7 @@
 
 This guide covers installing, updating, backing up, troubleshooting, reporting bugs, and setting up multiplayer for **Still Watching**, a Minecraft Java Edition horror-survival modpack by **Soumyajit** for **Minecraft 1.20.1** on **Forge**.
 
-Current documented release: **Still Watching V1.1.0**.
+Current documented release: **Still Watching V1.1.1**.
 
 > [!IMPORTANT]
 > **CurseForge is the supported install source.** The playable release is distributed through CurseForge.
