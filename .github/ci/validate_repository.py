@@ -46,6 +46,18 @@ METADATA_TARGETS = [
     Path("latest-modlist.md"),
 ]
 
+LINK_CHECK_TARGETS = [
+    Path("README.md"),
+    Path("installation-guide.md"),
+    Path("SUPPORT.md"),
+    Path("SECURITY.md"),
+    Path("CONTRIBUTING.md"),
+    Path("latest-modlist.md"),
+    Path("curseforge-description.html"),
+    Path("docs/server-pack-guide.md"),
+    Path("docs/ci-branch-protection.md"),
+]
+
 TEXT_EXTENSIONS = {
     ".css",
     ".editorconfig",
@@ -154,11 +166,39 @@ def normalize_for_metadata(text: str) -> str:
         text.replace("&ndash;", "–")
         .replace("&#8211;", "–")
         .replace("&mdash;", "—")
+        .replace("&#8212;", "—")
         .replace("&nbsp;", " ")
         .replace("5GB", "5 GB")
         .replace("6–8GB", "6–8 GB")
         .replace("6-8 GB", "6–8 GB")
+        .replace("Apache License 2.0", "Apache-2.0")
     )
+
+
+def metadata_candidates(key: str, value: str) -> list[str]:
+    """Return acceptable text variants for metadata values.
+
+    CI should catch real drift, not fail because one surface says "V1.1.1" while
+    the metadata source says "Still Watching V1.1.1".
+    """
+    candidates = [value]
+    if key == "current_documented_release" and value.startswith("Still Watching "):
+        short_version = value.removeprefix("Still Watching ")
+        candidates.extend([short_version, f"Current release {short_version}", f"Current documented release {short_version}"])
+    if key == "java_version":
+        candidates.extend([f"Java {value}", f"Java `{value}`"])
+    if key in {"minimum_ram", "preferred_ram"}:
+        candidates.append(value.replace(" ", ""))
+    if key == "loader":
+        candidates.append(value.lower())
+    return candidates
+
+
+def require_any(reporter: Reporter, path: Path, text: str, key: str, label: str, value: str) -> None:
+    candidates = metadata_candidates(key, value)
+    if not any(candidate in text for candidate in candidates):
+        candidate_list = ", ".join(repr(candidate) for candidate in candidates)
+        reporter.error(path, f"Missing metadata value for {label}; accepted one of: {candidate_list}")
 
 
 def check_baseline(reporter: Reporter) -> None:
@@ -178,6 +218,8 @@ def check_baseline(reporter: Reporter) -> None:
     readme = read_text(Path("README.md")) if (ROOT / "README.md").is_file() else ""
     if "./docs/server-pack-guide.md" in readme and not (ROOT / "docs/server-pack-guide.md").is_file():
         reporter.error("docs/server-pack-guide.md", "README links to the server-pack guide, but the file is missing")
+    if "./docs/ci-branch-protection.md" in readme and not (ROOT / "docs/ci-branch-protection.md").is_file():
+        reporter.error("docs/ci-branch-protection.md", "README links to the CI branch protection guide, but the file is missing")
     if "./.github/ISSUE_TEMPLATE" in readme and not (ROOT / ".github/ISSUE_TEMPLATE").is_dir():
         reporter.error(".github/ISSUE_TEMPLATE", "README links to issue templates, but the directory is missing")
     if "./CHANGELOG.md" in readme and not (ROOT / "CHANGELOG.md").is_file():
@@ -227,18 +269,7 @@ def check_metadata(reporter: Reporter) -> None:
             continue
         text = normalize_for_metadata(read_text(path))
         for key, label in labels.items():
-            value = metadata[key]
-            candidate_values = [value]
-            if key == "current_documented_release" and value.startswith("Still Watching "):
-                candidate_values.append(value.removeprefix("Still Watching "))
-            if key == "java_version":
-                candidate_values.extend([f"Java {value}", f"Java `{value}`"])
-            if key == "minimum_ram":
-                candidate_values.append(value.replace(" ", ""))
-            if key == "preferred_ram":
-                candidate_values.append(value.replace(" ", ""))
-            if not any(candidate in text for candidate in candidate_values):
-                reporter.error(path, f"Missing metadata value for {label}: {value}")
+            require_any(reporter, path, text, key, label, metadata[key])
     reporter.endgroup()
 
 
@@ -251,16 +282,28 @@ def check_html(reporter: Reporter) -> None:
     norm = normalize_for_metadata(text)
     metadata = load_metadata()
     reporter.group("CurseForge HTML sanity")
-    required = [
-        (metadata["project_name"], "project name"),
-        (metadata["current_documented_release"], "current documented release"),
-        (metadata["minecraft_version"], "Minecraft version"),
-        (metadata["loader"], "loader"),
+
+    for key, label in {
+        "project_name": "project name",
+        "minecraft_version": "Minecraft version",
+        "loader": "loader",
+        "current_documented_release": "current documented release",
+        "minimum_ram": "minimum RAM",
+        "preferred_ram": "preferred RAM",
+    }.items():
+        require_any(reporter, path, norm, key, label, metadata[key])
+
+    for needle, label in [
         ("url-shortener.curseforge.com", "CurseForge sponsor shortener URL"),
-    ]
-    for needle, label in required:
+        ("https://media.forgecdn.net/", "ForgeCDN-hosted image URL"),
+    ]:
         if needle not in norm:
             reporter.error(path, f"Missing required HTML content: {label}")
+
+    if re.search(r"<script\b", text, re.IGNORECASE):
+        reporter.error(path, "CurseForge description must not use JavaScript")
+    if re.search(r"<style\b", text, re.IGNORECASE):
+        reporter.error(path, "CurseForge description must use inline CSS, not a style block")
     for match in PLACEHOLDER_RE.finditer(text):
         reporter.error(path, f"Placeholder text remains: {match.group(0)}")
     for match in re.finditer(r"<img\b[^>]*\bsrc=[\"']([^\"']+)[\"']", text, re.IGNORECASE):
@@ -399,7 +442,6 @@ def check_external_link(reporter: Reporter, source: Path, line: int, target: str
         with urllib.request.urlopen(request, timeout=12) as response:
             status_code = response.getcode()
     except urllib.error.HTTPError as exc:
-        # Some servers reject HEAD but accept GET.
         if exc.code in {405, 403}:
             try:
                 get_request = urllib.request.Request(
@@ -429,9 +471,8 @@ def check_external_link(reporter: Reporter, source: Path, line: int, target: str
 
 
 def check_links(reporter: Reporter, external: bool = False) -> None:
-    files = [Path("README.md"), Path("installation-guide.md"), Path("SUPPORT.md"), Path("SECURITY.md"), Path("CONTRIBUTING.md"), Path("latest-modlist.md"), Path("curseforge-description.html")]
     reporter.group("Internal and external links" if external else "Internal links")
-    for source in files:
+    for source in LINK_CHECK_TARGETS:
         if not (ROOT / source).is_file():
             reporter.error(source, "Cannot check links because the file is missing")
             continue
@@ -514,7 +555,6 @@ def check_workflow(reporter: Reporter) -> None:
             reporter.error(WORKFLOW_PATH, f"Marketplace action is not pinned to an approved immutable SHA: {action}", line)
     lines = text.splitlines()
     job_lines = [(i + 1, m.group(1)) for i, line in enumerate(lines) if (m := JOB_LINE_RE.match(line))]
-    # Limit to lines after jobs: and ignore maps nested below known job keys by checking two-space indent only.
     job_lines = [(line, name) for line, name in job_lines if line > next((i + 1 for i, l in enumerate(lines) if l == "jobs:"), 0)]
     for idx, (line_no, job_name) in enumerate(job_lines):
         next_line = job_lines[idx + 1][0] if idx + 1 < len(job_lines) else len(lines) + 1
