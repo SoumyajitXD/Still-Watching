@@ -1,6 +1,8 @@
+<!-- markdownlint-disable MD013 -->
+
 # Contributing
 
-Still Watching accepts useful work: fixes, evidence, clean documentation, reproducible bug reports, and changes that make the modpack easier to install, maintain, validate, or troubleshoot.
+Still Watching accepts useful work: reproducible reports, clean documentation, evidence-backed metadata fixes, validation improvements, and changes that make the modpack easier to install, maintain, support, or troubleshoot.
 
 It does not need random noise wearing a pull request costume.
 
@@ -14,7 +16,7 @@ It does not need random noise wearing a pull request costume.
 | Type | Minecraft Java Edition horror-survival modpack |
 | Minecraft | `1.20.1` |
 | Loader | Forge |
-| Java | Java 17 where required |
+| Java | Java `17` where required |
 | Official playable release | CurseForge |
 | CurseForge Project ID | `1420406` |
 | Current documented release | Still Watching V1.1.1 |
@@ -27,11 +29,11 @@ Install from CurseForge when testing playable behavior. The GitHub ZIP is reposi
 
 ## License Scope
 
-This repository is licensed under the [Apache License 2.0](./LICENSE) for original repository files created for Still Watching, such as documentation, metadata, scripts, configuration source, validation helpers, and other project-maintained files unless a file clearly says otherwise.
+This repository is licensed under the [Apache License 2.0](./LICENSE), commonly identified as **Apache-2.0**, for original repository files created for Still Watching. That includes project-maintained documentation, metadata, validation helpers, configuration source, release-facing source files, and other original repo files unless a file clearly says otherwise.
 
-That does **not** relicense Minecraft, Forge, CurseForge, third-party mods, third-party assets, screenshots containing third-party content, trademarks, logos, mod names, or external project content. Those stay under their own owners' licenses, terms, and permissions.
+That does **not** relicense Minecraft, Forge, CurseForge, third-party mods, third-party assets, screenshots containing third-party content, trademarks, logos, mod names, shader packs, resource packs, sounds, textures, or external project content. Those stay under their own owners' licenses, terms, and permissions.
 
-Do not submit files you do not have the right to contribute. Do not upload mod JARs, copied assets, ripped textures, stolen logos, private files, or anything that would make licensing a dumpster fire with a README.
+Do not submit files you do not have the right to contribute. Do not upload mod JARs, copied assets, private files, or unlicensed material.
 
 ---
 
@@ -39,46 +41,47 @@ Do not submit files you do not have the right to contribute. Do not upload mod J
 
 By opening a pull request or otherwise contributing original content to this repository, you agree that your contribution may be used, modified, reproduced, and distributed under the repository's Apache-2.0 license unless you clearly mark a different compatible license and the maintainer accepts it.
 
-Contributions must be your own work, public-domain material, or material you are allowed to submit under compatible terms. If attribution is required, include it clearly in the relevant file or PR description.
+Contributions must be your own work or material you are allowed to submit under compatible terms. If attribution is required, include it clearly in the relevant file or pull request description.
 
 This is not legal advice. It is the project rule: do not bring licensing grenades into the modpack.
 
 ---
 
-## What Contributions Help
+## Useful Contributions
 
 Good contributions usually fall into one of these buckets:
 
 - documentation fixes for players, server admins, contributors, or maintainers;
 - reproducible bug reports with logs and clean-install testing;
 - server-pack corrections backed by actual dedicated-server testing;
-- mod metadata corrections backed by source/release evidence;
+- mod metadata corrections backed by source or release evidence;
 - broken link fixes;
 - typo, formatting, table, and navigation improvements;
 - validation or automation improvements;
 - compatibility notes for the documented release;
 - performance observations with hardware, settings, and logs;
-- screenshots or presentation improvements that fit the pack’s identity.
+- missing credit, attribution, or license-scope corrections;
+- screenshots or presentation improvements that fit the pack's identity.
 
 Useful work makes the project clearer. Useless work makes maintainers dig through fog with a spoon.
 
 ---
 
-## What Will Usually Be Rejected
+## Changes That Will Usually Be Rejected
 
 Do not open issues or pull requests for:
 
 - installing from the GitHub ZIP and then reporting that it does not work;
-- cracked-launcher support;
+- unsupported launcher support;
 - reuploaded modpack files or unofficial mirrors;
 - random mod dumps with no design reason or testing;
 - adding horror mobs just because they exist;
 - server/client-side claims without evidence;
 - crash screenshots without logs;
-- vague reports like “broken,” “fix,” or “doesn’t work”;
-- copyrighted assets, copied branding, stolen files, bundled mod JARs, or content you cannot license to this repository;
-- changes that strip the pack’s horror identity into bland generic modpack sludge;
-- changes that remove required credits, attribution, licensing notes, or sponsor-related content.
+- vague reports like `broken`, `fix`, or `doesn't work`;
+- copyrighted assets, copied branding, bundled mod JARs, or content you cannot license to this repository;
+- changes that strip the pack's horror identity into bland generic modpack sludge;
+- changes that remove required credits, attribution, license notes, source-of-truth warnings, or sponsor-related content.
 
 The pack has a theme. If a change does not serve that theme or maintenance reality, it is probably clutter.
 
@@ -89,9 +92,9 @@ The pack has a theme. If a change does not serve that theme or maintenance reali
 Check the basics first:
 
 1. Install the latest release from CurseForge.
-2. Launch once with no extra mods, shaders, or resource packs.
+2. Launch once with no extra mods, shaders, resource packs, or config edits.
 3. Confirm Minecraft `1.20.1` and the correct Forge environment.
-4. Use Java 17 if the launcher/server asks.
+4. Use Java `17` if the launcher or server asks.
 5. Allocate enough RAM: `5 GB` minimum, `6–8 GB` preferred.
 6. Reproduce the issue.
 7. Collect `logs/latest.log` and any crash report.
@@ -117,7 +120,7 @@ When reporting a bug, include:
 - whether the issue happens on a clean CurseForge install;
 - any extra mods, shaders, resource packs, or config edits.
 
-Do not paste giant logs directly into the issue body unless they are short. Use attachments or a paste service when needed, and remove secrets/private details first.
+Do not paste giant logs directly into the issue body unless they are short. Use attachments or a paste service when needed, and remove private details first.
 
 ---
 
@@ -125,17 +128,19 @@ Do not paste giant logs directly into the issue body unless they are short. Use 
 
 Pull requests should be focused. One clear job per PR.
 
-Good PRs:
+Good pull requests:
 
 - explain what changed and why;
 - link related issues when relevant;
 - avoid unrelated rewrites;
-- preserve the existing project tone;
+- preserve the project tone;
 - keep tables and docs readable;
-- include validation results when the change touches generated or release-facing files;
-- preserve license notices, attribution, credits, and third-party references.
+- preserve the warning that CurseForge is the playable source;
+- preserve Apache-2.0 license wording and third-party license scope;
+- preserve credits, attribution, mod names, links, and sponsor references;
+- include validation results when the change touches release-facing files.
 
-Bad PRs try to remodel the whole haunted house because one window squeaked.
+Bad pull requests try to remodel the whole haunted house because one window squeaked.
 
 ---
 
@@ -147,7 +152,8 @@ Keep the writing:
 - specific;
 - useful;
 - horror-flavored where it fits;
-- honest about uncertainty.
+- honest about uncertainty;
+- clear about what is supported and unsupported.
 
 Avoid:
 
@@ -155,7 +161,7 @@ Avoid:
 - fake certainty;
 - giant paragraphs nobody will read;
 - jokes that hide important instructions;
-- vague claims like “optimized,” “fixed,” or “compatible” without proof.
+- vague claims like `optimized`, `fixed`, or `compatible` without proof.
 
 Personality is seasoning. Accuracy is the meal. Do not serve a bowl of paprika.
 
@@ -167,10 +173,10 @@ Changes involving mods, sides, dependencies, loaders, or server-pack behavior ne
 
 Rules:
 
-1. Edit source metadata only when you have real release evidence.
-2. Keep `unknown`, `verify`, or cautious wording when proof is missing.
-3. Do not call a mod server-safe because it “looks client-only.” That is how servers become smoke.
-4. Preserve third-party mod names, links, credits, and license/permission notes.
+1. Edit source metadata only when you have release evidence.
+2. Keep cautious wording when proof is missing.
+3. Do not call a mod server-safe because it looks client-only. That is how servers become smoke.
+4. Preserve third-party mod names, links, credits, and license or permission notes.
 5. Regenerate derived docs when source data changes.
 6. Validate before committing.
 
@@ -180,7 +186,7 @@ If a change affects dedicated servers, test it on a dedicated server or clearly 
 
 ## Validation
 
-Before committing release-facing documentation, metadata, workflow, or link changes, run the same maintained checks CI uses. The old helper scripts are gone on purpose; maintained validation lives under `.github/ci/` so contributors do not chase dead ghosts.
+Before committing release-facing documentation, metadata, workflow, or link changes, run the same maintained checks CI uses. Maintained validation lives under `.github/ci/`.
 
 ```bash
 python3 .github/ci/validate_repository.py all
@@ -192,7 +198,7 @@ Run Markdown linting before touching tables, headings, fenced blocks, or README 
 npx --yes markdownlint-cli2@0.18.1 "**/*.md" "!Releases/**"
 ```
 
-If your change touches links, run the link check. It verifies internal links and probes external links with soft warnings for rate-limited CurseForge-style hosts:
+If your change touches links, run the link check. It verifies internal links and probes external links with soft warnings for rate-limited hosts:
 
 ```bash
 python3 .github/ci/validate_repository.py links --external-links
@@ -204,15 +210,15 @@ Always check for whitespace errors before committing:
 git diff --check
 ```
 
-If you cannot run validation, say so in the PR or issue. Silence makes reviewers assume you skipped it and hoped the fog would cover the body.
+If you cannot run validation, say so in the pull request or issue. Silence makes reviewers assume you skipped it and hoped the fog would cover the body.
 
 ---
 
 ## Security Reports
 
-Do not post secrets, tokens, private server addresses, or sensitive logs publicly.
+Do not post sensitive private details publicly.
 
-Use normal GitHub Issues only for non-sensitive security concerns, suspicious public links, fake downloads, or unsafe public references. See [`SECURITY.md`](./SECURITY.md) before reporting security-related issues.
+Use normal GitHub Issues only for non-sensitive security concerns, suspicious public links, fake downloads, unsafe public references, or license-scope concerns that are safe to discuss openly. See [`SECURITY.md`](./SECURITY.md) before reporting security-related issues.
 
 ---
 
@@ -220,4 +226,4 @@ Use normal GitHub Issues only for non-sensitive security concerns, suspicious pu
 
 For installation help, troubleshooting, and where to ask questions, read [`SUPPORT.md`](./SUPPORT.md).
 
-A Discord server may be added later. Until it exists and is officially linked, GitHub and CurseForge are the project’s public support path.
+A Discord server may be added later. Until it exists and is officially linked, GitHub and CurseForge are the project's public support path.
