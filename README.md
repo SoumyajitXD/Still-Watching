@@ -51,8 +51,7 @@ It keeps the familiar survival loop — mine, build, loot, travel, recover — t
 hostile structures, audio pressure, and stalking entities. The point is not random noise spam. The point is pressure:
 limited sight, suspicious sound, unsafe travel, and the feeling that something noticed you before you noticed it.
 
-This is not a kitchen-sink pack wearing a cheap horror mask. It has a narrower job: make Minecraft survival feel
-watched.
+This is not a kitchen-sink pack wearing a cheap horror mask. It has a narrower job: make Minecraft survival feel watched.
 
 ---
 
@@ -69,7 +68,7 @@ watched.
 | **CurseForge Project ID** | `1420406` |
 | **RAM target** | `5 GB` minimum; `6–8 GB` preferred |
 | **Install source** | [CurseForge](https://www.curseforge.com/minecraft/modpacks/still-watching) |
-| **Repository license** | [Apache License 2.0](./LICENSE) for original repository files only |
+| **Repository license** | [Apache-2.0](./LICENSE) for original repository files only |
 
 ---
 
@@ -139,8 +138,7 @@ Use this before changing anything:
 - Headphones strongly recommended.
 - Subtitles allowed. Accessibility is not playing wrong.
 
-If the clean pack works and your modified profile breaks, the modification is the suspect. Test it like evidence, not
-like folklore.
+If the clean pack works and your modified profile breaks, the modification is the suspect. Test it like evidence.
 
 ---
 
@@ -157,8 +155,7 @@ Multiplayer is supported when the server and every client match. Keep this borin
   the mod author explicitly supports it server-side.
 - Test startup, world generation, joining, voice chat, and common travel before inviting players.
 
-For conservative server-pack rules, read [`docs/server-pack-guide.md`](./docs/server-pack-guide.md). Guessing at Forge
-server files is not bravery. It is feeding the crash log.
+For conservative server-pack rules, read [`docs/server-pack-guide.md`](./docs/server-pack-guide.md).
 
 <!-- sponsor:bisecthosting:start -->
 [![Make a Still Watching server and get 25 percent off with BisectHosting](https://media.forgecdn.net/attachments/description/1420406/description_0434b1be-41ee-4fa8-a2f5-177b2fe87c95.png)](https://url-shortener.curseforge.com/AZDOs)
@@ -233,12 +230,13 @@ Logs matter. Vibes are not diagnostics.
 | [`installation-guide.md`](./installation-guide.md) | Install, update, backup, multiplayer, and troubleshooting guide. |
 | [`latest-modlist.md`](./latest-modlist.md) | Current repository-maintained mod, shader, and resource list. |
 | [`docs/server-pack-guide.md`](./docs/server-pack-guide.md) | Conservative dedicated-server guidance. |
+| [`docs/ci-branch-protection.md`](./docs/ci-branch-protection.md) | CI and branch protection recommendations. |
 | [`curseforge-description.html`](./curseforge-description.html) | CurseForge description source. |
 | [`Screenshots/`](./Screenshots) | Screenshot assets. |
 | [`Releases/`](./Releases) | Release-side files and exported package material. |
 | [`.github/ISSUE_TEMPLATE/`](./.github/ISSUE_TEMPLATE) | Issue templates. |
 | [`.github/workflows/ci.yml`](./.github/workflows/ci.yml) | Repository validation workflow. |
-| [`LICENSE`](./LICENSE) | Apache License 2.0 for original repository files. |
+| [`LICENSE`](./LICENSE) | Apache-2.0 for original repository files. |
 
 ---
 
@@ -269,7 +267,7 @@ legacy helper-script references. It does **not** build Minecraft or prove a GitH
 - Contribution rules: [`CONTRIBUTING.md`](./CONTRIBUTING.md)
 - Support boundaries: [`SUPPORT.md`](./SUPPORT.md)
 - Security and suspicious downloads: [`SECURITY.md`](./SECURITY.md)
-- Release notes: [`CHANGELOG.md`](./CHANGELOG.md)
+- Official releases: [CurseForge files](https://www.curseforge.com/minecraft/modpacks/still-watching/files)
 
 Useful contributions include tested docs, reproducible bug reports, compatibility notes backed by evidence, and missing
 credit or attribution corrections.
@@ -286,8 +284,8 @@ and sponsor information.
 Credit goes to the Minecraft modding community: mod authors, library maintainers, shader and resource creators, artists,
 sound designers, tool developers, and everyone whose work makes modded Minecraft possible.
 
-Original files in this repository are licensed under the **Apache License 2.0**. See [`LICENSE`](./LICENSE). Third-party
-mods, shaders, resource packs, sounds, textures, libraries, tools, and external assets remain under their own licenses,
+Original files in this repository are licensed under **Apache-2.0**. See [`LICENSE`](./LICENSE). Third-party mods,
+shaders, resource packs, sounds, textures, libraries, tools, and external assets remain under their own licenses,
 permissions, and distribution terms.
 
 Support the original authors. Modding only works when people get credited for the work they actually did.
