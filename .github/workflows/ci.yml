@@ -7,7 +7,15 @@ name: CI
   pull_request:
     branches:
       - main
-  workflow_dispatch: {}
+  schedule:
+    - cron: "23 3 * * 1"
+  workflow_dispatch:
+    inputs:
+      external_links:
+        description: "Probe external HTTP(S) links during this manual run."
+        required: false
+        default: false
+        type: boolean
 
 permissions:
   contents: read
@@ -16,32 +24,45 @@ concurrency:
   group: ci-${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
-jobs:
-  repo-baseline:
-    name: Repository baseline
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2 pinned to immutable commit
-      - name: Validate required files, paths, and legacy script references
-        shell: bash
-        run: |
-          set -euo pipefail
-          python3 .github/ci/validate_repository.py baseline
+defaults:
+  run:
+    shell: bash
 
-  metadata-consistency:
-    name: Metadata consistency
+env:
+  PYTHONUNBUFFERED: "1"
+  npm_config_audit: "false"
+  npm_config_fund: "false"
+  npm_config_update_notifier: "false"
+  GOTOOLCHAIN: local
+
+jobs:
+  repository-validation:
+    name: Repository validation (${{ matrix.name }})
     runs-on: ubuntu-latest
     timeout-minutes: 5
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: baseline
+            checks: baseline
+          - name: metadata
+            checks: metadata modlist
+          - name: HTML
+            checks: html
+          - name: hygiene
+            checks: hygiene
     steps:
       - name: Checkout repository
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2 pinned to immutable commit
-      - name: Validate project metadata across docs
-        shell: bash
+        with:
+          fetch-depth: 1
+          persist-credentials: false
+          show-progress: false
+      - name: Run ${{ matrix.name }} checks
         run: |
           set -euo pipefail
-          python3 .github/ci/validate_repository.py metadata modlist
+          python3 .github/ci/validate_repository.py ${{ matrix.checks }}
 
   markdown-lint:
     name: Markdown lint
@@ -50,50 +71,47 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2 pinned to immutable commit
+        with:
+          fetch-depth: 1
+          persist-credentials: false
+          show-progress: false
       - name: Run markdownlint-cli2
-        shell: bash
         run: |
           set -euo pipefail
           npx --yes markdownlint-cli2@0.18.1 "**/*.md" "!Releases/**"
 
   link-check:
-    name: Link check
+    name: Internal link check
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 5
     steps:
       - name: Checkout repository
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2 pinned to immutable commit
-      - name: Validate internal links and probe external links
-        shell: bash
+        with:
+          fetch-depth: 1
+          persist-credentials: false
+          show-progress: false
+      - name: Validate internal links
+        run: |
+          set -euo pipefail
+          python3 .github/ci/validate_repository.py links
+
+  external-link-check:
+    name: External link check
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    if: github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.external_links) || (github.event_name == 'push' && github.ref == 'refs/heads/main')
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2 pinned to immutable commit
+        with:
+          fetch-depth: 1
+          persist-credentials: false
+          show-progress: false
+      - name: Probe external links
         run: |
           set -euo pipefail
           python3 .github/ci/validate_repository.py links --external-links
-
-  html-validation:
-    name: CurseForge HTML validation
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2 pinned to immutable commit
-      - name: Validate curseforge-description.html
-        shell: bash
-        run: |
-          set -euo pipefail
-          python3 .github/ci/validate_repository.py html
-
-  repo-hygiene:
-    name: Repository hygiene
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2 pinned to immutable commit
-      - name: Check whitespace, junk files, conflict markers, and secrets
-        shell: bash
-        run: |
-          set -euo pipefail
-          python3 .github/ci/validate_repository.py hygiene
 
   workflow-lint:
     name: Workflow lint
@@ -102,15 +120,51 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2 pinned to immutable commit
+        with:
+          fetch-depth: 1
+          persist-credentials: false
+          show-progress: false
       - name: Install actionlint
-        shell: bash
         run: |
           set -euo pipefail
-          go install github.com/rhysd/actionlint/cmd/actionlint@v1.7.7
-          echo "$(go env GOPATH)/bin" >> "$GITHUB_PATH"
+          mkdir -p "$RUNNER_TEMP/bin"
+          GOBIN="$RUNNER_TEMP/bin" go install github.com/rhysd/actionlint/cmd/actionlint@v1.7.7
+          echo "$RUNNER_TEMP/bin" >> "$GITHUB_PATH"
       - name: Run actionlint and workflow security checks
-        shell: bash
         run: |
           set -euo pipefail
           actionlint .github/workflows/ci.yml
           python3 .github/ci/validate_repository.py workflow
+
+  required-checks:
+    name: Required checks
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    needs:
+      - repository-validation
+      - markdown-lint
+      - link-check
+      - workflow-lint
+    if: always()
+    steps:
+      - name: Check required job results
+        run: |
+          set -euo pipefail
+          failed=0
+          declare -A results=(
+            [repository-validation]="${{ needs.repository-validation.result }}"
+            [markdown-lint]="${{ needs.markdown-lint.result }}"
+            [link-check]="${{ needs.link-check.result }}"
+            [workflow-lint]="${{ needs.workflow-lint.result }}"
+          )
+
+          for job in "${!results[@]}"; do
+            result="${results[$job]}"
+            echo "$job: $result"
+            if [[ "$result" != "success" ]]; then
+              echo "::error::$job finished with result '$result'"
+              failed=1
+            fi
+          done
+
+          exit "$failed"
