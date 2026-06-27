@@ -31,37 +31,13 @@
 
 ---
 
-## Start Here
-
-| You are | Use this | Do not skip |
-| --- | --- | --- |
-| **Player** | [CurseForge files](https://www.curseforge.com/minecraft/modpacks/still-watching/files) | Allocate `5 GB` minimum RAM; `6–8 GB` preferred. |
-| **Server admin** | [Server Pack Guide](./docs/server-pack-guide.md) | Match pack version, Forge version, configs, and server files. |
-| **Bug reporter** | [GitHub Issues](https://github.com/SoumyajitXD/Still-Watching/issues) | Reproduce on a clean install and attach logs. |
-| **Maintainer** | [Maintainer Checks](#maintainer-checks) | Run validation before touching release-facing files. |
-
----
-
-## What Still Watching Is
-
-**Still Watching** is a Minecraft Java Edition horror-survival modpack by **Soumyajit** for **Minecraft `1.20.1`** on
-**Forge**.
-
-It keeps the familiar survival loop — mine, build, loot, travel, recover — then pushes it through fog, darkness,
-hostile structures, audio pressure, and stalking entities. The point is not random noise spam. The point is pressure:
-limited sight, suspicious sound, unsafe travel, and the feeling that something noticed you before you noticed it.
-
-This is not a kitchen-sink pack wearing a cheap horror mask. It has a narrower job: make Minecraft survival feel watched.
-
----
-
 ## Project Snapshot
 
 | Field | Value |
 | --- | --- |
 | **Project** | Still Watching |
 | **Creator** | Soumyajit |
-| **Current documented release** | Still Watching V1.1.1 |
+| **Current documented release** | Still Watching V1.1.2 |
 | **Minecraft** | `1.20.1` |
 | **Loader** | Forge |
 | **Java** | Java `17` if the launcher or server asks |
@@ -72,26 +48,22 @@ This is not a kitchen-sink pack wearing a cheap horror mask. It has a narrower j
 
 ---
 
-## Experience Pillars
+## What Still Watching Is
 
-| Pillar | What it means in play |
-| --- | --- |
-| **Fog-first atmosphere** | Visibility is part of the threat. Weather, terrain, distance, and darkness turn travel into risk. |
-| **Sound-led tension** | Footsteps, whispers, echoes, knocks, growls, and silence become evidence before they become danger. |
-| **Stalking horror** | Threats follow, ambush, mimic, punish careless routes, and wait for the moment you feel comfortable. |
-| **Survival pressure** | Gear helps, but awareness, preparation, escape routes, backups, and discipline matter more. |
-| **Hostile exploration** | Forests, caves, towns, roads, ruins, and structures are worth exploring because they are not safe. |
-| **Multiplayer paranoia** | Voice chat turns one strange sound into a team problem very quickly. |
+**Still Watching** is a Minecraft Java Edition horror-survival modpack by **Soumyajit** for **Minecraft `1.20.1`** on **Forge**.
+
+It keeps the familiar survival loop — mine, build, loot, travel, recover — then pushes it through fog, darkness, hostile structures, audio pressure, and stalking entities. This is not a kitchen-sink pack wearing a cheap horror mask. It is built to make survival feel watched.
 
 ---
 
-## Core Loop
+## Start Here
 
-1. **Prepare** before nightfall. Panic is expensive.
-2. **Explore** forests, caves, roads, towns, ruins, structures, and cursed places.
-3. **Listen** before moving. Sound is often the first warning and the last mercy.
-4. **React** when something turns the route home into a mistake.
-5. **Return** with loot, damage, worse nerves, and fewer lies about being safe.
+| You are | Use this | Do not skip |
+| --- | --- | --- |
+| **Player** | [CurseForge files](https://www.curseforge.com/minecraft/modpacks/still-watching/files) | Allocate `5 GB` minimum RAM; `6–8 GB` preferred. |
+| **Server admin** | [Server Pack Guide](./docs/server-pack-guide.md) | Match pack version, Forge version, configs, and server files. |
+| **Bug reporter** | [GitHub Issues](https://github.com/SoumyajitXD/Still-Watching/issues) | Reproduce on a clean install and attach logs. |
+| **Maintainer** | Run repository validation | Check release-facing docs before publishing. |
 
 ---
 
@@ -120,39 +92,19 @@ For the complete repository-maintained list, read [`latest-modlist.md`](./latest
 6. Use **Java `17`** if the launcher asks.
 7. Launch once clean before adding extra mods, shaders, resource packs, or config edits.
 
-Need manual import notes, backup steps, update safety, multiplayer setup, RAM conversion, or troubleshooting? Read the
-[Installation Guide](./installation-guide.md). The README is the front door, not the whole filing cabinet.
-
----
-
-## First Launch Baseline
-
-Use this before changing anything:
-
-- No extra mods.
-- No extra shaders.
-- No extra resource packs.
-- New test world first.
-- Render distance around `8–10` chunks if performance is uncertain.
-- Simulation distance around `5–6` chunks if CPU load is high.
-- Headphones strongly recommended.
-- Subtitles allowed. Accessibility is not playing wrong.
-
-If the clean pack works and your modified profile breaks, the modification is the suspect. Test it like evidence.
+Need manual import notes, backup steps, update safety, multiplayer setup, RAM conversion, or troubleshooting? Read the [Installation Guide](./installation-guide.md).
 
 ---
 
 ## Multiplayer and Servers
 
-Multiplayer is supported when the server and every client match. Keep this boring because boring saves worlds.
+Multiplayer is supported when the server and every client match.
 
 - Use the same Still Watching version on the server and all clients.
 - Use Minecraft `1.20.1`.
 - Use the required Forge version for the selected release.
 - Keep configs and server files aligned.
 - Back up worlds before updates, migrations, config edits, or mod removals.
-- Do not upload client-only visual, shader, UI, menu, map, audio-only, or rendering files to a dedicated server unless
-  the mod author explicitly supports it server-side.
 - Test startup, world generation, joining, voice chat, and common travel before inviting players.
 
 For conservative server-pack rules, read [`docs/server-pack-guide.md`](./docs/server-pack-guide.md).
@@ -163,27 +115,13 @@ For conservative server-pack rules, read [`docs/server-pack-guide.md`](./docs/se
 
 ---
 
-## Troubleshooting First
-
-| Symptom | First move |
-| --- | --- |
-| **Crash on launch** | Reinstall through CurseForge, remove extras, allocate `5 GB+`, use Java `17` if asked, then check logs. |
-| **Missing mods** | Reinstall from CurseForge. The GitHub ZIP is not an installer. |
-| **Low FPS** | Lower render distance, reduce shader or visual settings, and check RAM allocation. |
-| **Server mismatch** | Match pack version, Forge version, configs, and files on server and clients. |
-| **Bug after adding mods** | Reproduce on a clean CurseForge install before reporting. Extra mods are suspects. |
-
-Full troubleshooting path: [`installation-guide.md`](./installation-guide.md#troubleshooting)
-
----
-
 ## Reporting Issues
 
 Before opening an issue, reproduce the problem on a clean CurseForge install when possible.
 
 Include:
 
-- Pack version, for example `Still Watching V1.1.1`.
+- Pack version, for example `Still Watching V1.1.2`.
 - Launcher used.
 - Minecraft version.
 - Forge version, if visible.
@@ -194,29 +132,6 @@ Include:
 - Crash report or `latest.log`.
 - Steps to reproduce.
 - Any extra mods, shaders, resource packs, or config edits.
-
-Bad report:
-
-```text
-it broke fix pls
-```
-
-Good report:
-
-```text
-Pack version: Still Watching V1.1.1
-Launcher: CurseForge App
-Minecraft: 1.20.1
-Mode: Singleplayer
-Issue: Crash when entering a cave structure in a new world
-Steps:
-1. Install from CurseForge
-2. Launch with no extra mods, shaders, or resource packs
-3. Create a new world
-4. Enter the structure
-5. Game crashes
-Attached: latest.log and crash report
-```
 
 Logs matter. Vibes are not diagnostics.
 
@@ -240,55 +155,13 @@ Logs matter. Vibes are not diagnostics.
 
 ---
 
-## Maintainer Checks
-
-Before changing release-facing docs, run the local checks that mirror CI:
-
-```bash
-python3 .github/ci/validate_repository.py all
-npx --yes markdownlint-cli2@0.18.1 "**/*.md" "!Releases/**"
-git diff --check
-```
-
-For link-heavy edits, also probe external links:
-
-```bash
-python3 .github/ci/validate_repository.py links --external-links
-```
-
-The validation path checks required files, workflow shape, metadata drift, Markdown/table shape, internal links,
-CurseForge HTML, modlist rows, workflow security, whitespace, suspicious secrets, conflict markers, junk files, and dead
-legacy helper-script references. It does **not** build Minecraft or prove a GitHub ZIP is playable.
-
----
-
-## Contributing, Support, and Security
-
-- Contribution rules: [`CONTRIBUTING.md`](./CONTRIBUTING.md)
-- Support boundaries: [`SUPPORT.md`](./SUPPORT.md)
-- Security and suspicious downloads: [`SECURITY.md`](./SECURITY.md)
-- Official releases: [CurseForge files](https://www.curseforge.com/minecraft/modpacks/still-watching/files)
-
-Useful contributions include tested docs, reproducible bug reports, compatibility notes backed by evidence, and missing
-credit or attribution corrections.
-
-Not useful: random mod soup, crash complaints with no logs, unsafe redistribution, or edits that weaken required release
-and sponsor information.
-
----
-
 ## Credits and License
 
 **Still Watching** is created and published by **Soumyajit**.
 
-Credit goes to the Minecraft modding community: mod authors, library maintainers, shader and resource creators, artists,
-sound designers, tool developers, and everyone whose work makes modded Minecraft possible.
+Credit goes to the Minecraft modding community: mod authors, library maintainers, shader and resource creators, artists, sound designers, tool developers, and everyone whose work makes modded Minecraft possible.
 
-Original files in this repository are licensed under **Apache-2.0**. See [`LICENSE`](./LICENSE). Third-party mods,
-shaders, resource packs, sounds, textures, libraries, tools, and external assets remain under their own licenses,
-permissions, and distribution terms.
-
-Support the original authors. Modding only works when people get credited for the work they actually did.
+Original files in this repository are licensed under **Apache-2.0**. See [`LICENSE`](./LICENSE). Third-party mods, shaders, resource packs, sounds, textures, libraries, tools, and external assets remain under their own licenses, permissions, and distribution terms.
 
 ---
 
