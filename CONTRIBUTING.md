@@ -19,7 +19,7 @@ It does not need random noise wearing a pull request costume.
 | Java | Java `17` where required |
 | Official playable release | CurseForge |
 | CurseForge Project ID | `1420406` |
-| Current documented release | Still Watching V1.1.1 |
+| Current documented release | Still Watching V1.1.2 |
 | RAM | `5 GB` minimum; `6–8 GB` preferred |
 | Repository license | Apache-2.0 for original repository files only |
 
@@ -34,16 +34,6 @@ This repository is licensed under the [Apache License 2.0](./LICENSE), commonly 
 That does **not** relicense Minecraft, Forge, CurseForge, third-party mods, third-party assets, screenshots containing third-party content, trademarks, logos, mod names, shader packs, resource packs, sounds, textures, or external project content. Those stay under their own owners' licenses, terms, and permissions.
 
 Do not submit files you do not have the right to contribute. Do not upload mod JARs, copied assets, private files, or unlicensed material.
-
----
-
-## Contribution License
-
-By opening a pull request or otherwise contributing original content to this repository, you agree that your contribution may be used, modified, reproduced, and distributed under the repository's Apache-2.0 license unless you clearly mark a different compatible license and the maintainer accepts it.
-
-Contributions must be your own work or material you are allowed to submit under compatible terms. If attribution is required, include it clearly in the relevant file or pull request description.
-
-This is not legal advice. It is the project rule: do not bring licensing grenades into the modpack.
 
 ---
 
@@ -198,12 +188,6 @@ Run Markdown linting before touching tables, headings, fenced blocks, or README 
 npx --yes markdownlint-cli2@0.18.1 "**/*.md" "!Releases/**"
 ```
 
-If your change touches links, run the link check. It verifies internal links and probes external links with soft warnings for rate-limited hosts:
-
-```bash
-python3 .github/ci/validate_repository.py links --external-links
-```
-
 Always check for whitespace errors before committing:
 
 ```bash
@@ -211,14 +195,6 @@ git diff --check
 ```
 
 If you cannot run validation, say so in the pull request or issue. Silence makes reviewers assume you skipped it and hoped the fog would cover the body.
-
----
-
-## Security Reports
-
-Do not post sensitive private details publicly.
-
-Use normal GitHub Issues only for non-sensitive security concerns, suspicious public links, fake downloads, unsafe public references, or license-scope concerns that are safe to discuss openly. See [`SECURITY.md`](./SECURITY.md) before reporting security-related issues.
 
 ---
 
