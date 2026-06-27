@@ -1,6 +1,6 @@
 # Modlist
 
-**Version:** Still Watching V1.1.1 (latest)
+**Version:** Still Watching V1.1.2 (latest)
 
 - **Minecraft:** `1.20.1`
 - **Loader:** Forge
