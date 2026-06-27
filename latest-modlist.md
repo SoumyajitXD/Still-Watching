@@ -27,7 +27,6 @@
 | Valhelsia Structures (by ValhelsiaTeam) | [Curseforge](https://www.curseforge.com/minecraft/mc-mods/valhelsia-structures) |
 | Just Zoom (by Keksuccino) | [Curseforge](https://www.curseforge.com/minecraft/mc-mods/just-zoom) |
 | Tissou's Zombie Pack (by Tissou) | [Curseforge](https://www.curseforge.com/minecraft/texture-packs/tissous-zombie-pack-optifine-1-7x-1-20) |
-| BSL Shaders (by capttatsu) | [Curseforge](https://www.curseforge.com/minecraft/shaders/bsl-shaders) |
 | Dungeons Enhanced (by Valarauko9) | [Curseforge](https://www.curseforge.com/minecraft/mc-mods/dungeonsenhanced) |
 | The Anomaly (by clorobored) | [Curseforge](https://www.curseforge.com/minecraft/mc-mods/the-anomaly) |
 | Valhelsia Core (by ValhelsiaTeam) | [Curseforge](https://www.curseforge.com/minecraft/mc-mods/valhelsia-core) |
@@ -58,6 +57,7 @@
 | Sound Physics Remastered (by henkelmax) | [Curseforge](https://www.curseforge.com/minecraft/mc-mods/sound-physics-remastered) |
 | Mouse Tweaks (by YaLTeR) | [Curseforge](https://www.curseforge.com/minecraft/mc-mods/mouse-tweaks) |
 | Fresh Animations: Extensions (by FreshLX) | [Curseforge](https://www.curseforge.com/minecraft/texture-packs/fresh-animations-extensions) |
+| Fresh Animations: Player Extension (by FreshLX) | [Curseforge](https://www.curseforge.com/minecraft/texture-packs/fa-player-extension) |
 | The End of Herobrine (by lgow) | [Curseforge](https://www.curseforge.com/minecraft/mc-mods/endofherobrine) |
 | AmbientSounds 6 (by CreativeMD) | [Curseforge](https://www.curseforge.com/minecraft/mc-mods/ambientsounds) |
 | Security Craft (by Geforce132) | [Curseforge](https://www.curseforge.com/minecraft/mc-mods/security-craft) |
