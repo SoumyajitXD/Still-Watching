@@ -17,7 +17,7 @@ Need help with **Still Watching**? Start with the official install path, check t
 | Java | Java `17` where required |
 | Official playable release | CurseForge |
 | CurseForge Project ID | `1420406` |
-| Current documented release | Still Watching V1.1.1 |
+| Current documented release | Still Watching V1.1.2 |
 | RAM | `5 GB` minimum; `6–8 GB` preferred |
 | Repository license | Apache-2.0 for original repository files only |
 | Latest CurseForge release | Primary support target |
