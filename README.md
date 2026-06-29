@@ -2,32 +2,63 @@
 
 # Still Watching
 
-![Still Watching modpack logo](./still-watching-logo.jpg)
+<p align="center">
+  <img src="./still-watching-logo.jpg" width="220" alt="Still Watching modpack logo">
+</p>
 
-## Forge 1.20.1 horror survival where fog, sound, and bad choices do most of the killing
+<p align="center">
+  <strong>Forge 1.20.1 horror survival where fog, sound, and bad choices do most of the killing.</strong>
+</p>
 
-[![CI](https://github.com/SoumyajitXD/Still-Watching/actions/workflows/ci.yml/badge.svg)](https://github.com/SoumyajitXD/Still-Watching/actions/workflows/ci.yml)
-[![CurseForge](https://img.shields.io/curseforge/v/1420406?logo=curseforge&label=CurseForge)](https://www.curseforge.com/minecraft/modpacks/still-watching/files)
-[![Downloads](https://img.shields.io/curseforge/dt/1420406?logo=curseforge&label=Downloads)](https://www.curseforge.com/minecraft/modpacks/still-watching)
-[![License](https://img.shields.io/badge/License-Apache--2.0-2f81f7)](./LICENSE)
+<p align="center">
+  <a href="https://github.com/SoumyajitXD/Still-Watching/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/SoumyajitXD/Still-Watching/actions/workflows/ci.yml/badge.svg"></a>
+  <a href="https://www.curseforge.com/minecraft/modpacks/still-watching/files"><img alt="CurseForge" src="https://img.shields.io/curseforge/v/1420406?logo=curseforge&label=CurseForge"></a>
+  <a href="https://www.curseforge.com/minecraft/modpacks/still-watching"><img alt="Downloads" src="https://img.shields.io/curseforge/dt/1420406?logo=curseforge&label=Downloads"></a>
+  <img alt="Minecraft 1.20.1" src="https://img.shields.io/badge/Minecraft-1.20.1-brightgreen">
+  <img alt="Forge" src="https://img.shields.io/badge/Loader-Forge-orange">
+  <img alt="License" src="https://img.shields.io/badge/License-Apache--2.0-2f81f7">
+</p>
 
-**[Install on CurseForge](https://www.curseforge.com/minecraft/modpacks/still-watching/files)** ·
-**[Installation Guide](./installation-guide.md)** ·
-**[Server Pack Guide](./docs/server-pack-guide.md)** ·
-**[Mod List](./latest-modlist.md)** ·
-**[Report Issues](https://github.com/SoumyajitXD/Still-Watching/issues)** ·
-**[Screenshots](./Screenshots)**
+<p align="center">
+  <strong><a href="https://www.curseforge.com/minecraft/modpacks/still-watching/files">Install on CurseForge</a></strong>
+  · <a href="./installation-guide.md">Installation Guide</a>
+  · <a href="./docs/server-pack-guide.md">Server Pack Guide</a>
+  · <a href="./latest-modlist.md">Mod List</a>
+  · <a href="./Screenshots">Screenshots</a>
+  · <a href="https://github.com/SoumyajitXD/Still-Watching/issues">Report Issues</a>
+</p>
 
 ---
 
 > [!IMPORTANT]
 > **Install the playable modpack from CurseForge.**
 >
-> This repository is the source-side home for documentation, release tracking, screenshots, validation, issue reports,
-> and licensing clarity. The GitHub ZIP is **not** a playable modpack installer and is **not** a server pack.
+> This repository is the source-side home for documentation, release tracking, screenshots, validation, issue reports, and licensing clarity. The GitHub ZIP is **not** a playable modpack installer and is **not** a server pack.
 >
-> If a released file, version, or dependency looks different between GitHub and CurseForge, trust CurseForge first and
-> open an issue with evidence.
+> If a released file, version, or dependency looks different between GitHub and CurseForge, trust CurseForge first and open an issue with evidence.
+
+---
+
+## Why Play It
+
+**Still Watching** is a Minecraft Java Edition horror-survival modpack by **Soumyajit** for **Minecraft `1.20.1`** on **Forge**.
+
+It keeps the familiar survival loop — mine, build, loot, travel, recover — then poisons it with fog, darkness, hostile structures, layered sound, stalking entities, and just enough uncertainty to make every quiet cave feel personal.
+
+This is not a kitchen-sink pack wearing a cheap horror mask. It is built to make survival feel watched. 🕯️
+
+---
+
+## The Experience
+
+| Pillar | What it means in game |
+| --- | --- |
+| **Horror pressure** | Stalking entities, hostile encounters, darkness pressure, and threat escalation. |
+| **Atmosphere first** | Fog, sound physics, footsteps, ambience, shaders, resource packs, and visual stress. |
+| **Survival loop intact** | You still mine, build, loot, travel, recover, and prepare instead of watching a scripted haunted slideshow. |
+| **Exploration danger** | Structures, biomes, mobs, ruins, and travel systems push you out of the safe little dirt bunker. |
+| **Multiplayer-ready** | Designed with server/admin documentation, voice chat expectations, and pack-version matching in mind. |
+| **Documented releases** | Install, support, server-pack, mod-list, security, and validation docs are maintained in this repo. |
 
 ---
 
@@ -48,20 +79,12 @@
 
 ---
 
-## What Still Watching Is
-
-**Still Watching** is a Minecraft Java Edition horror-survival modpack by **Soumyajit** for **Minecraft `1.20.1`** on **Forge**.
-
-It keeps the familiar survival loop — mine, build, loot, travel, recover — then pushes it through fog, darkness, hostile structures, audio pressure, and stalking entities. This is not a kitchen-sink pack wearing a cheap horror mask. It is built to make survival feel watched.
-
----
-
 ## Start Here
 
 | You are | Use this | Do not skip |
 | --- | --- | --- |
 | **Player** | [CurseForge files](https://www.curseforge.com/minecraft/modpacks/still-watching/files) | Allocate `5 GB` minimum RAM; `6–8 GB` preferred. |
-| **Server admin** | [Server Pack Guide](./docs/server-pack-guide.md) | Match pack version, Forge version, configs, and server files. |
+| **Server admin** | [Server Pack Guide](./docs/server-pack-guide.md) | Match pack version, Forge version, configs, server files, and clients. |
 | **Bug reporter** | [GitHub Issues](https://github.com/SoumyajitXD/Still-Watching/issues) | Reproduce on a clean install and attach logs. |
 | **Maintainer** | Run repository validation | Check release-facing docs before publishing. |
 
@@ -137,11 +160,29 @@ Logs matter. Vibes are not diagnostics.
 
 ---
 
+## Follow, Star, And Share
+
+If Still Watching gives you a good scare, a useful server night, or a modpack idea worth stealing responsibly, star the repository. ⭐
+
+Stars help players and server admins find the project. CurseForge downloads show people are playing; GitHub stars show people trust the project enough to keep an eye on it. Tiny difference, big discovery effect.
+
+Useful ways to help without writing code:
+
+- Star the repo.
+- Share the CurseForge page.
+- Post screenshots or clips with the pack name.
+- Report reproducible bugs with logs.
+- Suggest focused improvements with evidence.
+- Avoid unofficial reuploads and mystery download links.
+
+---
+
 ## Repository Map
 
 | Path | Purpose |
 | --- | --- |
 | [`README.md`](./README.md) | GitHub landing page. |
+| [`CHANGELOG.md`](./CHANGELOG.md) | Human-readable release and repository-history notes. |
 | [`installation-guide.md`](./installation-guide.md) | Install, update, backup, multiplayer, and troubleshooting guide. |
 | [`latest-modlist.md`](./latest-modlist.md) | Current repository-maintained mod, shader, and resource list. |
 | [`docs/server-pack-guide.md`](./docs/server-pack-guide.md) | Conservative dedicated-server guidance. |
@@ -149,8 +190,12 @@ Logs matter. Vibes are not diagnostics.
 | [`curseforge-description.html`](./curseforge-description.html) | CurseForge description source. |
 | [`Screenshots/`](./Screenshots) | Screenshot assets. |
 | [`Releases/`](./Releases) | Release-side files and exported package material. |
-| [`.github/ISSUE_TEMPLATE/`](./.github/ISSUE_TEMPLATE) | Issue templates. |
+| [`.github/ISSUE_TEMPLATE/`](./.github/ISSUE_TEMPLATE) | Structured issue templates. |
+| [`.github/PULL_REQUEST_TEMPLATE.md`](./.github/PULL_REQUEST_TEMPLATE.md) | Pull request checklist. |
 | [`.github/workflows/ci.yml`](./.github/workflows/ci.yml) | Repository validation workflow. |
+| [`CONTRIBUTING.md`](./CONTRIBUTING.md) | Contribution rules and review expectations. |
+| [`SUPPORT.md`](./SUPPORT.md) | Support policy and evidence checklist. |
+| [`SECURITY.md`](./SECURITY.md) | Official-source and security-reporting policy. |
 | [`LICENSE`](./LICENSE) | Apache-2.0 for original repository files. |
 
 ---
