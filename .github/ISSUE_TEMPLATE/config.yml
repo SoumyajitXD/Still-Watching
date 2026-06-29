@@ -6,3 +6,12 @@ contact_links:
   - name: Installation guide
     url: https://github.com/SoumyajitXD/Still-Watching/blob/main/installation-guide.md
     about: Use this before opening install/update issues.
+  - name: Server pack guide
+    url: https://github.com/SoumyajitXD/Still-Watching/blob/main/docs/server-pack-guide.md
+    about: Read this before reporting dedicated-server or multiplayer setup problems.
+  - name: Support policy
+    url: https://github.com/SoumyajitXD/Still-Watching/blob/main/SUPPORT.md
+    about: Check what information to include before opening a support issue.
+  - name: Security policy
+    url: https://github.com/SoumyajitXD/Still-Watching/blob/main/SECURITY.md
+    about: Use this for official-source, fake-download, redistribution, or sensitive-report concerns.
