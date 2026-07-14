@@ -4,7 +4,7 @@
 
 This repository uses CI to protect the maintenance surface of **Still Watching**: documentation, metadata, release-facing HTML, links, workflow hygiene, and repository safety checks.
 
-It does **not** build Minecraft, Forge, Java, Gradle, Maven, npm packages, or a playable modpack. The playable Still Watching release belongs on CurseForge.
+It does **not** build Minecraft, Forge, Java, Gradle, Maven, npm packages, or prove that a playable modpack works. Playable Still Watching releases belong on CurseForge.
 
 ---
 
@@ -17,11 +17,30 @@ It does **not** build Minecraft, Forge, Java, Gradle, Maven, npm packages, or a 
 | Loader | Forge |
 | Java | Java `17` where required |
 | CurseForge Project ID | `1420406` |
-| Current documented release | Still Watching V1.1.2 |
+| Current documented release | Still Watching V2.0.0 |
 | RAM | `5 GB` minimum; `6–8 GB` preferred |
 | Repository license | Apache-2.0 for original repository files only |
 
 The CI should enforce consistency around this baseline, not pretend to validate every third-party mod or runtime behavior.
+
+---
+
+## Release-Facing Files
+
+A version, modlist, or release-direction change should be checked across at least:
+
+- `.github/ci/project-metadata.json`;
+- `README.md`;
+- `CHANGELOG.md`;
+- `latest-modlist.md`;
+- `installation-guide.md`;
+- `docs/server-pack-guide.md`;
+- `curseforge-description.html`;
+- `SUPPORT.md`;
+- `SECURITY.md`;
+- `CONTRIBUTING.md`.
+
+Updating one file while leaving nine stale is not release maintenance. It is documentation whack-a-mole.
 
 ---
 
@@ -35,32 +54,47 @@ python3 .github/ci/validate_repository.py all
 
 It checks:
 
-- required files and required directories;
+- required files and directories;
 - project metadata drift;
-- CurseForge description HTML sanity;
+- CurseForge-description HTML sanity;
 - mod-list structure;
 - internal links;
 - workflow security policy;
 - whitespace errors;
 - suspicious committed secrets;
-- merge conflict markers;
+- merge-conflict markers;
 - forbidden junk files;
 - oversized files outside expected asset and release paths;
 - dead references to deleted helper scripts.
 
-Markdown linting should also run for normal documentation hygiene:
+Markdown linting should also run:
 
 ```bash
 npx --yes markdownlint-cli2@0.18.1 "**/*.md" "!Releases/**"
 ```
 
-For link-heavy edits, maintainers can also run:
+For link-heavy edits:
 
 ```bash
 python3 .github/ci/validate_repository.py links --external-links
 ```
 
-CurseForge, shields, and CDN hosts can rate-limit or block CI user agents. The validation script treats those hosts more carefully so useful checks do not fail because a public host dislikes robots.
+CurseForge, shields, and CDN hosts can rate-limit or block CI user agents. Validation should distinguish a hostile robot gate from an actually broken project link.
+
+---
+
+## V2.0.0 Consistency Checks
+
+Release validation should catch stale references to V1.1.2 when V2.0.0 is the current baseline, while allowing intentional historical references in migration notes and changelog history.
+
+Human review should confirm:
+
+- the modlist has 80 documented entries;
+- V2.0.0 additions and removals are reflected in the changelog;
+- README and CurseForge source describe Terralith, Tectonic, Incendium, Nullscape, Xaero's maps, and the optimization stack;
+- migration docs warn about new worlds and JourneyMap data;
+- server docs mention worldgen and dimension smoke tests;
+- no removed mod is still advertised as current content.
 
 ---
 
@@ -68,32 +102,28 @@ CurseForge, shields, and CDN hosts can rate-limit or block CI user agents. The v
 
 CI should **not** require:
 
-- building Minecraft;
-- launching the modpack;
+- building or launching Minecraft;
 - downloading every third-party dependency;
 - proving that a GitHub ZIP is playable;
 - bundling third-party mod JARs;
 - generating release files from untrusted pull requests;
-- a changelog file.
+- runtime compatibility claims without an actual test environment.
 
-The repository no longer requires `CHANGELOG.md`. Release history should live in the appropriate release pages, CurseForge file notes, commit history, or project documentation chosen by the maintainer.
+Repository CI validates repository claims. It is not a séance that can infer whether eighty third-party components behave perfectly in-game.
 
 ---
 
 ## Recommended Branch Protection for Main
 
-Repository settings cannot be enforced from a Markdown patch, but `main` should be protected.
-
 Recommended settings:
 
 - Require a pull request before merging to `main`.
-- Require the CI workflow checks before merging.
-- Require branches to be up to date before merging when practical.
-- Block force pushes to `main`.
-- Block deletion of `main`.
-- Require conversation resolution before merge.
-- Require linear history if the maintainer prefers a cleaner commit graph.
-- Optionally require signed commits if stricter provenance is worth the friction.
+- Require CI checks before merging.
+- Require branches to be up to date when practical.
+- Block force pushes and deletion of `main`.
+- Require conversation resolution.
+- Require linear history when the maintainer prefers it.
+- Optionally require signed commits when stricter provenance is worth the friction.
 
 The goal is simple: make accidental breakage harder than doing the right thing.
 
@@ -104,12 +134,11 @@ The goal is simple: make accidental breakage harder than doing the right thing.
 Keep the workflow boring and locked down:
 
 - Use `pull_request`, not `pull_request_target`, for untrusted pull requests.
-- Keep top-level permissions to `contents: read`.
+- Keep top-level permissions at `contents: read`.
 - Pin marketplace actions to approved immutable SHAs.
-- Use concurrency cancellation.
-- Add job timeouts.
+- Use concurrency cancellation and job timeouts.
 - Use `set -euo pipefail` in Bash steps.
-- Do not grant write permissions unless a future workflow has a clear, reviewed reason.
+- Do not grant write permissions without a clear reviewed reason.
 
 CI should guard the door. It should not become the monster in the house.
 
@@ -119,4 +148,4 @@ CI should guard the door. It should not become the monster in the house.
 
 Original repository files are Apache-2.0 licensed through [`../LICENSE`](../LICENSE). CI may validate those repository files.
 
-That does not relicense Minecraft, Forge, CurseForge, third-party mods, screenshots containing third-party content, shaders, resource packs, sounds, textures, or external assets. CI should not encourage bundling or redistributing third-party files outside their allowed channels.
+That does not relicense Minecraft, Forge, CurseForge, third-party mods, screenshots, shaders, resource packs, sounds, textures, or external assets. CI should not encourage bundling or redistribution outside allowed channels.
