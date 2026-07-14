@@ -19,19 +19,35 @@ It does not need random noise wearing a pull request costume.
 | Java | Java `17` where required |
 | Official playable release | CurseForge |
 | CurseForge Project ID | `1420406` |
-| Current documented release | Still Watching V1.1.2 |
+| Current documented release | Still Watching V2.0.0 |
 | RAM | `5 GB` minimum; `6–8 GB` preferred |
 | Repository license | Apache-2.0 for original repository files only |
 
-Install from CurseForge when testing playable behavior. The GitHub ZIP is repository source content, not a playable modpack installer.
+Install from CurseForge when testing playable behavior. The GitHub ZIP is repository source content, not the recommended playable installer.
+
+---
+
+## V2.0.0 Context
+
+Contributions must account for the current V2.0.0 direction:
+
+- Terralith and Tectonic drive Overworld generation.
+- Incendium and Nullscape overhaul the Nether and End.
+- Lithostitched supports the world-generation stack.
+- Dungeons and Taverns, Explorify, and Towns and Towers provide structures.
+- Xaero's Minimap and World Map replace JourneyMap.
+- ImmediatelyFast, FerriteCore, ModernFix, FPS Reducer, Embeddium, and Chloride form the main optimization stack.
+- The One Who Watches is part of the current horror roster.
+
+Do not reintroduce removed V1.1.2 systems casually. A mod being popular is not a compatibility plan.
 
 ---
 
 ## License Scope
 
-This repository is licensed under the [Apache License 2.0](./LICENSE), commonly identified as **Apache-2.0**, for original repository files created for Still Watching. That includes project-maintained documentation, metadata, validation helpers, configuration source, release-facing source files, and other original repo files unless a file clearly says otherwise.
+This repository is licensed under [Apache License 2.0](./LICENSE) for original project files. That includes project-maintained documentation, metadata, validation helpers, configuration source, and other original repository files unless a file says otherwise.
 
-That does **not** relicense Minecraft, Forge, CurseForge, third-party mods, third-party assets, screenshots containing third-party content, trademarks, logos, mod names, shader packs, resource packs, sounds, textures, or external project content. Those stay under their own owners' licenses, terms, and permissions.
+That does **not** relicense Minecraft, Forge, CurseForge, third-party mods, screenshots containing third-party content, trademarks, logos, mod names, shader packs, resource packs, sounds, textures, or external project content.
 
 Do not submit files you do not have the right to contribute. Do not upload mod JARs, copied assets, private files, or unlicensed material.
 
@@ -39,39 +55,39 @@ Do not submit files you do not have the right to contribute. Do not upload mod J
 
 ## Useful Contributions
 
-Good contributions usually fall into one of these buckets:
+Good contributions usually include:
 
 - documentation fixes for players, server admins, contributors, or maintainers;
 - reproducible bug reports with logs and clean-install testing;
-- server-pack corrections backed by actual dedicated-server testing;
+- V2.0.0 migration guidance backed by actual testing;
+- world-generation compatibility notes backed by evidence;
+- server-pack corrections backed by dedicated-server testing;
 - mod metadata corrections backed by source or release evidence;
-- broken link fixes;
-- typo, formatting, table, and navigation improvements;
+- broken-link, typo, table, and navigation fixes;
 - validation or automation improvements;
-- compatibility notes for the documented release;
-- performance observations with hardware, settings, and logs;
+- performance observations with hardware, settings, shader, and logs;
 - missing credit, attribution, or license-scope corrections;
-- screenshots or presentation improvements that fit the pack's identity.
+- presentation improvements that fit the pack's horror identity.
 
 Useful work makes the project clearer. Useless work makes maintainers dig through fog with a spoon.
 
 ---
 
-## Changes That Will Usually Be Rejected
+## Changes Usually Rejected
 
 Do not open issues or pull requests for:
 
-- installing from the GitHub ZIP and then reporting that it does not work;
+- installing from the GitHub ZIP and reporting that it is not a launcher-ready pack;
 - unsupported launcher support;
 - reuploaded modpack files or unofficial mirrors;
-- random mod dumps with no design reason or testing;
-- adding horror mobs just because they exist;
+- random mod dumps with no design reason, dependency audit, or testing;
+- reintroducing removed mods without a migration and compatibility case;
 - server/client-side claims without evidence;
 - crash screenshots without logs;
-- vague reports like `broken`, `fix`, or `doesn't work`;
-- copyrighted assets, copied branding, bundled mod JARs, or content you cannot license to this repository;
-- changes that strip the pack's horror identity into bland generic modpack sludge;
-- changes that remove required credits, attribution, license notes, source-of-truth warnings, or sponsor-related content.
+- vague reports such as `broken`, `fix`, or `doesn't work`;
+- copyrighted assets, copied branding, bundled mod JARs, or content you cannot license;
+- changes that flatten the pack's horror identity into generic modpack sludge;
+- changes that remove credits, source-of-truth warnings, license notes, or sponsor content.
 
 The pack has a theme. If a change does not serve that theme or maintenance reality, it is probably clutter.
 
@@ -79,127 +95,87 @@ The pack has a theme. If a change does not serve that theme or maintenance reali
 
 ## Before Opening an Issue
 
-Check the basics first:
-
 1. Install the latest release from CurseForge.
-2. Launch once with no extra mods, shaders, resource packs, or config edits.
-3. Confirm Minecraft `1.20.1` and the correct Forge environment.
-4. Use Java `17` if the launcher or server asks.
-5. Allocate enough RAM: `5 GB` minimum, `6–8 GB` preferred.
+2. Launch with no extra mods, shaders, resource packs, or copied configs.
+3. Confirm Minecraft `1.20.1`, Forge, and Java `17` where required.
+4. Allocate `5 GB` minimum RAM; `6–8 GB` preferred.
+5. Create a clean V2.0.0 test world.
 6. Reproduce the issue.
 7. Collect `logs/latest.log` and any crash report.
+8. State whether the world is new or migrated from V1.1.2.
 
-A bug report without logs is not a report. It is a campfire story with stack traces missing.
-
----
-
-## Bug Report Checklist
-
-When reporting a bug, include:
-
-- Still Watching version;
-- whether it came from CurseForge;
-- singleplayer or multiplayer;
-- client or dedicated server;
-- operating system;
-- Java version, if relevant;
-- steps to reproduce;
-- expected behavior;
-- actual behavior;
-- logs and crash reports;
-- whether the issue happens on a clean CurseForge install;
-- any extra mods, shaders, resource packs, or config edits.
-
-Do not paste giant logs directly into the issue body unless they are short. Use attachments or a paste service when needed, and remove private details first.
+A bug report without logs is a campfire story with the stack trace missing.
 
 ---
 
 ## Pull Request Guidelines
 
-Pull requests should be focused. One clear job per PR.
+Pull requests should be focused: one clear job per PR.
 
 Good pull requests:
 
 - explain what changed and why;
 - link related issues when relevant;
 - avoid unrelated rewrites;
-- preserve the project tone;
-- keep tables and docs readable;
-- preserve the warning that CurseForge is the playable source;
-- preserve Apache-2.0 license wording and third-party license scope;
+- preserve the project tone and CurseForge source-of-truth warning;
+- preserve Apache-2.0 wording and third-party license scope;
 - preserve credits, attribution, mod names, links, and sponsor references;
-- include validation results when the change touches release-facing files.
+- update all release-facing surfaces when changing version or mod metadata;
+- include validation results.
 
-Bad pull requests try to remodel the whole haunted house because one window squeaked.
+Bad pull requests remodel the whole haunted house because one window squeaked.
 
 ---
 
 ## Documentation Style
 
-Keep the writing:
+Keep writing direct, specific, useful, honest about uncertainty, and clear about what is supported.
 
-- direct;
-- specific;
-- useful;
-- horror-flavored where it fits;
-- honest about uncertainty;
-- clear about what is supported and unsupported.
-
-Avoid:
-
-- corporate filler;
-- fake certainty;
-- giant paragraphs nobody will read;
-- jokes that hide important instructions;
-- vague claims like `optimized`, `fixed`, or `compatible` without proof.
+Avoid corporate filler, fake certainty, giant paragraphs, jokes that hide instructions, and vague claims such as `optimized`, `fixed`, or `compatible` without evidence.
 
 Personality is seasoning. Accuracy is the meal. Do not serve a bowl of paprika.
 
 ---
 
-## Mod Metadata and Server-Pack Changes
+## Mod Metadata and Server Changes
 
-Changes involving mods, sides, dependencies, loaders, or server-pack behavior need evidence.
+Changes involving mods, sides, dependencies, loaders, world generation, or server behavior need evidence.
 
-Rules:
-
-1. Edit source metadata only when you have release evidence.
+1. Edit source metadata only with release evidence.
 2. Keep cautious wording when proof is missing.
-3. Do not call a mod server-safe because it looks client-only. That is how servers become smoke.
-4. Preserve third-party mod names, links, credits, and license or permission notes.
+3. Do not call a mod server-safe because it looks client-only.
+4. Preserve third-party names, links, credits, and permission notes.
 5. Regenerate derived docs when source data changes.
 6. Validate before committing.
-
-If a change affects dedicated servers, test it on a dedicated server or clearly say it still needs testing.
+7. Test V2.0.0 worldgen changes in new worlds and disposable migrated copies.
+8. Test dedicated-server changes on a dedicated server or clearly mark them unverified.
 
 ---
 
 ## Validation
 
-Before committing release-facing documentation, metadata, workflow, or link changes, run the same maintained checks CI uses. Maintained validation lives under `.github/ci/`.
+Run the maintained repository checks:
 
 ```bash
 python3 .github/ci/validate_repository.py all
 ```
 
-Run Markdown linting before touching tables, headings, fenced blocks, or README navigation:
+Run Markdown linting:
 
 ```bash
 npx --yes markdownlint-cli2@0.18.1 "**/*.md" "!Releases/**"
 ```
 
-Always check for whitespace errors before committing:
+Check whitespace:
 
 ```bash
 git diff --check
 ```
 
-If you cannot run validation, say so in the pull request or issue. Silence makes reviewers assume you skipped it and hoped the fog would cover the body.
+If validation cannot be run, say so. Silence makes reviewers assume the fog was part of the test plan.
 
 ---
 
 ## Support
 
-For installation help, troubleshooting, and where to ask questions, read [`SUPPORT.md`](./SUPPORT.md).
-
-A Discord server may be added later. Until it exists and is officially linked, GitHub and CurseForge are the project's public support path.
+Read [`SUPPORT.md`](./SUPPORT.md) for installation help, troubleshooting boundaries, and evidence requirements.
