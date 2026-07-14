@@ -2,7 +2,7 @@
 
 # Support
 
-Need help with **Still Watching**? Start with the official install path, check the baseline, then bring logs. Guesswork belongs in the atmosphere, not in support threads.
+Need help with **Still Watching**? Start from the official install path, reproduce on a clean profile, then bring logs. Guesswork belongs in the atmosphere, not in support threads.
 
 ---
 
@@ -17,12 +17,11 @@ Need help with **Still Watching**? Start with the official install path, check t
 | Java | Java `17` where required |
 | Official playable release | CurseForge |
 | CurseForge Project ID | `1420406` |
-| Current documented release | Still Watching V1.1.2 |
+| Current documented release | Still Watching V2.0.0 |
 | RAM | `5 GB` minimum; `6–8 GB` preferred |
-| Repository license | Apache-2.0 for original repository files only |
 | Latest CurseForge release | Primary support target |
-| Older CurseForge releases | Best-effort support |
-| GitHub ZIP | Not a playable install source |
+| Older releases | Best-effort support |
+| GitHub ZIP | Not the recommended playable install source |
 
 Install playable releases from CurseForge:
 
@@ -30,7 +29,22 @@ Install playable releases from CurseForge:
 - [Still Watching files](https://www.curseforge.com/minecraft/modpacks/still-watching/files)
 - [Installation guide](./installation-guide.md)
 
-If you installed from a GitHub ZIP and the pack does not launch, the support answer is simple: install from CurseForge.
+---
+
+## V2.0.0 Migration Support
+
+V2.0.0 changes the Overworld, Nether, End, structure set, map system, and optimization stack.
+
+Before reporting an update problem:
+
+1. Back up the V1.1.2 instance and world.
+2. Install V2.0.0 as a fresh CurseForge profile.
+3. Test a newly created V2.0.0 world.
+4. Do not copy the entire old `config/` folder over the new release.
+5. Test migrated worlds only from disposable copies.
+6. Remember that JourneyMap data does not automatically transfer to Xaero's maps.
+
+Terrain seams and different generation in unexplored chunks are expected consequences of migrating a world across a major generator overhaul. That is not a bug the support team can erase with motivational speaking.
 
 ---
 
@@ -40,11 +54,11 @@ Use GitHub Issues for reproducible project problems:
 
 - [Open an issue](https://github.com/SoumyajitXD/Still-Watching/issues)
 
-Use CurseForge for official playable files and release downloads:
+Use CurseForge for official playable files and downloads:
 
 - [CurseForge project page](https://www.curseforge.com/minecraft/modpacks/still-watching)
 
-A Discord server may exist later. Until an official link appears in the repository or CurseForge page, do not trust random support-server links pretending to be official.
+Do not trust random support-server links, mirrors, or modified downloads pretending to be official.
 
 ---
 
@@ -53,17 +67,17 @@ A Discord server may exist later. Until an official link appears in the reposito
 Open an issue for:
 
 - reproducible crashes on the official CurseForge release;
-- broken installation steps in [`installation-guide.md`](./installation-guide.md);
+- broken installation or migration instructions;
+- world-generation failures on a clean V2.0.0 profile;
 - dedicated-server or multiplayer failures with logs;
 - server-pack documentation problems;
-- broken links;
-- incorrect project metadata;
+- broken links or incorrect project metadata;
 - wrong mod-list information;
 - compatibility reports backed by clear testing details;
-- suspicious public downloads, fake links, or unsafe public references;
-- attribution, credit, or Apache-2.0 license-scope problems.
+- suspicious downloads or unsafe public references;
+- attribution, credit, or license-scope problems.
 
-Good support requests give maintainers enough evidence to act. Bad support requests just scream into the cave and wait for Java to confess.
+Good support requests provide enough evidence to act. Bad requests just scream into the cave and wait for Java to confess.
 
 ---
 
@@ -71,15 +85,15 @@ Good support requests give maintainers enough evidence to act. Bad support reque
 
 Do not open support issues for:
 
-- cracked-launcher support;
+- cracked launchers;
 - unofficial reuploads, mirrors, or modified packs;
-- installs made from the GitHub ZIP;
-- random extra mods, shaders, resource packs, or config edits unless the issue also happens on a clean CurseForge install;
-- general Minecraft modding lessons;
-- low FPS reports without hardware, settings, and log details;
-- crash screenshots without logs or crash reports;
-- requests to add mods with no design reason, testing, or compatibility evidence;
-- vague reports like `fix`, `broken`, `lag`, or `doesn't work`.
+- installs assembled from the GitHub ZIP;
+- random extra mods, shaders, resource packs, or config edits unless the issue also happens clean;
+- expected terrain borders after migrating a V1.1.2 world;
+- requests to convert JourneyMap data into Xaero's map data;
+- low-FPS reports without hardware, settings, shader, and log details;
+- crash screenshots without logs;
+- vague reports such as `fix`, `broken`, `lag`, or `doesn't work`.
 
 Those are not actionable support requests. They are fog noises with a keyboard.
 
@@ -87,17 +101,15 @@ Those are not actionable support requests. They are fog noises with a keyboard.
 
 ## Before Asking for Help
 
-Do this first:
-
-1. Install the latest Still Watching release from CurseForge.
-2. Launch once with no extra mods, shaders, resource packs, or config edits.
-3. Confirm Minecraft `1.20.1`.
-4. Confirm the correct Forge environment.
-5. Use Java `17` if the launcher or server requires it.
-6. Allocate `5 GB` minimum RAM; `6–8 GB` preferred.
+1. Install the latest release from CurseForge.
+2. Launch with no extra mods, shaders, resource packs, or copied configs.
+3. Confirm Minecraft `1.20.1` and the correct Forge environment.
+4. Use Java `17` if required.
+5. Allocate `5 GB` minimum RAM; `6–8 GB` preferred.
+6. Create a clean test world.
 7. Reproduce the issue.
 8. Collect `logs/latest.log` and any crash report.
-9. Note whether the issue happens in singleplayer, multiplayer, client, or dedicated server.
+9. Record whether the issue affects a new V2.0.0 world or a migrated world.
 
 Skipping these steps usually creates a support thread that dies face-down in the swamp.
 
@@ -108,71 +120,41 @@ Skipping these steps usually creates a support thread that dies face-down in the
 Include:
 
 - Still Watching version;
-- where you installed it from;
-- launcher used;
+- installation source and launcher;
 - operating system;
-- singleplayer or multiplayer;
-- client or dedicated server;
-- Java version, if relevant;
-- RAM allocated;
-- steps to reproduce;
-- what you expected to happen;
-- what actually happened;
-- `logs/latest.log`;
-- crash report, if one exists;
-- whether you added extra mods, shaders, resource packs, or config edits;
-- whether it happens on a clean CurseForge install.
+- Minecraft, Forge, and Java versions;
+- RAM allocation;
+- singleplayer, multiplayer, client, or dedicated server;
+- new world or migrated world;
+- exact reproduction steps;
+- expected and actual behavior;
+- `logs/latest.log` and crash report;
+- shader name and graphics settings for performance reports;
+- any extra mods, resource packs, or config edits;
+- whether the issue reproduces on a clean CurseForge profile.
 
-If you are reporting a server issue, also include:
-
-- server host or local server type, if relevant;
-- server RAM;
-- whether the server uses a host installer, official server pack, or manual Forge setup;
-- server log;
-- whether every client is on the same pack version;
-- whether configs and server files match the selected release.
+For server issues, also include server RAM, host or local-server type, setup method, server log, and whether all clients match the exact release.
 
 ---
 
 ## Logs and Privacy
 
-Logs can contain private details. Before posting, check for:
+Before posting logs, check for usernames, local paths, IP addresses, server hostnames, tokens, credentials, and private server information.
 
-- usernames;
-- local file paths;
-- IP addresses;
-- server hostnames;
-- tokens or secret-looking strings;
-- private server information.
-
-Attach logs or use a paste service when they are long. Do not paste a wall of log sludge into the issue body unless the excerpt is short and directly relevant.
+Attach long logs or use a paste service. Do not paste a wall of log sludge into the issue body unless the excerpt is short and directly relevant.
 
 ---
 
 ## Latest Versus Older Versions
 
-The latest CurseForge release gets primary support.
+The latest CurseForge release gets primary support. Older releases receive best-effort help for documentation, migration, and known issues.
 
-Older releases may receive best-effort help for documentation, migration, or known issues. If a problem is already fixed in a newer release, update first. Maintaining old ghosts forever is not support; it is necromancy with version numbers.
-
----
-
-## License and Redistribution Support
-
-The original files in this repository are licensed under **Apache-2.0** through [`LICENSE`](./LICENSE). That license applies to project-maintained repository files, not to Minecraft, Forge, CurseForge, third-party mods, shaders, resource packs, sounds, textures, logos, screenshots containing third-party content, or external project assets.
-
-Support will not be provided for unsafe redistribution, stolen assets, bundled mod JARs outside their permitted channels, or fake download pages pretending to be official Still Watching releases.
+If a problem is already fixed in a newer release, update first. Maintaining old ghosts forever is not support; it is necromancy with version numbers.
 
 ---
 
-## Security or Suspicious Downloads
+## Security and Redistribution
 
-For fake downloads, suspicious links, unsafe public references, exposed secrets, or possible private-data leaks, read [`SECURITY.md`](./SECURITY.md).
+For fake downloads, suspicious links, exposed secrets, or private-data leaks, read [`SECURITY.md`](./SECURITY.md).
 
-Do not post secrets or sensitive private details publicly.
-
----
-
-## Contributing Fixes
-
-If you want to fix docs, metadata, validation, support boundaries, or license wording, read [`CONTRIBUTING.md`](./CONTRIBUTING.md).
+Original repository files are Apache-2.0 licensed. That does not relicense Minecraft, Forge, third-party mods, shaders, resource packs, sounds, textures, logos, or external assets.
