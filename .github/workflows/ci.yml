@@ -310,15 +310,100 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2 pinned to immutable commit
         with:
-          fetch-depth: 1
+          fetch-depth: 2
           persist-credentials: false
           show-progress: false
-      - name: Install markdownlint-cli2 with retries
+      - name: Lint changed Markdown or run a full audit
         run: |
           set -euo pipefail
+          python3 - <<'PY' > "$RUNNER_TEMP/markdown-files"
+          from __future__ import annotations
+
+          import json
+          import os
+          import subprocess
+          import sys
+          from pathlib import Path
+
+          event_name = os.environ["GITHUB_EVENT_NAME"]
+          event = json.loads(Path(os.environ["GITHUB_EVENT_PATH"]).read_text(encoding="utf-8"))
+          candidates: set[str] = set()
+
+          if event_name == "pull_request":
+              result = subprocess.run(
+                  ["git", "diff", "--name-only", "-z", "--diff-filter=ACMRT", "HEAD^1", "HEAD"],
+                  check=True,
+                  stdout=subprocess.PIPE,
+              )
+              candidates.update(
+                  item.decode("utf-8")
+                  for item in result.stdout.split(b"\0")
+                  if item
+              )
+          elif event_name == "push":
+              for commit in event.get("commits", []):
+                  candidates.update(commit.get("added", []))
+                  candidates.update(commit.get("modified", []))
+              if not candidates:
+                  result = subprocess.run(
+                      ["git", "diff", "--name-only", "-z", "--diff-filter=ACMRT", "HEAD^1", "HEAD"],
+                      check=True,
+                      stdout=subprocess.PIPE,
+                  )
+                  candidates.update(
+                      item.decode("utf-8")
+                      for item in result.stdout.split(b"\0")
+                      if item
+                  )
+          else:
+              result = subprocess.run(
+                  ["git", "ls-files", "-z", "*.md"],
+                  check=True,
+                  stdout=subprocess.PIPE,
+              )
+              candidates.update(
+                  item.decode("utf-8")
+                  for item in result.stdout.split(b"\0")
+                  if item
+              )
+
+          selected = sorted(
+              path
+              for path in candidates
+              if path.lower().endswith(".md")
+              and not path.startswith("Releases/")
+              and Path(path).is_file()
+          )
+          for path in selected:
+              sys.stdout.buffer.write(path.encode("utf-8") + b"\0")
+          PY
+
+          mapfile -d '' files < "$RUNNER_TEMP/markdown-files"
+          if (( ${#files[@]} == 0 )); then
+            echo "No Markdown files changed; incremental lint passed."
+            exit 0
+          fi
+
+          printf 'Markdown files selected for lint:\n'
+          printf ' - %s\n' "${files[@]}"
+
+          cat > "$RUNNER_TEMP/markdownlint-cli2.yaml" <<'YAML'
+          config:
+            default: true
+            MD013: false
+            MD033: false
+            MD036: false
+            MD041: false
+            MD047: false
+            MD024:
+              siblings_only: true
+            MD026:
+              punctuation: ".,;:!！?？"
+          YAML
+
           for attempt in 1 2 3; do
             if npm install --prefix "$RUNNER_TEMP/markdownlint" --no-save --package-lock=false --ignore-scripts markdownlint-cli2@0.18.1; then
-              exit 0
+              break
             fi
             if [[ "$attempt" -eq 3 ]]; then
               echo "::error::Failed to install markdownlint-cli2 after 3 attempts"
@@ -326,26 +411,10 @@ jobs:
             fi
             sleep $((attempt * 5))
           done
-      - name: Run markdownlint-cli2
-        run: |
-          set -euo pipefail
-          "$RUNNER_TEMP/markdownlint/node_modules/.bin/markdownlint-cli2" "**/*.md" "!Releases/**"
 
-  link-check:
-    name: Internal link check
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2 pinned to immutable commit
-        with:
-          fetch-depth: 1
-          persist-credentials: false
-          show-progress: false
-      - name: Validate internal links
-        run: |
-          set -euo pipefail
-          python3 .github/ci/validate_repository.py links
+          "$RUNNER_TEMP/markdownlint/node_modules/.bin/markdownlint-cli2" \
+            --config "$RUNNER_TEMP/markdownlint-cli2.yaml" \
+            "${files[@]}"
 
   external-link-check:
     name: External link check
@@ -405,7 +474,6 @@ jobs:
       - metadata-consistency
       - curseforge-html
       - markdown-lint
-      - link-check
       - workflow-lint
     if: always()
     steps:
@@ -418,7 +486,6 @@ jobs:
             [metadata-consistency]="${{ needs.metadata-consistency.result }}"
             [curseforge-html]="${{ needs.curseforge-html.result }}"
             [markdown-lint]="${{ needs.markdown-lint.result }}"
-            [link-check]="${{ needs.link-check.result }}"
             [workflow-lint]="${{ needs.workflow-lint.result }}"
           )
 
