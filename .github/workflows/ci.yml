@@ -48,8 +48,6 @@ jobs:
             checks: baseline
           - name: metadata
             checks: metadata modlist
-          - name: HTML
-            checks: html
           - name: hygiene
             checks: hygiene
     steps:
@@ -64,8 +62,8 @@ jobs:
           set -euo pipefail
           python3 .github/ci/validate_repository.py ${{ matrix.checks }}
 
-  markdown-lint:
-    name: Markdown lint
+  curseforge-html:
+    name: CurseForge HTML validation
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
@@ -75,10 +73,157 @@ jobs:
           fetch-depth: 1
           persist-credentials: false
           show-progress: false
+      - name: Validate HTML structure and safety
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from __future__ import annotations
+
+          import html.parser
+          import re
+          import sys
+          import urllib.parse
+          from pathlib import Path
+
+          path = Path("curseforge-description.html")
+          errors = 0
+          warnings = 0
+
+          def error(message: str, line: int | None = None) -> None:
+              global errors
+              errors += 1
+              location = f"file={path}"
+              if line is not None:
+                  location += f",line={line}"
+              print(f"::error {location}::{message}")
+
+          def warning(message: str, line: int | None = None) -> None:
+              global warnings
+              warnings += 1
+              location = f"file={path}"
+              if line is not None:
+                  location += f",line={line}"
+              print(f"::warning {location}::{message}")
+
+          if not path.is_file():
+              error("Missing CurseForge description HTML")
+              sys.exit(1)
+
+          text = path.read_text(encoding="utf-8")
+          if not text.strip():
+              error("CurseForge description HTML is empty")
+              sys.exit(1)
+
+          class Validator(html.parser.HTMLParser):
+              forbidden_tags = {"script", "style", "iframe", "object", "embed", "form"}
+
+              def __init__(self) -> None:
+                  super().__init__(convert_charrefs=True)
+                  self.images = 0
+                  self.links = 0
+
+              def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+                  tag = tag.lower()
+                  attributes = {name.lower(): value for name, value in attrs}
+                  line, _ = self.getpos()
+
+                  if tag in self.forbidden_tags:
+                      error(f"Forbidden HTML tag: <{tag}>", line)
+
+                  for attribute in ("href", "src"):
+                      value = attributes.get(attribute)
+                      if not value:
+                          continue
+                      if value.startswith("//"):
+                          error(f"Protocol-relative {attribute} is not allowed: {value}", line)
+                          continue
+                      scheme = urllib.parse.urlparse(value).scheme.lower()
+                      if scheme and scheme not in {"https", "mailto"}:
+                          error(f"Unsupported {attribute} scheme '{scheme}': {value}", line)
+
+                  if tag == "img":
+                      self.images += 1
+                      if not attributes.get("src"):
+                          error("Image is missing a src attribute", line)
+                      if "alt" not in attributes:
+                          warning("Image is missing an alt attribute", line)
+
+                  if tag == "a":
+                      self.links += 1
+                      if not attributes.get("href"):
+                          error("Link is missing an href attribute", line)
+                      if attributes.get("target") == "_blank":
+                          rel = set((attributes.get("rel") or "").lower().split())
+                          missing = {"noopener", "nofollow"} - rel
+                          if missing:
+                              warning(
+                                  "target='_blank' link is missing rel token(s): "
+                                  + ", ".join(sorted(missing)),
+                                  line,
+                              )
+
+          parser = Validator()
+          try:
+              parser.feed(text)
+              parser.close()
+          except Exception as exc:
+              error(f"HTML parser rejected the description: {exc}")
+
+          required_markers = {
+              "project name": "Still Watching",
+              "Minecraft version": "1.20.1",
+              "loader": "Forge",
+              "current release": "Still Watching V2.0.0",
+              "server sponsor link": "https://url-shortener.curseforge.com/AZDOs",
+          }
+          for label, marker in required_markers.items():
+              if marker not in text:
+                  error(f"Missing required {label}: {marker}")
+
+          if re.search(r"\b(?:TODO|FIXME|TBD|LOREM IPSUM|PLACEHOLDER)\b", text, re.IGNORECASE):
+              error("Placeholder text remains in the release-facing description")
+          if "http://" in text.lower():
+              error("Release-facing HTML contains an insecure HTTP URL")
+          if parser.images == 0:
+              error("CurseForge description must contain at least one image")
+          if parser.links == 0:
+              error("CurseForge description must contain at least one link")
+
+          print(
+              f"CurseForge HTML validation finished with "
+              f"{errors} error(s) and {warnings} warning(s)."
+          )
+          sys.exit(1 if errors else 0)
+          PY
+
+  markdown-lint:
+    name: Markdown lint
+    runs-on: ubuntu-latest
+    timeout-minutes: 7
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2 pinned to immutable commit
+        with:
+          fetch-depth: 1
+          persist-credentials: false
+          show-progress: false
+      - name: Install markdownlint-cli2 with retries
+        run: |
+          set -euo pipefail
+          for attempt in 1 2 3; do
+            if npm install --no-save --package-lock=false --ignore-scripts markdownlint-cli2@0.18.1; then
+              exit 0
+            fi
+            if [[ "$attempt" -eq 3 ]]; then
+              echo "::error::Failed to install markdownlint-cli2 after 3 attempts"
+              exit 1
+            fi
+            sleep $((attempt * 5))
+          done
       - name: Run markdownlint-cli2
         run: |
           set -euo pipefail
-          npx --yes markdownlint-cli2@0.18.1 "**/*.md" "!Releases/**"
+          ./node_modules/.bin/markdownlint-cli2 "**/*.md" "!Releases/**"
 
   link-check:
     name: Internal link check
@@ -100,7 +245,7 @@ jobs:
     name: External link check
     runs-on: ubuntu-latest
     timeout-minutes: 10
-    if: github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.external_links) || (github.event_name == 'push' && github.ref == 'refs/heads/main')
+    if: github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.external_links)
     steps:
       - name: Checkout repository
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2 pinned to immutable commit
@@ -124,16 +269,25 @@ jobs:
           fetch-depth: 1
           persist-credentials: false
           show-progress: false
-      - name: Install actionlint
+      - name: Install actionlint with retries
         run: |
           set -euo pipefail
           mkdir -p "$RUNNER_TEMP/bin"
-          GOBIN="$RUNNER_TEMP/bin" go install github.com/rhysd/actionlint/cmd/actionlint@v1.7.7
+          for attempt in 1 2 3; do
+            if GOBIN="$RUNNER_TEMP/bin" go install github.com/rhysd/actionlint/cmd/actionlint@v1.7.7; then
+              break
+            fi
+            if [[ "$attempt" -eq 3 ]]; then
+              echo "::error::Failed to install actionlint after 3 attempts"
+              exit 1
+            fi
+            sleep $((attempt * 5))
+          done
           echo "$RUNNER_TEMP/bin" >> "$GITHUB_PATH"
       - name: Run actionlint and workflow security checks
         run: |
           set -euo pipefail
-          actionlint .github/workflows/ci.yml
+          actionlint .github/workflows/*.yml
           python3 .github/ci/validate_repository.py workflow
 
   required-checks:
@@ -142,6 +296,7 @@ jobs:
     timeout-minutes: 5
     needs:
       - repository-validation
+      - curseforge-html
       - markdown-lint
       - link-check
       - workflow-lint
@@ -153,6 +308,7 @@ jobs:
           failed=0
           declare -A results=(
             [repository-validation]="${{ needs.repository-validation.result }}"
+            [curseforge-html]="${{ needs.curseforge-html.result }}"
             [markdown-lint]="${{ needs.markdown-lint.result }}"
             [link-check]="${{ needs.link-check.result }}"
             [workflow-lint]="${{ needs.workflow-lint.result }}"
