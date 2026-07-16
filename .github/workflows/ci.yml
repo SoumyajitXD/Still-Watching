@@ -46,8 +46,8 @@ jobs:
         include:
           - name: baseline
             checks: baseline
-          - name: metadata
-            checks: metadata modlist
+          - name: modlist
+            checks: modlist
           - name: hygiene
             checks: hygiene
     steps:
@@ -61,6 +61,112 @@ jobs:
         run: |
           set -euo pipefail
           python3 .github/ci/validate_repository.py ${{ matrix.checks }}
+
+  metadata-consistency:
+    name: Metadata consistency
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2 pinned to immutable commit
+        with:
+          fetch-depth: 1
+          persist-credentials: false
+          show-progress: false
+      - name: Validate documentation metadata
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from __future__ import annotations
+
+          import json
+          import sys
+          from pathlib import Path
+
+          metadata_path = Path(".github/ci/project-metadata.json")
+          targets = [
+              Path("README.md"),
+              Path("installation-guide.md"),
+              Path("SUPPORT.md"),
+              Path("CONTRIBUTING.md"),
+              Path("latest-modlist.md"),
+          ]
+          labels = {
+              "project_name": "project name",
+              "minecraft_version": "Minecraft version",
+              "loader": "loader",
+              "java_version": "Java version",
+              "curseforge_project_id": "CurseForge project ID",
+              "current_documented_release": "current documented release",
+              "minimum_ram": "minimum RAM",
+              "preferred_ram": "preferred RAM",
+          }
+          errors = 0
+
+          def error(path: Path, message: str) -> None:
+              global errors
+              errors += 1
+              print(f"::error file={path}::{message}")
+
+          def normalize(text: str) -> str:
+              return (
+                  text.replace("&ndash;", "–")
+                  .replace("&#8211;", "–")
+                  .replace("&mdash;", "—")
+                  .replace("&#8212;", "—")
+                  .replace("&nbsp;", " ")
+                  .replace("5GB", "5 GB")
+                  .replace("6–8GB", "6–8 GB")
+                  .replace("6-8 GB", "6–8 GB")
+                  .replace("Apache License 2.0", "Apache-2.0")
+              )
+
+          def candidates(key: str, value: str) -> list[str]:
+              values = [value]
+              if key == "current_documented_release" and value.startswith("Still Watching "):
+                  short_version = value.removeprefix("Still Watching ")
+                  values.extend(
+                      [
+                          short_version,
+                          f"Current release {short_version}",
+                          f"Current documented release {short_version}",
+                      ]
+                  )
+              if key == "java_version":
+                  values.extend([f"Java {value}", f"Java `{value}`"])
+              if key in {"minimum_ram", "preferred_ram"}:
+                  values.append(value.replace(" ", ""))
+              if key == "loader":
+                  values.append(value.lower())
+              return values
+
+          if not metadata_path.is_file():
+              error(metadata_path, "Missing metadata source of truth")
+              sys.exit(1)
+
+          metadata = json.loads(metadata_path.read_text(encoding="utf-8"))
+          for key, label in labels.items():
+              if not metadata.get(key):
+                  error(metadata_path, f"Missing metadata key: {key} ({label})")
+
+          for path in targets:
+              if not path.is_file():
+                  error(path, "Missing metadata-bearing documentation file")
+                  continue
+              text = normalize(path.read_text(encoding="utf-8"))
+              for key, label in labels.items():
+                  value = metadata.get(key, "")
+                  accepted = candidates(key, value) if value else []
+                  if accepted and not any(candidate in text for candidate in accepted):
+                      error(
+                          path,
+                          f"Missing metadata value for {label}; accepted one of: "
+                          + ", ".join(repr(candidate) for candidate in accepted),
+                      )
+
+          print(f"Metadata validation finished with {errors} error(s).")
+          sys.exit(1 if errors else 0)
+          PY
 
   curseforge-html:
     name: CurseForge HTML validation
@@ -296,6 +402,7 @@ jobs:
     timeout-minutes: 5
     needs:
       - repository-validation
+      - metadata-consistency
       - curseforge-html
       - markdown-lint
       - link-check
@@ -308,6 +415,7 @@ jobs:
           failed=0
           declare -A results=(
             [repository-validation]="${{ needs.repository-validation.result }}"
+            [metadata-consistency]="${{ needs.metadata-consistency.result }}"
             [curseforge-html]="${{ needs.curseforge-html.result }}"
             [markdown-lint]="${{ needs.markdown-lint.result }}"
             [link-check]="${{ needs.link-check.result }}"
