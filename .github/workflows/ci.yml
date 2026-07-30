@@ -1,18 +1,16 @@
-name: CI
+name: Still Watching CI
 
-"on":
+on:
   push:
-    branches:
-      - main
+    branches: [main]
   pull_request:
-    branches:
-      - main
+    branches: [main]
   schedule:
     - cron: "23 3 * * 1"
   workflow_dispatch:
     inputs:
       external_links:
-        description: "Probe external HTTP(S) links during this manual run."
+        description: Probe external HTTP(S) links during this manual run.
         required: false
         default: false
         type: boolean
@@ -21,7 +19,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: ci-${{ github.workflow }}-${{ github.ref }}
+  group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 defaults:
@@ -37,61 +35,59 @@ env:
 
 jobs:
   repository-validation:
-    name: Repository validation (${{ matrix.name }})
+    name: Validate ${{ matrix.check }}
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 7
     strategy:
       fail-fast: false
+      max-parallel: 3
       matrix:
-        include:
-          - name: baseline
-            checks: baseline
-          - name: modlist
-            checks: modlist
-          - name: hygiene
-            checks: hygiene
+        check:
+          - baseline
+          - modlist
+          - links
+          - hygiene
     steps:
       - name: Checkout repository
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2 pinned to immutable commit
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           fetch-depth: 1
           persist-credentials: false
           show-progress: false
-      - name: Run ${{ matrix.name }} checks
+
+      - name: Run ${{ matrix.check }} validation
         run: |
           set -euo pipefail
-          python3 .github/ci/validate_repository.py ${{ matrix.checks }}
+          python3 .github/ci/validate_repository.py "${{ matrix.check }}"
 
-  metadata-consistency:
-    name: Metadata consistency
+  release-surface:
+    name: Release surface consistency
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 7
     steps:
       - name: Checkout repository
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2 pinned to immutable commit
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           fetch-depth: 1
           persist-credentials: false
           show-progress: false
-      - name: Validate documentation metadata
+
+      - name: Validate metadata-bearing docs and CurseForge HTML
         run: |
           set -euo pipefail
           python3 - <<'PY'
           from __future__ import annotations
 
+          import html.parser
           import json
+          import re
           import sys
+          import urllib.parse
           from pathlib import Path
 
           metadata_path = Path(".github/ci/project-metadata.json")
-          targets = [
-              Path("README.md"),
-              Path("installation-guide.md"),
-              Path("SUPPORT.md"),
-              Path("CONTRIBUTING.md"),
-              Path("latest-modlist.md"),
-          ]
-          labels = {
+          metadata = json.loads(metadata_path.read_text(encoding="utf-8"))
+          required_keys = {
               "project_name": "project name",
               "minecraft_version": "Minecraft version",
               "loader": "loader",
@@ -101,12 +97,22 @@ jobs:
               "minimum_ram": "minimum RAM",
               "preferred_ram": "preferred RAM",
           }
+          docs = [
+              Path("README.md"),
+              Path("installation-guide.md"),
+              Path("SUPPORT.md"),
+              Path("CONTRIBUTING.md"),
+              Path("latest-modlist.md"),
+          ]
           errors = 0
 
-          def error(path: Path, message: str) -> None:
+          def error(path: Path, message: str, line: int | None = None) -> None:
               global errors
               errors += 1
-              print(f"::error file={path}::{message}")
+              location = f"file={path}"
+              if line is not None:
+                  location += f",line={line}"
+              print(f"::error {location}::{message}")
 
           def normalize(text: str) -> str:
               return (
@@ -118,20 +124,13 @@ jobs:
                   .replace("5GB", "5 GB")
                   .replace("6–8GB", "6–8 GB")
                   .replace("6-8 GB", "6–8 GB")
-                  .replace("Apache License 2.0", "Apache-2.0")
               )
 
           def candidates(key: str, value: str) -> list[str]:
               values = [value]
               if key == "current_documented_release" and value.startswith("Still Watching "):
-                  short_version = value.removeprefix("Still Watching ")
-                  values.extend(
-                      [
-                          short_version,
-                          f"Current release {short_version}",
-                          f"Current documented release {short_version}",
-                      ]
-                  )
+                  short = value.removeprefix("Still Watching ")
+                  values.extend([short, f"Current release {short}", f"Current documented release {short}"])
               if key == "java_version":
                   values.extend([f"Java {value}", f"Java `{value}`"])
               if key in {"minimum_ram", "preferred_ram"}:
@@ -140,232 +139,171 @@ jobs:
                   values.append(value.lower())
               return values
 
-          if not metadata_path.is_file():
-              error(metadata_path, "Missing metadata source of truth")
-              sys.exit(1)
-
-          metadata = json.loads(metadata_path.read_text(encoding="utf-8"))
-          for key, label in labels.items():
+          for key, label in required_keys.items():
               if not metadata.get(key):
                   error(metadata_path, f"Missing metadata key: {key} ({label})")
 
-          for path in targets:
+          for path in docs:
               if not path.is_file():
-                  error(path, "Missing metadata-bearing documentation file")
+                  error(path, "Missing metadata-bearing document")
                   continue
               text = normalize(path.read_text(encoding="utf-8"))
-              for key, label in labels.items():
+              for key, label in required_keys.items():
                   value = metadata.get(key, "")
                   accepted = candidates(key, value) if value else []
                   if accepted and not any(candidate in text for candidate in accepted):
-                      error(
-                          path,
-                          f"Missing metadata value for {label}; accepted one of: "
-                          + ", ".join(repr(candidate) for candidate in accepted),
-                      )
+                      error(path, f"Missing metadata value for {label}; expected one of {accepted!r}")
 
-          print(f"Metadata validation finished with {errors} error(s).")
+          html_path = Path("curseforge-description.html")
+          if not html_path.is_file():
+              error(html_path, "Missing CurseForge description HTML")
+          else:
+              text = html_path.read_text(encoding="utf-8")
+              normalized = normalize(text)
+
+              class Validator(html.parser.HTMLParser):
+                  forbidden_tags = {"script", "style", "iframe", "object", "embed", "form"}
+
+                  def __init__(self) -> None:
+                      super().__init__(convert_charrefs=True)
+                      self.images = 0
+                      self.links = 0
+
+                  def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+                      tag = tag.lower()
+                      attributes = {name.lower(): value for name, value in attrs}
+                      line, _ = self.getpos()
+                      if tag in self.forbidden_tags:
+                          error(html_path, f"Forbidden HTML tag: <{tag}>", line)
+                      for attribute in ("href", "src"):
+                          value = attributes.get(attribute)
+                          if not value:
+                              continue
+                          if value.startswith("//"):
+                              error(html_path, f"Protocol-relative {attribute} is not allowed: {value}", line)
+                              continue
+                          scheme = urllib.parse.urlparse(value).scheme.lower()
+                          if scheme and scheme not in {"https", "mailto"}:
+                              error(html_path, f"Unsupported {attribute} scheme '{scheme}': {value}", line)
+                      if tag == "img":
+                          self.images += 1
+                          if not attributes.get("src"):
+                              error(html_path, "Image is missing src", line)
+                      if tag == "a":
+                          self.links += 1
+                          if not attributes.get("href"):
+                              error(html_path, "Link is missing href", line)
+
+              parser = Validator()
+              try:
+                  parser.feed(text)
+                  parser.close()
+              except Exception as exc:
+                  error(html_path, f"HTML parser rejected the description: {exc}")
+
+              markers = {
+                  "project name": metadata.get("project_name", ""),
+                  "Minecraft version": metadata.get("minecraft_version", ""),
+                  "loader": metadata.get("loader", ""),
+                  "current release": metadata.get("current_documented_release", ""),
+                  "minimum RAM": metadata.get("minimum_ram", ""),
+                  "preferred RAM": metadata.get("preferred_ram", ""),
+                  "server sponsor link": "https://url-shortener.curseforge.com/AZDOs",
+              }
+              for label, marker in markers.items():
+                  if marker and marker not in normalized:
+                      error(html_path, f"Missing required {label}: {marker}")
+              if re.search(r"\b(?:TODO|FIXME|TBD|LOREM IPSUM|PLACEHOLDER)\b", text, re.IGNORECASE):
+                  error(html_path, "Placeholder text remains in the release-facing description")
+              if "http://" in text.lower():
+                  error(html_path, "Release-facing HTML contains an insecure HTTP URL")
+              if parser.images == 0:
+                  error(html_path, "CurseForge description must contain at least one image")
+              if parser.links == 0:
+                  error(html_path, "CurseForge description must contain at least one link")
+
+          print(f"Release-surface validation finished with {errors} error(s).")
           sys.exit(1 if errors else 0)
           PY
 
-  curseforge-html:
-    name: CurseForge HTML validation
+  validator-quality:
+    name: Validator quality
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
       - name: Checkout repository
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2 pinned to immutable commit
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           fetch-depth: 1
           persist-credentials: false
           show-progress: false
-      - name: Validate HTML structure and safety
+
+      - name: Compile validation code and parse metadata
+        run: |
+          set -euo pipefail
+          python3 -m compileall -q .github/ci
+          python3 -m json.tool .github/ci/project-metadata.json >/dev/null
+          python3 .github/ci/validate_repository.py baseline modlist links hygiene workflow
+
+  markdown-lint:
+    name: Markdown lint
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+          show-progress: false
+
+      - name: Select Markdown files
+        id: markdown
         run: |
           set -euo pipefail
           python3 - <<'PY'
           from __future__ import annotations
 
-          import html.parser
-          import re
-          import sys
-          import urllib.parse
-          from pathlib import Path
-
-          path = Path("curseforge-description.html")
-          errors = 0
-          warnings = 0
-
-          def error(message: str, line: int | None = None) -> None:
-              global errors
-              errors += 1
-              location = f"file={path}"
-              if line is not None:
-                  location += f",line={line}"
-              print(f"::error {location}::{message}")
-
-          def warning(message: str, line: int | None = None) -> None:
-              global warnings
-              warnings += 1
-              location = f"file={path}"
-              if line is not None:
-                  location += f",line={line}"
-              print(f"::warning {location}::{message}")
-
-          if not path.is_file():
-              error("Missing CurseForge description HTML")
-              sys.exit(1)
-
-          text = path.read_text(encoding="utf-8")
-          if not text.strip():
-              error("CurseForge description HTML is empty")
-              sys.exit(1)
-
-          class Validator(html.parser.HTMLParser):
-              forbidden_tags = {"script", "style", "iframe", "object", "embed", "form"}
-
-              def __init__(self) -> None:
-                  super().__init__(convert_charrefs=True)
-                  self.images = 0
-                  self.links = 0
-
-              def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
-                  tag = tag.lower()
-                  attributes = {name.lower(): value for name, value in attrs}
-                  line, _ = self.getpos()
-
-                  if tag in self.forbidden_tags:
-                      error(f"Forbidden HTML tag: <{tag}>", line)
-
-                  for attribute in ("href", "src"):
-                      value = attributes.get(attribute)
-                      if not value:
-                          continue
-                      if value.startswith("//"):
-                          error(f"Protocol-relative {attribute} is not allowed: {value}", line)
-                          continue
-                      scheme = urllib.parse.urlparse(value).scheme.lower()
-                      if scheme and scheme not in {"https", "mailto"}:
-                          error(f"Unsupported {attribute} scheme '{scheme}': {value}", line)
-
-                  if tag == "img":
-                      self.images += 1
-                      if not attributes.get("src"):
-                          error("Image is missing a src attribute", line)
-                      if "alt" not in attributes:
-                          warning("Image is missing an alt attribute", line)
-
-                  if tag == "a":
-                      self.links += 1
-                      if not attributes.get("href"):
-                          error("Link is missing an href attribute", line)
-                      if attributes.get("target") == "_blank":
-                          rel = set((attributes.get("rel") or "").lower().split())
-                          missing = {"noopener", "nofollow"} - rel
-                          if missing:
-                              warning(
-                                  "target='_blank' link is missing rel token(s): "
-                                  + ", ".join(sorted(missing)),
-                                  line,
-                              )
-
-          parser = Validator()
-          try:
-              parser.feed(text)
-              parser.close()
-          except Exception as exc:
-              error(f"HTML parser rejected the description: {exc}")
-
-          required_markers = {
-              "project name": "Still Watching",
-              "Minecraft version": "1.20.1",
-              "loader": "Forge",
-              "current release": "Still Watching V2.0.0",
-              "server sponsor link": "https://url-shortener.curseforge.com/AZDOs",
-          }
-          for label, marker in required_markers.items():
-              if marker not in text:
-                  error(f"Missing required {label}: {marker}")
-
-          if re.search(r"\b(?:TODO|FIXME|TBD|LOREM IPSUM|PLACEHOLDER)\b", text, re.IGNORECASE):
-              error("Placeholder text remains in the release-facing description")
-          if "http://" in text.lower():
-              error("Release-facing HTML contains an insecure HTTP URL")
-          if parser.images == 0:
-              error("CurseForge description must contain at least one image")
-          if parser.links == 0:
-              error("CurseForge description must contain at least one link")
-
-          print(
-              f"CurseForge HTML validation finished with "
-              f"{errors} error(s) and {warnings} warning(s)."
-          )
-          sys.exit(1 if errors else 0)
-          PY
-
-  markdown-lint:
-    name: Markdown lint
-    runs-on: ubuntu-latest
-    timeout-minutes: 7
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2 pinned to immutable commit
-        with:
-          fetch-depth: 2
-          persist-credentials: false
-          show-progress: false
-      - name: Lint changed Markdown or run a full audit
-        run: |
-          set -euo pipefail
-          python3 - <<'PY' > "$RUNNER_TEMP/markdown-files"
-          from __future__ import annotations
-
           import json
           import os
           import subprocess
-          import sys
           from pathlib import Path
 
           event_name = os.environ["GITHUB_EVENT_NAME"]
           event = json.loads(Path(os.environ["GITHUB_EVENT_PATH"]).read_text(encoding="utf-8"))
           candidates: set[str] = set()
 
-          if event_name == "pull_request":
+          def changed_between(base: str, head: str) -> set[str]:
+              if not base or not head or set(base) == {"0"}:
+                  return set()
               result = subprocess.run(
-                  ["git", "diff", "--name-only", "-z", "--diff-filter=ACMRT", "HEAD^1", "HEAD"],
+                  ["git", "diff", "--name-only", "-z", "--diff-filter=ACMRT", base, head],
                   check=True,
                   stdout=subprocess.PIPE,
               )
-              candidates.update(
-                  item.decode("utf-8")
-                  for item in result.stdout.split(b"\0")
-                  if item
+              return {item.decode("utf-8") for item in result.stdout.split(b"\0") if item}
+
+          if event_name == "pull_request":
+              candidates = changed_between(
+                  event["pull_request"]["base"]["sha"],
+                  event["pull_request"]["head"]["sha"],
               )
           elif event_name == "push":
-              for commit in event.get("commits", []):
-                  candidates.update(commit.get("added", []))
-                  candidates.update(commit.get("modified", []))
+              candidates = changed_between(event.get("before", ""), event.get("after", ""))
               if not candidates:
                   result = subprocess.run(
-                      ["git", "diff", "--name-only", "-z", "--diff-filter=ACMRT", "HEAD^1", "HEAD"],
+                      ["git", "ls-files", "-z", "*.md"],
                       check=True,
                       stdout=subprocess.PIPE,
                   )
-                  candidates.update(
-                      item.decode("utf-8")
-                      for item in result.stdout.split(b"\0")
-                      if item
-                  )
+                  candidates = {item.decode("utf-8") for item in result.stdout.split(b"\0") if item}
           else:
               result = subprocess.run(
                   ["git", "ls-files", "-z", "*.md"],
                   check=True,
                   stdout=subprocess.PIPE,
               )
-              candidates.update(
-                  item.decode("utf-8")
-                  for item in result.stdout.split(b"\0")
-                  if item
-              )
+              candidates = {item.decode("utf-8") for item in result.stdout.split(b"\0") if item}
 
           selected = sorted(
               path
@@ -374,19 +312,46 @@ jobs:
               and not path.startswith("Releases/")
               and Path(path).is_file()
           )
+
+          output = Path(os.environ["RUNNER_TEMP"]) / "markdown-files"
+          with output.open("wb") as handle:
+              for path in selected:
+                  handle.write(path.encode("utf-8") + b"\0")
+
+          with Path(os.environ["GITHUB_OUTPUT"]).open("a", encoding="utf-8") as handle:
+              handle.write("has-files=" + ("true" if selected else "false") + "\n")
+
+          print("Markdown files selected:")
           for path in selected:
-              sys.stdout.buffer.write(path.encode("utf-8") + b"\0")
+              print(f" - {path}")
+          if not selected:
+              print(" - none")
           PY
 
-          mapfile -d '' files < "$RUNNER_TEMP/markdown-files"
-          if (( ${#files[@]} == 0 )); then
-            echo "No Markdown files changed; incremental lint passed."
-            exit 0
-          fi
+      - name: Install markdownlint-cli2
+        if: steps.markdown.outputs.has-files == 'true'
+        run: |
+          set -euo pipefail
+          for attempt in 1 2 3; do
+            if npm install \
+              --prefix "$RUNNER_TEMP/markdownlint" \
+              --no-save \
+              --package-lock=false \
+              --ignore-scripts \
+              markdownlint-cli2@0.18.1; then
+              break
+            fi
+            if [[ "$attempt" -eq 3 ]]; then
+              echo "::error::Failed to install markdownlint-cli2 after 3 attempts"
+              exit 1
+            fi
+            sleep $((attempt * 5))
+          done
 
-          printf 'Markdown files selected for lint:\n'
-          printf ' - %s\n' "${files[@]}"
-
+      - name: Lint selected Markdown
+        if: steps.markdown.outputs.has-files == 'true'
+        run: |
+          set -euo pipefail
           cat > "$RUNNER_TEMP/markdownlint-cli2.yaml" <<'YAML'
           config:
             default: true
@@ -401,37 +366,16 @@ jobs:
               punctuation: ".,;:!！?？"
           YAML
 
-          for attempt in 1 2 3; do
-            if npm install --prefix "$RUNNER_TEMP/markdownlint" --no-save --package-lock=false --ignore-scripts markdownlint-cli2@0.18.1; then
-              break
-            fi
-            if [[ "$attempt" -eq 3 ]]; then
-              echo "::error::Failed to install markdownlint-cli2 after 3 attempts"
-              exit 1
-            fi
-            sleep $((attempt * 5))
-          done
-
+          mapfile -d '' files < "$RUNNER_TEMP/markdown-files"
           "$RUNNER_TEMP/markdownlint/node_modules/.bin/markdownlint-cli2" \
             --config "$RUNNER_TEMP/markdownlint-cli2.yaml" \
             "${files[@]}"
 
-  external-link-check:
-    name: External link check
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    if: github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.external_links)
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2 pinned to immutable commit
-        with:
-          fetch-depth: 1
-          persist-credentials: false
-          show-progress: false
-      - name: Probe external links
+      - name: Report no Markdown changes
+        if: steps.markdown.outputs.has-files != 'true'
         run: |
           set -euo pipefail
-          python3 .github/ci/validate_repository.py links --external-links
+          echo "No Markdown files require linting."
 
   workflow-lint:
     name: Workflow lint
@@ -439,12 +383,13 @@ jobs:
     timeout-minutes: 10
     steps:
       - name: Checkout repository
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2 pinned to immutable commit
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           fetch-depth: 1
           persist-credentials: false
           show-progress: false
-      - name: Install actionlint with retries
+
+      - name: Install actionlint
         run: |
           set -euo pipefail
           mkdir -p "$RUNNER_TEMP/bin"
@@ -459,36 +404,56 @@ jobs:
             sleep $((attempt * 5))
           done
           echo "$RUNNER_TEMP/bin" >> "$GITHUB_PATH"
-      - name: Run actionlint and workflow security checks
+
+      - name: Validate workflow syntax and policy
         run: |
           set -euo pipefail
-          actionlint .github/workflows/*.yml
+          actionlint .github/workflows/ci.yml
           python3 .github/ci/validate_repository.py workflow
+
+  external-link-check:
+    name: External link check
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    if: github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.external_links)
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          fetch-depth: 1
+          persist-credentials: false
+          show-progress: false
+
+      - name: Probe external links
+        run: |
+          set -euo pipefail
+          python3 .github/ci/validate_repository.py links --external-links
 
   required-checks:
     name: Required checks
     runs-on: ubuntu-latest
     timeout-minutes: 5
+    if: always()
     needs:
       - repository-validation
-      - metadata-consistency
-      - curseforge-html
+      - release-surface
+      - validator-quality
       - markdown-lint
       - workflow-lint
-    if: always()
     steps:
-      - name: Check required job results
+      - name: Enforce required job results
         run: |
           set -euo pipefail
-          failed=0
+
           declare -A results=(
             [repository-validation]="${{ needs.repository-validation.result }}"
-            [metadata-consistency]="${{ needs.metadata-consistency.result }}"
-            [curseforge-html]="${{ needs.curseforge-html.result }}"
+            [release-surface]="${{ needs.release-surface.result }}"
+            [validator-quality]="${{ needs.validator-quality.result }}"
             [markdown-lint]="${{ needs.markdown-lint.result }}"
             [workflow-lint]="${{ needs.workflow-lint.result }}"
           )
 
+          failed=0
           for job in "${!results[@]}"; do
             result="${results[$job]}"
             echo "$job: $result"
@@ -497,5 +462,4 @@ jobs:
               failed=1
             fi
           done
-
           exit "$failed"
