@@ -28,9 +28,9 @@ defaults:
 
 env:
   PYTHONUNBUFFERED: "1"
-  npm_config_audit: "false"
-  npm_config_fund: "false"
-  npm_config_update_notifier: "false"
+  npm_config_audit: false
+  npm_config_fund: false
+  npm_config_update_notifier: false
   GOTOOLCHAIN: local
 
 jobs:
@@ -62,8 +62,6 @@ jobs:
       matrix:
         check:
           - baseline
-          - metadata
-          - html
           - modlist
           - links
           - hygiene
@@ -80,6 +78,172 @@ jobs:
         run: |
           set -euo pipefail
           python3 .github/ci/validate_repository.py "${{ matrix.check }}"
+
+  release-surface:
+    name: Release surface consistency
+    runs-on: ubuntu-latest
+    timeout-minutes: 7
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          fetch-depth: 1
+          persist-credentials: false
+          show-progress: false
+
+      - name: Validate metadata-bearing docs and CurseForge HTML
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from __future__ import annotations
+
+          import html.parser
+          import json
+          import re
+          import sys
+          import urllib.parse
+          from pathlib import Path
+
+          metadata_path = Path(".github/ci/project-metadata.json")
+          metadata = json.loads(metadata_path.read_text(encoding="utf-8"))
+          required_keys = {
+              "project_name": "project name",
+              "minecraft_version": "Minecraft version",
+              "loader": "loader",
+              "java_version": "Java version",
+              "curseforge_project_id": "CurseForge project ID",
+              "current_documented_release": "current documented release",
+              "minimum_ram": "minimum RAM",
+              "preferred_ram": "preferred RAM",
+          }
+          docs = [
+              Path("README.md"),
+              Path("installation-guide.md"),
+              Path("SUPPORT.md"),
+              Path("CONTRIBUTING.md"),
+              Path("latest-modlist.md"),
+          ]
+          errors = 0
+
+          def error(path: Path, message: str, line: int | None = None) -> None:
+              global errors
+              errors += 1
+              location = f"file={path}"
+              if line is not None:
+                  location += f",line={line}"
+              print(f"::error {location}::{message}")
+
+          def normalize(text: str) -> str:
+              return (
+                  text.replace("&ndash;", "–")
+                  .replace("&#8211;", "–")
+                  .replace("&mdash;", "—")
+                  .replace("&#8212;", "—")
+                  .replace("&nbsp;", " ")
+                  .replace("5GB", "5 GB")
+                  .replace("6–8GB", "6–8 GB")
+                  .replace("6-8 GB", "6–8 GB")
+              )
+
+          def candidates(key: str, value: str) -> list[str]:
+              values = [value]
+              if key == "current_documented_release" and value.startswith("Still Watching "):
+                  short = value.removeprefix("Still Watching ")
+                  values.extend([short, f"Current release {short}", f"Current documented release {short}"])
+              if key == "java_version":
+                  values.extend([f"Java {value}", f"Java `{value}`"])
+              if key in {"minimum_ram", "preferred_ram"}:
+                  values.append(value.replace(" ", ""))
+              if key == "loader":
+                  values.append(value.lower())
+              return values
+
+          for key, label in required_keys.items():
+              if not metadata.get(key):
+                  error(metadata_path, f"Missing metadata key: {key} ({label})")
+
+          for path in docs:
+              if not path.is_file():
+                  error(path, "Missing metadata-bearing document")
+                  continue
+              text = normalize(path.read_text(encoding="utf-8"))
+              for key, label in required_keys.items():
+                  value = metadata.get(key, "")
+                  accepted = candidates(key, value) if value else []
+                  if accepted and not any(candidate in text for candidate in accepted):
+                      error(path, f"Missing metadata value for {label}; expected one of {accepted!r}")
+
+          html_path = Path("curseforge-description.html")
+          if not html_path.is_file():
+              error(html_path, "Missing CurseForge description HTML")
+          else:
+              text = html_path.read_text(encoding="utf-8")
+              normalized = normalize(text)
+
+              class Validator(html.parser.HTMLParser):
+                  forbidden_tags = {"script", "style", "iframe", "object", "embed", "form"}
+
+                  def __init__(self) -> None:
+                      super().__init__(convert_charrefs=True)
+                      self.images = 0
+                      self.links = 0
+
+                  def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+                      tag = tag.lower()
+                      attributes = {name.lower(): value for name, value in attrs}
+                      line, _ = self.getpos()
+                      if tag in self.forbidden_tags:
+                          error(html_path, f"Forbidden HTML tag: <{tag}>", line)
+                      for attribute in ("href", "src"):
+                          value = attributes.get(attribute)
+                          if not value:
+                              continue
+                          if value.startswith("//"):
+                              error(html_path, f"Protocol-relative {attribute} is not allowed: {value}", line)
+                              continue
+                          scheme = urllib.parse.urlparse(value).scheme.lower()
+                          if scheme and scheme not in {"https", "mailto"}:
+                              error(html_path, f"Unsupported {attribute} scheme '{scheme}': {value}", line)
+                      if tag == "img":
+                          self.images += 1
+                          if not attributes.get("src"):
+                              error(html_path, "Image is missing src", line)
+                      if tag == "a":
+                          self.links += 1
+                          if not attributes.get("href"):
+                              error(html_path, "Link is missing href", line)
+
+              parser = Validator()
+              try:
+                  parser.feed(text)
+                  parser.close()
+              except Exception as exc:
+                  error(html_path, f"HTML parser rejected the description: {exc}")
+
+              markers = {
+                  "project name": metadata.get("project_name", ""),
+                  "Minecraft version": metadata.get("minecraft_version", ""),
+                  "loader": metadata.get("loader", ""),
+                  "current release": metadata.get("current_documented_release", ""),
+                  "minimum RAM": metadata.get("minimum_ram", ""),
+                  "preferred RAM": metadata.get("preferred_ram", ""),
+                  "server sponsor link": "https://url-shortener.curseforge.com/AZDOs",
+              }
+              for label, marker in markers.items():
+                  if marker and marker not in normalized:
+                      error(html_path, f"Missing required {label}: {marker}")
+              if re.search(r"\b(?:TODO|FIXME|TBD|LOREM IPSUM|PLACEHOLDER)\b", text, re.IGNORECASE):
+                  error(html_path, "Placeholder text remains in the release-facing description")
+              if "http://" in text.lower():
+                  error(html_path, "Release-facing HTML contains an insecure HTTP URL")
+              if parser.images == 0:
+                  error(html_path, "CurseForge description must contain at least one image")
+              if parser.links == 0:
+                  error(html_path, "CurseForge description must contain at least one link")
+
+          print(f"Release-surface validation finished with {errors} error(s).")
+          sys.exit(1 if errors else 0)
+          PY
 
   markdown-lint:
     name: Markdown lint
@@ -290,6 +454,7 @@ jobs:
     needs:
       - validator-quality
       - repository-validation
+      - release-surface
       - markdown-lint
       - workflow-lint
     steps:
@@ -300,6 +465,7 @@ jobs:
           declare -A results=(
             [validator-quality]="${{ needs.validator-quality.result }}"
             [repository-validation]="${{ needs.repository-validation.result }}"
+            [release-surface]="${{ needs.release-surface.result }}"
             [markdown-lint]="${{ needs.markdown-lint.result }}"
             [workflow-lint]="${{ needs.workflow-lint.result }}"
           )
