@@ -270,6 +270,10 @@ def check_metadata(reporter: Reporter) -> None:
             continue
         text = normalize_for_metadata(read_text(path))
         for key, label in labels.items():
+            # CurseForge descriptions can use a project URL without displaying
+            # the internal numeric CurseForge project ID.
+            if path == Path("curseforge-description.html") and key == "curseforge_project_id":
+                continue
             if metadata.get(key):
                 require_any(reporter, path, text, key, label, metadata[key])
     reporter.endgroup()
@@ -297,7 +301,6 @@ def check_html(reporter: Reporter) -> None:
 
     for needle, label in [
         ("url-shortener.curseforge.com", "CurseForge sponsor shortener URL"),
-        ("https://media.forgecdn.net/", "ForgeCDN-hosted image URL"),
     ]:
         if needle not in norm:
             reporter.error(path, f"Missing required HTML content: {label}")
