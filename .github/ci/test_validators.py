@@ -1,6 +1,7 @@
 """Regression tests for repository and archive validators (stdlib only)."""
 from __future__ import annotations
 
+import contextlib
 import io
 import json
 import os
@@ -92,7 +93,8 @@ class RepositoryValidationTests(unittest.TestCase):
         with mock.patch.object(repository, "ROOT", self.root), \
              mock.patch.object(repository, "load_metadata", return_value={"current_documented_release": "Still Watching V2.0.0"}):
             results = repository.Reporter()
-            repository.check_modlist(results)
+            with contextlib.redirect_stdout(io.StringIO()):
+                repository.check_modlist(results)
         self.assertEqual(results.errors, 1)
 
     def test_modlist_detects_duplicate_names(self) -> None:
@@ -107,7 +109,8 @@ class RepositoryValidationTests(unittest.TestCase):
         with mock.patch.object(repository, "ROOT", self.root), \
              mock.patch.object(repository, "load_metadata", return_value={"current_documented_release": "Still Watching V2.0.0"}):
             results = repository.Reporter()
-            repository.check_modlist(results)
+            with contextlib.redirect_stdout(io.StringIO()):
+                repository.check_modlist(results)
         self.assertEqual(results.errors, 1)
 
     def test_broken_relative_anchor_fails(self) -> None:
@@ -116,7 +119,8 @@ class RepositoryValidationTests(unittest.TestCase):
         with mock.patch.object(repository, "ROOT", self.root), \
              mock.patch.object(repository, "LINK_CHECK_TARGETS", [Path("README.md")]):
             results = repository.Reporter()
-            repository.check_links(results)
+            with contextlib.redirect_stdout(io.StringIO()):
+                repository.check_links(results)
         self.assertEqual(results.errors, 1)
 
     def test_html_rejects_script(self) -> None:
@@ -135,7 +139,8 @@ class RepositoryValidationTests(unittest.TestCase):
         with mock.patch.object(repository, "ROOT", self.root), \
              mock.patch.object(repository, "load_metadata", return_value=data):
             results = repository.Reporter()
-            repository.check_html(results)
+            with contextlib.redirect_stdout(io.StringIO()):
+                repository.check_html(results)
         self.assertGreaterEqual(results.errors, 1)
 
     def test_push_whitespace_diff_uses_event_base(self) -> None:
@@ -150,7 +155,8 @@ class RepositoryValidationTests(unittest.TestCase):
              mock.patch.object(repository, "METADATA_TARGETS", [Path("README.md")]), \
              mock.patch.object(repository, "load_metadata", return_value={"project_name": "Still Watching"}):
             results = repository.Reporter()
-            repository.check_metadata(results)
+            with contextlib.redirect_stdout(io.StringIO()):
+                repository.check_metadata(results)
         self.assertGreater(results.errors, 0)
 
 
