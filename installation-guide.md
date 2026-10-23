@@ -24,6 +24,8 @@ Current documented release: **Still Watching V2.0.0**.
 > [!IMPORTANT]
 > CurseForge is the supported playable source. The GitHub ZIP is **not** the recommended playable modpack installer and is **not** a server pack.
 
+<!-- Separate the two independent GitHub alert blocks. -->
+
 > [!WARNING]
 > V2.0.0 changes Overworld, Nether, End, structure, and mapping systems. A new world is strongly recommended. Back up old worlds before testing the update.
 
