@@ -57,17 +57,31 @@ It checks:
 - required files and directories;
 - project metadata drift;
 - CurseForge-description HTML sanity;
-- mod-list structure;
+- mod-list structure, including the declared entry count and duplicates;
 - internal links;
 - workflow security policy;
-- whitespace errors;
+- commit-range whitespace errors (not just uncommitted worktree changes);
 - suspicious committed secrets;
 - merge-conflict markers;
 - forbidden junk files;
 - oversized files outside expected asset and release paths;
 - dead references to deleted helper scripts.
 
-Markdown linting should also run:
+The Python validator regression suite runs on every push and pull request:
+
+```bash
+python3 -m unittest discover -s .github/ci -p 'test_*.py' -v
+```
+
+Release ZIP structure, unsafe member paths, duplicates, symlinks and current archive CRC are independently checked without extraction:
+
+```bash
+python3 .github/ci/validate_archives.py
+```
+
+A CurseForge manifest is inspected for Minecraft/Forge compatibility **when present**. Missing manifests do not make repository source ZIPs playable or constitute runtime verification.
+
+Markdown linting uses the checked-in `.markdownlint-cli2.yaml` rules for **all maintained Markdown**, rather than only changed files:
 
 ```bash
 npx --yes markdownlint-cli2@0.18.1 "**/*.md" "!Releases/**"
@@ -112,6 +126,12 @@ CI should **not** require:
 Repository CI validates repository claims. It is not a séance that can infer whether eighty third-party components behave perfectly in-game.
 
 ---
+
+## Required Checks
+
+The stable aggregate required status is `Required checks`. It includes repository validation, validator regression tests, Markdown lint, workflow security lint, and release archive integrity. Scheduled third-party link probing remains advisory.
+
+The maintenance workflow does **not** prove that the modpack launches, that third-party mods are compatible, or that Forge servers can start successfully. Only actual Minecraft runtime tests can establish those results.
 
 ## Recommended Branch Protection for Main
 
