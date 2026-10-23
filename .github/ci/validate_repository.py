@@ -10,6 +10,7 @@ from __future__ import annotations
 import argparse
 import html.parser
 import json
+import os
 import re
 import stat
 import subprocess
@@ -269,7 +270,8 @@ def check_metadata(reporter: Reporter) -> None:
             continue
         text = normalize_for_metadata(read_text(path))
         for key, label in labels.items():
-            require_any(reporter, path, text, key, label, metadata[key])
+            if metadata.get(key):
+                require_any(reporter, path, text, key, label, metadata[key])
     reporter.endgroup()
 
 
@@ -310,12 +312,49 @@ def check_html(reporter: Reporter) -> None:
         src = match.group(1)
         if src.startswith("http://"):
             reporter.error(path, f"Inline image URL must use HTTPS: {src}")
-    parser = html.parser.HTMLParser(convert_charrefs=True)
+    class DescriptionParser(html.parser.HTMLParser):
+        """Basic HTML policy, not a browser rendering or CurseForge sanitizer test."""
+        blocked_tags = {"script", "style", "iframe", "object", "embed", "form"}
+
+        def __init__(self) -> None:
+            super().__init__(convert_charrefs=True)
+            self.links = 0
+            self.images = 0
+
+        def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+            line, _ = self.getpos()
+            tag = tag.lower()
+            values = {key.lower(): value for key, value in attrs}
+            if tag in self.blocked_tags:
+                reporter.error(path, f"Forbidden HTML tag: <{tag}>", line)
+            for attribute in ("href", "src"):
+                value = values.get(attribute)
+                if not value:
+                    continue
+                scheme = urllib.parse.urlparse(value).scheme.lower()
+                if value.startswith("//") or (scheme and scheme not in {"https", "mailto"}):
+                    reporter.error(path, f"Unsafe {attribute} URL: {value}", line)
+                if tag == "img" and attribute == "src" and scheme != "https":
+                    reporter.error(path, f"Image source must use HTTPS: {value}", line)
+            if tag == "img":
+                self.images += 1
+                if not values.get("src"):
+                    reporter.error(path, "Image missing src", line)
+            if tag == "a":
+                self.links += 1
+                if not values.get("href"):
+                    reporter.error(path, "Link missing href", line)
+
+    parser = DescriptionParser()
     try:
         parser.feed(text)
         parser.close()
-    except Exception as exc:  # pragma: no cover - html.parser is forgiving, but keep annotation useful.
+    except Exception as exc:
         reporter.error(path, f"HTML parser rejected the description: {exc}")
+    if not parser.images:
+        reporter.error(path, "CurseForge description must include an image")
+    if not parser.links:
+        reporter.error(path, "CurseForge description must include a link")
     reporter.endgroup()
 
 
@@ -375,6 +414,11 @@ def check_modlist(reporter: Reporter) -> None:
         row_count += 1
     if row_count == 0:
         reporter.error(path, "Modlist table has no mod rows")
+    declared = re.search(r"\*\*Documented entries:\*\*\s*(\d+)", text)
+    if declared is None:
+        reporter.error(path, "Missing documented modlist entry count")
+    elif row_count != int(declared.group(1)):
+        reporter.error(path, f"Documented entry count {declared.group(1)} differs from {row_count} rows")
     reporter.endgroup()
 
 
@@ -499,9 +543,41 @@ def check_links(reporter: Reporter, external: bool = False) -> None:
     reporter.endgroup()
 
 
+def git_diff_check_arguments() -> list[str]:
+    """Compare CI's actual commit range instead of an always-clean worktree."""
+    event_name = os.environ.get("GITHUB_EVENT_NAME", "")
+    event_path = os.environ.get("GITHUB_EVENT_PATH", "")
+    event = {}
+    if event_path and Path(event_path).is_file():
+        event = json.loads(Path(event_path).read_text(encoding="utf-8"))
+
+    if event_name == "pull_request" and event.get("pull_request"):
+        base = event["pull_request"]["base"].get("sha")
+        if base:
+            merge_base = subprocess.run(
+                ["git", "merge-base", base, "HEAD"], cwd=ROOT, text=True,
+                stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=True,
+            ).stdout.strip()
+            return [merge_base, "HEAD"]
+
+    if event_name == "push":
+        before = event.get("before", "")
+        if before and before != "0" * 40:
+            return [before, "HEAD"]
+
+    parent = subprocess.run(
+        ["git", "rev-parse", "--verify", "HEAD^"], cwd=ROOT,
+        text=True, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL,
+    )
+    return [parent.stdout.strip(), "HEAD"] if parent.returncode == 0 else ["--root", "HEAD"]
+
+
 def check_hygiene(reporter: Reporter) -> None:
     reporter.group("Git whitespace")
-    diff = subprocess.run(["git", "diff", "--check"], cwd=ROOT, text=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+    diff = subprocess.run(
+        ["git", "diff", "--check", *git_diff_check_arguments()],
+        cwd=ROOT, text=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
+    )
     if diff.returncode != 0:
         for line in diff.stdout.splitlines():
             reporter.error("git diff --check", line)
