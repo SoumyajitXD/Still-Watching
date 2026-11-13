@@ -86,6 +86,23 @@ That is the clean path. Save experiments for after the pack actually launches.
 
 ---
 
+## Preparing for V2.0.1 (Not Yet a Verified Public Release)
+
+The proposed V2.0.1 list adds **Zepholume Shaders** and **Configured** and removes **Chloride** and **TACZ: Durability**. As of November 13, 2026, **V2.0.0 is still the latest verified public CurseForge release**. Do not assemble a supposed V2.0.1 install from repository source files.
+
+Once an official V2.0.1 package becomes available:
+
+1. Back up your V2.0.0 profile, worlds, and settings.
+2. Install the exact CurseForge version into a fresh profile first.
+3. Select one optional shader at a time; Zepholume is not required for gameplay.
+4. Use Configured only with settings exposed by compatible mods.
+5. Do not expect Chloride or TACZ: Durability in the proposed V2.0.1 content. Embeddium and the core TaCZ gun mod remain.
+6. Test a disposable world and a copy of any existing world before replacing a working profile.
+7. Verify the Forge 1.20.1 dependencies, especially FTB entries displayed with NeoForge in the title.
+
+A list comparison does **not** prove the update preserves configs, world behavior, or performance. See the [changelog](./CHANGELOG.md) and [content inventory](./latest-modlist.md).
+
+---
 ## Updating from V1.1.2
 
 The safest migration is a fresh profile, not an overwrite.

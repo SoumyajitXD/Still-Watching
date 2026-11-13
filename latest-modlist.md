@@ -1,6 +1,8 @@
 # Modlist
 
-**Version:** Still Watching V2.0.0 (latest documented release)
+**Version:** Still Watching V2.0.1 (proposed content; publication not verified)
+
+**Current documented release:** Still Watching V2.0.0 (latest verified public CurseForge file)
 
 - **Minecraft:** `1.20.1`
 - **Loader:** Forge
@@ -10,7 +12,7 @@
 - **Documented entries:** 80 mods, libraries, shaders, and resource packs
 
 > [!NOTE]
-> This is the repository-maintained V2.0.0 content list. CurseForge remains the source of truth for the exact files bundled in a downloadable release.
+> This is the proposed V2.0.1 content list supplied for documentation. The newest verified public CurseForge file is V2.0.0. The list does not prove that V2.0.1 is built, tested, or published; CurseForge remains the source of truth for exact bundled files.
 
 | Name | CurseForge |
 | --- | --- |
@@ -53,8 +55,6 @@
 | 👻 Hysteria Shaders (by ElocinDev) | [CurseForge](https://www.curseforge.com/minecraft/shaders/hysteria-shaders) |
 | Cristel Lib (by Cristelknight) | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/cristel-lib) |
 | Fresh Animations: Extensions (by FreshLX) | [CurseForge](https://www.curseforge.com/minecraft/texture-packs/fresh-animations-extensions) |
-| Chloride (Previously Embeddium++/Sodium++) (by SrRapero720) | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/chloride) |
-| TACZ: Durability (Timeless and Classics Guns) (by jeducklet) | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/tacz-durability) |
 | Valhelsia Furniture (by ValhelsiaTeam) | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/valhelsia-furniture) |
 | Architectury API (by shedaniel) | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/architectury-api) |
 | [ETF] Entity Texture Features - [Fabric & Forge] (by Traben) | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/entity-texture-features-fabric) |
@@ -67,6 +67,7 @@
 | BisectHosting Server Integration Menu [FORGE] (by BisectHosting) | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/bisecthosting-server-integration-menu-forge) |
 | Just Zoom (by Keksuccino) | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/just-zoom) |
 | The Midnight Lurker (by Voxla) | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/the-midnight-lurker) |
+| Zepholume Shaders (by Soumyajit) | [CurseForge](https://www.curseforge.com/minecraft/shaders/zepholume-shaders) |
 | Incendium (by Starmute) | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/incendium) |
 | Realm RPG: Fallen Adventurers (by NoCube) | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/realm-rpg-fallen-adventurers) |
 | Dungeons and Taverns (by Nova_Wostra) | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/dungeons-and-taverns) |
@@ -91,10 +92,28 @@
 | Presence Footsteps (Forge) (by Paint_Ninja) | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/presence-footsteps-forge) |
 | Cave Dweller Reimagined (by idk_someguy) | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/cave-dweller-reimagined) |
 | [EMF] Entity Model Features [Fabric & Forge] (by Traben) | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/entity-model-features) |
+| Configured (by MrCrayfish) | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/configured) |
 | EnhancedVisuals (by CreativeMD) | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/enhancedvisuals) |
 | FTB XMod Compat (by FTB) | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/ftb-xmod-compat) |
 | FancyMenu (by Keksuccino) | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/fancymenu) |
 
+## V2.0.1 Proposed Changes from V2.0.0
+
+### Added
+
+- [Zepholume Shaders](https://www.curseforge.com/minecraft/shaders/zepholume-shaders) (by Soumyajit)
+- [Configured](https://www.curseforge.com/minecraft/mc-mods/configured) (by MrCrayfish)
+
+### Removed
+
+- [Chloride](https://www.curseforge.com/minecraft/mc-mods/chloride) (previously Embeddium++/Sodium++)
+- [TACZ: Durability](https://www.curseforge.com/minecraft/mc-mods/tacz-durability)
+
+**Net change:** +2 / -2 = **80 entries** including mods, libraries, shaders, and resource packs. No world-generation entries changed in this list comparison. The final distributable manifest and runtime compatibility remain unverified.
+
+**Verify before publishing:** FTB Teams, FTB Quests, and FTB Library have "NeoForge" in their displayed names. Check the bundled JARs themselves for **Forge 1.20.1** compatibility; project labels alone do not determine loader support.
+
+---
 ## V2.0.0 Changes from V1.1.2
 
 ### Added

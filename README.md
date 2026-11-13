@@ -22,7 +22,7 @@
 
 <p align="center">
   <strong><a href="https://www.curseforge.com/minecraft/modpacks/still-watching/files">Install on CurseForge</a></strong>
-  · <a href="./CHANGELOG.md">V2.0.0 Changelog</a>
+  · <a href="./CHANGELOG.md">Release Notes (V2.0.1 preview)</a>
   · <a href="./installation-guide.md">Installation Guide</a>
   · <a href="./docs/server-pack-guide.md">Server Pack Guide</a>
   · <a href="./latest-modlist.md">Mod List</a>
@@ -41,6 +41,22 @@
 
 ---
 
+## V2.0.1 Content Update (Prepared, Not Yet Published)
+
+The **V2.0.1 content list is prepared**, but the latest verified public CurseForge download is **V2.0.0**. The repository ZIP is not a playable modpack installer.
+
+The proposed V2.0.1 list keeps **80 entries** while making four changes:
+
+- **Added:** [Zepholume Shaders](https://www.curseforge.com/minecraft/shaders/zepholume-shaders), an optional sixth shader-pack choice.
+- **Added:** [Configured](https://www.curseforge.com/minecraft/mc-mods/configured), offering settings menus for supported mods.
+- **Removed:** Chloride; **Embeddium** remains.
+- **Removed:** TACZ: Durability; **Timeless and Classics Zero Guns** remains.
+
+No world-generation entries were added or removed in the supplied comparison. This **does not prove** unchanged configuration files or safe in-place migration. Back up your profile and worlds, then verify the eventual CurseForge ZIP and its Forge-compatible dependencies.
+
+See the [V2.0.1 changelog](./CHANGELOG.md) and [proposed modlist](./latest-modlist.md).
+
+---
 ## V2.0.0 Is a Major Rebuild
 
 Still Watching V2.0.0 is not V1.1.2 with a larger version number stapled to it. The pack has been rebuilt around four priorities:
@@ -74,7 +90,7 @@ This is not a kitchen-sink pack wearing a cheap horror mask. It is built to make
 | **Atmosphere first** | Fog, sound physics, footsteps, ambience, shaders, resource packs, and visual stress carry as much weight as raw combat. |
 | **World-scale exploration** | Terralith and Tectonic reshape the Overworld; Incendium and Nullscape overhaul the Nether and End. |
 | **Structures with risk** | Dungeons and Taverns, Explorify, and Towns and Towers make travel more rewarding and less polite. |
-| **Performance foundations** | Embeddium, Chloride, ImmediatelyFast, FerriteCore, ModernFix, and FPS Reducer reduce avoidable rendering and memory waste. |
+| **Performance foundations** | Embeddium, ImmediatelyFast, FerriteCore, ModernFix, and FPS Reducer remain in the proposed V2.0.1 performance stack. Actual results depend on hardware and settings. |
 | **Multiplayer-ready** | Voice chat, teams, quests, server guidance, and strict version matching support private multiplayer sessions. |
 
 ---
@@ -85,7 +101,8 @@ This is not a kitchen-sink pack wearing a cheap horror mask. It is built to make
 | --- | --- |
 | **Project** | Still Watching |
 | **Creator** | Soumyajit |
-| **Current documented release** | Still Watching V2.0.0 |
+| **Current documented public release** | Still Watching V2.0.0 |
+| **Next documented content update** | Still Watching V2.0.1 (prepared; not publicly verified) |
 | **Minecraft** | `1.20.1` |
 | **Loader** | Forge |
 | **Java** | Java `17` if the launcher or server asks |
@@ -99,7 +116,7 @@ This is not a kitchen-sink pack wearing a cheap horror mask. It is built to make
 
 ## Content Snapshot
 
-For the complete repository-maintained list, read [`latest-modlist.md`](./latest-modlist.md).
+For the proposed V2.0.1 content list, read [`latest-modlist.md`](./latest-modlist.md). The table below describes that selection, **not** a verified downloadable V2.0.1 archive.
 
 | Category | Examples |
 | --- | --- |
@@ -108,8 +125,8 @@ For the complete repository-maintained list, read [`latest-modlist.md`](./latest
 | **Structures** | Dungeons and Taverns, Explorify, Towns and Towers |
 | **Atmosphere and sound** | AmbientSounds 6, Presence Footsteps, Sound Physics Remastered, EnhancedVisuals, Cave Dweller Sound Overhaul |
 | **Multiplayer and utility** | Simple Voice Chat, FTB Teams, FTB Quests, Xaero's Minimap, Xaero's World Map, Corpse, JEI |
-| **Performance** | Embeddium, Chloride, ImmediatelyFast, FerriteCore, ModernFix, FPS Reducer |
-| **Shaders and resources** | Complementary Unbound, Complementary Reimagined, Hysteria, Insanity, Spooklementary, Fresh Animations |
+| **Performance (proposed V2.0.1)** | Embeddium, ImmediatelyFast, FerriteCore, ModernFix, FPS Reducer |
+| **Shaders and resources (proposed V2.0.1)** | Zepholume Shaders, Complementary Unbound, Complementary Reimagined, Hysteria, Insanity, Spooklementary, Fresh Animations |
 
 ---
 
@@ -185,9 +202,9 @@ Logs matter. Vibes are not diagnostics.
 | Path | Purpose |
 | --- | --- |
 | [`README.md`](./README.md) | GitHub landing page. |
-| [`CHANGELOG.md`](./CHANGELOG.md) | V2.0.0 release notes and documented release history. |
+| [`CHANGELOG.md`](./CHANGELOG.md) | V2.0.1 update preview, V2.0.0 release notes, and release history. |
 | [`installation-guide.md`](./installation-guide.md) | Install, migrate, back up, update, and troubleshoot. |
-| [`latest-modlist.md`](./latest-modlist.md) | Current mod, shader, resource-pack, and library list. |
+| [`latest-modlist.md`](./latest-modlist.md) | Proposed V2.0.1 mod, shader, resource-pack, and library inventory. |
 | [`docs/server-pack-guide.md`](./docs/server-pack-guide.md) | Conservative dedicated-server guidance. |
 | [`curseforge-description.html`](./curseforge-description.html) | CurseForge description source. |
 | [`SUPPORT.md`](./SUPPORT.md) | Support boundaries and evidence checklist. |

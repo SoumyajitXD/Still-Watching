@@ -27,6 +27,13 @@ Install from CurseForge when testing playable behavior. The GitHub ZIP is reposi
 
 ---
 
+## V2.0.1 Documentation Preview
+
+The proposed V2.0.1 list adds **Zepholume Shaders** and **Configured** and removes **Chloride** and **TACZ: Durability**, retaining 80 entries. The latest **verified public** release remains V2.0.0. Do not equate documentation with publication, testing, or runtime qualification.
+
+When preparing future release metadata, compare the final CurseForge manifest against [latest-modlist.md](./latest-modlist.md), verify the Forge 1.20.1 dependencies (including FTB projects displayed as NeoForge), and update the current-public-release baseline **only after** publication.
+
+---
 ## V2.0.0 Context
 
 Contributions must account for the current V2.0.0 direction:

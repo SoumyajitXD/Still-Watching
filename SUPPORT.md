@@ -31,6 +31,15 @@ Install playable releases from CurseForge:
 
 ---
 
+## V2.0.1 Content Preview: Support Boundaries
+
+The [proposed V2.0.1 list](./latest-modlist.md) is documented, but the latest **verified public** CurseForge release remains V2.0.0.
+
+The preview adds **Zepholume Shaders** and **Configured** and removes **Chloride** and **TACZ: Durability**. Embeddium and the core Timeless and Classics Zero Guns mod remain. Those optional removals alone are not a bug.
+
+Always report the **actual installed CurseForge file/version** rather than relying on a documentation preview. No V2.0.1 performance or server compatibility has been verified in this repository update.
+
+---
 ## V2.0.0 Migration Support
 
 V2.0.0 changes the Overworld, Nether, End, structure set, map system, and optimization stack.

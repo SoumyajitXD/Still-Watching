@@ -28,6 +28,19 @@ This guide is deliberately conservative. A server that starts cleanly and lets p
 
 ---
 
+## Planned V2.0.1 Compatibility Note
+
+The V2.0.1 content update is documented but **not a confirmed CurseForge server release**. It adds Zepholume Shaders and Configured and removes Chloride and TACZ: Durability.
+
+- **Do not upload shader packs to a dedicated server's mod directory.** They are client-side visual resources.
+- Do not assume Configured must be on the dedicated server; verify its distribution-side requirements and dependencies for the selected JAR.
+- Keep core Embeddium and Timeless and Classics Zero Guns distinct from the removed optional add-ons.
+- Verify that the exact FTB Teams, FTB Quests, and FTB Library artifacts support Forge 1.20.1; their displayed project titles mention NeoForge.
+- Do not claim a V2.0.1 server pack exists until CurseForge confirms one. Test startup, joining, world generation, dimension travel, and voice chat using the eventual official files.
+
+V2.0.0 instructions remain the supported public-release baseline until V2.0.1 is actually available.
+
+---
 ## Best Setup Path
 
 | Rank | Path | Use when |

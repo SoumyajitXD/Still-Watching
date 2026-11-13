@@ -13,7 +13,8 @@ Playable files live on CurseForge. If this file and CurseForge disagree about a 
 | Field | Value |
 | --- | --- |
 | Project | Still Watching |
-| Current documented release | Still Watching V2.0.0 |
+| Current verified public release | Still Watching V2.0.0 |
+| Next documented content update | Still Watching V2.0.1 (prepared; publication not verified) |
 | Minecraft | `1.20.1` |
 | Loader | Forge |
 | Java | Java `17` where required |
@@ -25,6 +26,40 @@ Playable files live on CurseForge. If this file and CurseForge disagree about a 
 
 ---
 
+## Still Watching V2.0.1 — Content Update (Prepared, Not Yet Published)
+
+> [!IMPORTANT]
+> This section documents the **proposed V2.0.1 modlist provided for this update**. As of November 13, 2026, official CurseForge files still list V2.0.0 as the latest public release. Documentation changes do **not** publish a playable pack or prove that its client, server, or performance behavior has been tested.
+
+### Summary
+
+V2.0.1 adds one shader pack and one configuration utility while removing two add-ons. The documented inventory remains **80 entries**: **2 added**, **2 removed** versus V2.0.0.
+
+### Added
+
+- **[Zepholume Shaders](https://www.curseforge.com/minecraft/shaders/zepholume-shaders)** (by Soumyajit): an additional optional shader-pack choice alongside the five existing options.
+- **[Configured](https://www.curseforge.com/minecraft/mc-mods/configured)** (by MrCrayfish): in-game configuration interface for supported mods.
+
+### Removed
+
+- **[Chloride](https://www.curseforge.com/minecraft/mc-mods/chloride)** (previously Embeddium++/Sodium++): optional rendering-related add-on removed; the main **Embeddium** mod remains.
+- **[TACZ: Durability](https://www.curseforge.com/minecraft/mc-mods/tacz-durability)**: separate gun durability add-on removed; the core **Timeless and Classics Zero Guns** mod remains.
+
+### Retained
+
+- The horror roster, sound mods, survival tools, maps, firearms, quests, voice chat, and existing structures remain in the proposed list.
+- **Terralith, Tectonic, Incendium, Nullscape, Lithostitched**, and the other world-generation entries remain listed.
+- The existing five shader options remain listed, bringing the proposed selection to six with Zepholume.
+
+### Update and Validation Notes
+
+- Back up important worlds, configs, and the old profile before installing a future V2.0.1 release.
+- No world-generation mods were added or removed, but this does **not** establish that configurations or behavior are unchanged.
+- Verify actual Forge 1.20.1 JAR compatibility, particularly FTB project labels that say "NeoForge."
+- Validate the final CurseForge manifest, client boot, new-world creation, shader selection, server-side dependencies, and joining before claiming release readiness.
+- There are no measured FPS, memory, load-time, crash-rate, or compatibility gains to report from the list comparison.
+
+---
 ## Still Watching V2.0.0
 
 Still Watching V2.0.0 is a major content, world-generation, exploration, mapping, and performance overhaul. It replaces several V1.1.2 systems instead of piling more mods onto the same foundation and hoping the loading screen forgives us.
