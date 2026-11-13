@@ -114,6 +114,7 @@
 **Verify before publishing:** FTB Teams, FTB Quests, and FTB Library have "NeoForge" in their displayed names. Check the bundled JARs themselves for **Forge 1.20.1** compatibility; project labels alone do not determine loader support.
 
 ---
+
 ## V2.0.0 Changes from V1.1.2
 
 ### Added

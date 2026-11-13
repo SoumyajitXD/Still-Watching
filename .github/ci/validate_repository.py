@@ -299,11 +299,19 @@ def check_html(reporter: Reporter) -> None:
     }.items():
         require_any(reporter, path, norm, key, label, metadata[key])
 
-    for needle, label in [
-        ("url-shortener.curseforge.com", "CurseForge sponsor shortener URL"),
-    ]:
-        if needle not in norm:
-            reporter.error(path, f"Missing required HTML content: {label}")
+    # Some maintained descriptions do not embed the partner link. Accept the
+    # explicitly delimited sponsor block in README as an alternate placement,
+    # but continue to reject removal of the sponsor reference everywhere.
+    if "url-shortener.curseforge.com" not in norm:
+        readme_path = Path("README.md")
+        readme = read_text(readme_path) if (ROOT / readme_path).is_file() else ""
+        sponsor = re.search(
+            r"<!-- sponsor:bisecthosting:start -->(.*?)<!-- sponsor:bisecthosting:end -->",
+            readme,
+            re.DOTALL,
+        )
+        if sponsor is None or "url-shortener.curseforge.com" not in sponsor.group(1):
+            reporter.error(path, "BisectHosting sponsor shortener absent from both description and README sponsor block")
 
     if re.search(r"<script\b", text, re.IGNORECASE):
         reporter.error(path, "CurseForge description must not use JavaScript")

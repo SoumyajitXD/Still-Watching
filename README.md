@@ -57,6 +57,7 @@ No world-generation entries were added or removed in the supplied comparison. Th
 See the [V2.0.1 changelog](./CHANGELOG.md) and [proposed modlist](./latest-modlist.md).
 
 ---
+
 ## V2.0.0 Is a Major Rebuild
 
 Still Watching V2.0.0 is not V1.1.2 with a larger version number stapled to it. The pack has been rebuilt around four priorities:

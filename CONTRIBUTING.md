@@ -34,6 +34,7 @@ The proposed V2.0.1 list adds **Zepholume Shaders** and **Configured** and remov
 When preparing future release metadata, compare the final CurseForge manifest against [latest-modlist.md](./latest-modlist.md), verify the Forge 1.20.1 dependencies (including FTB projects displayed as NeoForge), and update the current-public-release baseline **only after** publication.
 
 ---
+
 ## V2.0.0 Context
 
 Contributions must account for the current V2.0.0 direction:

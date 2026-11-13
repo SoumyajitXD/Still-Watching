@@ -41,6 +41,7 @@ The V2.0.1 content update is documented but **not a confirmed CurseForge server 
 V2.0.0 instructions remain the supported public-release baseline until V2.0.1 is actually available.
 
 ---
+
 ## Best Setup Path
 
 | Rank | Path | Use when |

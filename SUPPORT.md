@@ -40,6 +40,7 @@ The preview adds **Zepholume Shaders** and **Configured** and removes **Chloride
 Always report the **actual installed CurseForge file/version** rather than relying on a documentation preview. No V2.0.1 performance or server compatibility has been verified in this repository update.
 
 ---
+
 ## V2.0.0 Migration Support
 
 V2.0.0 changes the Overworld, Nether, End, structure set, map system, and optimization stack.

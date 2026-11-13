@@ -123,6 +123,36 @@ class RepositoryValidationTests(unittest.TestCase):
                 repository.check_links(results)
         self.assertEqual(results.errors, 1)
 
+    def test_html_accepts_sponsor_in_readme_block(self) -> None:
+        metadata = {
+            "project_name": "Still Watching", "minecraft_version": "1.20.1",
+            "loader": "Forge", "current_documented_release": "Still Watching V2.0.0",
+            "minimum_ram": "5 GB", "preferred_ram": "6–8 GB",
+        }
+        html = (
+            "Still Watching 1.20.1 Forge Still Watching V2.0.0 5 GB 6–8 GB "
+            '<img src="https://media.forgecdn.net/example.png">'
+            '<a href="https://www.curseforge.com">Install</a>'
+        )
+        (self.root / "curseforge-description.html").write_text(html, encoding="utf-8")
+        (self.root / "README.md").write_text(
+            "<!-- sponsor:bisecthosting:start -->\n"
+            "[Partner](https://url-shortener.curseforge.com/AZDOs)\n"
+            "<!-- sponsor:bisecthosting:end -->\n",
+            encoding="utf-8",
+        )
+        with mock.patch.object(repository, "ROOT", self.root), \
+             mock.patch.object(repository, "load_metadata", return_value=metadata):
+            result = repository.Reporter()
+            with contextlib.redirect_stdout(io.StringIO()):
+                repository.check_html(result)
+            self.assertEqual(result.errors, 0)
+            (self.root / "README.md").write_text("No partner block\n", encoding="utf-8")
+            missing = repository.Reporter()
+            with contextlib.redirect_stdout(io.StringIO()):
+                repository.check_html(missing)
+            self.assertGreater(missing.errors, 0)
+
     def test_html_rejects_script(self) -> None:
         data = {
             "project_name": "Still Watching", "minecraft_version": "1.20.1",

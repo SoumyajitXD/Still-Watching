@@ -103,6 +103,7 @@ Once an official V2.0.1 package becomes available:
 A list comparison does **not** prove the update preserves configs, world behavior, or performance. See the [changelog](./CHANGELOG.md) and [content inventory](./latest-modlist.md).
 
 ---
+
 ## Updating from V1.1.2
 
 The safest migration is a fresh profile, not an overwrite.
