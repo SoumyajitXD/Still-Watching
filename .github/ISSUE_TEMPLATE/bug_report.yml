@@ -11,7 +11,7 @@ body:
       value: |
         Use this for reproducible gameplay, content, quest, worldgen, mob, item, audio, visual, or config bugs.
 
-        Do not use this for crashes, install/update/first-launch failures, multiplayer-only problems, or pure performance issues. Those have their own templates. Bad reports waste time; useful reports have versions, steps, context, and logs when relevant.
+        Do not use this for crashes, install/update/first-launch failures, multiplayer-only problems, or pure performance issues. Those have their own templates. Include the version, steps, context and logs when relevant.
 
   - type: checkboxes
     id: preflight
@@ -31,7 +31,7 @@ body:
     id: severity
     attributes:
       label: Severity
-      description: Pick the impact, not the mood.
+      description: Choose the impact on gameplay or saved data.
       options:
         - Data loss
         - Progression blocker
@@ -90,7 +90,7 @@ body:
     attributes:
       label: Still Watching version
       description: Use the CurseForge file/version shown by your launcher.
-      placeholder: "Example: V1.0.x / CurseForge file name"
+      placeholder: "Example: V2.0.0 / CurseForge file name"
     validations:
       required: true
 
@@ -184,7 +184,7 @@ body:
     id: steps-to-reproduce
     attributes:
       label: Steps to reproduce
-      description: Give exact steps. If the steps are vague, the issue is dead on arrival.
+      description: Give exact steps. Write steps another player can follow to reproduce it.
       placeholder: |
         1. Create/load world
         2. Go to...
