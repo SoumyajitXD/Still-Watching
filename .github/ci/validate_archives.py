@@ -11,7 +11,7 @@ import re
 import stat
 import sys
 import zipfile
-from pathlib import Path, PurePosixPath
+from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 ARCHIVES = ROOT / "Releases"
@@ -22,15 +22,16 @@ MAX_MANIFEST_BYTES = 1024 * 1024
 
 
 def unsafe_member_name(name: str) -> bool:
-    """Reject absolute, traversal, and Windows-ambiguous entry names."""
-    path = PurePosixPath(name)
+    """Reject absolute, traversal, and ambiguous ZIP member names."""
+    # Only one trailing slash is allowed, for a directory entry.
+    parts = name[:-1].split("/") if name.endswith("/") else name.split("/")
     return (
         not name
         or name.startswith(("/", "\\"))
         or "\\" in name
         or "\x00" in name
         or ":" in name.split("/")[0]
-        or ".." in path.parts
+        or any(part in ("", ".", "..") for part in parts)
     )
 
 
