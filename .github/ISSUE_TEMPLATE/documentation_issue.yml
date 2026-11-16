@@ -29,7 +29,7 @@ body:
     id: affected-document-page
     attributes:
       label: Affected document or page
-      placeholder: "Example: README.md / installation-guide.md / CurseForge description / latest-modlist.html"
+      placeholder: "Example: README.md / installation-guide.md / CurseForge description / latest-modlist.md"
     validations:
       required: true
 
