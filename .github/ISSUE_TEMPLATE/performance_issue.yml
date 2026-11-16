@@ -58,7 +58,7 @@ body:
     attributes:
       label: Still Watching version
       description: Use the CurseForge file/version shown by your launcher or server pack.
-      placeholder: "Example: V1.0.x / CurseForge file name"
+      placeholder: "Example: V2.0.0 / CurseForge file name"
     validations:
       required: true
 
@@ -147,7 +147,7 @@ body:
     id: measurements
     attributes:
       label: Measurements
-      description: Fill the lines that apply. Numbers, not vibes.
+      description: Fill in the measurements you have. Write 'Unknown' for values you could not measure.
       placeholder: |
         FPS normal/problem:
         TPS:
