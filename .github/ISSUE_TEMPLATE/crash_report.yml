@@ -68,7 +68,7 @@ body:
     attributes:
       label: Still Watching version
       description: Use the CurseForge file/version shown by your launcher or server pack.
-      placeholder: "Example: V1.0.x / CurseForge file name"
+      placeholder: "Example: V2.0.0 / CurseForge file name"
     validations:
       required: true
 
