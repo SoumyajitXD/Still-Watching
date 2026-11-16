@@ -54,7 +54,7 @@ Before reporting an update problem:
 5. Test migrated worlds only from disposable copies.
 6. Remember that JourneyMap data does not automatically transfer to Xaero's maps.
 
-Terrain seams and different generation in unexplored chunks are expected consequences of migrating a world across a major generator overhaul. That is not a bug the support team can erase with motivational speaking.
+Terrain seams and changes in unexplored chunks can result from migrating an old world across a major world-generation update. Restoring a backup or starting a new world may be the only reliable options.
 
 ---
 
@@ -87,7 +87,7 @@ Open an issue for:
 - suspicious downloads or unsafe public references;
 - attribution, credit, or license-scope problems.
 
-Good support requests provide enough evidence to act. Bad requests just scream into the cave and wait for Java to confess.
+A useful report includes enough information for someone else to reproduce the failure.
 
 ---
 
@@ -105,7 +105,7 @@ Do not open support issues for:
 - crash screenshots without logs;
 - vague reports such as `fix`, `broken`, `lag`, or `doesn't work`.
 
-Those are not actionable support requests. They are fog noises with a keyboard.
+Include a clean-install reproduction and relevant logs before filing an issue.
 
 ---
 
@@ -159,7 +159,7 @@ Attach long logs or use a paste service. Do not paste a wall of log sludge into 
 
 The latest CurseForge release gets primary support. Older releases receive best-effort help for documentation, migration, and known issues.
 
-If a problem is already fixed in a newer release, update first. Maintaining old ghosts forever is not support; it is necromancy with version numbers.
+When a newer release fixes the problem, test that release before reporting the older behavior.
 
 ---
 
