@@ -63,7 +63,7 @@ V2.0.1 adds one shader pack and one configuration utility while removing two add
 
 ## Still Watching V2.0.0
 
-Still Watching V2.0.0 is a major content, world-generation, exploration, mapping, and performance overhaul. It replaces several V1.1.2 systems instead of piling more mods onto the same foundation and hoping the loading screen forgives us.
+Still Watching V2.0.0 revises world generation, exploration, maps, mod selection and the performance stack. Several V1.1.2 systems were replaced rather than carried into the new version.
 
 ### Highlights
 
