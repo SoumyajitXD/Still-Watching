@@ -60,7 +60,7 @@ See the [V2.0.1 changelog](./CHANGELOG.md) and [proposed modlist](./latest-modli
 
 ## V2.0.0 Is a Major Rebuild
 
-Still Watching V2.0.0 is not V1.1.2 with a larger version number stapled to it. The pack has been rebuilt around four priorities:
+V2.0.0 rebuilds the pack around four priorities:
 
 - **more deliberate horror encounters;**
 - **larger and more varied exploration;**
@@ -69,7 +69,7 @@ Still Watching V2.0.0 is not V1.1.2 with a larger version number stapled to it. 
 
 The world-generation stack now combines **Terralith**, **Tectonic**, **Nullscape**, **Incendium**, **Lithostitched**, **Dungeons and Taverns**, **Explorify**, and **Towns and Towers**. The pack also adds **The One Who Watches**, replaces JourneyMap with **Xaero's Minimap** and **Xaero's World Map**, and introduces **ImmediatelyFast**, **FerriteCore**, **ModernFix**, and **FPS Reducer**.
 
-A new world is strongly recommended. Mixing V1.1.2 terrain with V2.0.0 generation is how chunk borders become modern art.
+A new world is strongly recommended. Old saves can develop abrupt chunk borders where new terrain generation meets existing areas.
 
 ---
 
@@ -77,9 +77,9 @@ A new world is strongly recommended. Mixing V1.1.2 terrain with V2.0.0 generatio
 
 **Still Watching** is a Minecraft Java Edition horror-survival modpack by **Soumyajit** for **Minecraft `1.20.1`** on **Forge**.
 
-It keeps the familiar survival loop—mine, build, loot, travel, recover—then poisons it with fog, darkness, hostile structures, layered sound, stalking entities, and enough uncertainty to make every quiet cave feel staged.
+It keeps the usual survival loop—mining, building, exploring and recovering—but adds fog, darkness, unsettling sounds, hostile structures and stalking entities.
 
-This is not a kitchen-sink pack wearing a cheap horror mask. It is built to make survival feel watched. 🕯️
+The mod selection is focused on horror and exploration rather than sheer mod count.
 
 ---
 
@@ -92,7 +92,7 @@ This is not a kitchen-sink pack wearing a cheap horror mask. It is built to make
 | **World-scale exploration** | Terralith and Tectonic reshape the Overworld; Incendium and Nullscape overhaul the Nether and End. |
 | **Structures with risk** | Dungeons and Taverns, Explorify, and Towns and Towers make travel more rewarding and less polite. |
 | **Performance foundations** | Embeddium, ImmediatelyFast, FerriteCore, ModernFix, and FPS Reducer remain in the proposed V2.0.1 performance stack. Actual results depend on hardware and settings. |
-| **Multiplayer-ready** | Voice chat, teams, quests, server guidance, and strict version matching support private multiplayer sessions. |
+| **Multiplayer setup** | Voice chat, teams and quests are included; use matching pack versions and test the server separately. |
 
 ---
 
@@ -194,7 +194,7 @@ Include:
 - Whether the world was created on V2.0.0 or migrated from an older release.
 - Any extra mods, shaders, resource packs, or config edits.
 
-Logs matter. Vibes are not diagnostics.
+Attach the full log when available; a screenshot of the final error line often misses the cause.
 
 ---
 
