@@ -62,7 +62,7 @@ If GitHub and CurseForge disagree about a playable release, trust CurseForge fir
 | Audio | Headphones recommended for direction and atmosphere |
 | CurseForge Project ID | `1420406` |
 
-Do not allocate every megabyte of system memory to Minecraft. The operating system still needs room to breathe.
+Leave enough memory for Windows or your operating system and any background applications. On an 8 GB system, close unnecessary apps before launching.
 
 ---
 
@@ -82,7 +82,7 @@ Do not allocate every megabyte of system memory to Minecraft. The operating syst
 8. Create a new test world.
 9. Confirm world generation, dimensions, audio, controls, menus, maps, and FPS are playable.
 
-That is the clean path. Save experiments for after the pack actually launches.
+Confirm that the unmodified pack works before testing additional mods or settings.
 
 ---
 
@@ -152,7 +152,7 @@ JourneyMap data does not automatically migrate. Keep the old `journeymap/` folde
 | `6 GB` | `6144 MB` |
 | `8 GB` | `8192 MB` |
 
-More RAM is not always better. Too little causes crashes and stutter; too much can make garbage collection uglier.
+Allocating more RAM than needed does not guarantee better performance. Leave memory available for the operating system and other applications.
 
 ---
 
