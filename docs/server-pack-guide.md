@@ -2,7 +2,7 @@
 
 # Server Pack Guide
 
-Still Watching servers should stay predictable in the places where predictability saves worlds. This guide targets **Still Watching V2.0.0**, Minecraft `1.20.1`, Forge, and Java `17` where required.
+This guide covers **Still Watching V2.0.0** dedicated servers on Minecraft `1.20.1` with Forge and Java `17` where required.
 
 Use CurseForge as the source of playable files. The GitHub ZIP is not the recommended playable installer and is not a server pack.
 
@@ -50,7 +50,7 @@ V2.0.0 instructions remain the supported public-release baseline until V2.0.1 is
 | 2 | Official server pack from CurseForge | The selected CurseForge file provides a server pack. |
 | 3 | Manual Forge server | You can verify sides, dependencies, worldgen files, configs, and logs yourself. |
 
-Manual setup is the failure-prone path. Use it only when you know what each file is doing.
+Use the manual path only if you can verify each required dependency and configuration file.
 
 ---
 
@@ -80,7 +80,7 @@ Migrating a V1.1.2 world can cause:
 - new structures appearing only in newly generated areas;
 - increased CPU pressure while several players generate new terrain.
 
-The strong recommendation is simple: create a new V2.0.0 world. If preserving an old world matters more than visual consistency, test a copy first and accept that the seams are permanent evidence of the migration.
+A new V2.0.0 world is recommended. If you need to keep an old world, test a disposable copy first and expect some terrain borders to remain.
 
 ---
 
@@ -115,7 +115,7 @@ Use this only if the selected CurseForge release provides a server pack.
 9. Inspect logs and console output.
 10. Test a new world and one matching client.
 
-Never mix a server pack from one release with clients from another. That is dependency roulette.
+Use the same Still Watching release on the server and every client.
 
 ---
 
@@ -134,7 +134,7 @@ Manual setup is advanced and unsupported unless verified for the exact release.
 9. Generate a disposable test world.
 10. Test Overworld, Nether, End, structures, respawn, voice chat, and joining with one clean client.
 
-Do not claim a file is server-safe because it looks harmless. Side mistakes are how servers fail.
+Check which side each mod supports before placing it on a dedicated server.
 
 ---
 
@@ -217,7 +217,7 @@ Start conservative:
 - test all dimensions before a real session;
 - avoid extra mods unless you can debug the consequences.
 
-More RAM does not fix every problem. A weak CPU, broken config, or wrong-side mod will still fail enthusiastically.
+More RAM cannot fix an incompatible mod, incorrect config or CPU bottleneck.
 
 ---
 
