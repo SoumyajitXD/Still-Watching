@@ -43,7 +43,7 @@ body:
     id: compat-pack-version
     attributes:
       label: Still Watching version
-      placeholder: "Example: V1.0.x / CurseForge file name"
+      placeholder: "Example: V2.0.0 / CurseForge file name"
     validations:
       required: true
 
