@@ -42,6 +42,18 @@ class ArchiveValidationTests(unittest.TestCase):
         make_zip(self.path, {"C:\\escape.txt": b"bad"})
         self.assertTrue(any("Unsafe" in s for s in archives.inspect_archive(self.path)))
 
+    def test_double_slash_is_rejected(self) -> None:
+        make_zip(self.path, {"config//settings.txt": b"ambiguous"})
+        self.assertTrue(any("Unsafe" in s for s in archives.inspect_archive(self.path)))
+
+    def test_dot_component_is_rejected(self) -> None:
+        make_zip(self.path, {"config/./settings.txt": b"ambiguous"})
+        self.assertTrue(any("Unsafe" in s for s in archives.inspect_archive(self.path)))
+
+    def test_normal_directory_entries_are_allowed(self) -> None:
+        make_zip(self.path, {"config/": b"", "config/settings.txt": b"ok"})
+        self.assertEqual(archives.inspect_archive(self.path), [])
+
     def test_duplicate_paths_ignore_case(self) -> None:
         make_zip(self.path, {"Config/Test.txt": b"one", "config/test.txt": b"two"})
         self.assertTrue(any("Duplicate" in s for s in archives.inspect_archive(self.path)))
