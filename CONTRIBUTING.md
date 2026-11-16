@@ -47,7 +47,7 @@ Contributions must account for the current V2.0.0 direction:
 - ImmediatelyFast, FerriteCore, ModernFix, FPS Reducer, Embeddium, and Chloride form the main optimization stack.
 - The One Who Watches is part of the current horror roster.
 
-Do not reintroduce removed V1.1.2 systems casually. A mod being popular is not a compatibility plan.
+Do not reintroduce removed V1.1.2 systems casually. Check dependencies and test compatibility before proposing a mod change.
 
 ---
 
@@ -77,7 +77,7 @@ Good contributions usually include:
 - missing credit, attribution, or license-scope corrections;
 - presentation improvements that fit the pack's horror identity.
 
-Useful work makes the project clearer. Useless work makes maintainers dig through fog with a spoon.
+Prefer changes that solve a specific problem and explain how to verify them.
 
 ---
 
@@ -97,7 +97,7 @@ Do not open issues or pull requests for:
 - changes that flatten the pack's horror identity into generic modpack sludge;
 - changes that remove credits, source-of-truth warnings, license notes, or sponsor content.
 
-The pack has a theme. If a change does not serve that theme or maintenance reality, it is probably clutter.
+Proposals should fit the horror-survival direction or reduce real maintenance work.
 
 ---
 
@@ -112,7 +112,7 @@ The pack has a theme. If a change does not serve that theme or maintenance reali
 7. Collect `logs/latest.log` and any crash report.
 8. State whether the world is new or migrated from V1.1.2.
 
-A bug report without logs is a campfire story with the stack trace missing.
+Attach the full log or crash report when the issue produces one.
 
 ---
 
@@ -131,7 +131,7 @@ Good pull requests:
 - update all release-facing surfaces when changing version or mod metadata;
 - include validation results.
 
-Bad pull requests remodel the whole haunted house because one window squeaked.
+Keep unrelated cleanup out of a focused change.
 
 ---
 
@@ -141,7 +141,7 @@ Keep writing direct, specific, useful, honest about uncertainty, and clear about
 
 Avoid corporate filler, fake certainty, giant paragraphs, jokes that hide instructions, and vague claims such as `optimized`, `fixed`, or `compatible` without evidence.
 
-Personality is seasoning. Accuracy is the meal. Do not serve a bowl of paprika.
+Keep the tone natural, but make instructions and claims testable.
 
 ---
 
@@ -180,7 +180,7 @@ Check whitespace:
 git diff --check
 ```
 
-If validation cannot be run, say so. Silence makes reviewers assume the fog was part of the test plan.
+If you cannot run a check, say which check and why.
 
 ---
 
