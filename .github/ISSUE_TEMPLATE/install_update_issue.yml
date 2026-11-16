@@ -11,7 +11,7 @@ body:
       value: |
         Use this only for problems before normal gameplay starts: install, import, update, launcher profile creation, dependency resolution, or first launch.
 
-        The GitHub ZIP is not the playable modpack. Use the official CurseForge release. If you installed from a random mirror or edited ZIP, that is not a supported setup.
+        The GitHub ZIP is not the playable modpack. Use the official CurseForge release. Modified archives and unofficial mirrors are outside the supported installation path.
 
   - type: checkboxes
     id: preflight
@@ -60,7 +60,7 @@ body:
     attributes:
       label: Still Watching version / CurseForge file
       description: Use the exact CurseForge file/version shown.
-      placeholder: "Example: V1.0.x / CurseForge file name"
+      placeholder: "Example: V2.0.0 / CurseForge file name"
     validations:
       required: true
 
