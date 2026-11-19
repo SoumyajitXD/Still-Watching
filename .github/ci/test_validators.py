@@ -70,6 +70,22 @@ class ArchiveValidationTests(unittest.TestCase):
         make_zip(self.path, {"Config/Test.txt": b"one", "config/test.txt": b"two"})
         self.assertTrue(any("Duplicate" in s for s in archives.inspect_archive(self.path)))
 
+    def test_manifest_array_is_rejected(self) -> None:
+        make_zip(self.path, {"manifest.json": b"[]"})
+        self.assertTrue(any("JSON object" in s
+                            for s in archives.inspect_archive(self.path, current=True)))
+
+    def test_malformed_minecraft_field_is_rejected(self) -> None:
+        make_zip(self.path, {"manifest.json": b'{"minecraft": []}'})
+        self.assertTrue(any("minecraft field" in s
+                            for s in archives.inspect_archive(self.path, current=True)))
+
+    def test_malformed_loader_list_is_rejected(self) -> None:
+        data = {"minecraft": {"version": "1.20.1", "modLoaders": "forge-47.4.0"}}
+        make_zip(self.path, {"manifest.json": json.dumps(data).encode()})
+        self.assertTrue(any("modLoaders field" in s
+                            for s in archives.inspect_archive(self.path, current=True)))
+
     def test_wrong_minecraft_version_fails(self) -> None:
         data = {"minecraft": {"version": "1.21.11", "modLoaders": [{"id": "forge-47.4.0"}]}}
         make_zip(self.path, {"manifest.json": json.dumps(data).encode()})

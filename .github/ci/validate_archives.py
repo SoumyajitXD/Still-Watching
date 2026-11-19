@@ -95,19 +95,26 @@ def inspect_archive(path: Path, *, current: bool = False,
                         except (ValueError, UnicodeError, RuntimeError, zipfile.BadZipFile) as exc:
                             errors.append(f"Invalid modpack manifest: {exc}")
                         else:
-                            game = metadata.get("minecraft", {})
-                            if isinstance(game, dict) and "version" in game:
-                                if str(game["version"]) != game_version:
-                                    errors.append(
-                                        f"Manifest Minecraft version {game['version']!r} "
-                                        f"does not match {game_version!r}"
-                                    )
-                                modloaders = game.get("modLoaders", [])
-                                if isinstance(modloaders, list) and modloaders:
-                                    prefixes = [str(x.get("id", "")).lower()
-                                                for x in modloaders if isinstance(x, dict)]
-                                    if not any(x.startswith(loader.lower() + "-") for x in prefixes):
-                                        errors.append(f"Manifest lacks the expected {loader} loader")
+                            if not isinstance(metadata, dict):
+                                errors.append("Modpack manifest must be a JSON object")
+                            else:
+                                game = metadata.get("minecraft", {})
+                                if not isinstance(game, dict):
+                                    errors.append("Manifest minecraft field must be an object")
+                                else:
+                                    if "version" in game and str(game["version"]) != game_version:
+                                        errors.append(
+                                            f"Manifest Minecraft version {game['version']!r} "
+                                            f"does not match {game_version!r}"
+                                        )
+                                    modloaders = game.get("modLoaders", [])
+                                    if not isinstance(modloaders, list):
+                                        errors.append("Manifest modLoaders field must be an array")
+                                    elif modloaders:
+                                        prefixes = [str(x.get("id", "")).lower()
+                                                    for x in modloaders if isinstance(x, dict)]
+                                        if not any(x.startswith(loader.lower() + "-") for x in prefixes):
+                                            errors.append(f"Manifest lacks the expected {loader} loader")
 
                 # CRC-check every member in the documented current archive, not
                 # only the ZIP central directory. No extraction is performed.
