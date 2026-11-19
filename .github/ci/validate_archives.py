@@ -19,6 +19,8 @@ METADATA = ROOT / ".github/ci/project-metadata.json"
 MAX_ENTRIES = 100_000
 MAX_EXPANDED_BYTES = 8 * 1024 ** 3
 MAX_MANIFEST_BYTES = 1024 * 1024
+WINDOWS_RESERVED = re.compile(r"(?:con|prn|aux|nul|com[1-9]|lpt[1-9])(?:\..*)?", re.I)
+WINDOWS_FORBIDDEN = set('<>:"|?*')
 
 
 def unsafe_member_name(name: str) -> bool:
@@ -30,8 +32,10 @@ def unsafe_member_name(name: str) -> bool:
         or name.startswith(("/", "\\"))
         or "\\" in name
         or "\x00" in name
-        or ":" in name.split("/")[0]
         or any(part in ("", ".", "..") for part in parts)
+        or any(part.endswith((" ", ".")) for part in parts)
+        or any(WINDOWS_RESERVED.fullmatch(part) for part in parts)
+        or any(any(ord(ch) < 32 or ch in WINDOWS_FORBIDDEN for ch in part) for part in parts)
     )
 
 

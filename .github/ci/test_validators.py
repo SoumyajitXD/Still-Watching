@@ -42,6 +42,18 @@ class ArchiveValidationTests(unittest.TestCase):
         make_zip(self.path, {"C:\\escape.txt": b"bad"})
         self.assertTrue(any("Unsafe" in s for s in archives.inspect_archive(self.path)))
 
+    def test_nested_windows_alternate_stream_is_rejected(self) -> None:
+        make_zip(self.path, {"config/settings.txt:backup": b"ambiguous"})
+        self.assertTrue(any("Unsafe" in s for s in archives.inspect_archive(self.path)))
+
+    def test_windows_device_name_is_rejected(self) -> None:
+        make_zip(self.path, {"config/AUX.txt": b"ambiguous"})
+        self.assertTrue(any("Unsafe" in s for s in archives.inspect_archive(self.path)))
+
+    def test_windows_trailing_dot_is_rejected(self) -> None:
+        make_zip(self.path, {"config/settings.txt.": b"ambiguous"})
+        self.assertTrue(any("Unsafe" in s for s in archives.inspect_archive(self.path)))
+
     def test_double_slash_is_rejected(self) -> None:
         make_zip(self.path, {"config//settings.txt": b"ambiguous"})
         self.assertTrue(any("Unsafe" in s for s in archives.inspect_archive(self.path)))
