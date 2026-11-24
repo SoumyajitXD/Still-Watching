@@ -188,7 +188,7 @@ Back up before updates, server moves, config edits, world migrations, mod remova
 | `saves/` | Singleplayer worlds |
 | `config/` | Main mod configuration |
 | `defaultconfigs/` | Default templates for new worlds or servers |
-| `serverconfig/` | Per-world server configs |
+| `saves/<world>/serverconfig/` | Per-world server configs, included in a complete world backup |
 | `journeymap/` | Legacy V1.1.2 map data, if present |
 | Xaero map folders | V2.0.0 minimap and world-map data, if present |
 | `screenshots/` | Screenshots you care about |
@@ -203,7 +203,7 @@ Example backup name:
 Still-Watching-worldname-before-v2.0.0-migration.zip
 ```
 
-Check that the archive actually contains files. An empty backup is just a lie with a `.zip` extension.
+Exit Minecraft or stop the dedicated server before copying world files. Keep a backup outside the live instance and test extraction into a separate folder before relying on it.
 
 ---
 
@@ -223,7 +223,7 @@ For conservative server-focused rules, read [`docs/server-pack-guide.md`](./docs
 
 ## Troubleshooting
 
-Start with a clean baseline before chasing demons.
+Start with a clean CurseForge profile.
 
 | Symptom | First move |
 | --- | --- |
@@ -255,4 +255,4 @@ Include:
 - Steps to reproduce.
 - Any extra mods, shaders, resource packs, or config edits.
 
-Logs beat vibes. Always.
+Copy the log before launching again, and remove sensitive information before sharing it.
