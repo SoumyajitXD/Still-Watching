@@ -2,7 +2,7 @@
 
 # Security Policy
 
-**Still Watching** is a Minecraft Java Edition horror-survival modpack. Most reports are gameplay bugs, mod conflicts, broken installs, bad configs, or cursed launcher behavior. Annoying, yes. Security vulnerabilities, usually no.
+**Still Watching** is a Minecraft Java Edition horror-survival modpack. Most reports are gameplay bugs, mod conflicts, broken installs, bad configs, or cursed launcher behavior. These usually belong in regular support.
 
 Security reports are for risks that could harm players, servers, maintainers, or the project's distribution chain.
 
@@ -73,7 +73,7 @@ These belong in normal support or bug channels:
 - broken configs;
 - expected terrain seams after migrating an old world to V2.0.0;
 - JourneyMap data not transferring to Xaero's maps;
-- horror mobs being unfair, loud, invisible, rude, or emotionally unemployed;
+- unexpected horror-mob behavior;
 - issues caused by extra mods, shaders, resource packs, cracked launchers, or modified pack files.
 
 If the issue only affects gameplay or stability, file it as a normal bug with logs and reproduction steps.
@@ -86,7 +86,7 @@ For reports safe to discuss publicly, use [GitHub Issues](https://github.com/Sou
 
 Do **not** publicly post secrets, tokens, passwords, private server IPs, private logs, credentials, or anything that would make the situation worse by being indexed forever.
 
-Redact sensitive details before posting. Publicly leaking the evidence while reporting the leak is a remarkably efficient way to double the problem.
+Redact sensitive details before posting. If a credential has already been exposed, revoke or rotate it promptly. For a sensitive vulnerability, use GitHub's private vulnerability reporting option if enabled; otherwise request a private contact method without posting exploit details.
 
 ---
 
@@ -101,7 +101,7 @@ Logs and crash reports can contain:
 - private modpack or server information;
 - IP addresses or hostnames.
 
-Post the smallest useful log section that still proves the issue. Evidence is good. Doxxing yourself by accident is not character development.
+Post only the relevant, redacted log section for security reports.
 
 ---
 
@@ -131,4 +131,4 @@ Security reports may include license-scope and redistribution risks when they af
 
 Valid security concerns may result in documentation fixes, warning notices, issue cleanup, link removal, release-reference corrections, license clarifications, or other repository changes.
 
-Reports without evidence may be closed. Panic is not a reproduction step.
+Include enough evidence to reproduce or investigate the concern.
