@@ -4,8 +4,6 @@
 
 Still Watching accepts useful work: reproducible reports, clean documentation, evidence-backed metadata fixes, validation improvements, and changes that make the modpack easier to install, maintain, support, or troubleshoot.
 
-It does not need random noise wearing a pull request costume.
-
 ---
 
 ## Project Baseline
@@ -94,7 +92,7 @@ Do not open issues or pull requests for:
 - crash screenshots without logs;
 - vague reports such as `broken`, `fix`, or `doesn't work`;
 - copyrighted assets, copied branding, bundled mod JARs, or content you cannot license;
-- changes that flatten the pack's horror identity into generic modpack sludge;
+- changes that disregard the pack's horror-survival focus;
 - changes that remove credits, source-of-truth warnings, license notes, or sponsor content.
 
 Proposals should fit the horror-survival direction or reduce real maintenance work.
@@ -166,6 +164,12 @@ Run the maintained repository checks:
 
 ```bash
 python3 .github/ci/validate_repository.py all
+```
+
+Run validator regression tests when changing CI scripts:
+
+```bash
+python3 -m unittest discover -s .github/ci -p 'test_*.py' -v
 ```
 
 Run Markdown linting:
