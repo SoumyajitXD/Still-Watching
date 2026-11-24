@@ -2,7 +2,7 @@
 
 # Support
 
-Need help with **Still Watching**? Start from the official install path, reproduce on a clean profile, then bring logs. Guesswork belongs in the atmosphere, not in support threads.
+For help with **Still Watching**, reproduce the problem on a clean CurseForge profile and include the affected instance's logs.
 
 ---
 
@@ -121,7 +121,7 @@ Include a clean-install reproduction and relevant logs before filing an issue.
 8. Collect `logs/latest.log` and any crash report.
 9. Record whether the issue affects a new V2.0.0 world or a migrated world.
 
-Skipping these steps usually creates a support thread that dies face-down in the swamp.
+If the game crashes before you can create a world, report that stage and attach the startup log instead.
 
 ---
 
@@ -151,7 +151,7 @@ For server issues, also include server RAM, host or local-server type, setup met
 
 Before posting logs, check for usernames, local paths, IP addresses, server hostnames, tokens, credentials, and private server information.
 
-Attach long logs or use a paste service. Do not paste a wall of log sludge into the issue body unless the excerpt is short and directly relevant.
+Save `logs/latest.log` before the next launch. Attach the redacted log and any crash report; include a short relevant excerpt in the issue body if useful.
 
 ---
 
