@@ -169,7 +169,7 @@ Some mods have both client and server behavior. Some libraries are required on b
 | `server.properties` | Core server settings |
 | `logs/` | Evidence when things break |
 
-Back up before editing any of these. An untested backup is not a backup; it is optimism with a file extension.
+Stop the server cleanly before copying these files. Keep at least one backup outside the server directory and verify that it restores into a separate test instance.
 
 ---
 
@@ -187,7 +187,7 @@ Back up before editing any of these. An untested backup is not a backup; it is o
 - [ ] Logs are accessible.
 - [ ] Backups exist outside the live server folder.
 
-This does not prove the server is perfect. It proves the basics are not obviously broken.
+These checks cover basic startup and gameplay, not long-session stability or load testing.
 
 ---
 
