@@ -63,8 +63,8 @@ See the [V2.0.1 changelog](./CHANGELOG.md) and [proposed modlist](./latest-modli
 V2.0.0 rebuilds the pack around four priorities:
 
 - **more deliberate horror encounters;**
-- **larger and more varied exploration;**
-- **stronger performance and memory foundations;**
+- **more varied terrain and structures;**
+- **a revised performance and memory-management mod stack;**
 - **a cleaner mod selection with obsolete systems removed.**
 
 The world-generation stack now combines **Terralith**, **Tectonic**, **Nullscape**, **Incendium**, **Lithostitched**, **Dungeons and Taverns**, **Explorify**, and **Towns and Towers**. The pack also adds **The One Who Watches**, replaces JourneyMap with **Xaero's Minimap** and **Xaero's World Map**, and introduces **ImmediatelyFast**, **FerriteCore**, **ModernFix**, and **FPS Reducer**.
@@ -90,7 +90,7 @@ The mod selection is focused on horror and exploration rather than sheer mod cou
 | **Horror pressure** | The One Who Watches joins a roster of stalking, ambushing, mimicking, and environment-driven threats. |
 | **Atmosphere first** | Fog, sound physics, footsteps, ambience, shaders, resource packs, and visual stress carry as much weight as raw combat. |
 | **World-scale exploration** | Terralith and Tectonic reshape the Overworld; Incendium and Nullscape overhaul the Nether and End. |
-| **Structures with risk** | Dungeons and Taverns, Explorify, and Towns and Towers make travel more rewarding and less polite. |
+| **Structures with risk** | Dungeons and Taverns, Explorify, and Towns and Towers add structures to discover. |
 | **Performance foundations** | Embeddium, ImmediatelyFast, FerriteCore, ModernFix, and FPS Reducer remain in the proposed V2.0.1 performance stack. Actual results depend on hardware and settings. |
 | **Multiplayer setup** | Voice chat, teams and quests are included; use matching pack versions and test the server separately. |
 
@@ -162,7 +162,7 @@ Need manual import notes, backup steps, multiplayer setup, RAM conversion, or tr
 
 ## Multiplayer and Servers
 
-Multiplayer is supported when the server and every client match.
+For multiplayer, start with matching server and client releases. Matching versions alone do not guarantee dedicated-server compatibility.
 
 - Use the same Still Watching version on the server and all clients.
 - Use Minecraft `1.20.1` and the required Forge build.
