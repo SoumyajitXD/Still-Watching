@@ -1,48 +1,24 @@
 <!-- markdownlint-disable MD013 -->
 
-## Summary
+## What changed?
 
-Describe what changed and why.
+Explain the problem and the fix. Link the related issue, if there is one.
 
-## Change Type
+## Checks
 
-- [ ] Documentation
-- [ ] Metadata
-- [ ] Issue templates or support flow
-- [ ] CI or validation
-- [ ] Server-pack guidance
-- [ ] Screenshots or presentation
-- [ ] Other
+- [ ] CurseForge remains the official playable download; no unsupported compatibility claims.
+- [ ] Third-party credits and license boundaries are preserved.
+- [ ] Release metadata and related docs are updated where needed.
 
-## Scope Check
-
-- [ ] I kept CurseForge as the official playable install source.
-- [ ] I did not imply that the GitHub ZIP is a playable modpack installer.
-- [ ] I did not claim unsupported loader, Minecraft-version, launcher, or server-pack support.
-- [ ] I preserved Apache-2.0 wording for original repository files only.
-- [ ] I preserved third-party license and attribution boundaries.
-- [ ] I kept this PR focused.
-
-## Validation
-
-Paste the commands you ran:
-
-```text
-
-```
-
-Suggested checks:
+Run the relevant checks and note anything you could not run:
 
 ```bash
 python3 .github/ci/validate_repository.py all
+python3 -m unittest discover -s .github/ci -p 'test_*.py' -v
 npx --yes markdownlint-cli2@0.18.1 "**/*.md" "!Releases/**"
 git diff --check
 ```
 
-## Evidence
+## Evidence or risks
 
-Add screenshots, logs, links, or notes that prove the change is correct.
-
-## Reviewer Notes
-
-Mention risk, uncertainty, or follow-up work.
+Include relevant logs, screenshots, sources, or testing limitations.
