@@ -139,6 +139,19 @@ class RepositoryValidationTests(unittest.TestCase):
         self.addCleanup(self.temporary.cleanup)
         self.root = Path(self.temporary.name)
 
+    def test_baseline_checks_workflows_under_repository_root(self) -> None:
+        workflow_dir = self.root / ".github/workflows"
+        workflow_dir.mkdir(parents=True)
+        (workflow_dir / "ci.yml").write_text("name: CI\n", encoding="utf-8")
+        (workflow_dir / "unexpected.yml").write_text("name: Extra\n", encoding="utf-8")
+        with mock.patch.object(repository, "ROOT", self.root):
+            reporter = repository.Reporter()
+            output = io.StringIO()
+            with contextlib.redirect_stdout(output):
+                repository.check_baseline(reporter)
+        self.assertIn("file=.github/workflows/unexpected.yml", output.getvalue())
+        self.assertNotIn("file=.github/workflows/ci.yml::Only", output.getvalue())
+
     def test_modlist_detects_count_drift(self) -> None:
         content = (
             "# Modlist\n\nStill Watching V2.0.0\n"

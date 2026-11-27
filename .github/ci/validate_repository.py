@@ -228,8 +228,9 @@ def check_baseline(reporter: Reporter) -> None:
     reporter.endgroup()
 
     reporter.group("Workflow inventory and legacy helper scripts")
-    workflows = sorted(Path(".github/workflows").glob("*")) if (ROOT / ".github/workflows").is_dir() else []
-    for path in workflows:
+    workflows = sorted((ROOT / ".github/workflows").glob("*"))
+    for full_path in workflows:
+        path = full_path.relative_to(ROOT)
         if path != WORKFLOW_PATH:
             reporter.error(path, "Only .github/workflows/ci.yml is intentionally allowed in this repo")
     legacy_scripts = ROOT / ".github/scripts"
