@@ -70,7 +70,7 @@ Do not trust random support-server links, mirrors, or modified downloads pretend
 
 ---
 
-## Supported Help
+## What to report
 
 Open an issue for:
 
@@ -89,9 +89,9 @@ A useful report includes enough information for someone else to reproduce the fa
 
 ---
 
-## Unsupported Help
+## Before reporting an unsupported setup
 
-Do not open support issues for:
+The following are outside normal support, unless a problem also reproduces on the official clean release:
 
 - cracked launchers;
 - unofficial reuploads, mirrors, or modified packs;
@@ -149,7 +149,7 @@ For server issues, also include server RAM, host or local-server type, setup met
 
 Before posting logs, check for usernames, local paths, IP addresses, server hostnames, tokens, credentials, and private server information.
 
-Save `logs/latest.log` before the next launch. Attach the redacted log and any crash report; include a short relevant excerpt in the issue body if useful.
+Save `logs/latest.log` before the next launch. If there is a crash report, look in the affected instance's `crash-reports/` directory. Attach the redacted files rather than just a screenshot of the last error.
 
 ---
 
