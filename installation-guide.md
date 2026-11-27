@@ -148,7 +148,7 @@ JourneyMap data does not automatically migrate. Keep the old `journeymap/` folde
 | `6 GB` | `6144 MB` |
 | `8 GB` | `8192 MB` |
 
-Allocating more RAM than needed does not guarantee better performance. Leave memory available for the operating system and other applications.
+Allocating more RAM than needed does not guarantee better performance. Leave memory for the operating system, background apps and integrated graphics. On an 8 GB PC, start at 5 GB rather than assigning 6–8 GB and forcing the system to page to disk. If the pack still runs out of memory, close background apps and test without optional shaders.
 
 ---
 
