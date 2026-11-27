@@ -4,10 +4,10 @@
   "loader": "Forge",
   "java_version": "17",
   "curseforge_project_id": "1420406",
-  "current_documented_release": "Still Watching V2.0.0",
+  "current_documented_release": "Still Watching V2.0.2",
   "minimum_ram": "5 GB",
   "preferred_ram": "6–8 GB",
-  "next_content_update": "Still Watching V2.0.1",
-  "next_update_status": "Documentation preview; publication unverified",
-  "next_update_entries": "80"
+  "description_release": "Still Watching V2.0.1",
+  "archive_release": "Still Watching V2.0.1",
+  "inventory_release": "Still Watching V2.0.1"
 }

@@ -22,7 +22,7 @@ Install playable releases from the official CurseForge project:
 | Loader | Forge |
 | Java | Java `17` where required |
 | CurseForge Project ID | `1420406` |
-| Current documented release | Still Watching V2.0.0 |
+| Current documented release | Still Watching V2.0.2 |
 | RAM | `5 GB` minimum; `6–8 GB` preferred |
 | Repository license | Apache-2.0 for original repository files only |
 
@@ -41,7 +41,7 @@ If someone tells players to install Still Watching from a random ZIP, mirror, re
 | GitHub ZIP or source download | Not a supported playable install |
 | Third-party reuploads, mirrors, or modified packs | Not supported |
 
-V2.0.0 is the current documentation baseline. Older releases may still receive attention when a report is clear and useful.
+V2.0.2 is the current documentation baseline. Older releases may still receive attention when a report is clear and useful.
 
 ---
 

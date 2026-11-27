@@ -116,7 +116,7 @@ def inspect_archive(path: Path, *, current: bool = False,
                                         if not any(x.startswith(loader.lower() + "-") for x in prefixes):
                                             errors.append(f"Manifest lacks the expected {loader} loader")
 
-                # CRC-check every member in the documented current archive, not
+                # CRC-check every member in the pinned repository archive, not
                 # only the ZIP central directory. No extraction is performed.
                 if not errors:
                     bad_member = archive.testzip()
@@ -130,9 +130,9 @@ def inspect_archive(path: Path, *, current: bool = False,
 def main() -> int:
     settings = json.loads(METADATA.read_text(encoding="utf-8"))
     match = re.fullmatch(r"Still Watching V(\d+\.\d+\.\d+)",
-                         settings["current_documented_release"])
+                         settings.get("archive_release", settings["current_documented_release"]))
     if not match:
-        print("::error file=.github/ci/project-metadata.json::Malformed current documented release")
+        print("::error file=.github/ci/project-metadata.json::Malformed archive release")
         return 1
     current_file = f"Still Watching-{match.group(1)}.zip"
     archives = sorted(ARCHIVES.glob("*.zip"))

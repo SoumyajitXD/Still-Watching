@@ -16,13 +16,13 @@
   <a href="https://www.curseforge.com/minecraft/modpacks/still-watching"><img alt="Downloads" src="https://img.shields.io/curseforge/dt/1420406?logo=curseforge&label=Downloads"></a>
   <img alt="Minecraft 1.20.1" src="https://img.shields.io/badge/Minecraft-1.20.1-brightgreen">
   <img alt="Forge" src="https://img.shields.io/badge/Loader-Forge-orange">
-  <img alt="Release V2.0.0" src="https://img.shields.io/badge/Release-V2.0.0-fa1d04">
+  <img alt="Release V2.0.2" src="https://img.shields.io/badge/Release-V2.0.2-fa1d04">
   <img alt="License" src="https://img.shields.io/badge/License-Apache--2.0-2f81f7">
 </p>
 
 <p align="center">
   <strong><a href="https://www.curseforge.com/minecraft/modpacks/still-watching/files">Install on CurseForge</a></strong>
-  · <a href="./CHANGELOG.md">Release Notes (V2.0.1 preview)</a>
+  · <a href="./CHANGELOG.md">Release Notes</a>
   · <a href="./installation-guide.md">Installation Guide</a>
   · <a href="./docs/server-pack-guide.md">Server Pack Guide</a>
   · <a href="./latest-modlist.md">Mod List</a>
@@ -41,20 +41,13 @@
 
 ---
 
-## V2.0.1 Content Update (Prepared, Not Yet Published)
+## V2.0.2 Maintenance Update
 
-The **V2.0.1 content list is prepared**, but the latest verified public CurseForge download is **V2.0.0**. The repository ZIP is not a playable modpack installer.
+V2.0.2 updates selected bundled mods to newer versions. It is a minor maintenance release, not a new content overhaul. Check the [CurseForge Files page](https://www.curseforge.com/minecraft/modpacks/still-watching/files) for the downloadable build and exact file versions.
 
-The proposed V2.0.1 list keeps **80 entries** while making four changes:
+V2.0.1 previously added [Zepholume Shaders](https://www.curseforge.com/minecraft/shaders/zepholume-shaders) and [Configured](https://www.curseforge.com/minecraft/mc-mods/configured), and removed Chloride and TACZ: Durability. Embeddium and Timeless and Classics Zero Guns remained in the documented list.
 
-- **Added:** [Zepholume Shaders](https://www.curseforge.com/minecraft/shaders/zepholume-shaders), an optional sixth shader-pack choice.
-- **Added:** [Configured](https://www.curseforge.com/minecraft/mc-mods/configured), offering settings menus for supported mods.
-- **Removed:** Chloride; **Embeddium** remains.
-- **Removed:** TACZ: Durability; **Timeless and Classics Zero Guns** remains.
-
-No world-generation entries were added or removed in the supplied comparison. This **does not prove** unchanged configuration files or safe in-place migration. Back up your profile and worlds, then verify the eventual CurseForge ZIP and its Forge-compatible dependencies.
-
-See the [V2.0.1 changelog](./CHANGELOG.md) and [proposed modlist](./latest-modlist.md).
+Back up your profile and worlds before updating. The [changelog](./CHANGELOG.md) records the release scope; the [modlist](./latest-modlist.md) is the V2.0.1 project inventory, not an audited V2.0.2 manifest. No measured performance or runtime compatibility improvement is claimed.
 
 ---
 
@@ -91,7 +84,7 @@ The mod selection is focused on horror and exploration rather than sheer mod cou
 | **Atmosphere first** | Fog, sound physics, footsteps, ambience, shaders, resource packs, and visual stress carry as much weight as raw combat. |
 | **World-scale exploration** | Terralith and Tectonic reshape the Overworld; Incendium and Nullscape overhaul the Nether and End. |
 | **Structures with risk** | Dungeons and Taverns, Explorify, and Towns and Towers add structures to discover. |
-| **Performance foundations** | Embeddium, ImmediatelyFast, FerriteCore, ModernFix, and FPS Reducer remain in the proposed V2.0.1 performance stack. Actual results depend on hardware and settings. |
+| **Performance foundations** | Embeddium, ImmediatelyFast, FerriteCore, ModernFix, and FPS Reducer form the documented V2.0.1 performance stack. Actual results depend on hardware and settings. |
 | **Multiplayer setup** | Voice chat, teams and quests are included; use matching pack versions and test the server separately. |
 
 ---
@@ -102,14 +95,14 @@ The mod selection is focused on horror and exploration rather than sheer mod cou
 | --- | --- |
 | **Project** | Still Watching |
 | **Creator** | Soumyajit |
-| **Current documented public release** | Still Watching V2.0.0 |
-| **Next documented content update** | Still Watching V2.0.1 (prepared; not publicly verified) |
+| **Current documented release** | Still Watching V2.0.2 |
+| **Inventory baseline** | Still Watching V2.0.1 (exact V2.0.2 file versions not audited) |
 | **Minecraft** | `1.20.1` |
 | **Loader** | Forge |
 | **Java** | Java `17` if the launcher or server asks |
 | **CurseForge Project ID** | `1420406` |
 | **RAM target** | `5 GB` minimum; `6–8 GB` preferred |
-| **Documented content entries** | 80 mods, libraries, shaders, and resource packs |
+| **Documented content entries** | 80 mods, libraries, shaders, and resource packs (V2.0.1 inventory) |
 | **Install source** | [CurseForge](https://www.curseforge.com/minecraft/modpacks/still-watching) |
 | **Repository license** | [Apache-2.0](./LICENSE) for original repository files only |
 
@@ -117,7 +110,7 @@ The mod selection is focused on horror and exploration rather than sheer mod cou
 
 ## Content Snapshot
 
-For the proposed V2.0.1 content list, read [`latest-modlist.md`](./latest-modlist.md). The table below describes that selection, **not** a verified downloadable V2.0.1 archive.
+For the documented V2.0.1 project inventory, read [`latest-modlist.md`](./latest-modlist.md). The table below describes that selection; exact V2.0.2 bundled versions have not been compared.
 
 | Category | Examples |
 | --- | --- |
@@ -126,16 +119,16 @@ For the proposed V2.0.1 content list, read [`latest-modlist.md`](./latest-modlis
 | **Structures** | Dungeons and Taverns, Explorify, Towns and Towers |
 | **Atmosphere and sound** | AmbientSounds 6, Presence Footsteps, Sound Physics Remastered, EnhancedVisuals, Cave Dweller Sound Overhaul |
 | **Multiplayer and utility** | Simple Voice Chat, FTB Teams, FTB Quests, Xaero's Minimap, Xaero's World Map, Corpse, JEI |
-| **Performance (proposed V2.0.1)** | Embeddium, ImmediatelyFast, FerriteCore, ModernFix, FPS Reducer |
-| **Shaders and resources (proposed V2.0.1)** | Zepholume Shaders, Complementary Unbound, Complementary Reimagined, Hysteria, Insanity, Spooklementary, Fresh Animations |
+| **Performance (V2.0.1 inventory)** | Embeddium, ImmediatelyFast, FerriteCore, ModernFix, FPS Reducer |
+| **Shaders and resources (V2.0.1 inventory)** | Zepholume Shaders, Complementary Unbound, Complementary Reimagined, Hysteria, Insanity, Spooklementary, Fresh Animations |
 
 ---
 
 ## Updating from V1.1.2
 
 1. Back up the entire instance and every world you care about.
-2. Prefer installing V2.0.0 as a fresh CurseForge profile.
-3. Do not overwrite V2.0.0 with the entire V1.1.2 `config/` folder.
+2. Prefer installing the current V2.0.x release as a fresh CurseForge profile.
+3. Do not overwrite the new profile with the entire V1.1.2 `config/` folder.
 4. Create a new world for the intended V2.0.0 terrain and structure experience.
 5. Reconfigure personal keybinds, shaders, voice chat, and graphics settings as needed.
 6. JourneyMap data does not automatically migrate to Xaero's mapping system.
@@ -150,7 +143,7 @@ Existing worlds may show terrain borders, changed biome transitions, missing rem
 1. Install the [CurseForge App](https://www.curseforge.com/download/app).
 2. Open the [Still Watching CurseForge page](https://www.curseforge.com/minecraft/modpacks/still-watching).
 3. Confirm the project is by **Soumyajit**.
-4. Install **Still Watching V2.0.0** or the newest compatible release.
+4. Install **Still Watching V2.0.2** or the newest compatible release.
 5. Allocate **`5 GB` minimum RAM**; use **`6–8 GB`** if your system allows it.
 6. Use **Java `17`** if the launcher asks.
 7. Launch once clean before adding extra mods, shaders, resource packs, or config edits.
@@ -185,7 +178,7 @@ Before opening an issue, reproduce the problem on a clean CurseForge installatio
 
 Include:
 
-- Pack version, for example `Still Watching V2.0.0`.
+- Pack version, for example `Still Watching V2.0.2`.
 - Launcher, Minecraft, Forge, Java, and operating-system details.
 - Singleplayer or multiplayer status.
 - Server host and RAM when relevant.
@@ -203,11 +196,11 @@ Attach the full log when available; a screenshot of the final error line often m
 | Path | Purpose |
 | --- | --- |
 | [`README.md`](./README.md) | GitHub landing page. |
-| [`CHANGELOG.md`](./CHANGELOG.md) | V2.0.1 update preview, V2.0.0 release notes, and release history. |
+| [`CHANGELOG.md`](./CHANGELOG.md) | V2.0.2 maintenance notes and earlier release history. |
 | [`installation-guide.md`](./installation-guide.md) | Install, migrate, back up, update, and troubleshoot. |
-| [`latest-modlist.md`](./latest-modlist.md) | Proposed V2.0.1 mod, shader, resource-pack, and library inventory. |
+| [`latest-modlist.md`](./latest-modlist.md) | V2.0.1 project inventory; exact V2.0.2 versions pending comparison. |
 | [`docs/server-pack-guide.md`](./docs/server-pack-guide.md) | Conservative dedicated-server guidance. |
-| [`curseforge-description.html`](./curseforge-description.html) | CurseForge description source. |
+| [`curseforge-description.html`](./curseforge-description.html) | CurseForge description source (V2.0.1 snapshot). |
 | [`SUPPORT.md`](./SUPPORT.md) | Support boundaries and evidence checklist. |
 | [`SECURITY.md`](./SECURITY.md) | Official-source and security-reporting policy. |
 | [`CONTRIBUTING.md`](./CONTRIBUTING.md) | Contribution and validation rules. |

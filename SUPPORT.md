@@ -17,7 +17,7 @@ For help with **Still Watching**, reproduce the problem on a clean CurseForge pr
 | Java | Java `17` where required |
 | Official playable release | CurseForge |
 | CurseForge Project ID | `1420406` |
-| Current documented release | Still Watching V2.0.0 |
+| Current documented release | Still Watching V2.0.2 |
 | RAM | `5 GB` minimum; `6–8 GB` preferred |
 | Latest CurseForge release | Primary support target |
 | Older releases | Best-effort support |
@@ -31,13 +31,11 @@ Install playable releases from CurseForge:
 
 ---
 
-## V2.0.1 Content Preview: Support Boundaries
+## V2.0.2 Support Boundaries
 
-The [proposed V2.0.1 list](./latest-modlist.md) is documented, but the latest **verified public** CurseForge release remains V2.0.0.
+V2.0.2 updates selected bundled mod versions. Exact mod file changes have not been independently compared. V2.0.1 added Zepholume Shaders and Configured and removed Chloride and TACZ: Durability; those historical removals alone are not a bug.
 
-The preview adds **Zepholume Shaders** and **Configured** and removes **Chloride** and **TACZ: Durability**. Embeddium and the core Timeless and Classics Zero Guns mod remain. Those optional removals alone are not a bug.
-
-Always report the **actual installed CurseForge file/version** rather than relying on a documentation preview. No V2.0.1 performance or server compatibility has been verified in this repository update.
+Report the actual installed CurseForge file, Forge build, and whether the issue reproduces on a clean V2.0.2 profile. Include the previous working release for regressions. No V2.0.2 performance or dedicated-server compatibility has been established by this documentation update.
 
 ---
 
@@ -48,8 +46,8 @@ V2.0.0 changes the Overworld, Nether, End, structure set, map system, and optimi
 Before reporting an update problem:
 
 1. Back up the V1.1.2 instance and world.
-2. Install V2.0.0 as a fresh CurseForge profile.
-3. Test a newly created V2.0.0 world.
+2. Install the current V2.0.x release as a fresh CurseForge profile.
+3. Test a newly created world on the selected release.
 4. Do not copy the entire old `config/` folder over the new release.
 5. Test migrated worlds only from disposable copies.
 6. Remember that JourneyMap data does not automatically transfer to Xaero's maps.
@@ -78,7 +76,7 @@ Open an issue for:
 
 - reproducible crashes on the official CurseForge release;
 - broken installation or migration instructions;
-- world-generation failures on a clean V2.0.0 profile;
+- world-generation failures on a clean profile on the selected release;
 - dedicated-server or multiplayer failures with logs;
 - server-pack documentation problems;
 - broken links or incorrect project metadata;
@@ -119,7 +117,7 @@ Include a clean-install reproduction and relevant logs before filing an issue.
 6. Create a clean test world.
 7. Reproduce the issue.
 8. Collect `logs/latest.log` and any crash report.
-9. Record whether the issue affects a new V2.0.0 world or a migrated world.
+9. Record whether the issue affects a new world on the selected release or a migrated world.
 
 If the game crashes before you can create a world, report that stage and attach the startup log instead.
 

@@ -13,23 +13,31 @@ Playable files live on CurseForge. If this file and CurseForge disagree about a 
 | Field | Value |
 | --- | --- |
 | Project | Still Watching |
-| Current verified public release | Still Watching V2.0.0 |
-| Next documented content update | Still Watching V2.0.1 (prepared; publication not verified) |
+| Current documented release | Still Watching V2.0.2 |
+| Inventory baseline | Still Watching V2.0.1 |
 | Minecraft | `1.20.1` |
 | Loader | Forge |
 | Java | Java `17` where required |
 | CurseForge Project ID | `1420406` |
 | RAM | `5 GB` minimum; `6–8 GB` preferred |
-| Documented content entries | 80 mods, libraries, shaders, and resource packs |
+| Documented content entries | 80 mods, libraries, shaders, and resource packs (V2.0.1 inventory) |
 | Official playable release source | [CurseForge](https://www.curseforge.com/minecraft/modpacks/still-watching/files) |
 | Repository license | Apache-2.0 for original repository files only |
 
 ---
 
-## Still Watching V2.0.1 — Content Update (Prepared, Not Yet Published)
+## Still Watching V2.0.2 — Maintenance Update
 
-> [!IMPORTANT]
-> This section documents the **proposed V2.0.1 modlist provided for this update**. As of November 13, 2026, official CurseForge files still list V2.0.0 as the latest public release. Documentation changes do **not** publish a playable pack or prove that its client, server, or performance behavior has been tested.
+Released November 27, 2026, as announced by the maintainer.
+
+- Updated selected bundled mods to newer versions.
+- Minor maintenance release following V2.0.1; no major content overhaul announced.
+
+The exact changed mod names and file versions have not been supplied for this changelog. See the [CurseForge Files page](https://www.curseforge.com/minecraft/modpacks/still-watching/files) for the playable release. Back up profiles and worlds before updating, and keep server and client versions matched. No specific bug fixes, measured performance gains, or runtime compatibility results are claimed.
+
+---
+
+## Still Watching V2.0.1 — Content Update
 
 ### Summary
 
@@ -47,13 +55,13 @@ V2.0.1 adds one shader pack and one configuration utility while removing two add
 
 ### Retained
 
-- The horror roster, sound mods, survival tools, maps, firearms, quests, voice chat, and existing structures remain in the proposed list.
+- The horror roster, sound mods, survival tools, maps, firearms, quests, voice chat, and existing structures remain in the documented list.
 - **Terralith, Tectonic, Incendium, Nullscape, Lithostitched**, and the other world-generation entries remain listed.
-- The existing five shader options remain listed, bringing the proposed selection to six with Zepholume.
+- The existing five shader options remain listed, bringing the documented selection to six with Zepholume.
 
 ### Update and Validation Notes
 
-- Back up important worlds, configs, and the old profile before installing a future V2.0.1 release.
+- Back up important worlds, configs, and the old profile before installing V2.0.1.
 - No world-generation mods were added or removed, but this does **not** establish that configurations or behavior are unchanged.
 - Verify actual Forge 1.20.1 JAR compatibility, particularly FTB project labels that say "NeoForge."
 - Validate the final CurseForge manifest, client boot, new-world creation, shader selection, server-side dependencies, and joining before claiming release readiness.
@@ -194,7 +202,7 @@ For the cleanest upgrade:
 
 V1.1.2 was the previous documented release and the last release before the V2.0.0 world-generation, mapping, performance, and content overhaul.
 
-Players keeping V1.1.2 worlds should preserve backups before testing V2.0.0. Older releases receive best-effort support; V2.0.0 is the current documentation baseline.
+Players keeping V1.1.2 worlds should preserve backups before testing V2.0.0. Older releases receive best-effort support; V2.0.2 is the current documented release.
 
 ---
 

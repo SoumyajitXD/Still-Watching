@@ -2,7 +2,7 @@
 
 # Server Pack Guide
 
-This guide covers **Still Watching V2.0.0** dedicated servers on Minecraft `1.20.1` with Forge and Java `17` where required.
+This guide covers **Still Watching V2.0.x**, including V2.0.2, dedicated servers on Minecraft `1.20.1` with Forge and Java `17` where required.
 
 Use CurseForge as the source of playable files. The GitHub ZIP is not the recommended playable installer and is not a server pack.
 
@@ -17,7 +17,7 @@ Use CurseForge as the source of playable files. The GitHub ZIP is not the recomm
 | Loader | Forge |
 | Java | Java `17` where required |
 | CurseForge Project ID | `1420406` |
-| Current documented release | Still Watching V2.0.0 |
+| Current documented release | Still Watching V2.0.2 |
 | RAM | `5 GB` minimum; `6–8 GB` preferred for small groups |
 | Repository license | Apache-2.0 for original repository files only |
 
@@ -28,17 +28,16 @@ This guide is deliberately conservative. A server that starts cleanly and lets p
 
 ---
 
-## Planned V2.0.1 Compatibility Note
+## V2.0.2 Compatibility Note
 
-The V2.0.1 content update is documented but **not a confirmed CurseForge server release**. It adds Zepholume Shaders and Configured and removes Chloride and TACZ: Durability.
+V2.0.2 updates selected mod versions. A matching dedicated-server pack and runtime compatibility have not been verified here.
 
-- **Do not upload shader packs to a dedicated server's mod directory.** They are client-side visual resources.
-- Do not assume Configured must be on the dedicated server; verify its distribution-side requirements and dependencies for the selected JAR.
-- Keep core Embeddium and Timeless and Classics Zero Guns distinct from the removed optional add-ons.
-- Verify that the exact FTB Teams, FTB Quests, and FTB Library artifacts support Forge 1.20.1; their displayed project titles mention NeoForge.
-- Do not claim a V2.0.1 server pack exists until CurseForge confirms one. Test startup, joining, world generation, dimension travel, and voice chat using the eventual official files.
+- Use the exact selected release and matching Forge build on server and clients.
+- Keep shader packs out of the dedicated server's mod directory. Check each mod's distribution-side requirements.
+- Verify the exact Forge 1.20.1 artifacts, including FTB entries whose project titles mention NeoForge.
+- Back up the server and test startup, joining, world generation, dimension travel, and voice chat before replacing the live instance.
 
-V2.0.0 instructions remain the supported public-release baseline until V2.0.1 is actually available.
+Do not assume a client release automatically provides an official server pack.
 
 ---
 
@@ -60,7 +59,7 @@ Use the manual path only if you can verify each required dependency and configur
 2. Keep the server, every client, configs, datapacks, and modpack version matched.
 3. Match Minecraft `1.20.1` and the required Forge build.
 4. Back up worlds before updates, migrations, config edits, or mod removals.
-5. Do not copy the entire V1.1.2 configuration set into V2.0.0.
+5. Do not copy the entire V1.1.2 configuration set into the new installation.
 6. Do not upload client-only visual, shader, UI, map, menu, audio-only, or rendering files unless the author explicitly supports them server-side.
 7. Test startup, world generation, joining, voice chat, structures, Nether travel, End travel, respawn, and map-independent gameplay before inviting players.
 8. Keep logs. A crash without logs is not actionable.
@@ -89,7 +88,7 @@ A new V2.0.0 world is recommended. If you need to keep an old world, test a disp
 1. Open the hosting control panel.
 2. Find the **CurseForge**, **Modpacks**, or **Modpack Installer** area.
 3. Search for **Still Watching**.
-4. Select **V2.0.0** or the exact release used by every client.
+4. Select **V2.0.2** or the exact release used by every client.
 5. Install the pack.
 6. Start the server once.
 7. Check the console for missing dependencies, wrong Java, memory errors, or worldgen failures.
@@ -177,7 +176,7 @@ Stop the server cleanly before copying these files. Keep at least one backup out
 
 - [ ] Server starts with no fatal errors.
 - [ ] One clean matching client can join.
-- [ ] A new V2.0.0 world generates.
+- [ ] A new world generates on the selected release.
 - [ ] Existing-world backup restores correctly, if migration is being tested.
 - [ ] Common structures generate without immediate crashes.
 - [ ] Nether portal travel works.
@@ -196,7 +195,7 @@ These checks cover basic startup and gameplay, not long-session stability or loa
 | Problem | Likely cause | First fix |
 | --- | --- | --- |
 | Server crashes before world load | Wrong Forge, wrong Java, missing dependency, or client-only file | Read the first fatal error and rebuild from a supported path. |
-| New world fails to generate | Missing or mismatched worldgen dependency, config, or datapack | Reinstall the exact V2.0.0 server set and compare logs. |
+| New world fails to generate | Missing or mismatched worldgen dependency, config, or datapack | Reinstall the exact selected server set and compare logs. |
 | Client cannot join | Pack version, Forge build, configs, or files differ | Match the exact CurseForge release on server and clients. |
 | Severe lag during exploration | Multiple players generating terrain, high view distance, weak CPU, or heavy entities | Reduce load and test world generation with fewer players. |
 | Broken old-world terrain | Major generator migration | Restore backup or accept seams; prefer a new world. |

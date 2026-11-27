@@ -1,8 +1,8 @@
 # Modlist
 
-**Version:** Still Watching V2.0.1 (proposed content; publication not verified)
+**Inventory version:** Still Watching V2.0.1 (project names, not exact file versions)
 
-**Current documented release:** Still Watching V2.0.0 (latest verified public CurseForge file)
+**Current documented release:** Still Watching V2.0.2
 
 - **Minecraft:** `1.20.1`
 - **Loader:** Forge
@@ -12,7 +12,7 @@
 - **Documented entries:** 80 mods, libraries, shaders, and resource packs
 
 > [!NOTE]
-> This is the proposed V2.0.1 content list supplied for documentation. The newest verified public CurseForge file is V2.0.0. The list does not prove that V2.0.1 is built, tested, or published; CurseForge remains the source of truth for exact bundled files.
+> This is the V2.0.1 project inventory. V2.0.2 updates selected mod versions; the exact V2.0.2 manifest has not been compared, so the table is retained as a reference rather than a verified V2.0.2 inventory. [CurseForge Files](https://www.curseforge.com/minecraft/modpacks/still-watching/files) remains the source for playable releases and bundled file versions.
 
 | Name | CurseForge |
 | --- | --- |
@@ -97,7 +97,7 @@
 | FTB XMod Compat (by FTB) | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/ftb-xmod-compat) |
 | FancyMenu (by Keksuccino) | [CurseForge](https://www.curseforge.com/minecraft/mc-mods/fancymenu) |
 
-## V2.0.1 Proposed Changes from V2.0.0
+## V2.0.1 Changes from V2.0.0
 
 ### Added
 

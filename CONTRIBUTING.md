@@ -17,7 +17,7 @@ Still Watching accepts useful work: reproducible reports, clean documentation, e
 | Java | Java `17` where required |
 | Official playable release | CurseForge |
 | CurseForge Project ID | `1420406` |
-| Current documented release | Still Watching V2.0.0 |
+| Current documented release | Still Watching V2.0.2 |
 | RAM | `5 GB` minimum; `6–8 GB` preferred |
 | Repository license | Apache-2.0 for original repository files only |
 
@@ -25,11 +25,11 @@ Install from CurseForge when testing playable behavior. The GitHub ZIP is reposi
 
 ---
 
-## V2.0.1 Documentation Preview
+## Release Documentation
 
-The proposed V2.0.1 list adds **Zepholume Shaders** and **Configured** and removes **Chloride** and **TACZ: Durability**, retaining 80 entries. The latest **verified public** release remains V2.0.0. Do not equate documentation with publication, testing, or runtime qualification.
+V2.0.2 is a minor mod-version update. The documented V2.0.1 inventory remains the project-list reference until the exact V2.0.2 manifest can be compared.
 
-When preparing future release metadata, compare the final CurseForge manifest against [latest-modlist.md](./latest-modlist.md), verify the Forge 1.20.1 dependencies (including FTB projects displayed as NeoForge), and update the current-public-release baseline **only after** publication.
+Keep the public release version, the checked-in description snapshot and the archived release version distinct in [project metadata](./.github/ci/project-metadata.json). Update each only when its corresponding source changes. Do not equate publication with runtime qualification.
 
 ---
 
@@ -105,7 +105,7 @@ Proposals should fit the horror-survival direction or reduce real maintenance wo
 2. Launch with no extra mods, shaders, resource packs, or copied configs.
 3. Confirm Minecraft `1.20.1`, Forge, and Java `17` where required.
 4. Allocate `5 GB` minimum RAM; `6–8 GB` preferred.
-5. Create a clean V2.0.0 test world.
+5. Create a clean test world on the release being tested.
 6. Reproduce the issue.
 7. Collect `logs/latest.log` and any crash report.
 8. State whether the world is new or migrated from V1.1.2.

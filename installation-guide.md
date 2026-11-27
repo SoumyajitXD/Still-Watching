@@ -4,7 +4,7 @@
 
 This guide covers installing, updating, migrating, backing up, troubleshooting, and hosting **Still Watching**, a Minecraft Java Edition horror-survival modpack by **Soumyajit** for **Minecraft `1.20.1`** on **Forge**.
 
-Current documented release: **Still Watching V2.0.0**.
+Current documented release: **Still Watching V2.0.2**.
 
 ---
 
@@ -17,7 +17,7 @@ Current documented release: **Still Watching V2.0.0**.
 | Loader | Forge |
 | Java | Java `17` if the launcher or server asks |
 | CurseForge Project ID | `1420406` |
-| Current documented release | Still Watching V2.0.0 |
+| Current documented release | Still Watching V2.0.2 |
 | RAM | `5 GB` minimum; `6–8 GB` preferred |
 | Repository license | Apache-2.0 for original repository files only |
 
@@ -76,7 +76,7 @@ Leave enough memory for Windows or your operating system and any background appl
    - Creator: **Soumyajit**.
    - Minecraft: **`1.20.1`**.
    - Loader: **Forge**.
-5. Install **Still Watching V2.0.0** or the newest compatible release.
+5. Install **Still Watching V2.0.2** or the newest compatible release.
 6. Allocate RAM if needed.
 7. Launch once with **no extra mods, shaders, resource packs, or config edits**.
 8. Create a new test world.
@@ -86,21 +86,17 @@ Confirm that the unmodified pack works before testing additional mods or setting
 
 ---
 
-## Preparing for V2.0.1 (Not Yet a Verified Public Release)
+## Updating to V2.0.2
 
-The proposed V2.0.1 list adds **Zepholume Shaders** and **Configured** and removes **Chloride** and **TACZ: Durability**. As of November 13, 2026, **V2.0.0 is still the latest verified public CurseForge release**. Do not assemble a supposed V2.0.1 install from repository source files.
+V2.0.2 is a minor update to selected bundled mod versions. V2.0.1 previously added Zepholume Shaders and Configured and removed Chloride and TACZ: Durability.
 
-Once an official V2.0.1 package becomes available:
+1. Back up the previous profile, worlds, configs, and personal settings.
+2. Install the exact V2.0.2 CurseForge release in a separate profile before replacing a working instance.
+3. Launch without extra mods or shaders, then test a new world and a disposable copy of the old save.
+4. Verify the required Forge build and dependencies from the selected release.
+5. Match the exact pack version on all multiplayer clients and the server, if applicable.
 
-1. Back up your V2.0.0 profile, worlds, and settings.
-2. Install the exact CurseForge version into a fresh profile first.
-3. Select one optional shader at a time; Zepholume is not required for gameplay.
-4. Use Configured only with settings exposed by compatible mods.
-5. Do not expect Chloride or TACZ: Durability in the proposed V2.0.1 content. Embeddium and the core TaCZ gun mod remain.
-6. Test a disposable world and a copy of any existing world before replacing a working profile.
-7. Verify the Forge 1.20.1 dependencies, especially FTB entries displayed with NeoForge in the title.
-
-A list comparison does **not** prove the update preserves configs, world behavior, or performance. See the [changelog](./CHANGELOG.md) and [content inventory](./latest-modlist.md).
+Do not assume a minor update guarantees world or configuration compatibility. See the [changelog](./CHANGELOG.md) and [V2.0.1 content inventory](./latest-modlist.md) for context.
 
 ---
 
@@ -111,8 +107,8 @@ The safest migration is a fresh profile, not an overwrite.
 1. Back up the complete V1.1.2 instance.
 2. Back up every important world separately.
 3. Preserve the old `journeymap/` folder if its waypoints or map tiles matter.
-4. Install V2.0.0 as a fresh CurseForge profile.
-5. Do **not** copy the entire old `config/` folder into V2.0.0.
+4. Install the current V2.0.x release as a fresh CurseForge profile.
+5. Do **not** copy the entire old `config/` folder into the new profile.
 6. Reapply only personal settings you understand, such as keybinds, shader choice, voice-chat preferences, and graphics options.
 7. Create a new world for the intended V2.0.0 terrain and structure experience.
 8. Test an old world only from a disposable copy.
@@ -159,7 +155,7 @@ Allocating more RAM than needed does not guarantee better performance. Leave mem
 ## First Launch Checklist
 
 - [ ] Installed through CurseForge.
-- [ ] V2.0.0 or the intended release selected.
+- [ ] V2.0.2 or the intended release selected.
 - [ ] No extra mods.
 - [ ] No extra shaders or resource packs.
 - [ ] No copied V1.1.2 config folder.
@@ -243,7 +239,7 @@ Before opening an issue, reproduce the problem on a clean CurseForge install whe
 
 Include:
 
-- Pack version, for example `Still Watching V2.0.0`.
+- Pack version, for example `Still Watching V2.0.2`.
 - Launcher used.
 - Minecraft and Forge versions.
 - Java version, if relevant.

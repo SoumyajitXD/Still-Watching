@@ -275,7 +275,10 @@ def check_metadata(reporter: Reporter) -> None:
             if path == Path("curseforge-description.html") and key == "curseforge_project_id":
                 continue
             if metadata.get(key):
-                require_any(reporter, path, text, key, label, metadata[key])
+                value = metadata[key]
+                if path == Path("curseforge-description.html") and key == "current_documented_release":
+                    value = metadata.get("description_release", value)
+                require_any(reporter, path, text, key, label, value)
     reporter.endgroup()
 
 
@@ -297,7 +300,10 @@ def check_html(reporter: Reporter) -> None:
         "minimum_ram": "minimum RAM",
         "preferred_ram": "preferred RAM",
     }.items():
-        require_any(reporter, path, norm, key, label, metadata[key])
+        value = metadata[key]
+        if key == "current_documented_release":
+            value = metadata.get("description_release", value)
+        require_any(reporter, path, norm, key, label, value)
 
     # Some maintained descriptions do not embed the partner link. Accept the
     # explicitly delimited sponsor block in README as an alternate placement,

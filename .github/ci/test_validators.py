@@ -34,6 +34,23 @@ class ArchiveValidationTests(unittest.TestCase):
         make_zip(self.path, {"README.md": b"readme", "config/settings.txt": b"hello"})
         self.assertEqual(archives.inspect_archive(self.path, current=True), [])
 
+    def test_archive_baseline_can_precede_documented_release(self) -> None:
+        make_zip(self.path, {"README.md": b"source archive"})
+        metadata_path = self.path.parent / "metadata.json"
+        metadata_path.write_text(json.dumps({
+            "current_documented_release": "Still Watching V2.0.2",
+            "archive_release": "Still Watching V2.0.0",
+            "minecraft_version": "1.20.1",
+            "loader": "Forge",
+        }), encoding="utf-8")
+        with mock.patch.object(archives, "ARCHIVES", self.path.parent), \
+             mock.patch.object(archives, "METADATA", metadata_path):
+            with contextlib.redirect_stdout(io.StringIO()):
+                self.assertEqual(archives.main(), 0)
+            self.path.unlink()
+            with contextlib.redirect_stdout(io.StringIO()):
+                self.assertEqual(archives.main(), 1)
+
     def test_traversal_is_rejected(self) -> None:
         make_zip(self.path, {"../escape.txt": b"bad"})
         self.assertTrue(any("Unsafe" in s for s in archives.inspect_archive(self.path)))
@@ -166,7 +183,8 @@ class RepositoryValidationTests(unittest.TestCase):
     def test_html_accepts_sponsor_in_readme_block(self) -> None:
         metadata = {
             "project_name": "Still Watching", "minecraft_version": "1.20.1",
-            "loader": "Forge", "current_documented_release": "Still Watching V2.0.0",
+            "loader": "Forge", "current_documented_release": "Still Watching V2.0.2",
+            "description_release": "Still Watching V2.0.0",
             "minimum_ram": "5 GB", "preferred_ram": "6–8 GB",
         }
         html = (

@@ -17,7 +17,7 @@ It does **not** build Minecraft, Forge, Java, Gradle, Maven, npm packages, or pr
 | Loader | Forge |
 | Java | Java `17` where required |
 | CurseForge Project ID | `1420406` |
-| Current documented release | Still Watching V2.0.0 |
+| Current documented release | Still Watching V2.0.2 |
 | RAM | `5 GB` minimum; `6–8 GB` preferred |
 | Repository license | Apache-2.0 for original repository files only |
 
@@ -97,13 +97,13 @@ CurseForge, shields, and CDN hosts can rate-limit or block CI user agents. Valid
 
 ---
 
-## V2.0.0 Consistency Checks
+## Release Consistency Checks
 
-Release validation should catch stale references to V1.1.2 when V2.0.0 is the current baseline, while allowing intentional historical references in migration notes and changelog history.
+The documented public release is V2.0.2. The checked-in CurseForge HTML and latest repository ZIP are V2.0.1 snapshots. CI checks those snapshots against explicit metadata fields (`description_release` and `archive_release`) rather than requiring a public release to have a matching repository archive. All ZIPs still receive structural checks, and the pinned archive receives CRC and manifest checks when applicable. Historical references remain valid in migration notes and changelog history.
 
 Human review should confirm:
 
-- the modlist has 80 documented entries;
+- the V2.0.1 inventory has 80 documented entries;
 - V2.0.0 additions and removals are reflected in the changelog;
 - README and CurseForge source describe Terralith, Tectonic, Incendium, Nullscape, Xaero's maps, and the optimization stack;
 - migration docs warn about new worlds and JourneyMap data;
