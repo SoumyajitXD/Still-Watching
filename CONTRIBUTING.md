@@ -2,7 +2,7 @@
 
 # Contributing
 
-Still Watching accepts useful work: reproducible reports, clean documentation, evidence-backed metadata fixes, validation improvements, and changes that make the modpack easier to install, maintain, support, or troubleshoot.
+Bug reports, documentation fixes, metadata corrections and improvements to the repository checks are welcome.
 
 ---
 
@@ -35,14 +35,14 @@ Keep the public release version, the checked-in description snapshot and the arc
 
 ## V2.0.0 Context
 
-Contributions must account for the current V2.0.0 direction:
+The V2.0.x series builds on the V2.0.0 rebuild:
 
 - Terralith and Tectonic drive Overworld generation.
 - Incendium and Nullscape overhaul the Nether and End.
 - Lithostitched supports the world-generation stack.
 - Dungeons and Taverns, Explorify, and Towns and Towers provide structures.
 - Xaero's Minimap and World Map replace JourneyMap.
-- ImmediatelyFast, FerriteCore, ModernFix, FPS Reducer, Embeddium, and Chloride form the main optimization stack.
+- ImmediatelyFast, FerriteCore, ModernFix, FPS Reducer and Embeddium form the documented V2.0.1 optimization stack. Chloride was removed in V2.0.1.
 - The One Who Watches is part of the current horror roster.
 
 Do not reintroduce removed V1.1.2 systems casually. Check dependencies and test compatibility before proposing a mod change.
