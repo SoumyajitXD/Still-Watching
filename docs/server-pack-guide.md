@@ -24,7 +24,7 @@ Use CurseForge as the source of playable files. The GitHub ZIP is not the recomm
 > [!WARNING]
 > V2.0.0 changes Overworld, Nether, End, and structure generation. Back up existing server worlds and test migrations in a disposable copy. A new world is strongly recommended.
 
-This guide is deliberately conservative. A server that starts cleanly and lets players join is better than an impressive manual file experiment that collapses into a crash log.
+Start with the simplest supported installation method. Only assemble a server manually if you can verify the required mods and configs.
 
 ---
 
@@ -95,7 +95,7 @@ A new V2.0.0 world is recommended. If you need to keep an old world, test a disp
 8. Create a disposable test world.
 9. Join with one clean matching client before inviting the group.
 
-If this works, do not replace it with manual assembly just because manual work feels more technical. The goal is a stable server.
+If the provider installer works, there is no need to assemble the server manually.
 
 ---
 
@@ -149,7 +149,7 @@ These categories commonly cause dedicated-server problems unless the author says
 - screenshot, camera, or client-presentation tools;
 - background FPS reducers and other client lifecycle tools.
 
-Some mods have both client and server behavior. Some libraries are required on both sides. Do not infer side support from vibes, filenames, or wishful thinking.
+Some mods have both client and server behavior. Some libraries are required on both sides. Check each mod's documented side support and dependencies rather than relying on its filename.
 
 ---
 
