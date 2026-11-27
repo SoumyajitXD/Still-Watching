@@ -2,7 +2,7 @@
 
 # Security Policy
 
-**Still Watching** is a Minecraft Java Edition horror-survival modpack. Most reports are gameplay bugs, mod conflicts, broken installs, bad configs, or cursed launcher behavior. These usually belong in regular support.
+**Still Watching** is a Minecraft Java Edition horror-survival modpack. For gameplay bugs, crashes, mod conflicts or installation problems, see [Support](./SUPPORT.md).
 
 Security reports are for risks that could harm players, servers, maintainers, or the project's distribution chain.
 
@@ -84,9 +84,9 @@ If the issue only affects gameplay or stability, file it as a normal bug with lo
 
 For reports safe to discuss publicly, use [GitHub Issues](https://github.com/SoumyajitXD/Still-Watching/issues).
 
-Do **not** publicly post secrets, tokens, passwords, private server IPs, private logs, credentials, or anything that would make the situation worse by being indexed forever.
+Do **not** publicly post secrets, tokens, passwords, private server IPs, private logs, credentials, or other sensitive material. Public issue attachments can be indexed and copied.
 
-Redact sensitive details before posting. If a credential has already been exposed, revoke or rotate it promptly. For a sensitive vulnerability, use GitHub's private vulnerability reporting option if enabled; otherwise request a private contact method without posting exploit details.
+Redact sensitive details before posting. If a credential has already been exposed, revoke or rotate it promptly; deleting the issue or commit alone does not invalidate the credential. For a sensitive vulnerability, use GitHub's private vulnerability reporting option if enabled; otherwise request a private contact method without posting exploit details.
 
 ---
 
