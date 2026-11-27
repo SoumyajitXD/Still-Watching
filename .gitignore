@@ -6,3 +6,10 @@ __pycache__/
 Thumbs.db
 .env
 .venv/
+*.bak
+*.orig
+*.rej
+*~
+.pytest_cache/
+.mypy_cache/
+.env.local
