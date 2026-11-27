@@ -35,7 +35,7 @@
 > [!IMPORTANT]
 > **Install the playable modpack from CurseForge.**
 >
-> This repository is the source-side home for documentation, release tracking, screenshots, validation, issue reports, and licensing clarity. The GitHub ZIP is **not** the recommended playable installer and is **not** a server pack.
+> This repository contains the documentation, screenshots, release archives and maintenance tools. The GitHub ZIP is **not** the recommended playable installer and is **not** a server pack.
 >
 > V2.0.0 substantially changes Overworld, Nether, End, structure, and mapping systems. Back up old worlds and read the migration notes before updating.
 
@@ -51,14 +51,9 @@ Back up your profile and worlds before updating. The [changelog](./CHANGELOG.md)
 
 ---
 
-## V2.0.0 Is a Major Rebuild
+## The V2.0.0 rebuild
 
-V2.0.0 rebuilds the pack around four priorities:
-
-- **more deliberate horror encounters;**
-- **more varied terrain and structures;**
-- **a revised performance and memory-management mod stack;**
-- **a cleaner mod selection with obsolete systems removed.**
+V2.0.0 reworked horror encounters, terrain, structures and the performance mod selection.
 
 The world-generation stack now combines **Terralith**, **Tectonic**, **Nullscape**, **Incendium**, **Lithostitched**, **Dungeons and Taverns**, **Explorify**, and **Towns and Towers**. The pack also adds **The One Who Watches**, replaces JourneyMap with **Xaero's Minimap** and **Xaero's World Map**, and introduces **ImmediatelyFast**, **FerriteCore**, **ModernFix**, and **FPS Reducer**.
 
@@ -138,13 +133,13 @@ Existing worlds may show terrain borders, changed biome transitions, missing rem
 
 ---
 
-## Install Fast
+## Installation
 
 1. Install the [CurseForge App](https://www.curseforge.com/download/app).
 2. Open the [Still Watching CurseForge page](https://www.curseforge.com/minecraft/modpacks/still-watching).
 3. Confirm the project is by **Soumyajit**.
 4. Install **Still Watching V2.0.2** or the newest compatible release.
-5. Allocate **`5 GB` minimum RAM**; use **`6–8 GB`** if your system allows it.
+5. Allocate **`5 GB` minimum RAM**; use **`6–8 GB`** only if enough memory remains for your operating system.
 6. Use **Java `17`** if the launcher asks.
 7. Launch once clean before adding extra mods, shaders, resource packs, or config edits.
 8. Create a new test world before trusting your main save to the update.
